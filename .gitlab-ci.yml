@@ -1,0 +1,42 @@
+stages:
+  - deploy
+
+# Requires an available GitLab Runner with Docker executor.
+# GitLab CI/CD variables (File type): SSH_PRIVATE_KEY, SSH_KNOWN_HOSTS
+# GitLab CI/CD variables (normal): DEPLOY_HOST, DEPLOY_USER=deploy
+
+deploy_school:
+  stage: deploy
+  image: alpine:3.21
+  resource_group: stantonys-production
+  environment:
+    name: production
+    url: https://stantonysneyveli.in
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      when: on_success
+  before_script:
+    - apk add --no-cache openssh-client rsync
+    - test -f "$SSH_PRIVATE_KEY"
+    - test -f "$SSH_KNOWN_HOSTS"
+    - chmod 400 "$SSH_PRIVATE_KEY"
+    - mkdir -p "$HOME/.ssh"
+    - chmod 700 "$HOME/.ssh"
+    - cp "$SSH_KNOWN_HOSTS" "$HOME/.ssh/known_hosts"
+    - chmod 600 "$HOME/.ssh/known_hosts"
+  script:
+    - |
+      rsync -az --delete \
+        --exclude='/.git/' \
+        --exclude='.env*' \
+        --exclude='node_modules/' \
+        --exclude='dist/' \
+        --exclude='generated/' \
+        --exclude='uploads/' \
+        --exclude='logs/' \
+        -e "ssh -i $SSH_PRIVATE_KEY -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+        ./ "${DEPLOY_USER}@${DEPLOY_HOST}:/var/www/stantonysneyveli.in/live/"
+    - |
+      ssh -i "$SSH_PRIVATE_KEY" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+        "${DEPLOY_USER}@${DEPLOY_HOST}" \
+        'bash /var/www/stantonysneyveli.in/live/deployment/deploy.sh'
