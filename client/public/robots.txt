@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/admin
+# Add Sitemap: https://your-verified-domain/sitemap.xml when configuring deployment.

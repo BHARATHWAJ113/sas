@@ -1,0 +1,33 @@
+{
+  "name": "st-antonys-school",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n API,WEB -c blue,cyan \"npm run dev -w server\" \"npm run dev -w client\"",
+    "dev:demo": "concurrently -k -n API,WEB -c blue,cyan \"npm run demo -w server\" \"npm run dev -w client\"",
+    "build": "npm run generate -w server && npm run build -w client",
+    "start": "npm run start -w server",
+    "lint": "eslint client/src shared server/src server/prisma/seed.js server/tests client/vite.config.js",
+    "test": "vitest run",
+    "test:mysql": "node scripts/test-mysql.mjs",
+    "db:generate": "npm run generate -w server",
+    "db:migrate": "npm run migrate -w server",
+    "db:seed": "npm run seed -w server",
+    "db:studio": "npm run studio -w server"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "concurrently": "^9.2.1",
+    "eslint": "^10.14.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.5.0",
+    "supertest": "^7.1.4",
+    "vitest": "^5.0.5"
+  }
+}

@@ -1,0 +1,129 @@
+.gallery-hero {
+  overflow: hidden;
+  padding-block: clamp(40px, 6vw, 92px);
+  background:
+    radial-gradient(ellipse at 100% 0, #cbdff5 0, transparent 42%),
+    radial-gradient(ellipse at 0 100%, #dce9fa 0, transparent 36%),
+    var(--light);
+  text-align: center;
+}
+
+#main .gallery-hero h1 {
+  margin: 0 auto 16px;
+  font-size: clamp(36px, 4.3vw, 64px);
+}
+
+.gallery-hero h1 span {
+  color: #285991;
+  text-decoration: underline;
+  text-decoration-color: var(--blue);
+  text-decoration-thickness: .08em;
+  text-underline-offset: .15em;
+}
+
+.gallery-hero p {
+  max-width: 54ch;
+  margin-inline: auto;
+}
+
+.gallery-media-section { background: #f8fafc; }
+.gallery-catalog { max-width: 1120px; }
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: clamp(22px, 3vw, 40px);
+}
+
+.gallery-filters button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 7px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.gallery-filters button:hover { border-color: var(--blue); }
+.gallery-filters button[aria-pressed=true] {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+  box-shadow: 0 4px 8px #102a5626;
+}
+
+.gallery-filters button span {
+  min-width: 23px;
+  padding: 3px 5px;
+  border-radius: 999px;
+  background: var(--light);
+  color: var(--navy);
+  font-size: 12px;
+}
+
+.image-grid.gallery-photo-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 24px);
+  margin-top: 0;
+}
+
+.gallery-photo-grid button {
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--line);
+  border-radius: clamp(12px, 1.45vw, 20px);
+  box-shadow: 0 5px 13px #102a561a;
+}
+
+.gallery-photo-grid button:first-child { grid-column: auto; }
+.gallery-photo-grid button img,
+.gallery-photo-grid button:first-child img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-photo-grid [data-album=school-archive] img { object-position: center 30%; }
+
+.gallery-photo-grid button > span {
+  opacity: 0;
+  transition: opacity .18s ease-out;
+}
+
+.gallery-photo-grid button:is(:hover, :focus-visible) > span { opacity: 1; }
+
+.gallery-demo-label {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.gallery-catalog .pagination,
+.gallery-more {
+  margin-top: 24px;
+}
+
+.gallery-more { text-align: center; }
+
+@media (max-width: 800px) {
+  .image-grid.gallery-photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 440px) {
+  .image-grid.gallery-photo-grid { grid-template-columns: minmax(0, 1fr); }
+}

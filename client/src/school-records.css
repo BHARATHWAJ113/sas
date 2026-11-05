@@ -1,0 +1,74 @@
+.school-leadership,
+.school-diary {
+  background: #f1f5f9;
+}
+
+.leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.leadership-card {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid #dbe4ee;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.leadership-card img {
+  width: 100%;
+  height: 232px;
+  background: #eaf4ff;
+  object-fit: contain;
+}
+
+.leadership-card figcaption {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+}
+
+.school-leadership,
+.school-diary {
+  scroll-margin-top: 125px;
+}
+
+.diary-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.diary-list li {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 14px 18px;
+  border: 1px solid #dbe4ee;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.diary-list time {
+  color: #31577f;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+@media (max-width: 950px) {
+  .leadership-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 550px) {
+  .leadership-grid,
+  .diary-list {
+    grid-template-columns: 1fr;
+  }
+}

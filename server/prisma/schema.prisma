@@ -1,0 +1,247 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/client"
+}
+datasource db {
+  provider = "mysql"
+}
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+enum AnnouncementKind {
+  ANNOUNCEMENT
+  NOTICE
+  NEWS
+}
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
+model Role {
+  id    String @id @default(cuid()) @db.VarChar(191)
+  name  String @unique @db.VarChar(50)
+  users User[]
+  @@map("roles")
+}
+model User {
+  id           String @id @default(cuid()) @db.VarChar(191)
+  email        String @unique @db.VarChar(191)
+  name         String @db.VarChar(120)
+  passwordHash String @db.VarChar(255)
+  active       Boolean @default(true)
+  roleId       String @db.VarChar(191)
+  role         Role @relation(fields: [roleId], references: [id])
+  sessions     Session[]
+  auditLogs    AuditLog[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  @@map("users")
+}
+model Session {
+  id        String @id @db.VarChar(64)
+  userId    String @db.VarChar(191)
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  csrfToken String @db.VarChar(64)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  @@index([expiresAt])
+  @@map("sessions")
+}
+model Page {
+  id             String @id @default(cuid()) @db.VarChar(191)
+  slug           String @unique @db.VarChar(160)
+  title          String @db.VarChar(255)
+  titleTa        String @db.VarChar(255)
+  summary        String @db.Text
+  summaryTa      String @db.Text
+  body           String @db.LongText
+  bodyTa         String @db.LongText
+  seoTitle       String? @db.VarChar(255)
+  seoDescription String? @db.VarChar(500)
+  status         ContentStatus @default(DRAFT)
+  isDemo         Boolean @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  @@index([status])
+  @@map("pages")
+}
+model Translation {
+  id        String @id @default(cuid()) @db.VarChar(191)
+  key       String @db.VarChar(191)
+  locale    String @db.VarChar(5)
+  value     String @db.Text
+  status    ContentStatus @default(DRAFT)
+  updatedAt DateTime @updatedAt
+  @@unique([key, locale])
+  @@map("translations")
+}
+model Announcement {
+  id          String @id @default(cuid()) @db.VarChar(191)
+  slug        String @unique @db.VarChar(160)
+  title       String @db.VarChar(255)
+  titleTa     String @db.VarChar(255)
+  summary     String @db.Text
+  summaryTa   String @db.Text
+  body        String @db.LongText
+  bodyTa      String @db.LongText
+  kind        AnnouncementKind @default(NOTICE)
+  status      ContentStatus @default(DRAFT)
+  isDemo      Boolean @default(false)
+  publishedAt DateTime @default(now())
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([status, kind, publishedAt])
+  @@map("announcements")
+}
+model Event {
+  id             String @id @default(cuid()) @db.VarChar(191)
+  slug           String @unique @db.VarChar(160)
+  title          String @db.VarChar(255)
+  titleTa        String @db.VarChar(255)
+  summary        String @db.Text
+  summaryTa      String @db.Text
+  body           String @db.LongText
+  bodyTa         String @db.LongText
+  category       String @db.VarChar(80)
+  categoryTa     String @db.VarChar(120)
+  date           DateTime
+  endDate        DateTime?
+  location       String @db.VarChar(255)
+  locationTa     String @db.VarChar(255)
+  cover          String? @db.VarChar(500)
+  attachmentId   String? @db.VarChar(191)
+  attachment     Media? @relation("EventAttachment", fields: [attachmentId], references: [id], onDelete: SetNull)
+  images         EventImage[]
+  seoTitle       String? @db.VarChar(255)
+  seoDescription String? @db.VarChar(500)
+  status         ContentStatus @default(DRAFT)
+  isDemo         Boolean @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  @@index([status, date])
+  @@map("events")
+}
+model EventImage {
+  id      String @id @default(cuid()) @db.VarChar(191)
+  eventId String @db.VarChar(191)
+  mediaId String @db.VarChar(191)
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  media   Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  order   Int @default(0)
+  @@unique([eventId, mediaId])
+  @@map("event_images")
+}
+model Media {
+  id          String @id @default(cuid()) @db.VarChar(191)
+  filename    String @unique @db.VarChar(255)
+  originalName String @db.VarChar(255)
+  mimeType    String @db.VarChar(80)
+  size        Int
+  alt         String @db.VarChar(255)
+  altTa       String @db.VarChar(255)
+  status      ContentStatus @default(DRAFT)
+  eventImages EventImage[]
+  attachments Event[] @relation("EventAttachment")
+  galleryMedia GalleryMedia[]
+  activities  Activity[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@map("media")
+}
+model ActivityCategory {
+  id         String @id @default(cuid()) @db.VarChar(191)
+  slug       String @unique @db.VarChar(80)
+  title      String @db.VarChar(120)
+  titleTa    String @db.VarChar(160)
+  icon       String @default("sparkles") @db.VarChar(24)
+  sortOrder  Int @default(0)
+  status     ContentStatus @default(DRAFT)
+  activities Activity[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([status, sortOrder])
+  @@map("activity_categories")
+}
+model Activity {
+  id         String @id @default(cuid()) @db.VarChar(191)
+  slug       String @unique @db.VarChar(160)
+  title      String @db.VarChar(255)
+  titleTa    String @db.VarChar(255)
+  summary    String @db.Text
+  summaryTa  String @db.Text
+  categoryId String @db.VarChar(191)
+  category   ActivityCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  imageId    String? @db.VarChar(191)
+  image      Media? @relation(fields: [imageId], references: [id], onDelete: SetNull)
+  sortOrder  Int @default(0)
+  status     ContentStatus @default(DRAFT)
+  isDemo     Boolean @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([categoryId, status, sortOrder])
+  @@index([status, sortOrder])
+  @@map("activities")
+}
+model Gallery {
+  id        String @id @default(cuid()) @db.VarChar(191)
+  slug      String @unique @db.VarChar(160)
+  title     String @db.VarChar(255)
+  titleTa   String @db.VarChar(255)
+  summary   String @db.Text
+  summaryTa String @db.Text
+  status    ContentStatus @default(DRAFT)
+  isDemo    Boolean @default(false)
+  images    GalleryMedia[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("galleries")
+}
+model GalleryMedia {
+  id        String @id @default(cuid()) @db.VarChar(191)
+  galleryId String @db.VarChar(191)
+  mediaId   String @db.VarChar(191)
+  gallery   Gallery @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+  media     Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  order     Int @default(0)
+  @@unique([galleryId, mediaId])
+  @@map("gallery_media")
+}
+model AdmissionEnquiry {
+  id          String @id @default(cuid()) @db.VarChar(191)
+  parentName  String @db.VarChar(120)
+  studentName String @db.VarChar(120)
+  email       String @db.VarChar(191)
+  phone       String @db.VarChar(20)
+  grade       String @db.VarChar(20)
+  message     String @db.Text
+  locale      String @default("en") @db.VarChar(5)
+  consentAt   DateTime @default(now())
+  status      EnquiryStatus @default(NEW)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([status, createdAt])
+  @@map("admission_enquiries")
+}
+model AuditLog {
+  id        String @id @default(cuid()) @db.VarChar(191)
+  userId    String? @db.VarChar(191)
+  user      User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String @db.VarChar(80)
+  entity    String @db.VarChar(80)
+  entityId  String? @db.VarChar(191)
+  createdAt DateTime @default(now())
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+model SiteSetting {
+  id        String @id @default(cuid()) @db.VarChar(191)
+  key       String @unique @db.VarChar(191)
+  value     String @db.Text
+  public    Boolean @default(false)
+  updatedAt DateTime @updatedAt
+  @@map("site_settings")
+}

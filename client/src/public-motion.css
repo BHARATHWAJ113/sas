@@ -1,0 +1,101 @@
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes school-stat-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+  }
+
+  .school-stats-grid[data-animated=true] .school-stat {
+    animation: school-stat-float 1.45s ease-in-out 2;
+  }
+
+  .school-stats-grid[data-animated=true] .school-stat:nth-child(even) {
+    animation-delay: .17s;
+  }
+
+  @keyframes school-enter {
+    from { opacity: .7; translate: 0 8px; }
+    to { opacity: 1; translate: 0 0; }
+  }
+
+  .hero-content,
+  .page-hero-inner > div:first-child,
+  .gallery-hero > .container {
+    animation: school-enter 460ms ease-out both;
+  }
+
+  .campus-dropdown[open] > .campus-subnav,
+  .campus-nav.is-open {
+    animation: school-enter 160ms ease-out both;
+  }
+
+  .hero-video { transition: opacity 350ms ease-out; }
+
+  .campus-nav > a,
+  .campus-dropdown summary,
+  .campus-nav-actions :is(a, button),
+  .notice-arrows button,
+  .quick-link,
+  .activity-filters button,
+  .gallery-filters button {
+    transition: background-color 180ms ease-out, border-color 180ms ease-out;
+  }
+
+  :is(.quick-link, .text-link, .button, .hero-second, .campus-enquire) > svg:last-child,
+  .academic-card .card-arrow {
+    transition: translate 180ms ease-out;
+  }
+
+  :is(.quick-link, .text-link, .button, .hero-second, .campus-enquire):focus-visible > svg:last-child,
+  .academic-card:focus-visible .card-arrow {
+    translate: 2px -2px;
+  }
+
+  @keyframes school-scroll-enter {
+    from { opacity: .58; translate: 0 14px; }
+    to { opacity: 1; translate: 0 0; }
+  }
+
+  #main [data-scroll-revealed] {
+    animation: school-scroll-enter 430ms ease-out var(--reveal-delay, 0ms) backwards;
+  }
+
+  #main :is(.quick-grid, .journey-grid, .highlights-grid, .academic-grid, .three-grid, .activity-grid, .updates-grid, .gallery-photo-grid, .leadership-grid) > :nth-child(3n + 2) {
+    --reveal-delay: 45ms;
+  }
+
+  #main :is(.quick-grid, .journey-grid, .highlights-grid, .academic-grid, .three-grid, .activity-grid, .updates-grid, .gallery-photo-grid, .leadership-grid) > :nth-child(3n) {
+    --reveal-delay: 90ms;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    :is(.quick-link, .text-link, .button, .hero-second, .campus-enquire):hover > svg:last-child,
+    .academic-card:hover .card-arrow {
+      translate: 2px -2px;
+    }
+
+    :is(.photo-card, .activity-card, .update-card, .leadership-card, .gallery-photo-grid > button) {
+      transition: transform 220ms ease-out, border-color 220ms ease-out, box-shadow 220ms ease-out;
+    }
+
+    :is(.photo-card, .activity-card, .update-card, .leadership-card, .gallery-photo-grid > button):hover {
+      transform: translateY(-4px);
+      border-color: var(--blue);
+      box-shadow: 0 14px 28px #102a5626;
+    }
+
+    :is(.quick-link > svg:first-child, .academic-card .icon-tile, .activity-emblem) {
+      transition: transform 220ms ease-out;
+    }
+
+    :is(.quick-link:hover > svg:first-child, .academic-card:hover .icon-tile, .activity-card:hover .activity-emblem) {
+      transform: translateY(-3px) scale(1.05);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main :is(.button, .event-card):hover,
+  #main :is(.photo-card:hover img, .event-card:hover .event-image > img, .image-grid button:hover img) {
+    transform: none;
+  }
+}

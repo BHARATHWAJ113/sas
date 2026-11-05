@@ -1,0 +1,32 @@
+{
+  "name": "school-api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "demo": "node --watch src/preview.js",
+    "start": "node src/index.js",
+    "generate": "prisma generate",
+    "migrate": "prisma migrate deploy",
+    "migrate:dev": "prisma migrate dev",
+    "seed": "node prisma/seed.js",
+    "studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/adapter-mariadb": "^7.10.1",
+    "@prisma/client": "^7.10.1",
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "file-type": "^21.0.0",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "prisma": "^7.10.1",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7"
+  }
+}

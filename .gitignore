@@ -1,0 +1,11 @@
+node_modules/
+client/dist/
+.env
+**/.env
+server/uploads/*
+!server/uploads/.gitkeep
+coverage/
+*.log
+test-results/
+artifacts/
+server/generated/
