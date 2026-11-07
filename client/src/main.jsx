@@ -9,11 +9,15 @@ import '@fontsource/inter/latin-800.css';
 import '@fontsource/noto-sans-tamil/tamil-400.css';
 import '@fontsource/noto-sans-tamil/tamil-600.css';
 import { SiteProvider } from './context';
-import { Footer, RouteReset, StateBox } from './components';
+import { Footer, RouteReset, ScrollToTop, StateBox } from './components';
 import { SiteHeader } from './SiteHeader';
 import { Home, About, Academics, Admissions, Infrastructure, StudentLife, Updates, Events, EventDetails, Contact, NotFound, Privacy } from './pages';
 import { Gallery } from './Gallery';
 import { useScrollReveal } from './useScrollReveal';
+import { CookieConsentProvider } from './CookieConsent';
+import AnnouncementPopup from './AnnouncementPopup';
+import VisitorTracker from './VisitorTracker';
+import './form-design.css';
 import './styles.css';
 import './public-design.css';
 import './site-header.css';
@@ -28,7 +32,7 @@ class ErrorBoundary extends React.Component {
 function PublicSite() {
   const content = useScrollReveal();
   return (
-    <>
+    <CookieConsentProvider>
       <SiteHeader />
       <main id="main" ref={content} tabIndex={-1}>
         <Routes>
@@ -45,11 +49,17 @@ function PublicSite() {
           <Route path="/notices" element={<Updates kind="NOTICE" />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/cookie-policy" element={<Privacy cookiePolicy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
-    </>
+      <ScrollToTop />
+      <AnnouncementPopup />
+      <VisitorTracker />
+    </CookieConsentProvider>
   );
 }
-createRoot(document.getElementById('root')).render(<React.StrictMode><ErrorBoundary><BrowserRouter><SiteProvider><RouteReset/><Suspense fallback={<StateBox loading/>}><Routes><Route path="/admin/*" element={<Admin/>}/><Route path="*" element={<PublicSite/>}/></Routes></Suspense></SiteProvider></BrowserRouter></ErrorBoundary></React.StrictMode>);
+const root = import.meta.hot?.data.root ?? createRoot(document.getElementById('root'));
+if (import.meta.hot) import.meta.hot.data.root = root;
+root.render(<React.StrictMode><ErrorBoundary><BrowserRouter><SiteProvider><RouteReset/><Suspense fallback={<StateBox loading/>}><Routes><Route path="/admin/*" element={<Admin/>}/><Route path="*" element={<PublicSite/>}/></Routes></Suspense></SiteProvider></BrowserRouter></ErrorBoundary></React.StrictMode>);

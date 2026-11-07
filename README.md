@@ -2,7 +2,11 @@
 
 A complete React/Vite public school site and role-based Express CMS, with Prisma/MySQL persistence, bilingual English/Tamil content, event publishing, validated media uploads and admission enquiries.
 
-**Launch status:** the source and production frontend build are complete. This workspace is configured for a clearly labeled, read-only demo preview. No configured MySQL connection or Docker command was available during implementation. Database migration execution, repeatable seeding and real database-backed CMS/enquiry operations therefore require the MySQL setup below before launch. The site deliberately disables enquiry submission and staff login in demo mode. It never reports a false saved enquiry.
+Gmail SMTP, the durable email queue, administrator email history and cookie preference controls are described in [email and consent operations](docs/EMAIL-AND-CONSENT.md). Configure the server email variables and apply the new migrations before enabling email.
+
+Homepage popup reminders, multiple office recipients, admin filters/pagination, attachments, optional visitor information and updated consent controls are covered in [the enhancement guide](docs/ENHANCEMENTS.md).
+
+**Local verification:** the email, consent and enhancement migrations have been applied to the configured MySQL database. Automated database tests verified staff authentication, publishing, uploads, enquiry storage, duplicate prevention, consent history and concurrent email queue claims. Gmail sending remains disabled until the school configures its approved SMTP account. Demo mode remains a separate read-only preview and disables enquiry submission and staff login.
 
 ## Start the preview
 
@@ -119,7 +123,7 @@ Roles are deliberate fixed policies, seeded into the roles table. Staff accounts
 | `npm run db:seed` | Ensure roles and optional admin/demo records |
 | `npm run db:studio` | Local Prisma database inspector |
 | `npm run lint` | ESLint across application and tests |
-| `npm test` | API/security tests with a mocked persistence boundary |
+| `npm test` | API/security, request-cache and loopback SMTP tests |
 | `npm run test:mysql` | Opt-in real MySQL integration test (see below) |
 | `npm run build` | Generate Prisma client and build `client/dist` |
 | `npm start` | Start production Node API; Apache serves the frontend |
@@ -129,11 +133,11 @@ Roles are deliberate fixed policies, seeded into the roles table. Staff accounts
 
 Build and lint passed. API tests validate publication boundaries, expiry windows, search/pagination, enquiry validation and honest write failure, cookie hashing, role restrictions, CSRF, upload rejection, self-account protection and transactional audit writes. Tests use Supertest loopback requests. The Codex network sandbox initially blocked those requests; they passed when run with local-network permission. No sandbox workaround is required in an ordinary local terminal.
 
-All public routes, the 404 page and staff login were measured in the browser at **1440px, 768px and 390px**, with no document horizontal overflow. English/Tamil switching, event search/filter/pagination, event navigation, gallery and notice dialogs, and disabled demo enquiry submission were also checked. Evidence is under the local ignored `artifacts/` directory. The authenticated CMS and actual MySQL migration/seed/storage path require the database integration check before deployment; they were not represented as live-tested.
+All public routes, the 404 page and staff login were measured in the browser at **1440px, 768px and 390px**, with no document horizontal overflow. English/Tamil switching, event search/filter/pagination, event navigation, gallery and notice dialogs, and disabled demo enquiry submission were also checked. The new email composer, form acknowledgements, consent changes, map withdrawal and scroll-to-top control were checked using an isolated browser fixture; database behavior was verified separately with real MySQL integration tests. Evidence is under the local ignored `artifacts/` directory. Live Gmail credentials and delivery have not been tested.
 
-To run the opt-in database test, apply migrations to a **dedicated test database** first, set `TEST_DATABASE_URL` to it in your shell, then run `npm run test:mysql`. The test creates uniquely prefixed temporary records, exercises real sign-in, a draft/published/archived event, media upload and a persisted enquiry, then cleans up only those records. It does not reset a database. Do not use your production database for tests.
+To run the opt-in database test, apply migrations to a **dedicated test database** first, set `TEST_DATABASE_URL` to it in your shell, then run `npm run test:mysql`. The test creates uniquely prefixed temporary records, exercises real sign-in, publishing, upload, enquiry/outbox persistence, consent records and concurrent queue workers, then cleans up only those records. Its test transport never sends external email, and worker queries are scoped to the run's records. It does not reset a database. Do not use your production database for tests.
 
-Rate limiting currently uses process-local memory, suited to one Node process. Use a shared external rate-limit store before horizontal scaling. The app uses plain-text CMS bodies rendered as text, so untrusted HTML is never executed. It does not implement email/SMS notifications, payments or online admission decisions. Google Maps loads only after explicit user interaction. Choose an operational enquiry-retention policy and configure backups. API details are in [docs/API.md](docs/API.md).
+Enquiry and administrator email quotas are enforced in MySQL. General ingress rate limiting uses process-local memory; use a shared ingress limiter before horizontal scaling. CMS bodies render as plain text; outgoing email rich text is separately sanitized. Gmail enquiry notifications and administrator correspondence use a durable outbox. SMS, payments and online admission decisions are outside this implementation. Google Maps requires consent and an explicit load action. Configure retention and backups. API details are in [docs/API.md](docs/API.md).
 
 ## Apache deployment
 
@@ -168,8 +172,22 @@ D:\SAS
 │   │   ├── i18n.js
 │   │   ├── components.jsx
 │   │   ├── pages.jsx
-│   │   ├── styles.css
-│   │   └── admin/{Admin.jsx,admin.css}
+│   │   ├── AnnouncementPopup.jsx
+│   │   ├── popup-policy.js
+│   │   ├── VisitorTracker.jsx
+│   │   ├── OptionalMetadata.jsx
+│   │   ├── visitor-metadata.js
+│   │   ├── CookieConsent.jsx
+│   │   ├── SiteHeader.jsx
+│   │   ├── Gallery.jsx
+│   │   ├── ActivityExplorer.jsx
+│   │   ├── HeroVideo.jsx
+│   │   ├── HomeHighlights.jsx
+│   │   ├── SchoolRecords.jsx
+│   │   ├── useScrollReveal.js
+│   │   ├── school-copy.js
+│   │   ├── styles.css                # with component CSS, public-design.css and public-motion.css
+│   │   └── admin/{Admin.jsx,admin.css,EmailManager.jsx,email.css,RecordControls.jsx,RecordDetails.jsx,SearchableSelect.jsx}
 │   └── dist/                         # generated static production build
 ├── server/
 │   ├── .env.example
@@ -180,7 +198,10 @@ D:\SAS
 │   │   ├── seed.js
 │   │   └── migrations/
 │   │       ├── migration_lock.toml
-│   │       └── 202610310001_initial/migration.sql
+│   │       ├── 202610310001_initial/migration.sql
+│   │       ├── 202611040001_activities/migration.sql
+│   │       ├── 202611070001_email_consent/migration.sql
+│   │       └── 202611080001_enhancements/migration.sql
 │   ├── src/
 │   │   ├── index.js
 │   │   ├── preview.js
@@ -191,13 +212,26 @@ D:\SAS
 │   │   ├── validation.js
 │   │   ├── admin.js
 │   │   ├── uploads.js
+│   │   ├── gallery.js
+│   │   ├── enquiries.js
+│   │   ├── email-content.js
+│   │   ├── email-worker.js
+│   │   ├── email-admin.js
+│   │   ├── email-addresses.js
+│   │   ├── admin-list.js
+│   │   ├── visitors.js
+│   │   ├── metadata.js
+│   │   ├── consent.js
+│   │   ├── idempotency.js
+│   │   ├── public-cache.js
 │   │   └── demo.js
-│   ├── tests/{api.test.js,mysql.integration.test.js}
+│   ├── tests/{api.test.js,email-consent.test.js,client-requests.test.js,enhancements.test.js,mysql.integration.test.js}
 │   ├── generated/client/             # generated Prisma client, ignored
 │   └── uploads/.gitkeep
 ├── scripts/test-mysql.mjs
 ├── deployment/{apache-vhost.conf,school-api.service}
-├── docs/{API.md,ASSETS.md,VERIFICATION.md}
+├── shared/{school-profile.js,school-activities.js,record-fields.js}
+├── docs/{API.md,ASSETS.md,SCHOOL-SOURCES.md,EMAIL-AND-CONSENT.md,ENHANCEMENTS.md,VERIFICATION.md}
 ├── artifacts/                        # local screenshots and layout measurements
 ├── .env.example                      # optional Compose secrets template
 ├── compose.yaml

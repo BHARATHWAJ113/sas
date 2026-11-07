@@ -20,6 +20,18 @@ enum EnquiryStatus {
   CONTACTED
   CLOSED
 }
+enum EmailStatus {
+  PENDING
+  SENDING
+  SENT
+  FAILED
+  PARTIAL
+  UNKNOWN
+}
+enum ConsentChoice {
+  ACCEPTED
+  REJECTED
+}
 model Role {
   id    String @id @default(cuid()) @db.VarChar(191)
   name  String @unique @db.VarChar(50)
@@ -36,6 +48,7 @@ model User {
   role         Role @relation(fields: [roleId], references: [id])
   sessions     Session[]
   auditLogs    AuditLog[]
+  emails       EmailMessage[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   @@map("users")
@@ -92,9 +105,22 @@ model Announcement {
   isDemo      Boolean @default(false)
   publishedAt DateTime @default(now())
   expiresAt   DateTime?
+  showPopup   Boolean @default(false)
+  priority    Int @default(0)
+  announcementType String @default("NOTICE") @db.VarChar(24)
+  imageId     String? @db.VarChar(191)
+  image       Media? @relation("AnnouncementImage", fields: [imageId], references: [id], onDelete: SetNull)
+  footerMessage String? @db.VarChar(500)
+  footerMessageTa String? @db.VarChar(500)
+  wishes      String? @db.Text
+  wishesTa    String? @db.Text
+  ctaLabel    String? @db.VarChar(80)
+  ctaLabelTa  String? @db.VarChar(120)
+  ctaPath     String? @db.VarChar(255)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   @@index([status, kind, publishedAt])
+  @@index([showPopup, status, publishedAt, priority])
   @@map("announcements")
 }
 model Event {
@@ -148,6 +174,8 @@ model Media {
   attachments Event[] @relation("EventAttachment")
   galleryMedia GalleryMedia[]
   activities  Activity[]
+  announcementImages Announcement[] @relation("AnnouncementImage")
+  emailAttachments EmailMessage[] @relation("EmailAttachment")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   @@map("media")
@@ -221,10 +249,99 @@ model AdmissionEnquiry {
   locale      String @default("en") @db.VarChar(5)
   consentAt   DateTime @default(now())
   status      EnquiryStatus @default(NEW)
+  requestKey  String? @unique @db.VarChar(64)
+  payloadHash String? @db.VarChar(64)
+  fingerprint String? @unique @db.VarChar(64)
+  metadata    Json?
+  metadataExpiresAt DateTime?
+  emails      EmailMessage[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   @@index([status, createdAt])
+  @@index([metadataExpiresAt])
   @@map("admission_enquiries")
+}
+model EmailMessage {
+  id                 String @id @default(cuid()) @db.VarChar(191)
+  dedupeKey          String @unique @db.VarChar(64)
+  payloadHash        String @db.VarChar(64)
+  kind               String @db.VarChar(40)
+  to                 String @db.VarChar(191)
+  cc                 Json
+  bcc                Json?
+  attachmentId       String? @db.VarChar(191)
+  attachment         Media? @relation("EmailAttachment", fields: [attachmentId], references: [id], onDelete: Restrict)
+  subject            String @db.VarChar(255)
+  html               String @db.LongText
+  text               String @db.LongText
+  replyTo            String? @db.VarChar(191)
+  status             EmailStatus @default(PENDING)
+  attempts           Int @default(0)
+  nextAttemptAt      DateTime @default(now())
+  lockedAt           DateTime?
+  lockToken          String? @db.VarChar(36)
+  lastError          String? @db.VarChar(500)
+  messageId          String? @db.VarChar(255)
+  accepted           Json?
+  rejected           Json?
+  sentAt             DateTime?
+  expiresAt          DateTime?
+  userId             String? @db.VarChar(191)
+  user               User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  enquiryId          String? @db.VarChar(191)
+  enquiry            AdmissionEnquiry? @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  @@index([status, nextAttemptAt])
+  @@index([status, lockedAt])
+  @@index([userId, createdAt])
+  @@index([to, createdAt])
+  @@map("email_messages")
+}
+model CookieConsent {
+  id        String @id @db.VarChar(64)
+  choice    ConsentChoice
+  maps      Boolean @default(false)
+  analytics Boolean @default(false)
+  version   String @db.VarChar(40)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  events    CookieConsentEvent[]
+  @@index([expiresAt])
+  @@map("cookie_consents")
+}
+model CookieConsentEvent {
+  id        String @id @default(cuid()) @db.VarChar(191)
+  consentId String @db.VarChar(64)
+  consent   CookieConsent @relation(fields: [consentId], references: [id], onDelete: Cascade)
+  action    String @db.VarChar(12)
+  choice    ConsentChoice
+  maps      Boolean @default(false)
+  analytics Boolean @default(false)
+  version   String @db.VarChar(40)
+  createdAt DateTime @default(now())
+  @@index([consentId, createdAt])
+  @@map("cookie_consent_events")
+}
+model VisitorRecord {
+  id        String @id @default(cuid()) @db.VarChar(191)
+  requestKey String @unique @db.VarChar(64)
+  path      String @db.VarChar(300)
+  consentId String @db.VarChar(64)
+  metadata  Json
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  @@index([createdAt])
+  @@index([expiresAt])
+  @@map("visitor_records")
+}
+model RateLimitBucket {
+  id        String @id @db.VarChar(64)
+  count     Int @default(1)
+  expiresAt DateTime
+  @@index([expiresAt])
+  @@map("rate_limit_buckets")
 }
 model AuditLog {
   id        String @id @default(cuid()) @db.VarChar(191)

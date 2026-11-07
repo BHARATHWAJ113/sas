@@ -10,7 +10,9 @@ const origin = 'http://127.0.0.1:5173';
 const token = 'a'.repeat(64); const csrfToken = 'b'.repeat(64);
 function database(role = 'ADMIN') {
   const db = {};
-  for (const model of ['session', 'user', 'role', 'event', 'activity', 'activityCategory', 'page', 'media', 'gallery', 'galleryMedia', 'siteSetting', 'translation', 'announcement', 'admissionEnquiry', 'auditLog']) db[model] = Object.fromEntries(['findMany', 'findFirst', 'findUnique', 'count', 'create', 'update', 'delete', 'deleteMany'].map(key => [key, vi.fn()]));
+  for (const model of ['session', 'user', 'role', 'event', 'activity', 'activityCategory', 'page', 'media', 'gallery', 'galleryMedia', 'siteSetting', 'translation', 'announcement', 'admissionEnquiry', 'auditLog', 'emailMessage', 'rateLimitBucket', 'cookieConsent']) db[model] = Object.fromEntries(['findMany', 'findFirst', 'findUnique', 'count', 'create', 'createMany', 'upsert', 'update', 'updateMany', 'delete', 'deleteMany'].map(key => [key, vi.fn()]));
+  db.rateLimitBucket.upsert.mockResolvedValue({ count: 1 });
+  db.emailMessage.createMany.mockResolvedValue({ count: 2 });
   db.session.findUnique.mockResolvedValue({ id: hashToken(token), csrfToken, expiresAt: new Date(Date.now() + 60000), user: { id: 'staff-1', name: 'Test staff', email: 'staff@example.test', roleId: 'role-1', active: true, role: { id: 'role-1', name: role } } });
   db.$transaction = vi.fn(callback => callback(db));
   return db;
@@ -74,7 +76,15 @@ describe('public database boundaries', () => {
   it('limits announcements to their publication and expiry window', async () => { db.announcement.findMany.mockResolvedValue([]); db.announcement.count.mockResolvedValue(0); await request(app).get('/api/announcements?kind=NOTICE').expect(200); expect(db.announcement.findMany.mock.calls[0][0].where).toMatchObject({ status: 'PUBLISHED', kind: 'NOTICE', publishedAt: { lte: expect.any(Date) }, OR: [{ expiresAt: null }, { expiresAt: { gt: expect.any(Date) } }] }); });
   it('does not expose draft media to anonymous users', async () => { db.media.findUnique.mockResolvedValue({ status: 'DRAFT' }); await request(app).get('/api/media/private').expect(404); });
   const validEnquiry = { parentName: 'Test parent', studentName: 'Test student', email: 'parent@example.test', phone: '9876543210', grade: '5', message: 'Class availability?', consent: true, locale: 'en' };
-  it('stores validated enquiries and returns a reference after the database write', async () => { db.admissionEnquiry.create.mockResolvedValue({ id: 'saved-reference' }); const { body } = await request(app).post('/api/enquiries').set('Origin', origin).send(validEnquiry).expect(201); expect(body.id).toBe('saved-reference'); expect(db.admissionEnquiry.create).toHaveBeenCalledWith({ data: { parentName: 'Test parent', studentName: 'Test student', email: 'parent@example.test', phone: '9876543210', grade: '5', message: 'Class availability?', locale: 'en' } }); });
+  it('stores the enquiry and both emails in one transaction before returning a reference', async () => {
+    db.admissionEnquiry.create.mockImplementation(({ data }) => ({ id: 'saved-reference', ...data }));
+    const { body } = await request(app).post('/api/enquiries').set('Origin', origin).send(validEnquiry).expect(201);
+    expect(body.id).toBe('saved-reference');
+    expect(db.admissionEnquiry.create).toHaveBeenCalledWith({ data: expect.objectContaining({
+      parentName: 'Test parent', email: 'parent@example.test', requestKey: expect.any(String), payloadHash: expect.any(String),
+    }) });
+    expect(db.emailMessage.createMany.mock.calls[0][0].data.map(item => item.kind)).toEqual(['ENQUIRY_CONFIRMATION', 'ENQUIRY_NOTIFICATION']);
+  });
   it('returns unavailable when persistence fails', async () => { db.admissionEnquiry.create.mockRejectedValue(Object.assign(new Error('private connection details'), { code: 'P1001' })); const { body } = await request(app).post('/api/enquiries').set('Origin', origin).send(validEnquiry).expect(503); expect(body.id).toBeUndefined(); expect(body.error).not.toContain('private connection'); });
   it('requires consent and rejects unknown fields', async () => { await request(app).post('/api/enquiries').set('Origin', origin).send({ ...validEnquiry, consent: false, status: 'CLOSED' }).expect(422); expect(db.admissionEnquiry.create).not.toHaveBeenCalled(); });
   it('rejects unexpected cross-origin writes', async () => { await request(app).post('/api/enquiries').set('Origin', 'https://evil.example').send(validEnquiry).expect(403); expect(db.admissionEnquiry.create).not.toHaveBeenCalled(); });

@@ -2,8 +2,10 @@ import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 import { allow, csrf, fail, safeUser } from './auth.js';
-import { listQuery, schemas, parse, userSchema } from './validation.js';
+import { schemas, parse, userSchema } from './validation.js';
 import { mountUploads } from './uploads.js';
+import { mountEmailAdmin } from './email-admin.js';
+import { adminList, listEnvelope } from './admin-list.js';
 const resources = { pages: 'page', events: 'event', activities: 'activity', 'activity-categories': 'activityCategory', announcements: 'announcement', translations: 'translation', galleries: 'gallery', settings: 'siteSetting', media: 'media' };
 const relations = {
   events: { images: { orderBy: { order: 'asc' }, include: { media: true } }, attachment: true },
@@ -14,16 +16,21 @@ const audit = (tx, req, action, entity, entityId) => tx.auditLog.create({ data: 
 export function adminRouter(db, auth) {
   const router = Router();
   router.use(auth, csrf);
+  mountEmailAdmin(router, db, audit);
   router.get('/dashboard', async (_req, res) => {
     const [events, pages, enquiries, media, recent] = await Promise.all([db.event.count(), db.page.count(), db.admissionEnquiry.count({ where: { status: 'NEW' } }), db.media.count(), db.auditLog.findMany({ take: 8, orderBy: { createdAt: 'desc' }, include: { user: { select: { name: true } } } })]);
     res.json({ events, pages, enquiries, media, recent });
   });
   router.get('/roles', allow('ADMIN'), async (_req, res) => res.json({ items: await db.role.findMany() }));
   router.get('/activity-category-options', allow('ADMIN', 'EDITOR'), async (_req, res) => {
-    const items = await db.activityCategory.findMany({ select: { id: true, title: true, status: true }, orderBy: [{ sortOrder: 'asc' }, { title: 'asc' }] });
+    const items = await db.activityCategory.findMany({ select: { id: true, slug: true, title: true, status: true }, orderBy: [{ sortOrder: 'asc' }, { title: 'asc' }] });
     res.json({ items });
   });
-  router.get('/users', allow('ADMIN'), async (_req, res) => res.json({ items: (await db.user.findMany({ include: { role: true }, take: 100, orderBy: { createdAt: 'desc' } })).map(safeUser) }));
+  router.get('/users', allow('ADMIN'), async (req, res) => {
+    const { query, ...args } = adminList('users', req.query);
+    const [items, total] = await Promise.all([db.user.findMany({ ...args, include: { role: true } }), db.user.count({ where: args.where })]);
+    res.json(listEnvelope(items.map(safeUser), total, query));
+  });
   router.post('/users', allow('ADMIN'), parse(userSchema.refine(v => !!v.password, { message: 'A password is required.', path: ['password'] })), async (req, res) => {
     const { password, ...data } = req.validated;
     const passwordHash = await bcrypt.hash(password, 12);
@@ -33,6 +40,11 @@ export function adminRouter(db, auth) {
       return user;
     });
     res.status(201).json(safeUser(result));
+  });
+  router.get('/users/:id', allow('ADMIN'), async (req, res) => {
+    const user = await db.user.findUnique({ where: { id: req.params.id }, include: { role: true } });
+    if (!user) throw fail(404, 'User unavailable.');
+    res.json(safeUser(user));
   });
   router.put('/users/:id', allow('ADMIN'), parse(userSchema), async (req, res) => {
     if (req.params.id === req.user.id && (!req.validated.active || req.validated.roleId !== req.user.roleId)) throw fail(400, 'You cannot disable your own account or change your own role.');
@@ -53,30 +65,63 @@ export function adminRouter(db, auth) {
     res.status(204).end();
   });
   router.get('/audit-logs', allow('ADMIN'), async (req, res) => {
-    const { page, limit } = listQuery.parse(req.query);
-    const [items, total] = await Promise.all([db.auditLog.findMany({ take: limit, skip: (page - 1) * limit, orderBy: { createdAt: 'desc' }, include: { user: { select: { name: true } } } }), db.auditLog.count()]);
-    res.json({ items, total, page, pages: Math.ceil(total / limit) });
+    const { query, ...args } = adminList('audit-logs', req.query);
+    const [items, total] = await Promise.all([db.auditLog.findMany({ ...args, include: { user: { select: { name: true } } } }), db.auditLog.count({ where: args.where })]);
+    res.json(listEnvelope(items, total, query));
   });
   router.get('/enquiries', allow('ADMIN', 'EDITOR'), async (req, res) => {
-    const { page, limit } = listQuery.parse(req.query);
-    const [items, total] = await Promise.all([db.admissionEnquiry.findMany({ take: limit, skip: (page - 1) * limit, orderBy: { createdAt: 'desc' } }), db.admissionEnquiry.count()]);
-    res.json({ items, total, page, pages: Math.ceil(total / limit) });
+    const { query, ...args } = adminList('enquiries', req.query);
+    const select = Object.fromEntries(['id', 'parentName', 'studentName', 'email', 'phone', 'grade', 'message', 'locale', 'status', 'createdAt', 'updatedAt'].map(key => [key, true]));
+    const [items, total] = await Promise.all([db.admissionEnquiry.findMany({ ...args, select }), db.admissionEnquiry.count({ where: args.where })]);
+    res.json(listEnvelope(items, total, query));
+  });
+  router.get('/enquiries/:id', allow('ADMIN'), async (req, res) => {
+    const item = await db.admissionEnquiry.findUnique({ where: { id: req.params.id }, include: { emails: { select: { id: true, to: true, status: true, kind: true, attempts: true, sentAt: true, lastError: true } } } });
+    if (!item) throw fail(404, 'Enquiry unavailable.');
+    if (item.metadataExpiresAt && item.metadataExpiresAt <= new Date()) { item.metadata = null; item.metadataExpiresAt = null; }
+    const history = await db.auditLog.findMany({ where: { entity: 'enquiry', entityId: item.id }, orderBy: { createdAt: 'asc' }, select: { action: true, createdAt: true } });
+    const { requestKey: _requestKey, payloadHash: _payloadHash, fingerprint: _fingerprint, ...details } = item;
+    res.json({ ...details, history });
+  });
+  router.get('/visitors', allow('ADMIN'), async (req, res) => {
+    const { query, ...args } = adminList('visitors', req.query);
+    const where = { ...args.where, expiresAt: { gt: new Date() } };
+    const [items, total] = await Promise.all([db.visitorRecord.findMany({ ...args, where, select: { id: true, path: true, createdAt: true, expiresAt: true } }), db.visitorRecord.count({ where })]);
+    res.json(listEnvelope(items, total, query));
+  });
+  router.get('/visitors/:id', allow('ADMIN'), async (req, res) => {
+    const item = await db.visitorRecord.findFirst({ where: { id: req.params.id, expiresAt: { gt: new Date() } }, select: { id: true, path: true, metadata: true, createdAt: true, expiresAt: true } });
+    if (!item) throw fail(404, 'Visitor record unavailable or expired.');
+    res.json(item);
   });
   router.patch('/enquiries/:id', allow('ADMIN', 'EDITOR'), parse(z.object({ status: z.enum(['NEW', 'CONTACTED', 'CLOSED']) }).strict()), async (req, res) => {
     const item = await db.$transaction(async tx => { const item = await tx.admissionEnquiry.update({ where: { id: req.params.id }, data: req.validated }); await audit(tx, req, 'UPDATE', 'enquiry', item.id); return item; });
     res.json(item);
   });
   router.delete('/enquiries/:id', allow('ADMIN'), async (req, res) => {
-    await db.$transaction(async tx => { await tx.admissionEnquiry.delete({ where: { id: req.params.id } }); await audit(tx, req, 'DELETE', 'enquiry', req.params.id); });
+    await db.$transaction(async tx => {
+      // Lock queued rows before the sending check so a waiting worker cannot claim them during deletion.
+      await tx.emailMessage.updateMany({ where: { enquiryId: req.params.id, status: 'PENDING' }, data: { status: 'FAILED' } });
+      const sending = await tx.emailMessage.count({ where: { enquiryId: req.params.id, status: 'SENDING' } });
+      if (sending) throw fail(409, 'An email for this enquiry is being sent. Try deleting it again shortly.');
+      await tx.admissionEnquiry.delete({ where: { id: req.params.id } });
+      await audit(tx, req, 'DELETE', 'enquiry', req.params.id);
+    });
     res.status(204).end();
   });
   mountUploads(router, db, audit);
   for (const [resource, model] of Object.entries(resources)) {
     const privilege = ['settings'].includes(resource) ? ['ADMIN'] : ['ADMIN', 'EDITOR'];
     router.get(`/${resource}`, async (req, res) => {
-      const { page, limit } = listQuery.parse(req.query);
-      const [items, total] = await Promise.all([db[model].findMany({ take: limit, skip: (page - 1) * limit, orderBy: { updatedAt: 'desc' }, ...(relations[resource] ? { include: relations[resource] } : {}) }), db[model].count()]);
-      res.json({ items, total, page, pages: Math.ceil(total / limit) });
+      const { query, ...args } = adminList(resource, req.query);
+      const omit = ['pages', 'events', 'announcements'].includes(resource) ? { omit: { body: true, bodyTa: true } } : {};
+      const [items, total] = await Promise.all([db[model].findMany({ ...args, ...omit, ...(relations[resource] ? { include: relations[resource] } : {}) }), db[model].count({ where: args.where })]);
+      res.json(listEnvelope(items, total, query));
+    });
+    router.get(`/${resource}/:id`, ...(resource === 'settings' ? [allow('ADMIN')] : []), async (req, res) => {
+      const item = await db[model].findUnique({ where: { id: req.params.id }, ...(relations[resource] ? { include: relations[resource] } : {}) });
+      if (!item) throw fail(404, 'Record unavailable.');
+      res.json(item);
     });
     if (resource !== 'media') router.post(`/${resource}`, allow(...privilege), parse(schemas[resource]), async (req, res) => {
       const result = await saveResource(db, req, resource, model, audit, false);
@@ -85,7 +130,7 @@ export function adminRouter(db, auth) {
     router.put(`/${resource}/:id`, allow(...privilege), parse(schemas[resource]), async (req, res) => res.json(await saveResource(db, req, resource, model, audit, true)));
     router.delete(`/${resource}/:id`, allow('ADMIN'), async (req, res) => {
       if (resource === 'media') {
-        const refs = await db.media.findUnique({ where: { id: req.params.id }, include: { _count: { select: { eventImages: true, attachments: true, galleryMedia: true, activities: true } } } });
+        const refs = await db.media.findUnique({ where: { id: req.params.id }, include: { _count: { select: { eventImages: true, attachments: true, galleryMedia: true, activities: true, announcementImages: true, emailAttachments: true } } } });
         if (refs && Object.values(refs._count).some(Boolean)) throw fail(409, 'Remove this media from events, galleries and activities before deleting it.');
         const covers = await db.event.count({ where: { cover: `/api/media/${req.params.id}` } });
         if (covers) throw fail(409, 'This image is used as an event cover. Remove that reference first.');

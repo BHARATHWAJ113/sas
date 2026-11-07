@@ -1,0 +1,47 @@
+.cookie-banner {
+  position: fixed;
+  z-index: 90;
+  inset: auto 16px 16px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: 22px;
+  border: 1px solid #c9daee;
+  border-radius: 18px;
+  background: #fff;
+  color: #334155;
+  box-shadow: 0 12px 48px #102a5633;
+}
+.cookie-banner > svg { flex: none; color: #102a56; }
+.cookie-banner h2 { font-size: 19px; letter-spacing: 0; }
+.cookie-banner p, .cookie-dialog p, .cookie-dialog dd { font-size: 14px; line-height: 1.7; }
+.cookie-banner p { margin-top: 5px; }
+.cookie-banner a { text-decoration: underline; color: #102a56; }
+.cookie-actions { display: flex; flex: none; gap: 10px; flex-wrap: wrap; }
+.cookie-actions button, .cookie-withdraw {
+  min-height: 44px; padding: 10px 16px; border: 1px solid #102a56;
+  border-radius: 999px; color: #102a56; background: #fff; font-size: 14px; font-weight: 600;
+}
+.cookie-actions button:hover { background: #eaf4ff; }
+.cookie-actions .cookie-accept { color: #fff; background: #102a56; }
+.cookie-dialog {
+  width: min(600px, calc(100vw - 28px)); max-height: 90dvh; overflow: auto;
+  border: 1px solid #c9daee; border-radius: 20px; padding: 45px 28px 28px; color: #334155;
+}
+.cookie-dialog::backdrop { background: #102a5677; }
+.cookie-dialog h2 { font-size: 26px; margin-bottom: 14px; }
+.cookie-dialog dl { margin-block: 20px; }
+.cookie-dialog dl div { padding-block: 14px; border-bottom: 1px solid #dde5ee; }
+.cookie-dialog dt { color: #102a56; font-weight: 700; }
+.cookie-dialog dd { margin: 6px 0 0; }
+.cookie-dialog .cookie-saved { margin-bottom: 16px; font-size: 12px; }
+.cookie-withdraw { margin-top: 14px; text-decoration: underline; border: 0; padding-inline: 0; }
+.footer-cookie-settings { color: inherit; font-size: inherit; text-align: start; }
+@media(max-width: 760px) {
+  .cookie-banner { flex-wrap: wrap; padding: 18px; gap: 12px; }
+  .cookie-banner > div:first-of-type { flex: 1; min-width: 0; }
+  .cookie-banner .cookie-actions { width: 100%; }
+  .cookie-actions button { flex: 1; }
+}

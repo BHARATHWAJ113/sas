@@ -13,7 +13,7 @@ export function SiteProvider({ children }) {
     ...Object.fromEntries((site.data?.translations || []).filter(x => x.locale === lang).map(x => [x.key, x.value])),
   };
   useEffect(() => { document.documentElement.lang = lang; try { localStorage.setItem('school-language', lang); } catch { /* Preference remains available for this visit. */ } }, [lang]);
-  const t = key => dictionary[key] ?? key;
+  const t = key => typeof dictionary[key] === 'string' ? dictionary[key].replaceAll('{metadataDays}', String(site.data?.privacyRetentionDays ?? 30)) : dictionary[key] ?? key;
   const pick = (object, field) => lang === 'ta' ? object?.[`${field}Ta`] || object?.[field] : object?.[field];
   const setting = (key) => {
     const value = site.data?.settings?.[key];

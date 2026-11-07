@@ -1,0 +1,20 @@
+.email-compose { display: grid; gap: 18px; margin-bottom: 26px; }
+.email-compose label, .email-history > label { display: flex; flex-direction: column; gap: 7px; font-size: 13px; font-weight: 600; }
+.email-compose h2, .email-history h2, .email-detail h2 { font-size: 23px; }
+.email-compose > .button { justify-self: start; }
+.email-editor { border: 1px solid #cbd5e1; border-radius: 10px; overflow: hidden; }
+.email-toolbar { display: flex; flex-wrap: wrap; gap: 7px; padding: 9px; background: #eaf4ff; }
+.email-toolbar button, .email-history-title button, .email-history td button, .email-detail > button { min-height: 38px; padding: 6px 10px; border: 1px solid #c9d9ec; border-radius: 7px; color: #102a56; background: #fff; font-size: 12px; }
+.email-toolbar button[aria-pressed=true] { color: #fff; background: #102a56; }
+.email-editor .tiptap { min-height: 240px; max-height: 550px; overflow: auto; padding: 18px; outline-offset: -3px; font-size: 15px; }
+.email-editor .tiptap p { margin-bottom: 10px; }
+.email-editor .tiptap h2 { font-size: 24px; }
+.email-history-title { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.email-history > label { max-width: 300px; }
+.email-history td { max-width: 300px; overflow-wrap: anywhere; }
+.email-history td button + button { margin-inline-start: 6px; }
+.status-pill.sent { background: #e2f3eb; color: #1c6045; }
+.status-pill.failed, .status-pill.unknown { background: #fce9e9; color: #8a2929; }
+.status-pill.pending, .status-pill.sending, .status-pill.partial { background: #fff0cf; color: #74521d; }
+.email-detail { margin-top: 25px; display: grid; gap: 12px; }
+.email-detail pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: inherit; font-size: 14px; line-height: 1.7; }

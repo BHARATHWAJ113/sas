@@ -1,4 +1,26 @@
+.scroll-to-top {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #6699cc;
+  border-radius: 50%;
+  background: #102a56;
+  color: #fff;
+  box-shadow: 0 5px 20px #102a5633;
+}
+.scroll-to-top[hidden] { display: none; }
+.scroll-to-top:hover { background: #244777; }
+.scroll-to-top:focus-visible { outline: 3px solid #6699cc; outline-offset: 4px; }
+/* Keep preference controls unobstructed, including keyboard focus. */
+body:has(.cookie-banner) .scroll-to-top { visibility: hidden; }
 @media (prefers-reduced-motion: no-preference) {
+  .scroll-to-top { transition: transform 180ms ease, background 180ms ease; }
+  .scroll-to-top:hover { transform: translateY(-3px); }
   @keyframes school-stat-float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-7px); }

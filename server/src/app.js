@@ -10,6 +10,10 @@ import { fail, hashToken, mountAuth, originGuard } from './auth.js';
 import { adminRouter } from './admin.js';
 import { enquirySchema, listQuery, parse } from './validation.js';
 import { galleryMedia } from './gallery.js';
+import { saveEnquiry } from './enquiries.js';
+import { mountConsent } from './consent.js';
+import { publicCache } from './public-cache.js';
+import { mountVisitors } from './visitors.js';
 import { demoEvents, demoAnnouncements, demoPages, demoSettings } from './demo.js';
 import { schoolPages } from '../../shared/school-profile.js';
 import { schoolActivities, schoolActivityCategories } from '../../shared/school-activities.js';
@@ -19,6 +23,7 @@ const envelope = (items, total, page, limit, extra = {}) => ({ items, total, pag
 export function createApp(db, options = {}) {
   const demo = options.demo ?? config.demo;
   const app = express();
+  const cache = publicCache();
   app.disable('x-powered-by');
   app.set('trust proxy', config.TRUST_PROXY);
   app.use(helmet(), cors({ origin: config.origins, credentials: true }), cookieParser());
@@ -26,6 +31,9 @@ export function createApp(db, options = {}) {
   app.use(express.json({ limit: '512kb' }), originGuard);
   app.use('/api', (_req, res, next) => { res.set('Cache-Control', 'no-store'); next(); });
   const databaseOnly = (_req, _res, next) => demo ? next(fail(503, 'This preview uses read-only demo content. Authentication and enquiry submission require a configured MySQL database.')) : next();
+  mountConsent(app, db, databaseOnly, demo);
+  mountVisitors(app, db, databaseOnly);
+  app.use(cache.middleware);
   app.get('/api/health', async (_req, res) => {
     if (demo) return res.json({ status: 'demo', database: 'unavailable', readOnly: true });
     try { await db.$queryRaw`SELECT 1`; res.json({ status: 'ok', database: 'connected', readOnly: false }); }
@@ -34,10 +42,10 @@ export function createApp(db, options = {}) {
   app.get('/api/site', async (_req, res) => {
     const settings = demo ? demoSettings : Object.fromEntries((await db.siteSetting.findMany({ where: { public: true } })).map(x => [x.key, x.value]));
     const translations = demo ? [] : await db.translation.findMany({ where: published });
-    res.json({ settings, translations, demo });
+    res.json({ settings, translations, demo, privacyRetentionDays: config.VISITOR_RETENTION_DAYS });
   });
   app.get('/api/sitemap.xml', async (_req, res) => {
-    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy'];
+    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy', 'cookie-policy'];
     const events = demo ? [] : await db.event.findMany({ where: published, select: { slug: true } });
     const base = config.SITE_URL.replace(/\/$/, '');
     const escape = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -103,13 +111,18 @@ export function createApp(db, options = {}) {
     }));
     res.json(envelope(items, total, page, limit, { categories }));
   });
+  app.get('/api/home-announcements', async (_req, res) => {
+    const now = new Date();
+    const items = demo ? demoAnnouncements.filter(item => item.showPopup && new Date(item.publishedAt) <= now && (!item.expiresAt || new Date(item.expiresAt) > now)) : await db.announcement.findMany({ where: { ...published, showPopup: true, publishedAt: { lte: now }, OR: [{ expiresAt: null }, { expiresAt: { gt: now } }] }, include: { image: { select: { id: true, alt: true, altTa: true, status: true } } }, orderBy: [{ priority: 'desc' }, { publishedAt: 'desc' }, { id: 'asc' }], take: 50 });
+    res.json({ items: items.map(({ image, ...item }) => ({ ...item, image: image?.status === 'PUBLISHED' ? image : null })) });
+  });
   app.get('/api/announcements', async (req, res) => {
     const { page, limit } = listQuery.parse(req.query);
     const kind = z.enum(['ANNOUNCEMENT', 'NOTICE', 'NEWS', 'NOTICE_BOARD']).optional().parse(req.query.kind);
     const now = new Date();
-    if (demo) { const items = demoAnnouncements.filter(x => !kind || (kind === 'NOTICE_BOARD' ? x.kind !== 'NEWS' : x.kind === kind)); return res.json(envelope(items.slice((page - 1) * limit, page * limit), items.length, page, limit, { demo: true })); }
+    if (demo) { const items = demoAnnouncements.filter(x => !kind || (kind === 'NOTICE_BOARD' ? x.kind !== 'NEWS' : x.kind === kind)); return res.json(envelope(items.slice((page - 1) * limit, page * limit).map(({ body: _body, bodyTa: _bodyTa, ...item }) => item), items.length, page, limit, { demo: true })); }
     const where = { ...published, ...(kind ? { kind: kind === 'NOTICE_BOARD' ? { in: ['ANNOUNCEMENT', 'NOTICE'] } : kind } : {}), publishedAt: { lte: now }, OR: [{ expiresAt: null }, { expiresAt: { gt: now } }] };
-    const [items, total] = await Promise.all([db.announcement.findMany({ where, take: limit, skip: (page - 1) * limit, orderBy: { publishedAt: 'desc' } }), db.announcement.count({ where })]);
+    const [items, total] = await Promise.all([db.announcement.findMany({ where, take: limit, skip: (page - 1) * limit, omit: { body: true, bodyTa: true }, orderBy: { publishedAt: 'desc' } }), db.announcement.count({ where })]);
     res.json(envelope(items, total, page, limit));
   });
   app.get('/api/announcements/:slug', async (req, res) => {
@@ -140,12 +153,13 @@ export function createApp(db, options = {}) {
     res.sendFile(path, err => { if (err && !res.headersSent) res.status(404).json({ error: 'File unavailable.' }); });
   });
   app.post('/api/enquiries', databaseOnly, rateLimit({ windowMs: 60 * 60 * 1000, limit: 5, standardHeaders: 'draft-8', legacyHeaders: false, message: { error: 'Enquiry limit reached. Please try again later.' } }), parse(enquirySchema), async (req, res) => {
-    const { consent: _consent, website: _website, ...data } = req.validated;
-    const item = await db.admissionEnquiry.create({ data });
-    res.status(201).json({ id: item.id, message: 'Your enquiry has been received. This is not an admission confirmation.' });
+    res.status(201).json(await saveEnquiry(db, req));
   });
   const auth = mountAuth(app, db, databaseOnly);
-  app.use('/api/admin', databaseOnly, adminRouter(db, auth));
+  app.use('/api/admin', (req, res, next) => {
+    if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method)) res.once('finish', () => { if (res.statusCode < 400) cache.clear(); });
+    next();
+  }, databaseOnly, adminRouter(db, auth));
   app.use((_req, _res, next) => next(fail(404, 'Endpoint not found.')));
   app.use((error, _req, res, _next) => {
     if (error instanceof z.ZodError) return res.status(422).json({ error: 'Please check the highlighted information.', fields: Object.fromEntries(error.issues.map(i => [i.path.join('.'), i.message])) });

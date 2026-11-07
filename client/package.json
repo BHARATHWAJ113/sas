@@ -3,7 +3,24 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "scripts": { "dev": "vite --host 127.0.0.1", "build": "vite build", "preview": "vite preview --host 127.0.0.1" },
-  "dependencies": { "react": "^19.2.0", "react-dom": "^19.2.0", "react-router-dom": "^7.9.5", "lucide-react": "^0.548.0", "@fontsource/inter": "^5.2.8", "@fontsource/noto-sans-tamil": "^5.2.7" },
-  "devDependencies": { "vite": "^7.1.12", "@vitejs/plugin-react": "^5.0.4" }
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/noto-sans-tamil": "^5.2.7",
+    "@tiptap/pm": "^3.33.0",
+    "@tiptap/react": "^3.33.0",
+    "@tiptap/starter-kit": "^3.33.0",
+    "lucide-react": "^0.548.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "vite": "^7.1.12"
+  }
 }

@@ -536,6 +536,10 @@
   gap: 4px 16px;
 }
 
+.footer-bottom > div {
+  flex-wrap: wrap;
+}
+
 .footer-credit a {
   display: inline;
   color: var(--navy);

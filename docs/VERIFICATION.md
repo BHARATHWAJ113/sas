@@ -1,4 +1,31 @@
-# Verification record · 31 October 2026
+# Verification record
+
+## Announcements, admin and visitor privacy · 8 November 2026
+
+- Applied the additive `202611080001_enhancements` migration to local MySQL. Existing school data was not reset; historical notices default to popup disabled.
+- Final regression run: **80 tests passed**. The **3 opt-in MySQL integration tests** passed separately, including actual JSON metadata expiry cleanup, publication scheduling, all four page sizes, consent gating, duplicate visit references, BCC and attachment handling.
+- Final `npm run lint`, `npm run build` and `git diff --check` passed. Production files are in `client/dist`. The email editor remains a separate lazy bundle; no new dependencies were needed for this enhancement.
+- Browser tests used an isolated in-memory fixture with clearly labeled demo announcements and synthetic recipients. Verified numbered navigation, refresh behavior, per-message reminder persistence, delayed follow-up display, internal-navigation cancellation, preview/edit/save, category search/validation/edit prefill, BCC/attachment upload, queue/history status, CSV export, private record details, cookie customization/withdrawal and optional enquiry metadata.
+- Table checks used 205 synthetic records: 20, 50, 100 and 200 rows rendered correctly; First/Last navigation, range/count summaries and column-specific search worked. CSV export produced the expected download.
+- Desktop 1440px, tablet 768px and mobile 390px checks showed no document horizontal overflow in the new layouts. Tamil mobile consent controls and private detail dialogs fit the viewport. Fresh admin checks showed no console errors.
+- Location was not requested from the operator during browser QA. Controlled tests cover granted, denied, unavailable, timeout and policy-blocked results; ordinary submission works without requesting location.
+- Evidence: `artifacts/announcement-popup-desktop.png`, `announcement-popup-mobile.png`, `searchable-field-mobile.png`. The temporary preview was stopped and its tabs closed.
+- No external email was sent. Gmail credentials/inbox delivery and deployed HTTPS/proxy/browser-permission behavior still need school-approved live verification. No production load benchmark was performed. Configuration and operational notes are in [ENHANCEMENTS.md](ENHANCEMENTS.md).
+
+## Email, consent and performance · 7 November 2026
+
+- Applied `202611070001_email_consent` to the configured local MySQL database without resetting existing content.
+- `npm test`: **55 passed**; the **2 opt-in MySQL tests** also passed in a separate run. Tests cover input sanitization, authorization/CSRF, idempotent submissions, atomic outbox writes, SMTP retries and ambiguous failures, cookie persistence and request coalescing/timeouts. Nodemailer was exercised against a local SMTP test server.
+- Real MySQL checks cover staff sign-in, publication and upload operations, enquiry and paired email persistence, consent audit history, administrator correspondence, and competing queue workers. Test records use a unique prefix and were cleaned up; workers were restricted to those records and used a synthetic transport.
+- `npm run lint`, `npm run build` and `git diff --check` passed. The email editor is a separate lazy-loaded bundle, excluded from public page startup.
+- Browser checks used an isolated API fixture. Verified To/CC/subject, bold formatting, queued/sent history, enquiry confirmation, reject/reload persistence, accept/load map, withdrawal removing the iframe, English/Tamil settings, scroll-to-top and focus restoration.
+- Measured the new public and admin layouts at 1440px, 768px and 390px with no document horizontal overflow. Fresh admin page checks showed no console errors.
+- Evidence: `artifacts/email-management-desktop.png`, `email-management-mobile.png`, `consent-banner-desktop.png`, `cookie-settings-mobile.png`.
+- No external emails were sent. Approved Gmail credentials, deployed HTTPS/proxy behavior and actual inbox delivery still require live verification. There is no production load benchmark.
+
+## Original website · 31 October 2026
+
+The following is the historical verification record from the original implementation.
 
 ## Completed
 
