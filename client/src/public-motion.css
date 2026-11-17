@@ -17,7 +17,6 @@
 .scroll-to-top:hover { background: #244777; }
 .scroll-to-top:focus-visible { outline: 3px solid #6699cc; outline-offset: 4px; }
 /* Keep preference controls unobstructed, including keyboard focus. */
-body:has(.cookie-banner) .scroll-to-top { visibility: hidden; }
 @media (prefers-reduced-motion: no-preference) {
   .scroll-to-top { transition: transform 180ms ease, background 180ms ease; }
   .scroll-to-top:hover { transform: translateY(-3px); }

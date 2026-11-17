@@ -16,7 +16,7 @@ const token = 'a'.repeat(64); const csrf = 'b'.repeat(64);
 const auth = query => query.set('Cookie', `school_session=${token}`).set('Origin', origin).set('x-csrf-token', csrf);
 function database(role = 'ADMIN') {
   const db = {};
-  for (const name of ['session', 'announcement', 'visitorRecord', 'cookieConsent', 'emailMessage', 'admissionEnquiry', 'auditLog', 'media', 'rateLimitBucket']) {
+  for (const name of ['session', 'announcement', 'emailMessage', 'admissionEnquiry', 'auditLog', 'media', 'rateLimitBucket']) {
     db[name] = Object.fromEntries(['findUnique', 'findFirst', 'findMany', 'create', 'createMany', 'updateMany', 'upsert', 'deleteMany', 'count'].map(method => [method, vi.fn().mockResolvedValue(method === 'findMany' ? [] : method === 'count' ? 0 : null)]));
   }
   db.session.findUnique.mockResolvedValue({ expiresAt: new Date(Date.now() + 60000), csrfToken: csrf, user: { id: 'test-admin', active: true, role: { name: role } } });
@@ -79,8 +79,8 @@ describe('admin query and announcement boundaries', () => {
     expect(schemas.announcements.safeParse({ ...payload, expiresAt: '2026-10-01T00:00:00Z' }).success).toBe(false);
     expect(schemas.announcements.safeParse(payload).success).toBe(true);
   });
-  it('keeps visitor and enquiry metadata restricted to administrators', async () => {
-    for (const role of ['EDITOR', 'VIEWER']) for (const path of ['/api/admin/visitors', '/api/admin/visitors/one', '/api/admin/enquiries/one']) await auth(request(createApp(database(role), { demo: false })).get(path)).expect(403);
+  it('keeps enquiry metadata restricted to administrators', async () => {
+    for (const role of ['EDITOR', 'VIEWER']) await auth(request(createApp(database(role), { demo: false })).get('/api/admin/enquiries/one')).expect(403);
     const db = database(); await auth(request(createApp(db, { demo: false })).get('/api/admin/enquiries')).expect(200);
     expect(db.admissionEnquiry.findMany.mock.calls[0][0].select.metadata).toBeUndefined();
   });
@@ -120,20 +120,14 @@ describe('permission-aware metadata and SMTP recipients', () => {
     expect(metadataSchema.safeParse({ location: { permission: 'denied', latitude: 10, longitude: 10 } }).success).toBe(false);
     expect(submissionMetadata({ get: () => '', ip: '127.0.0.1' })).toMatchObject({ device: { browser: null, model: null }, network: { ipAddress: '127.0.0.1' }, location: { permission: 'not-requested' } });
   });
-  it('rejects analytics without stored current consent and discards location from analytics', async () => {
-    const db = database(); const app = createApp(db, { demo: false });
-    const payload = { path: '/', requestId: '123e4567-e89b-42d3-a456-426614174000', metadata: { location: { permission: 'granted', latitude: 10, longitude: 20 } } };
-    await request(app).post('/api/visits').set('Origin', origin).send(payload).expect(403);
-    db.cookieConsent.findUnique.mockResolvedValue({ id: 'consent', analytics: false, version: config.CONSENT_VERSION, expiresAt: new Date(Date.now() + 60000) });
-    await request(app).post('/api/visits').set('Origin', origin).set('Cookie', `school_consent=${token}`).send(payload).expect(403);
-    db.cookieConsent.findUnique.mockResolvedValue({ id: 'consent', analytics: true, version: config.CONSENT_VERSION, expiresAt: new Date(Date.now() + 60000) });
-    await request(app).post('/api/visits').set('Origin', origin).set('Cookie', `school_consent=${token}`).send(payload).expect(204);
-    expect(db.visitorRecord.upsert.mock.calls[0][0].create.metadata.location).toEqual({ permission: 'not-requested' });
-  });
-  it('saves independently selected consent categories in the audit event', async () => {
-    const db = database(); db.cookieConsent.upsert.mockImplementation(({ create }) => ({ ...create, updatedAt: new Date() }));
-    const { body } = await request(createApp(db, { demo: false })).post('/api/consent').set('Origin', origin).send({ action: 'customize', maps: true, analytics: false }).expect(200);
-    expect(body).toMatchObject({ maps: true, analytics: false });
-    expect(db.cookieConsent.upsert.mock.calls[0][0].create.events.create).toMatchObject({ action: 'customize', maps: true, analytics: false });
+  it('retires tracking and preference endpoints and expires the old cookie', async () => {
+    const app = createApp(database(), { demo: false });
+    const legacy = await request(app).get('/api/consent')
+      .set('Cookie', `school_consent=${token}; school_session=${token}`).expect(404);
+    expect(legacy.headers['set-cookie']).toEqual([expect.stringMatching(/^school_consent=; Path=\/api; Expires=/)]);
+    await request(app).post('/api/consent').set('Origin', origin).send({ action: 'accept' }).expect(404);
+    await request(app).post('/api/visits').set('Origin', origin).send({ path: '/' }).expect(404);
+    await auth(request(app).get('/api/admin/visitors')).expect(404);
+    await auth(request(app).get('/api/admin/visitors/one')).expect(404);
   });
 });

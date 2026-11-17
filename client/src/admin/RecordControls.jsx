@@ -33,7 +33,7 @@ export function RecordFilters({ resource, controls, items = [] }) {
     <label>From · IST<input type="date" value={filters.from} onChange={event => update('from', event.target.value)}/></label><label>To · IST<input type="date" value={filters.to} min={filters.from || undefined} onChange={event => update('to', event.target.value)}/></label>
     <label>Sort column<select value={filters.sort} onChange={event => update('sort', event.target.value)}>{[['settings', 'translations'].includes(resource) ? 'updatedAt' : 'createdAt', ...fields].map(key => <option key={key}>{key}</option>)}</select></label>
     <label>Sort direction<select value={filters.direction} onChange={event => update('direction', event.target.value)}><option value="desc">Descending</option><option value="asc">Ascending</option></select></label>
-    {!['users', 'settings', 'visitors', 'audit-logs'].includes(resource) && <label>Status<select value={filters.status} onChange={event => update('status', event.target.value)}><option value="">All statuses</option>{statuses.map(status => <option key={status}>{status}</option>)}</select></label>}
+    {!['users', 'settings', 'audit-logs'].includes(resource) && <label>Status<select value={filters.status} onChange={event => update('status', event.target.value)}><option value="">All statuses</option>{statuses.map(status => <option key={status}>{status}</option>)}</select></label>}
     <button type="button" className="record-export" onClick={reset}>Reset filters</button><button type="button" className="record-export" disabled={!items.length} onClick={() => exportRecords(items, `${resource}-current-page`)}>Export current page · CSV</button>
   </section>;
 }

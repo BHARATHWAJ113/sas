@@ -83,17 +83,6 @@ export function adminRouter(db, auth) {
     const { requestKey: _requestKey, payloadHash: _payloadHash, fingerprint: _fingerprint, ...details } = item;
     res.json({ ...details, history });
   });
-  router.get('/visitors', allow('ADMIN'), async (req, res) => {
-    const { query, ...args } = adminList('visitors', req.query);
-    const where = { ...args.where, expiresAt: { gt: new Date() } };
-    const [items, total] = await Promise.all([db.visitorRecord.findMany({ ...args, where, select: { id: true, path: true, createdAt: true, expiresAt: true } }), db.visitorRecord.count({ where })]);
-    res.json(listEnvelope(items, total, query));
-  });
-  router.get('/visitors/:id', allow('ADMIN'), async (req, res) => {
-    const item = await db.visitorRecord.findFirst({ where: { id: req.params.id, expiresAt: { gt: new Date() } }, select: { id: true, path: true, metadata: true, createdAt: true, expiresAt: true } });
-    if (!item) throw fail(404, 'Visitor record unavailable or expired.');
-    res.json(item);
-  });
   router.patch('/enquiries/:id', allow('ADMIN', 'EDITOR'), parse(z.object({ status: z.enum(['NEW', 'CONTACTED', 'CLOSED']) }).strict()), async (req, res) => {
     const item = await db.$transaction(async tx => { const item = await tx.admissionEnquiry.update({ where: { id: req.params.id }, data: req.validated }); await audit(tx, req, 'UPDATE', 'enquiry', item.id); return item; });
     res.json(item);

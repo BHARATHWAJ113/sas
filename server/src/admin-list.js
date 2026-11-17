@@ -7,7 +7,7 @@ export function adminList(resource, input) {
   const query = z.object({ page: z.coerce.number().int().min(1).max(10000).default(1), limit: z.coerce.number().int().min(1).max(200).default(20), search: z.string().trim().max(100).default(''), column: z.enum(fields).optional(), from: z.iso.date().optional(), to: z.iso.date().optional(), status: z.string().max(30).optional(), sort: z.enum([dateField, ...fields]).default(dateField), direction: z.enum(['asc', 'desc']).default('desc') }).parse(input);
   if (query.from && query.to && query.from > query.to) throw fail(422, 'The end date must follow the start date.');
   const statuses = resource === 'enquiries' ? ['NEW', 'CONTACTED', 'CLOSED'] : resource === 'emails' ? ['PENDING', 'SENDING', 'SENT', 'FAILED', 'PARTIAL', 'UNKNOWN'] : ['DRAFT', 'PUBLISHED', 'ARCHIVED'];
-  if (query.status && (!statuses.includes(query.status) || ['users', 'settings', 'visitors', 'audit-logs'].includes(resource))) throw fail(422, 'Invalid status filter.');
+  if (query.status && (!statuses.includes(query.status) || ['users', 'settings', 'audit-logs'].includes(resource))) throw fail(422, 'Invalid status filter.');
   const where = {
     ...(query.search ? { OR: (query.column ? [query.column] : fields).map(key => resource === 'announcements' && key === 'kind' ? ['ANNOUNCEMENT', 'NOTICE', 'NEWS'].includes(query.search.toUpperCase()) ? { kind: query.search.toUpperCase() } : { id: '__no_matching_kind__' } : { [key]: { contains: query.search } }) } : {}),
     ...(query.status ? { status: query.status } : {}),

@@ -11,9 +11,7 @@ import { adminRouter } from './admin.js';
 import { enquirySchema, listQuery, parse } from './validation.js';
 import { galleryMedia } from './gallery.js';
 import { saveEnquiry } from './enquiries.js';
-import { mountConsent } from './consent.js';
 import { publicCache } from './public-cache.js';
-import { mountVisitors } from './visitors.js';
 import { demoEvents, demoAnnouncements, demoPages, demoSettings } from './demo.js';
 import { schoolPages } from '../../shared/school-profile.js';
 import { schoolActivities, schoolActivityCategories } from '../../shared/school-activities.js';
@@ -29,10 +27,14 @@ export function createApp(db, options = {}) {
   app.use(helmet(), cors({ origin: config.origins, credentials: true }), cookieParser());
   app.use('/api', rateLimit({ windowMs: 15 * 60 * 1000, limit: 500, standardHeaders: 'draft-8', legacyHeaders: false, message: { error: 'Too many requests. Please try again shortly.' } }));
   app.use(express.json({ limit: '512kb' }), originGuard);
-  app.use('/api', (_req, res, next) => { res.set('Cache-Control', 'no-store'); next(); });
+  app.use('/api', (req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    if (req.cookies.school_consent) {
+      res.clearCookie('school_consent', { httpOnly: true, secure: config.secure, sameSite: 'strict', path: '/api' });
+    }
+    next();
+  });
   const databaseOnly = (_req, _res, next) => demo ? next(fail(503, 'This preview uses read-only demo content. Authentication and enquiry submission require a configured MySQL database.')) : next();
-  mountConsent(app, db, databaseOnly, demo);
-  mountVisitors(app, db, databaseOnly);
   app.use(cache.middleware);
   app.get('/api/health', async (_req, res) => {
     if (demo) return res.json({ status: 'demo', database: 'unavailable', readOnly: true });
@@ -45,7 +47,7 @@ export function createApp(db, options = {}) {
     res.json({ settings, translations, demo, privacyRetentionDays: config.VISITOR_RETENTION_DAYS });
   });
   app.get('/api/sitemap.xml', async (_req, res) => {
-    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy', 'cookie-policy'];
+    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy'];
     const events = demo ? [] : await db.event.findMany({ where: published, select: { slug: true } });
     const base = config.SITE_URL.replace(/\/$/, '');
     const escape = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');

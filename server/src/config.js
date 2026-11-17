@@ -22,8 +22,7 @@ const env = z.object({
   ADMIN_NOTIFICATION_EMAILS: z.string().default(''),
   VISITOR_RETENTION_DAYS: z.coerce.number().int().min(1).max(90).default(30),
   EMAIL_MAX_ATTEMPTS: z.coerce.number().int().min(1).max(8).default(4),
-  EMAIL_POLL_MS: z.coerce.number().int().min(1000).max(60000).default(5000),
-  CONSENT_VERSION: z.string().min(1).max(40).default('2026-11-08')
+  EMAIL_POLL_MS: z.coerce.number().int().min(1000).max(60000).default(5000)
 }).parse(process.env);
 if (env.NODE_ENV === 'production' && (env.DEMO_MODE === 'true' || env.COOKIE_SECURE === 'false')) throw new Error('Production requires DEMO_MODE=false and secure cookies.');
 const admins = parseAdminRecipients(env.ADMIN_NOTIFICATION_EMAILS || env.SMTP_NOTIFY_TO);

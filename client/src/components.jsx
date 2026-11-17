@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowUp, ArrowUpRight, ArrowRight, MapPin, Phone, Mail, BookOpen, GraduationCap, CalendarDays, UsersRound, RefreshCw, AlertCircle, Search, Compass, ExternalLink } from 'lucide-react';
 import { useSite } from './context';
-import { useConsent } from './CookieConsent';
 import { useApi, assetUrl } from './api';
 export const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=JF45%2B88R%20Neyveli%20Tamil%20Nadu%20607807';
 export function ScrollToTop() {
@@ -69,13 +68,12 @@ function ContactValue({ kind }) {
 
 export function Footer() {
   const { t, lang } = useSite();
-  const { openSettings } = useConsent();
   return <footer className="site-footer"><div className="container footer-grid"><div className="footer-brand"><Link to="/" className="brand"><ResponsiveImage src="/images/logo.webp" width="68" height="68" alt="St. Antony's official crest"/><span><strong>{t('school')}</strong><span>{t('schoolSub')}</span><small>{t('neyveli')}</small></span></Link><p>{t('footerText')}</p><span className="footer-motto">{t('motto')} <span>↗</span></span></div><div><h3>{t('explore')}</h3>{[['about','about'],['academics','academics'],['infrastructure','infrastructure'],['student-life','studentLife']].map(([p,k])=><Link key={p} to={`/${p}`}>{t(k)}</Link>)}</div><div><h3>{t('useful')}</h3>{[['admissions','admissions'],['events','events'],['gallery','gallery'],['news','news'],['notices','notices']].map(([p,k])=><Link key={p} to={`/${p}`}>{t(k)}</Link>)}</div><div className="footer-contact"><h3>{t('connect')}</h3><a href={mapsUrl} target="_blank" rel="noreferrer"><MapPin size={18}/>{t(lang === 'ta' ? 'addressTa' : 'address')}</a><p><Phone size={17}/><ContactValue kind="phone"/></p><p><Mail size={17}/><ContactValue kind="email"/></p></div></div><div className="container footer-bottom">
     <div className="footer-credits">
       <span>© {new Date().getFullYear()} {t('copyright')} {t('copyrightYear')}</span>
       <span className="footer-credit">{t('websiteCredit')} <a href="https://tecnozard.com/">Tecnozard Private Limited</a></span>
     </div>
-    <div><Link to="/privacy">{t('privacy')}</Link><button type="button" className="footer-cookie-settings" onClick={openSettings}>{t('cookieSettings')}</button><Link to="/admin">{t('admin')}<ArrowUpRight size={13}/></Link></div>
+    <div><Link to="/privacy">{t('privacy')}</Link><Link to="/admin">{t('admin')}<ArrowUpRight size={13}/></Link></div>
   </div></footer>;
 }
 export function Seo({ title, description }) {
@@ -120,9 +118,32 @@ export function Vision() {
 }
 export function AdmissionsCTA() { const { t } = useSite(); return <section className="admission-cta"><div className="container"><div><span className="eyebrow">{t('ctaTag')}</span><h2>{t('ctaTitle')}</h2><p>{t('ctaText')}</p></div><div><span className="cta-symbol" aria-hidden="true">✳</span><ButtonLink to="/admissions#enquiry" light>{t('ctaButton')}</ButtonLink></div></div></section>; }
 export function ContactBlock({ full = false }) {
-  const { t, lang } = useSite(); const [map, setMap] = useState(false);
-  const { optionalAllowed, openSettings } = useConsent();
-  return <section className={`section contact-section ${full ? 'contact-full' : ''}`}><div className="container contact-grid"><div><span className="eyebrow">{t('visitTag')}</span><h2>{t('visitTitle')}</h2><div className="contact-detail"><MapPin/><div><h3>{t('schoolFull')}</h3><p>{t(lang === 'ta' ? 'addressTa' : 'address')}</p><a className="text-link" href={mapsUrl} target="_blank" rel="noreferrer">{t('directions')}<ExternalLink size={16}/></a></div></div><div className="contact-detail"><Phone/><div><h3>{t('phone')}</h3><p><ContactValue kind="phone"/></p></div></div><div className="contact-detail"><Mail/><div><h3>{t('email')}</h3><p><ContactValue kind="email"/></p></div></div></div><div className="map-panel">{map && optionalAllowed ? <iframe title={lang === 'ta' ? 'பள்ளி இருப்பிட வரைபடம்' : 'School location map'} src="https://maps.google.com/maps?q=JF45%2B88R%20Neyveli%20Tamil%20Nadu&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen/> : <div className="map-preview"><div className="map-road road1"/><div className="map-road road2"/><div className="map-road road3"/><div className="map-pin"><MapPin size={30}/></div><span className="map-town">NEYVELI</span><button className="button" onClick={() => optionalAllowed ? setMap(true) : openSettings()}>{t(optionalAllowed ? 'mapLoad' : 'mapConsent')}<ArrowUpRight size={16}/></button><small>{t('mapPrivacy')}</small></div>}</div></div></section>;
+  const { t, lang } = useSite();
+  return (
+    <section className={`section contact-section ${full ? 'contact-full' : ''}`}>
+      <div className="container contact-grid">
+        <div>
+          <span className="eyebrow">{t('visitTag')}</span>
+          <h2>{t('visitTitle')}</h2>
+          <div className="contact-detail">
+            <MapPin/>
+            <div><h3>{t('schoolFull')}</h3><p>{t(lang === 'ta' ? 'addressTa' : 'address')}</p></div>
+          </div>
+          <div className="contact-detail"><Phone/><div><h3>{t('phone')}</h3><p><ContactValue kind="phone"/></p></div></div>
+          <div className="contact-detail"><Mail/><div><h3>{t('email')}</h3><p><ContactValue kind="email"/></p></div></div>
+        </div>
+        <div className="map-panel">
+          <div className="map-preview">
+            <div className="map-road road1"/><div className="map-road road2"/><div className="map-road road3"/>
+            <div className="map-pin"><MapPin size={30}/></div>
+            <span className="map-town">NEYVELI</span>
+            <a className="button" href={mapsUrl} target="_blank" rel="noreferrer">{t('directions')}<ExternalLink size={16}/></a>
+            <small>{t('mapPrivacy')}</small>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 export function EventCard({ event }) {
   const { t, pick, lang } = useSite(); const date = new Date(event.date);

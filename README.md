@@ -2,11 +2,11 @@
 
 A complete React/Vite public school site and role-based Express CMS, with Prisma/MySQL persistence, bilingual English/Tamil content, event publishing, validated media uploads and admission enquiries.
 
-Gmail SMTP, the durable email queue, administrator email history and cookie preference controls are described in [email and consent operations](docs/EMAIL-AND-CONSENT.md). Configure the server email variables and apply the new migrations before enabling email.
+Gmail SMTP, the durable email queue, and administrator email history are described in [email operations](docs/EMAIL-AND-CONSENT.md). Configure the server email variables and apply the new migrations before enabling email.
 
-Homepage popup reminders, multiple office recipients, admin filters/pagination, attachments, optional visitor information and updated consent controls are covered in [the enhancement guide](docs/ENHANCEMENTS.md).
+Homepage popup reminders, multiple office recipients, admin filters/pagination, attachments and optional enquiry details are covered in [the enhancement guide](docs/ENHANCEMENTS.md).
 
-**Local verification:** the email, consent and enhancement migrations have been applied to the configured MySQL database. Automated database tests verified staff authentication, publishing, uploads, enquiry storage, duplicate prevention, consent history and concurrent email queue claims. Gmail sending remains disabled until the school configures its approved SMTP account. Demo mode remains a separate read-only preview and disables enquiry submission and staff login.
+**Local verification:** the email and enhancement migrations have been applied to the configured MySQL database. Automated database tests verified staff authentication, publishing, uploads, enquiry storage, duplicate prevention and concurrent email queue claims. Gmail sending remains disabled until the school configures its approved SMTP account. Demo mode remains a separate read-only preview and disables enquiry submission and staff login.
 
 ## Start the preview
 
@@ -131,13 +131,13 @@ Roles are deliberate fixed policies, seeded into the roles table. Staff accounts
 
 ## Validation and limits
 
-Build and lint passed. API tests validate publication boundaries, expiry windows, search/pagination, enquiry validation and honest write failure, cookie hashing, role restrictions, CSRF, upload rejection, self-account protection and transactional audit writes. Tests use Supertest loopback requests. The Codex network sandbox initially blocked those requests; they passed when run with local-network permission. No sandbox workaround is required in an ordinary local terminal.
+Build and lint passed. API tests validate publication boundaries, expiry windows, search/pagination, enquiry validation and honest write failure, staff session token hashing, role restrictions, CSRF, upload rejection, self-account protection and transactional audit writes. Tests use Supertest loopback requests. The Codex network sandbox initially blocked those requests; they passed when run with local-network permission. No sandbox workaround is required in an ordinary local terminal.
 
-All public routes, the 404 page and staff login were measured in the browser at **1440px, 768px and 390px**, with no document horizontal overflow. English/Tamil switching, event search/filter/pagination, event navigation, gallery and notice dialogs, and disabled demo enquiry submission were also checked. The new email composer, form acknowledgements, consent changes, map withdrawal and scroll-to-top control were checked using an isolated browser fixture; database behavior was verified separately with real MySQL integration tests. Evidence is under the local ignored `artifacts/` directory. Live Gmail credentials and delivery have not been tested.
+All public routes, the 404 page and staff login were measured in the browser at **1440px, 768px and 390px**, with no document horizontal overflow. English/Tamil switching, event search/filter/pagination, event navigation, gallery and notice dialogs, and disabled demo enquiry submission were also checked. The new email composer, form acknowledgements and scroll-to-top control were checked using an isolated browser fixture; database behavior was verified separately with real MySQL integration tests. Evidence is under the local ignored `artifacts/` directory. Live Gmail credentials and delivery have not been tested.
 
-To run the opt-in database test, apply migrations to a **dedicated test database** first, set `TEST_DATABASE_URL` to it in your shell, then run `npm run test:mysql`. The test creates uniquely prefixed temporary records, exercises real sign-in, publishing, upload, enquiry/outbox persistence, consent records and concurrent queue workers, then cleans up only those records. Its test transport never sends external email, and worker queries are scoped to the run's records. It does not reset a database. Do not use your production database for tests.
+To run the opt-in database test, apply migrations to a **dedicated test database** first, set `TEST_DATABASE_URL` to it in your shell, then run `npm run test:mysql`. The test creates uniquely prefixed temporary records, exercises real sign-in, publishing, upload, enquiry/outbox persistence and concurrent queue workers, then cleans up only those records. Its test transport never sends external email, and worker queries are scoped to the run's records. It does not reset a database. Do not use your production database for tests.
 
-Enquiry and administrator email quotas are enforced in MySQL. General ingress rate limiting uses process-local memory; use a shared ingress limiter before horizontal scaling. CMS bodies render as plain text; outgoing email rich text is separately sanitized. Gmail enquiry notifications and administrator correspondence use a durable outbox. SMS, payments and online admission decisions are outside this implementation. Google Maps requires consent and an explicit load action. Configure retention and backups. API details are in [docs/API.md](docs/API.md).
+Enquiry and administrator email quotas are enforced in MySQL. General ingress rate limiting uses process-local memory; use a shared ingress limiter before horizontal scaling. CMS bodies render as plain text; outgoing email rich text is separately sanitized. Gmail enquiry notifications and administrator correspondence use a durable outbox. SMS, payments and online admission decisions are outside this implementation. Directions open through a link to Google Maps. Configure retention and backups. API details are in [docs/API.md](docs/API.md).
 
 ## Apache deployment
 
@@ -174,10 +174,8 @@ D:\SAS
 │   │   ├── pages.jsx
 │   │   ├── AnnouncementPopup.jsx
 │   │   ├── popup-policy.js
-│   │   ├── VisitorTracker.jsx
 │   │   ├── OptionalMetadata.jsx
 │   │   ├── visitor-metadata.js
-│   │   ├── CookieConsent.jsx
 │   │   ├── SiteHeader.jsx
 │   │   ├── Gallery.jsx
 │   │   ├── ActivityExplorer.jsx
@@ -219,13 +217,11 @@ D:\SAS
 │   │   ├── email-admin.js
 │   │   ├── email-addresses.js
 │   │   ├── admin-list.js
-│   │   ├── visitors.js
 │   │   ├── metadata.js
-│   │   ├── consent.js
 │   │   ├── idempotency.js
 │   │   ├── public-cache.js
 │   │   └── demo.js
-│   ├── tests/{api.test.js,email-consent.test.js,client-requests.test.js,enhancements.test.js,mysql.integration.test.js}
+│   ├── tests/{api.test.js,email.test.js,client-requests.test.js,enhancements.test.js,mysql.integration.test.js}
 │   ├── generated/client/             # generated Prisma client, ignored
 │   └── uploads/.gitkeep
 ├── scripts/test-mysql.mjs

@@ -10,7 +10,7 @@ const origin = 'http://127.0.0.1:5173';
 const token = 'a'.repeat(64); const csrfToken = 'b'.repeat(64);
 function database(role = 'ADMIN') {
   const db = {};
-  for (const model of ['session', 'user', 'role', 'event', 'activity', 'activityCategory', 'page', 'media', 'gallery', 'galleryMedia', 'siteSetting', 'translation', 'announcement', 'admissionEnquiry', 'auditLog', 'emailMessage', 'rateLimitBucket', 'cookieConsent']) db[model] = Object.fromEntries(['findMany', 'findFirst', 'findUnique', 'count', 'create', 'createMany', 'upsert', 'update', 'updateMany', 'delete', 'deleteMany'].map(key => [key, vi.fn()]));
+  for (const model of ['session', 'user', 'role', 'event', 'activity', 'activityCategory', 'page', 'media', 'gallery', 'galleryMedia', 'siteSetting', 'translation', 'announcement', 'admissionEnquiry', 'auditLog', 'emailMessage', 'rateLimitBucket']) db[model] = Object.fromEntries(['findMany', 'findFirst', 'findUnique', 'count', 'create', 'createMany', 'upsert', 'update', 'updateMany', 'delete', 'deleteMany'].map(key => [key, vi.fn()]));
   db.rateLimitBucket.upsert.mockResolvedValue({ count: 1 });
   db.emailMessage.createMany.mockResolvedValue({ count: 2 });
   db.session.findUnique.mockResolvedValue({ id: hashToken(token), csrfToken, expiresAt: new Date(Date.now() + 60000), user: { id: 'staff-1', name: 'Test staff', email: 'staff@example.test', roleId: 'role-1', active: true, role: { id: 'role-1', name: role } } });

@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import request from 'supertest';
 import { createApp } from '../src/app.js';
 import { config } from '../src/config.js';
-import { hashToken } from '../src/auth.js';
 import { composeEmailSchema, cleanEmail, enquiryEmails } from '../src/email-content.js';
 import { emailWorker, smtpFailure } from '../src/email-worker.js';
 import { digest } from '../src/idempotency.js';
@@ -19,7 +18,7 @@ const enquiry = { parentName: 'Parent', studentName: 'Student', email: 'parent@e
 
 function database(role = 'ADMIN') {
   const db = {};
-  for (const name of ['session', 'cookieConsent', 'emailMessage', 'admissionEnquiry', 'auditLog', 'rateLimitBucket', 'event']) {
+  for (const name of ['session', 'emailMessage', 'admissionEnquiry', 'auditLog', 'rateLimitBucket', 'event']) {
     db[name] = Object.fromEntries(['findUnique', 'findFirst', 'findMany', 'count', 'create', 'createMany', 'updateMany', 'upsert', 'deleteMany'].map(method => [method, vi.fn()]));
   }
   db.session.findUnique.mockResolvedValue({
@@ -175,35 +174,5 @@ describe('admin email authorization', () => {
     db.emailMessage.findUnique.mockResolvedValue({ id: 'manual-1', payloadHash: db.emailMessage.create.mock.calls[0][0].data.payloadHash, status: 'PENDING' });
     await authorized(request(app).post('/api/admin/emails')).set('Idempotency-Key', 'manual-send-reference-123').send(payload).expect(202);
     expect(db.emailMessage.create).toHaveBeenCalledOnce();
-  });
-});
-
-describe('cookie consent storage', () => {
-  it('defaults to no optional consent and saves rejection with a secure opaque cookie', async () => {
-    const db = database();
-    const app = createApp(db, { demo: false });
-    const initial = await request(app).get('/api/consent').expect(200);
-    expect(initial.body.choice).toBeNull();
-    db.cookieConsent.upsert.mockImplementation(({ create }) => ({ ...create, updatedAt: new Date() }));
-    const result = await request(app).post('/api/consent').set('Origin', origin).send({ action: 'reject' }).expect(200);
-    expect(result.body).toMatchObject({ choice: 'REJECTED', timestamp: expect.any(String) });
-    expect(result.headers['set-cookie'][0]).toContain('HttpOnly');
-    expect(result.headers['set-cookie'][0]).toContain('SameSite=Strict');
-    expect(db.cookieConsent.upsert.mock.calls[0][0].create.events.create.action).toBe('reject');
-  });
-  it('records withdrawal on the same consent record and expires outdated policies', async () => {
-    const db = database();
-    db.cookieConsent.upsert.mockImplementation(({ update }) => ({ ...update, updatedAt: new Date() }));
-    const app = createApp(db, { demo: false });
-    const result = await request(app).post('/api/consent').set('Cookie', `school_consent=${raw}`).set('Origin', origin).send({ action: 'withdraw' }).expect(200);
-    expect(result.body.choice).toBe('REJECTED');
-    expect(db.cookieConsent.upsert.mock.calls[0][0]).toMatchObject({ where: { id: hashToken(raw) }, update: { events: { create: { action: 'withdraw' } } } });
-    db.cookieConsent.findUnique.mockResolvedValue({ choice: 'ACCEPTED', version: 'old', expiresAt: new Date(Date.now() + 100000) });
-    expect((await request(app).get('/api/consent').set('Cookie', `school_consent=${raw}`).expect(200)).body.choice).toBeNull();
-  });
-  it('rejects cross-origin changes and forged consent input', async () => {
-    const app = createApp(database(), { demo: false });
-    await request(app).post('/api/consent').set('Origin', 'https://untrusted.example').send({ action: 'accept' }).expect(403);
-    await request(app).post('/api/consent').set('Origin', origin).send({ action: 'accept', timestamp: 'fake' }).expect(422);
   });
 });

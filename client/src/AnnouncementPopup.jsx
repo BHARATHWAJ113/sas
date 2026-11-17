@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Megaphone, X, ArrowUpRight } from 'lucide-react';
 import { useApi, mediaUrl } from './api';
 import { useSite } from './context';
-import { useConsent } from './CookieConsent';
 import { isPopupEligible, popupPreferences, rememberPopup, POPUP_INTERVAL } from './popup-policy';
 import './announcement-popup.css';
 const loadedOnHome = window.location.pathname === '/';
@@ -29,7 +28,6 @@ export default function AnnouncementPopup() {
   const { pathname } = useLocation();
   const initialHome = useRef(loadedOnHome && pathname === '/');
   const departed = useRef(false);
-  const { popupAllowed } = useConsent();
   const { t } = useSite();
   const state = useApi(initialHome.current ? '/home-announcements' : null);
   const [closed, setClosed] = useState([]);
@@ -49,7 +47,7 @@ export default function AnnouncementPopup() {
     return () => { document.removeEventListener('visibilitychange', changed); clearTimeout(fade.current); };
   }, []);
   useEffect(() => { if (pathname !== '/') departed.current = true; }, [pathname]);
-  const allowed = initialHome.current && !departed.current && pathname === '/' && popupAllowed && visible;
+  const allowed = initialHome.current && !departed.current && pathname === '/' && visible;
   function eligible(item) {
     let preferences = memory.current;
     try { preferences = { ...popupPreferences(localStorage), ...memory.current }; } catch { /* In-memory preferences remain active. */ }

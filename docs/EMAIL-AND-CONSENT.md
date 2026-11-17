@@ -1,4 +1,4 @@
-# Email and consent operations
+# Email operations
 
 ## Configure Gmail
 
@@ -13,7 +13,6 @@ SMTP_FROM_NAME="St. Antony's School"
 ADMIN_NOTIFICATION_EMAILS=the-approved-school-office@example.com,principal@example.com
 EMAIL_MAX_ATTEMPTS=4
 EMAIL_POLL_MS=5000
-CONSENT_VERSION=2026-11-08
 VISITOR_RETENTION_DAYS=30
 ```
 
@@ -52,19 +51,11 @@ Transient rejections retry after 30, 60 and 120 seconds with the default four-at
 
 The history records timestamps, recipients, attempts, accepted and rejected recipients and a safe error summary. SENT represents SMTP acceptance. Check Gmail for later bounces and inbox placement. Logs contain job references and statuses. The server retains message bodies in MySQL for authorised administrative review.
 
-Apply the school's retention and backup policy to enquiries, email history and consent records. Deleting an enquiry also deletes its generated email records. The API prevents deletion while its email is actively sending. Keep database backups and storage access restricted.
-
-## Cookie preferences
-
-The public banner provides accept, reject and customize choices. The footer opens the settings dialog for later changes or withdrawal. Optional Google Maps and visitor analytics are independent consent categories and stay blocked until selected. The map also requires the visitor to choose to load it. Withdrawal removes an active map, stops future analytics and propagates to other open tabs on the same origin. See [the enhancement guide](ENHANCEMENTS.md) for metadata collection and retention.
-
-Consent choices and changes are stored in MySQL with a server timestamp and policy version. The browser carries an opaque HttpOnly, SameSite=Strict cookie, with Secure enabled in production. The stored token is hashed. The cookie lasts 180 days. A changed `CONSENT_VERSION` prompts the visitor again. Language preference and staff authentication use essential storage.
-
-The implementation supports recording and withdrawal. The school should confirm its notices, purposes, retention periods and handling of children's data against the rules applicable to its actual operation and deployment. [ICO guidance on managing consent](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guidance-on-the-use-of-storage-and-access-technologies/how-do-we-manage-consent-in-practice), [India's DPDP Rules](https://www.meity.gov.in/documents/act-and-policies/digital-personal-data-protection-rules-2025-gDOxUjMtQWa)
+Apply the school's retention and backup policy to enquiries and email history. Deleting an enquiry also deletes its generated email records. The API prevents deletion while its email is actively sending. Keep database backups and storage access restricted.
 
 ## Performance
 
-Public browser reads share in-flight requests and cache successful responses for 15 seconds. Server collection caches are limited to 150 entries with a 10-second TTL. Successful CMS mutations invalidate the server cache. Private staff, consent, email and enquiry responses use no shared cache.
+Public browser reads share in-flight requests and cache successful responses for 15 seconds. Server collection caches are limited to 150 entries with a 10-second TTL. Successful CMS mutations invalidate the server cache. Private staff, email and enquiry responses use no shared cache.
 
 Requests have a 15-second timeout. Public reads retry one transient failure after 500 ms. Writes use explicit idempotency references. Event searches wait 220 ms between typed changes. The email editor loads only when an administrator opens Email management. Email bodies are fetched only when opening details, while history is paginated.
 
@@ -78,15 +69,15 @@ The public scroll-to-top arrow appears after 500 pixels, restores keyboard focus
 | --- | --- |
 | Schema and migration | `server/prisma/schema.prisma`, `server/prisma/migrations/202611070001_email_consent/migration.sql` |
 | SMTP and outbox | `server/src/email-content.js`, `email-worker.js`, `email-admin.js`, `enquiries.js`, `idempotency.js` |
-| API integration | `server/src/app.js`, `admin.js`, `config.js`, `index.js`, `validation.js`, `consent.js`, `public-cache.js` |
+| API integration | `server/src/app.js`, `admin.js`, `config.js`, `index.js`, `validation.js`, `public-cache.js` |
 | Admin editor | `client/src/admin/Admin.jsx`, `EmailManager.jsx`, `email.css` |
-| Public consent and form | `client/src/CookieConsent.jsx`, `cookie-consent.css`, `pages.jsx`, `components.jsx`, `main.jsx`, `school-copy.js` |
+| Public enquiry form | `client/src/pages.jsx`, `components.jsx`, `main.jsx`, `school-copy.js` |
 | Frontend performance and motion | `client/src/api.js`, `public-design.css`, `public-motion.css` |
-| Verification | `server/tests/email-consent.test.js`, `client-requests.test.js`, `api.test.js`, `mysql.integration.test.js` |
+| Verification | `server/tests/email.test.js`, `client-requests.test.js`, `api.test.js`, `mysql.integration.test.js` |
 | Configuration and setup | `server/.env.example`, workspace package manifests/lockfile, `README.md`, `docs/API.md` |
 
 ## Verification and deployment limits
 
 The additive migration was applied to local MySQL on 7 November 2026. Integration tests used uniquely prefixed temporary records in the local database because the restricted application account cannot create a separate test database. Cleanup removed only those records. A dedicated migrated test database remains recommended for routine runs. Tests exercised actual MySQL persistence and competing workers with a test transport; a separate test used Nodemailer against a loopback SMTP server. No external email was sent.
 
-Browser checks use an isolated API fixture and synthetic email recipients. They cover the rich-text composer, email history, enquiry confirmation, cookie rejection across reload, acceptance, map withdrawal, English/Tamil controls and responsive layouts. Live Gmail acceptance, deployed HTTPS/reverse-proxy behavior and real inbox placement still require verification after school credentials and hosting are configured. Cache timings are configured limits, not claims from a production load benchmark.
+Browser checks use an isolated API fixture and synthetic email recipients. They cover the rich-text composer, email history, enquiry confirmation, English/Tamil controls and responsive layouts. Live Gmail acceptance, deployed HTTPS/reverse-proxy behavior and real inbox placement still require verification after school credentials and hosting are configured. Cache timings are configured limits, not claims from a production load benchmark.

@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
@@ -14,9 +14,7 @@ import { SiteHeader } from './SiteHeader';
 import { Home, About, Academics, Admissions, Infrastructure, StudentLife, Updates, Events, EventDetails, Contact, NotFound, Privacy } from './pages';
 import { Gallery } from './Gallery';
 import { useScrollReveal } from './useScrollReveal';
-import { CookieConsentProvider } from './CookieConsent';
 import AnnouncementPopup from './AnnouncementPopup';
-import VisitorTracker from './VisitorTracker';
 import './form-design.css';
 import './styles.css';
 import './public-design.css';
@@ -32,7 +30,7 @@ class ErrorBoundary extends React.Component {
 function PublicSite() {
   const content = useScrollReveal();
   return (
-    <CookieConsentProvider>
+    <>
       <SiteHeader />
       <main id="main" ref={content} tabIndex={-1}>
         <Routes>
@@ -49,15 +47,14 @@ function PublicSite() {
           <Route path="/notices" element={<Updates kind="NOTICE" />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/cookie-policy" element={<Privacy cookiePolicy />} />
+          <Route path="/cookie-policy" element={<Navigate to="/privacy" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
       <ScrollToTop />
       <AnnouncementPopup />
-      <VisitorTracker />
-    </CookieConsentProvider>
+    </>
   );
 }
 const root = import.meta.hot?.data.root ?? createRoot(document.getElementById('root'));
