@@ -8,6 +8,8 @@ import '@fontsource/inter/latin-700.css';
 import '@fontsource/inter/latin-800.css';
 import '@fontsource/noto-sans-tamil/tamil-400.css';
 import '@fontsource/noto-sans-tamil/tamil-600.css';
+import { ThemeProvider } from './Theme';
+import { WelcomeLoader } from './Loading';
 import { SiteProvider } from './context';
 import { Footer, RouteReset, ScrollToTop, StateBox } from './components';
 import { SiteHeader } from './SiteHeader';
@@ -22,6 +24,7 @@ import './public-design.css';
 import './site-header.css';
 import './public-motion.css';
 import './gallery.css';
+import './theme.css';
 const SchoolSection = lazy(() => import('./SchoolSection'));
 const Admin = lazy(() => import('./admin/Admin'));
 class ErrorBoundary extends React.Component {
@@ -33,6 +36,8 @@ function PublicSite() {
   const content = useScrollReveal();
   return (
     <>
+      <WelcomeLoader />
+      <div id="public-shell">
       <SiteHeader />
       <main id="main" ref={content} tabIndex={-1}>
         <Routes>
@@ -59,9 +64,10 @@ function PublicSite() {
       <Footer />
       <ScrollToTop />
       <AnnouncementPopup />
+      </div>
     </>
   );
 }
 const root = import.meta.hot?.data.root ?? createRoot(document.getElementById('root'));
 if (import.meta.hot) import.meta.hot.data.root = root;
-root.render(<React.StrictMode><ErrorBoundary><BrowserRouter><SiteProvider><RouteReset/><Suspense fallback={<StateBox loading/>}><Routes><Route path="/admin/*" element={<Admin/>}/><Route path="*" element={<PublicSite/>}/></Routes></Suspense></SiteProvider></BrowserRouter></ErrorBoundary></React.StrictMode>);
+root.render(<React.StrictMode><ErrorBoundary><BrowserRouter><ThemeProvider><SiteProvider><RouteReset/><Suspense fallback={<StateBox loading/>}><Routes><Route path="/admin/*" element={<Admin/>}/><Route path="*" element={<PublicSite/>}/></Routes></Suspense></SiteProvider></ThemeProvider></BrowserRouter></ErrorBoundary></React.StrictMode>);

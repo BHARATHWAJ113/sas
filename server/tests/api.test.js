@@ -93,6 +93,15 @@ describe('public database boundaries', () => {
 describe('CMS security and content operations', () => {
   let db; let app;
   beforeEach(() => { db = database(); app = createApp(db, { demo: false }); });
+  it.each(['VIEWER', 'EDITOR'])('keeps dashboard audit history private for %s', async role => {
+    const roleDb = database(role);
+    for (const model of ['event', 'page', 'media', 'admissionEnquiry']) roleDb[model].count.mockResolvedValue(3);
+    const { body } = await auth(request(createApp(roleDb, { demo: false })).get('/api/admin/dashboard')).expect(200);
+    expect(body.recent).toEqual([]);
+    expect(roleDb.auditLog.findMany).not.toHaveBeenCalled();
+    expect(body.enquiries).toBe(role === 'VIEWER' ? null : 3);
+    if (role === 'VIEWER') expect(roleDb.admissionEnquiry.count).not.toHaveBeenCalled();
+  });
   it('requires a session for admin reads', async () => { await request(app).get('/api/admin/events').expect(401); expect(db.event.findMany).not.toHaveBeenCalled(); });
   it('rejects expired sessions', async () => { const session = await db.session.findUnique(); db.session.findUnique.mockResolvedValue({ ...session, expiresAt: new Date(0) }); await auth(request(app).get('/api/admin/events')).expect(401); });
   it('requires a valid CSRF token, including valid byte encoding', async () => { await request(app).post('/api/admin/events').set('Cookie', `school_session=${token}`).set('Origin', origin).send({}).expect(403); await request(app).post('/api/admin/events').set('Cookie', `school_session=${token}`).set('Origin', origin).set('x-csrf-token', 'é'.repeat(64)).send({}).expect(403); });

@@ -19,8 +19,8 @@ export function adminRouter(db, auth) {
   const router = Router();
   router.use(auth, csrf);
   mountEmailAdmin(router, db, audit);
-  router.get('/dashboard', async (_req, res) => {
-    const [events, pages, enquiries, media, recent] = await Promise.all([db.event.count(), db.page.count(), db.admissionEnquiry.count({ where: { status: 'NEW' } }), db.media.count(), db.auditLog.findMany({ take: 8, orderBy: { createdAt: 'desc' }, include: { user: { select: { name: true } } } })]);
+  router.get('/dashboard', async (req, res) => {
+    const [events, pages, enquiries, media, recent] = await Promise.all([db.event.count(), db.page.count(), ['ADMIN', 'EDITOR'].includes(req.user.role.name) ? db.admissionEnquiry.count({ where: { status: 'NEW' } }) : Promise.resolve(null), db.media.count(), req.user.role.name === 'ADMIN' ? db.auditLog.findMany({ take: 8, orderBy: { createdAt: 'desc' }, include: { user: { select: { name: true } } } }) : Promise.resolve([])]);
     res.json({ events, pages, enquiries, media, recent });
   });
   router.get('/roles', allow('ADMIN'), async (_req, res) => res.json({ items: await db.role.findMany() }));

@@ -1,0 +1,33 @@
+:root { color-scheme: light; --surface-page:#f4f6f9; --surface:#fff; --surface-soft:#edf2f8; --text-primary:#172c49; --text-secondary:#586a80; --border:#dce4ee; --accent:#224c7c; --accent-soft:#e7eef8; --gold:#b77b27; }
+:root[data-theme=dark] { color-scheme:dark; --surface-page:#101925; --surface:#192636; --surface-soft:#223248; --text-primary:#ecf2fb; --text-secondary:#b5c4d7; --border:#34475d; --accent:#9cc7ff; --accent-soft:#263f5d; --gold:#f0c77c; --navy:#e1ecfb; --blue:#91b9e8; --light:#223248; --soft:#1d2d41; --line:#34475d; --muted:#b5c4d7; }
+body { background:var(--surface-page); color:var(--text-primary); }
+.theme-toggle { width:42px; height:42px; display:inline-grid; place-items:center; flex-shrink:0; border:1px solid var(--border); border-radius:50%; background:var(--surface); color:var(--text-primary); }
+.theme-toggle:hover { background:var(--surface-soft); }
+[data-theme=dark] :is(.campus-header,.campus-nav-shell,.campus-subnav,.campus-nav.is-open,.site-footer,.footer-bottom,.quick-section,.gallery-media-section,.social-page,.social-sidebar,.state-box,.page-hero,.directory-section,.school-section,.school-directory,.event-list-section,.updates-section,.activity-section,.gallery-hero) { background:var(--surface-page); color:var(--text-primary); border-color:var(--border); }
+[data-theme=dark] #main > .section:not(.vision-section):not(.admission-cta) { background:var(--surface-page); }
+[data-theme=dark] :is(.academic-card,.photo-card,.event-card,.update-card,.activity-card,.directory-card,.fee-schedule,.contact-card,.contact-info,.enquiry-panel,.social-page-grid a,.gallery-expand,.gallery-filters button,.gallery-carousel-controls button,.event-info,.article-dialog,.lightbox,.notice-ribbon,.record-filters,.campus-mobile-actions) { background:var(--surface); color:var(--text-primary); border-color:var(--border); }
+[data-theme=dark] :is(.brand,.brand strong,.campus-nav a,.campus-nav summary,.campus-subnav a,.footer-contact a,.footer-brand p,.footer-bottom,.footer-grid a,.footer-grid h3,.welcome-copy,.page-hero p,.life-grid p,.photo-card p,.event-card p,.academic-card p,.directory-card p,.activity-copy p,.section-heading p,.social-page p,.gallery-hero p,.gallery-caption p,.event-info p,.notice-item,.notice-kind,.contact-value) { color:var(--text-secondary); }
+[data-theme=dark] :is(h1,h2,h3,h4,.campus-brand strong,.academic-card h3,.photo-card h3,.event-card h3,.directory-card h3) { color:var(--text-primary); }
+[data-theme=dark] :is(input,textarea,select) { background:var(--surface); color:var(--text-primary); border-color:var(--border); }
+[data-theme=dark] input::placeholder,[data-theme=dark] textarea::placeholder { color:#9badc3; }
+[data-theme=dark] #main .button,[data-theme=dark] .campus-enquire { background:#b9d6fa; color:#12243b; }
+[data-theme=dark] #main .button-secondary { background:var(--surface-soft); color:var(--text-primary); }
+[data-theme=dark] :is(.filter-tabs button,.activity-filters button,.directory-filters button,.pagination button,.quick-link,.fee-schedule th,.fee-schedule td,.fee-schedule tfoot,.school-filter-panel,.achievement-panel,.highlights-section,.welcome-section,.school-section-heading) { background:var(--surface); color:var(--text-primary); border-color:var(--border); }
+[data-theme=dark] :is(.gallery-filters button[aria-pressed=true],.activity-filters button[aria-pressed=true],.filter-tabs button[aria-pressed=true],.campus-nav a.active) { background:#c1dafa; color:#102a46; }
+[data-theme=dark] .eyebrow { color:#bdd8fa; }
+[data-theme=dark] :is(.hero h1,.vision-section h2,.admission-cta h2) { color:white; }
+[data-theme=dark] .hero h1 > span { color:#f1d394; }
+[data-theme=dark] :is(.hero,.vision-section,.admission-cta) { --navy:#102a56; }
+[data-theme=dark] .gallery-hero h1 span { color:#a9ceff; }
+[data-theme=dark] .gallery-filters button span { background:var(--surface-soft); color:var(--text-primary); }
+[data-theme=dark] .gallery-slide > span { background:#fff; color:#102a56; }
+[data-theme=dark] .social-page-grid .social-icon { color:#fff; }
+[data-theme=dark] .brand img { mix-blend-mode:normal; }
+[data-theme=dark] .campus-call,[data-theme=dark] .campus-language,[data-theme=dark] .campus-menu-toggle { color:var(--text-primary); }
+[data-theme=dark] :is(.form-grid,.admin-form-grid,.email-compose,.record-filters,.popup-preferences,.admin-login,.event-search) :is(input:not([type=checkbox]):not([type=radio]):not([type=file]),textarea,select) { background:var(--surface-soft); color:var(--text-primary); border-color:var(--border); }
+[data-theme=dark] :is(.dialog-close,.record-export,.record-pagination button,.optional-metadata,.record-details pre,.email-compose,.email-history,.email-toolbar,.email-editor,.email-preview) { background:var(--surface-soft); color:var(--text-primary); border-color:var(--border); }
+[data-theme=dark] .notice-ribbon :is(.notice-label,.notice-kind) { background:#263f5d; color:#ecf2fb; }
+[data-theme=dark] .notice-item time { color:var(--text-secondary); }
+[data-theme=dark] :is(.email-toolbar,.email-history,.email-detail) button { background:var(--surface-soft); color:var(--text-primary); border-color:var(--border); }
+[data-theme=dark] .email-toolbar button[aria-pressed=true] { background:#224c7c; color:#fff; }
+@media(max-width:650px) { .campus-nav-actions { gap:6px; } .campus-nav-actions .theme-toggle { width:36px; height:36px; } }

@@ -6,8 +6,10 @@ Wants=network-online.target
 [Service]
 Type=simple
 User=school-api
-WorkingDirectory=/var/www/st-antonys/server
-EnvironmentFile=/var/www/st-antonys/server/.env
+Group=school-web
+SupplementaryGroups=school-private
+WorkingDirectory=/var/www/stantonysneyveli.in/live/server
+EnvironmentFile=/var/www/stantonysneyveli.in/shared/server.env
 ExecStart=/usr/bin/node src/index.js
 Restart=on-failure
 RestartSec=5
@@ -16,7 +18,7 @@ PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
 ReadWritePaths=/var/lib/st-antonys/uploads
-UMask=0077
+UMask=0027
 
 [Install]
 WantedBy=multi-user.target

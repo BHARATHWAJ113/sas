@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { api } from '../api';
+import { Loader } from '../Loading';
 import './email.css';
 import { useRecordQuery, RecordFilters, RecordPagination } from './RecordControls';
 
@@ -142,15 +143,15 @@ export default function EmailManager({ mutate }) {
           <label>CC · Optional, up to five addresses<input value={cc} onChange={event => setCc(event.target.value)} maxLength="1000" placeholder="name@example.com, another@example.com" /></label>
           <label>BCC · Optional, up to five addresses<input value={bcc} onChange={event => setBcc(event.target.value)} maxLength="1000" placeholder="Private copy recipients"/></label><label className="full-width">Subject<input required maxLength="160" value={subject} onChange={event => setSubject(event.target.value)} /></label>
         </div>
-        <label>Attachment · Optional image or PDF, up to 8 MB<input ref={attachmentInput} type="file" accept="image/jpeg,image/png,image/webp,application/pdf" disabled={uploading || pending} onChange={event => upload(event.target.files?.[0])}/></label>{uploading && <p role="status">Validating attachment…</p>}{attachment && <p>{attachment.originalName} <button type="button" onClick={() => { setAttachment(null); attachmentInput.current.value = ''; }}>Remove attachment</button></p>}<span id="email-body-label">Body</span>
+        <label>Attachment · Optional image or PDF, up to 8 MB<input ref={attachmentInput} type="file" accept="image/jpeg,image/png,image/webp,application/pdf" disabled={uploading || pending} onChange={event => upload(event.target.files?.[0])}/></label>{uploading && <Loader label="Validating attachment…" compact />}{attachment && <p>{attachment.originalName} <button type="button" onClick={() => { setAttachment(null); attachmentInput.current.value = ''; }}>Remove attachment</button></p>}<span id="email-body-label">Body</span>
         <RichText onChange={setHtml} editorRef={editor} />
-        <button className="button" disabled={pending || uploading || !data?.configured || editor.current?.isEmpty}>{pending ? 'Queuing…' : 'Send email'}</button>
+        <button className="button" disabled={pending || uploading || !data?.configured || editor.current?.isEmpty}>{pending ? <Loader label="Queuing…" compact /> : 'Send email'}</button>
       </form>
       <section className="admin-panel email-history">
         <div className="email-history-title"><h2>Email history</h2><button type="button" onClick={() => setVersion(value => value + 1)}>Refresh</button></div>
         <RecordFilters resource="emails" controls={controls} items={data?.items || []}/>
         <p className="editor-help">Sent means the SMTP server accepted the message. Inbox placement and later bounces require checking Gmail. Review uncertain or partially accepted messages before sending again.</p>
-        {!data ? <p role="status">{historyError ? 'Email history is unavailable. Choose Refresh to try again.' : 'Loading history…'}</p> : data.items.length ? (
+        {!data ? historyError ? <p role="alert">Email history is unavailable. Choose Refresh to try again.</p> : <Loader label="Loading history…" /> : data.items.length ? (
           <div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>Recipients</th><th>Subject</th><th>Status</th><th>Time</th><th>Actions</th></tr></thead><tbody>
             {data.items.map(item => <tr key={item.id}>
               <td>{item.to}{item.bcc?.length > 0 && <small>BCC {item.bcc.join(', ')}</small>}{item.cc.length > 0 && <small>CC {item.cc.join(', ')}</small>}</td>

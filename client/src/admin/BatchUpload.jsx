@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import '../school-sections.css';
+import { Loader } from '../Loading';
 
 export default function BatchUpload({ mutate, onSaved }) {
   const [items, setItems] = useState([]);
@@ -42,6 +43,6 @@ export default function BatchUpload({ mutate, onSaved }) {
       {item.url && <img src={item.url} alt="Upload preview"/>}<span>{item.file.name}<small role="status">{item.status}</small></span>
       {['alt', 'altTa'].map(key => <label key={key}>{key === 'alt' ? 'Title / alternative text · English' : 'Title / alternative text · Tamil'}<input required maxLength={255} disabled={busy || item.status === 'Uploaded'} value={item[key]} onChange={e => setItems(current => current.map((row, index) => index === i ? { ...row, [key]: e.target.value } : row))}/></label>)}
     </div>)}</div>
-    {complete ? <button type="button" className="button" onClick={onSaved}>Done · manage uploaded files</button> : <button className="button" disabled={busy || !items.length}>{busy ? 'Uploading…' : 'Upload / retry remaining files'}</button>}
+    {complete ? <button type="button" className="button" onClick={onSaved}>Done · manage uploaded files</button> : <button className="button" disabled={busy || !items.length}>{busy ? <Loader label="Uploading…" compact/> : 'Upload / retry remaining files'}</button>}
   </form>;
 }

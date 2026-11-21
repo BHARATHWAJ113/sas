@@ -1,3 +1,4 @@
+import { Loader } from './Loading';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowUp, ArrowUpRight, ArrowRight, MapPin, Phone, Mail, BookOpen, GraduationCap, CalendarDays, UsersRound, RefreshCw, AlertCircle, Search, Compass, ExternalLink } from 'lucide-react';
@@ -49,7 +50,7 @@ export function SectionHeading({ eyebrow, title, text, link, to, icon: Icon, lig
 }
 export function StateBox({ loading, error, retry, empty = false }) {
   const { t } = useSite();
-  if (loading) return <div className="state-box" role="status"><span className="spinner"/>{t('loading')}</div>;
+  if (loading) return <Loader label={t('loading')}/>;
   if (error) return <div className="state-box error" role="alert"><AlertCircle size={23}/><p>{t('offline')}</p>{retry && <button onClick={retry} className="text-link"><RefreshCw size={16}/>{t('retry')}</button>}</div>;
   if (empty) return <div className="state-box"><CalendarDays size={30}/><h3>{t('empty')}</h3><p>{t('emptyText')}</p></div>;
   return null;

@@ -1,3 +1,4 @@
+import { ThemeToggle } from './Theme';
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ArrowUpRight, Bell, ChevronDown, ChevronLeft, ChevronRight, Menu, Pause, Phone, Play, X } from 'lucide-react';
@@ -200,7 +201,7 @@ export function SiteHeader() {
               <Link className="campus-enquire" to="/admissions#enquiry" onClick={closeMenu}>{t('enquire')}<ArrowUpRight size={16} aria-hidden="true" /></Link>
             </div>
           </nav>
-          <div className="campus-nav-actions">
+          <div className="campus-nav-actions"><ThemeToggle/>
             <button type="button" className="campus-language" onClick={() => setLang(lang === 'en' ? 'ta' : 'en')} aria-label={lang === 'en' ? 'Switch to Tamil' : 'Switch to English'}>{t('language')}</button>
             {hasPhone && <a className="campus-call" href={`tel:${phone}`} aria-label={t('callSchool')}><Phone size={16} aria-hidden="true" /><span>{t('callSchool')}</span></a>}
             <Link className="campus-enquire" to="/admissions#enquiry" onClick={closeMenu}>{t('enquire')}<ArrowUpRight size={16} aria-hidden="true" /></Link>
