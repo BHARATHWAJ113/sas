@@ -1,4 +1,4 @@
-const publicPaths = new Set(['/api/site', '/api/activities', '/api/gallery-media', '/api/galleries', '/api/events']);
+const publicPaths = new Set(['/api/fees', '/api/honours', '/api/staff', '/api/toppers', '/api/site', '/api/activities', '/api/gallery-media', '/api/galleries', '/api/events']);
 
 export function publicCache() {
   const records = new Map();

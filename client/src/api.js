@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 const BASE = (import.meta.env.VITE_API_BASE || '/api').replace(/\/$/, '');
-const publicReads = /^\/(site|pages\/[^?]+|events(?:\/[^?]+)?|announcements(?:\/[^?]+)?|home-announcements|activities|gallery-media|galleries)(?:\?|$)/;
+const publicReads = /^\/(site|pages\/[^?]+|events(?:\/[^?]+)?|announcements(?:\/[^?]+)?|home-announcements|activities|gallery-media|galleries|fees|honours|staff|toppers)(?:\?|$)/;
 const reads = new Map();
 export const mediaUrl = id => `${BASE}/media/${encodeURIComponent(id)}`;
 export const assetUrl = url => url?.startsWith('/api/media/') ? mediaUrl(url.slice('/api/media/'.length)) : url;

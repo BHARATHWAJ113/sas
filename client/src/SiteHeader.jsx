@@ -6,12 +6,12 @@ import { useSite } from './context';
 
 const navigation = [
   { label: 'home', path: '/' },
-  { label: 'about', pages: [['about', '/about'], ['infrastructure', '/infrastructure']] },
-  { label: 'academics', path: '/academics' },
+  { label: 'about', pages: [['about', '/about'], ['infrastructure', '/infrastructure'], ['staff', '/staff']] },
+  { label: 'academics', pages: [['academics', '/academics'], ['honours', '/honours'], ['toppers', '/toppers']] },
   { label: 'studentLife', pages: [['studentLife', '/student-life'], ['activitiesNav', '/student-life#activities'], ['events', '/events'], ['news', '/news']] },
   { label: 'gallery', path: '/gallery' },
-  { label: 'admissions', path: '/admissions' },
-  { label: 'contact', path: '/contact' },
+  { label: 'admissions', pages: [['admissions', '/admissions'], ['fees', '/fees']] },
+  { label: 'contact', pages: [['contact', '/contact'], ['socialMedia', '/social-media']] },
 ];
 
 function NoticeBar() {

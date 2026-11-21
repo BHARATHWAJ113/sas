@@ -4,7 +4,7 @@ import { ResponsiveImage } from './components';
 import { useSite } from './context';
 
 const schoolVideo = import.meta.env.VITE_HOME_VIDEO?.trim();
-const videoSource = schoolVideo || '/videos/school-life-preview.mp4';
+const videoSource = schoolVideo;
 
 export function HeroVideo() {
   const { t } = useSite();
@@ -15,6 +15,7 @@ export function HeroVideo() {
 
   useEffect(() => {
     const player = video.current;
+    if (!player) return;
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const pauseForReducedMotion = event => { if (event.matches) player.pause(); };
     if (!motion.matches && !navigator.connection?.saveData) {
@@ -42,8 +43,8 @@ export function HeroVideo() {
 
   return (
     <>
-      <ResponsiveImage className="hero-image" sizes="100vw" src="/images/hero.webp" alt="" width="1672" height="941" fetchPriority="high" />
-      <video
+      <ResponsiveImage className="hero-image" sizes="100vw" src="/images/campus-students.webp" alt="" width="1800" height="1400" fetchPriority="high" />
+      {schoolVideo && <video
         ref={video}
         className={`hero-video${started && !failed ? ' is-visible' : ''}`}
         src={videoSource}
@@ -57,11 +58,11 @@ export function HeroVideo() {
         onPlaying={() => { setStarted(true); setPlaying(true); }}
         onPause={() => setPlaying(false)}
         onError={() => setFailed(true)}
-      />
+      />}
       <div className="hero-shade" />
       <div className="hero-video-tools">
-        <span>{t(started && !failed ? (schoolVideo ? 'heroSchoolVideo' : 'heroIllustrativeVideo') : 'illustrative')}</span>
-        {!failed && (
+        <span>{t(started && !failed ? 'heroSchoolVideo' : 'campusPhotos')}</span>
+        {schoolVideo && !failed && (
           <button type="button" onClick={togglePlayback} aria-label={t(playing ? 'pauseVideo' : 'playVideo')}>
             {playing ? <Pause size={17} aria-hidden="true" /> : <Play size={17} aria-hidden="true" />}
           </button>

@@ -1,0 +1,97 @@
+{
+  "originalBytes": 31380909,
+  "optimizedMainBytes": 3341760,
+  "photos": [
+    {
+      "source": "IMG_0753.JPEG",
+      "asset": "campus-library",
+      "trimmedTop": 91,
+      "trimmedBottom": 0,
+      "bytes": 262820
+    },
+    {
+      "source": "IMG_0757.JPEG",
+      "asset": "campus-reading",
+      "trimmedTop": 152,
+      "trimmedBottom": 0,
+      "bytes": 273702
+    },
+    {
+      "source": "IMG_0760.JPEG",
+      "asset": "campus-learning",
+      "trimmedTop": 100,
+      "trimmedBottom": 0,
+      "bytes": 280924
+    },
+    {
+      "source": "IMG_0761.JPEG",
+      "asset": "campus-primary",
+      "trimmedTop": 0,
+      "trimmedBottom": 0,
+      "bytes": 358176
+    },
+    {
+      "source": "IMG_0763.JPEG",
+      "asset": "campus-english",
+      "trimmedTop": 12,
+      "trimmedBottom": 0,
+      "bytes": 255512
+    },
+    {
+      "source": "IMG_0764.JPEG",
+      "asset": "campus-classroom",
+      "trimmedTop": 0,
+      "trimmedBottom": 0,
+      "bytes": 239132
+    },
+    {
+      "source": "IMG_0765.JPEG",
+      "asset": "campus-playground",
+      "trimmedTop": 0,
+      "trimmedBottom": 0,
+      "bytes": 471710
+    },
+    {
+      "source": "IMG_0766.JPEG",
+      "asset": "campus-smart-class",
+      "trimmedTop": 0,
+      "trimmedBottom": 0,
+      "bytes": 237818
+    },
+    {
+      "source": "IMG_0767.JPEG",
+      "asset": "campus-students",
+      "trimmedTop": 0,
+      "trimmedBottom": 0,
+      "bytes": 246628
+    },
+    {
+      "source": "IMG_0768.JPEG",
+      "asset": "campus-physics",
+      "trimmedTop": 152,
+      "trimmedBottom": 0,
+      "bytes": 221780
+    },
+    {
+      "source": "IMG_0826.JPEG",
+      "asset": "campus-chess",
+      "trimmedTop": 114,
+      "trimmedBottom": 0,
+      "bytes": 160898
+    },
+    {
+      "source": "IMG_0827.JPEG",
+      "asset": "campus-carrom",
+      "trimmedTop": 0,
+      "trimmedBottom": 0,
+      "bytes": 154698
+    },
+    {
+      "source": "IMG_0828.JPEG",
+      "asset": "campus-table-tennis",
+      "trimmedTop": 0,
+      "trimmedBottom": 0,
+      "bytes": 177962
+    }
+  ]
+}

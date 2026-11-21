@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, ChevronLeft, ChevronRight, Images, X } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Images, X, ZoomIn, ZoomOut } from 'lucide-react';
 import { mediaUrl, useApi } from './api';
 import { AdmissionsCTA, Pagination, ResponsiveImage, SectionHeading, Seo, StateBox, TextLink } from './components';
 import { useSite } from './context';
+import './school-sections.css';
 
 const imageSource = media => media.url || mediaUrl(media.id);
 
-export function ImageGrid({ images, gallery = false }) {
-  const { pick, t } = useSite();
+export function ImageGrid({ images, gallery = false, carousel = false }) {
+  const { pick, t, lang } = useSite();
+  const [zoom, setZoom] = useState(false);
   const [active, setActive] = useState(-1);
+  const [featured, setFeatured] = useState(0);
   const dialog = useRef(null);
   const selected = images[active]?.media;
 
@@ -17,6 +20,7 @@ export function ImageGrid({ images, gallery = false }) {
   }, [active]);
 
   function move(step) {
+    setZoom(false);
     setActive(index => (index + step + images.length) % images.length);
   }
 
@@ -26,23 +30,46 @@ export function ImageGrid({ images, gallery = false }) {
     move(event.key === 'ArrowRight' ? 1 : -1);
   }
 
+  function slide(step) { setFeatured(index => (index + step + images.length) % images.length); }
+
   return (
     <>
-      <div className={gallery ? 'image-grid gallery-photo-grid' : 'image-grid'}>
-        {images.map((item, index) => (
+      <div className={carousel ? 'gallery-coverflow' : gallery ? 'image-grid gallery-photo-grid' : 'image-grid'}
+        role={carousel ? 'region' : undefined} aria-roledescription={carousel ? 'carousel' : undefined}
+        aria-label={carousel ? t('gallery') : undefined}
+        onKeyDown={event => {
+          if (!carousel || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+          event.preventDefault(); slide(event.key === 'ArrowRight' ? 1 : -1);
+        }}>
+        {images.map((item, index) => {
+          let offset = (index - featured + images.length) % images.length;
+          if (offset > images.length / 2) offset -= images.length;
+          if (carousel && Math.abs(offset) > 2) return null;
+          return (
           <button
             type="button"
             key={item.id}
             data-album={item.gallery?.slug}
-            onClick={() => setActive(index)}
-            aria-label={`${t('galleryOpen')}: ${pick(item.media, 'alt')}`}
+            className={carousel ? 'gallery-slide' : undefined}
+            style={carousel ? { '--offset': offset, '--distance': Math.abs(offset), zIndex: 3 - Math.abs(offset) } : undefined}
+            tabIndex={carousel && offset !== 0 ? -1 : undefined}
+            onClick={() => { if (carousel && offset !== 0) setFeatured(index); else { setZoom(false); setActive(index); } }}
+            aria-label={`${carousel && offset !== 0 ? (lang === 'ta' ? 'படத்தைக் காட்டு' : 'Show photo') : t('galleryOpen')}: ${pick(item.media, 'alt')}`}
           >
-            <ResponsiveImage src={imageSource(item.media)} alt={pick(item.media, 'alt')} loading="lazy" width="600" height="450" sizes="(max-width: 440px) 100vw, (max-width: 800px) 50vw, 33vw" />
+            <ResponsiveImage src={imageSource(item.media)} srcSet={item.media.hasVariants ? `${imageSource(item.media)}?width=640 640w, ${imageSource(item.media)}?width=1200 1200w` : undefined} alt={pick(item.media, 'alt')} loading="lazy" decoding="async" width="600" height="450" sizes="(max-width: 440px) 100vw, (max-width: 800px) 50vw, 33vw" />
             {item.gallery?.isDemo && <small className="gallery-demo-label">{t(item.gallery.slug === 'illustrations' ? 'galleryIllustration' : 'demo')}</small>}
             <span aria-hidden="true"><ArrowUpRight size={23} /></span>
           </button>
-        ))}
+        ); })}
       </div>
+      {carousel && <div className="gallery-carousel-footer">
+        <div className="gallery-caption" aria-live="polite"><span className="eyebrow">{pick(images[featured]?.gallery, 'title')}</span><p>{pick(images[featured]?.media, 'alt')}</p></div>
+        <div className="gallery-carousel-controls">
+          <button type="button" onClick={() => slide(-1)} disabled={images.length < 2} aria-label={t('previous')}><ChevronLeft size={20}/></button>
+          <span>{featured + 1} / {images.length}</span>
+          <button type="button" onClick={() => slide(1)} disabled={images.length < 2} aria-label={t('next')}><ChevronRight size={20}/></button>
+        </div>
+      </div>}
       <dialog
         className="lightbox"
         ref={dialog}
@@ -54,8 +81,11 @@ export function ImageGrid({ images, gallery = false }) {
         <button type="button" className="dialog-close" aria-label={t('close')} onClick={() => dialog.current.close()}><X /></button>
         {selected && (
           <>
-            <ResponsiveImage src={imageSource(selected)} alt={pick(selected, 'alt')} sizes="min(920px, 90vw)" />
+            <div className={`lightbox-zoom-viewport${zoom ? ' is-zoomed' : ''}`} tabIndex={0}><ResponsiveImage src={imageSource(selected)} alt={pick(selected, 'alt')} sizes="min(920px, 90vw)" /></div>
             <p>{pick(selected, 'alt')}</p>
+            {selected.description && <p>{pick(selected, 'description')}</p>}
+            {selected.eventDate && <p>{new Date(selected.eventDate).toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: 'Asia/Kolkata' })}</p>}
+            <button type="button" aria-pressed={zoom} onClick={() => setZoom(value => !value)}>{zoom ? <ZoomOut/> : <ZoomIn/>}{lang === 'ta' ? 'பெரிதாக்கு' : 'Zoom'}</button>
             {images.length > 1 && (
               <div className="lightbox-controls">
                 <button type="button" aria-label={t('previous')} onClick={() => move(-1)}><ChevronLeft /></button>
@@ -74,7 +104,9 @@ function GalleryMedia({ preview = false }) {
   const { pick, t, lang } = useSite();
   const [category, setCategory] = useState('');
   const [page, setPage] = useState(1);
-  const path = `/gallery-media?limit=${preview ? 3 : 12}`;
+  const [expanded, setExpanded] = useState(false);
+  const [grid, setGrid] = useState(false);
+  const path = `/gallery-media?limit=${preview ? 9 : 12}`;
   const all = useApi(path);
   const filtered = useApi(category || page > 1 ? `${path}&category=${encodeURIComponent(category)}&page=${page}` : null);
   const results = category || page > 1 ? filtered : all;
@@ -88,7 +120,8 @@ function GalleryMedia({ preview = false }) {
   return (
     <div className="container gallery-catalog">
       {all.data?.categories.length > 0 && (
-        <div className="gallery-filters" role="group" aria-label={t('galleryFilter')}>
+        <div className="gallery-filter-bar">
+        <div id={preview ? 'home-gallery-albums' : 'gallery-albums'} className={`gallery-filters${expanded ? ' is-expanded' : ''}`} role="group" aria-label={t('galleryFilter')}>
           <button type="button" aria-pressed={!category} onClick={() => selectCategory('')}>
             {t('galleryAll')} <span>{count.format(all.data.allCount)}</span>
           </button>
@@ -98,10 +131,13 @@ function GalleryMedia({ preview = false }) {
             </button>
           ))}
         </div>
+        <button type="button" className="gallery-expand" aria-expanded={expanded} aria-controls={preview ? 'home-gallery-albums' : 'gallery-albums'} onClick={() => setExpanded(value => !value)}>{lang === 'ta' ? (expanded ? 'சுருக்கு' : 'அனைத்து ஆல்பங்கள்') : (expanded ? 'Show less' : 'All albums')}</button>
+        </div>
       )}
       <div aria-busy={results.loading}>
         <StateBox {...results} empty={results.data?.items.length === 0} />
-        {results.data?.items.length > 0 && <ImageGrid key={`${category}:${page}`} images={results.data.items} gallery />}
+        {!results.loading && results.data?.items.length > 0 && <ImageGrid key={`${category}:${page}`} images={results.data.items} gallery carousel={!grid} />}
+        {!preview && results.data?.items.length > 0 && <div className="gallery-view-switch"><button type="button" className="gallery-expand" aria-pressed={grid} onClick={() => setGrid(value => !value)}>{lang === 'ta' ? (grid ? 'படத் தொகுப்பைக் காட்டு' : 'அனைத்துப் படங்களைக் காட்டு') : (grid ? 'Carousel view' : 'View all photos')}</button></div>}
         {!preview && <Pagination page={page} pages={results.data?.pages || 0} onChange={setPage} />}
       </div>
       {preview && <div className="gallery-more"><TextLink to="/gallery">{t('allGallery')}</TextLink></div>}

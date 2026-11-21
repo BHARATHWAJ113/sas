@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ArrowUp, ArrowUpRight, ArrowRight, MapPin, Phone, Mail, BookOpen, GraduationCap, CalendarDays, UsersRound, RefreshCw, AlertCircle, Search, Compass, ExternalLink } from 'lucide-react';
 import { useSite } from './context';
 import { useApi, assetUrl } from './api';
+import campusPhotos from '../../shared/campus-photos.json';
 export const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=JF45%2B88R%20Neyveli%20Tamil%20Nadu%20607807';
 export function ScrollToTop() {
   const { t } = useSite();
@@ -24,10 +25,13 @@ export function ScrollToTop() {
   return <button className="scroll-to-top" type="button" aria-label={t('backToTop')} title={t('backToTop')} hidden={!visible} onClick={goToTop}><ArrowUp size={23} aria-hidden="true" /></button>;
 }
 export function ResponsiveImage(props) {
-  const match = /^\/images\/(hero|discovery|sports)\.webp$/.exec(props.src || '');
-  const width = match?.[1] === 'hero' ? 1672 : 1400;
-  const srcSet = match ? `/images/${match[1]}-640.webp 640w, /images/${match[1]}-960.webp 960w, ${props.src} ${width}w` : undefined;
-  return <img {...props} srcSet={srcSet} sizes={props.sizes || '(max-width: 650px) 100vw, 50vw'}/>;
+  const { pick } = useSite();
+  // Retire legacy generated covers, including references saved in older CMS records.
+  const legacy = { '/images/hero.webp': 'campus-students', '/images/discovery.webp': 'campus-smart-class', '/images/sports.webp': 'campus-table-tennis' };
+  const src = legacy[props.src] ? `/images/${legacy[props.src]}.webp` : props.src;
+  const photo = campusPhotos.find(item => src === `/images/${item.key}.webp`);
+  const srcSet = photo ? `/images/${photo.key}-640.webp 640w, /images/${photo.key}-1200.webp 1200w, ${src} 1800w` : undefined;
+  return <img {...props} src={src} alt={props.alt === '' ? '' : photo ? pick(photo, 'alt') : props.alt} srcSet={props.srcSet || srcSet} sizes={props.sizes || '(max-width: 650px) 100vw, 50vw'}/>;
 }
 export function ButtonLink({ to, children, secondary = false, light = false, className = '', ...props }) { return <Link to={to} className={`button ${secondary ? 'button-secondary' : ''} ${light ? 'button-light' : ''} ${className}`} {...props}>{children}<ArrowUpRight size={18}/></Link>; }
 export function TextLink({ to, children, ...props }) { return <Link to={to} className="text-link" {...props}>{children}<ArrowUpRight size={17}/></Link>; }
@@ -68,7 +72,7 @@ function ContactValue({ kind }) {
 
 export function Footer() {
   const { t, lang } = useSite();
-  return <footer className="site-footer"><div className="container footer-grid"><div className="footer-brand"><Link to="/" className="brand"><ResponsiveImage src="/images/logo.webp" width="68" height="68" alt="St. Antony's official crest"/><span><strong>{t('school')}</strong><span>{t('schoolSub')}</span><small>{t('neyveli')}</small></span></Link><p>{t('footerText')}</p><span className="footer-motto">{t('motto')} <span>↗</span></span></div><div><h3>{t('explore')}</h3>{[['about','about'],['academics','academics'],['infrastructure','infrastructure'],['student-life','studentLife']].map(([p,k])=><Link key={p} to={`/${p}`}>{t(k)}</Link>)}</div><div><h3>{t('useful')}</h3>{[['admissions','admissions'],['events','events'],['gallery','gallery'],['news','news'],['notices','notices']].map(([p,k])=><Link key={p} to={`/${p}`}>{t(k)}</Link>)}</div><div className="footer-contact"><h3>{t('connect')}</h3><a href={mapsUrl} target="_blank" rel="noreferrer"><MapPin size={18}/>{t(lang === 'ta' ? 'addressTa' : 'address')}</a><p><Phone size={17}/><ContactValue kind="phone"/></p><p><Mail size={17}/><ContactValue kind="email"/></p></div></div><div className="container footer-bottom">
+  return <footer className="site-footer"><div className="container footer-grid"><div className="footer-brand"><Link to="/" className="brand"><ResponsiveImage src="/images/logo.webp" width="68" height="68" alt="St. Antony's official crest"/><span><strong>{t('school')}</strong><span>{t('schoolSub')}</span><small>{t('neyveli')}</small></span></Link><p>{t('footerText')}</p><span className="footer-motto">{t('motto')} <span>↗</span></span></div><div><h3>{t('explore')}</h3>{[['about','about'],['academics','academics'],['infrastructure','infrastructure'],['student-life','studentLife']].map(([p,k])=><Link key={p} to={`/${p}`}>{t(k)}</Link>)}</div><div><h3>{t('useful')}</h3>{[['admissions','admissions'],['events','events'],['gallery','gallery'],['news','news'],['notices','notices'],['social-media','socialMedia']].map(([p,k])=><Link key={p} to={`/${p}`}>{t(k)}</Link>)}</div><div className="footer-contact"><h3>{t('connect')}</h3><a href={mapsUrl} target="_blank" rel="noreferrer"><MapPin size={18}/>{t(lang === 'ta' ? 'addressTa' : 'address')}</a><p><Phone size={17}/><ContactValue kind="phone"/></p><p><Mail size={17}/><ContactValue kind="email"/></p></div></div><div className="container footer-bottom">
     <div className="footer-credits">
       <span>© {new Date().getFullYear()} {t('copyright')} {t('copyrightYear')}</span>
       <span className="footer-credit">{t('websiteCredit')} <a href="https://tecnozard.com/">Tecnozard Private Limited</a></span>
@@ -100,9 +104,9 @@ export function RouteReset() {
   }, [pathname, hash]);
   return null;
 }
-export function PageHero({ eyebrow, title, text, image = '/images/hero.webp' }) {
+export function PageHero({ eyebrow, title, text, image = '/images/campus-students.webp' }) {
   const { t } = useSite();
-  return <section className="page-hero"><div className="container page-hero-inner"><div><div className="breadcrumb"><Link to="/">{t('home')}</Link><span>/</span>{eyebrow}</div><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{text}</p></div><div className="page-hero-photo"><ResponsiveImage src={image} alt={t('illustrative')} width="600" height="400"/><span>{t('illustrative')}</span></div></div></section>;
+  return <section className="page-hero"><div className="container page-hero-inner"><div><div className="breadcrumb"><Link to="/">{t('home')}</Link><span>/</span>{eyebrow}</div><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{text}</p></div><div className="page-hero-photo"><ResponsiveImage src={image} alt={t('schoolFull')} width="600" height="400"/></div></div></section>;
 }
 export function AcademicCards({ full = false }) {
   const { t } = useSite();
@@ -110,7 +114,7 @@ export function AcademicCards({ full = false }) {
 }
 export function FacilityCards() {
   const { t } = useSite();
-  return <div className="three-grid facility-grid">{['discovery', 'hero', 'sports'].map((key, i) => <Link to="/infrastructure" className="photo-card" key={key}><div><ResponsiveImage src={`/images/${key}.webp`} alt={t('illustrative')} loading="lazy" width="600" height="400"/><span className="demo-badge">{t('illustrative')}</span></div><div className="photo-card-body"><h3>{t(`facility${i + 1}`)}<ArrowUpRight size={20}/></h3><p>{t(`facility${i + 1}Text`)}</p></div></Link>)}</div>;
+  return <div className="three-grid facility-grid">{['campus-library', 'campus-classroom', 'campus-table-tennis'].map((key, i) => <Link to="/infrastructure" className="photo-card" key={key}><div><ResponsiveImage src={`/images/${key}.webp`} alt={t('schoolFull')} loading="lazy" width="600" height="400"/></div><div className="photo-card-body"><h3>{t(`facility${i + 1}`)}<ArrowUpRight size={20}/></h3><p>{t(`facility${i + 1}Text`)}</p></div></Link>)}</div>;
 }
 export function Vision() {
   const { t } = useSite();
@@ -147,7 +151,7 @@ export function ContactBlock({ full = false }) {
 }
 export function EventCard({ event }) {
   const { t, pick, lang } = useSite(); const date = new Date(event.date);
-  return <article className="event-card"><Link to={`/events/${event.slug}`} className="event-image" tabIndex={-1} aria-hidden="true"><ResponsiveImage src={assetUrl(event.cover) || '/images/discovery.webp'} alt={event.isDemo || !event.cover ? t('illustrative') : pick(event, 'title')} width="600" height="400" loading="lazy"/><div className="date-badge"><strong>{new Intl.DateTimeFormat(lang === 'ta' ? 'ta-IN' : 'en-GB', { day: '2-digit', timeZone: 'Asia/Kolkata' }).format(date)}</strong><span>{new Intl.DateTimeFormat(lang === 'ta' ? 'ta-IN' : 'en-GB', { month: 'short', timeZone: 'Asia/Kolkata' }).format(date)}</span></div>{event.isDemo && <DemoBadge/>}</Link><div className="event-body"><div className="event-meta"><span>{pick(event, 'category')}</span><span>{new Intl.DateTimeFormat('en', { year: 'numeric', timeZone: 'Asia/Kolkata' }).format(date)}</span></div><h3><Link to={`/events/${event.slug}`}>{pick(event, 'title')}</Link></h3><p>{pick(event, 'summary')}</p><TextLink to={`/events/${event.slug}`}>{t('viewDetails')}</TextLink>{event.isDemo && <small className="event-demo">{t('sampleEvent')}</small>}</div></article>;
+  return <article className="event-card"><Link to={`/events/${event.slug}`} className="event-image" tabIndex={-1} aria-hidden="true"><ResponsiveImage src={assetUrl(event.cover) || '/images/campus-smart-class.webp'} alt={event.isDemo || !event.cover ? t('illustrative') : pick(event, 'title')} width="600" height="400" loading="lazy"/><div className="date-badge"><strong>{new Intl.DateTimeFormat(lang === 'ta' ? 'ta-IN' : 'en-GB', { day: '2-digit', timeZone: 'Asia/Kolkata' }).format(date)}</strong><span>{new Intl.DateTimeFormat(lang === 'ta' ? 'ta-IN' : 'en-GB', { month: 'short', timeZone: 'Asia/Kolkata' }).format(date)}</span></div>{event.isDemo && <DemoBadge/>}</Link><div className="event-body"><div className="event-meta"><span>{pick(event, 'category')}</span><span>{new Intl.DateTimeFormat('en', { year: 'numeric', timeZone: 'Asia/Kolkata' }).format(date)}</span></div><h3><Link to={`/events/${event.slug}`}>{pick(event, 'title')}</Link></h3><p>{pick(event, 'summary')}</p><TextLink to={`/events/${event.slug}`}>{t('viewDetails')}</TextLink>{event.isDemo && <small className="event-demo">{t('sampleEvent')}</small>}</div></article>;
 }
 export function EventPreview() {
   const { t } = useSite(); const state = useApi('/events?period=upcoming&limit=3');

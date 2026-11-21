@@ -13,6 +13,7 @@ import { Footer, RouteReset, ScrollToTop, StateBox } from './components';
 import { SiteHeader } from './SiteHeader';
 import { Home, About, Academics, Admissions, Infrastructure, StudentLife, Updates, Events, EventDetails, Contact, NotFound, Privacy } from './pages';
 import { Gallery } from './Gallery';
+import { SocialMedia, SocialSidebar } from './SocialMedia';
 import { useScrollReveal } from './useScrollReveal';
 import AnnouncementPopup from './AnnouncementPopup';
 import './form-design.css';
@@ -21,6 +22,7 @@ import './public-design.css';
 import './site-header.css';
 import './public-motion.css';
 import './gallery.css';
+const SchoolSection = lazy(() => import('./SchoolSection'));
 const Admin = lazy(() => import('./admin/Admin'));
 class ErrorBoundary extends React.Component {
   state = { failed: false };
@@ -40,7 +42,9 @@ function PublicSite() {
           <Route path="/admissions" element={<Admissions />} />
           <Route path="/infrastructure" element={<Infrastructure />} />
           <Route path="/student-life" element={<StudentLife />} />
+          {['fees', 'honours', 'staff', 'toppers'].map(resource => <Route key={resource} path={`/${resource}`} element={<SchoolSection key={resource} resource={resource}/>}/>)}
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/social-media" element={<SocialMedia />} />
           <Route path="/news" element={<Updates kind="NEWS" />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/:slug" element={<EventDetails />} />
@@ -51,6 +55,7 @@ function PublicSite() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <SocialSidebar />
       <Footer />
       <ScrollToTop />
       <AnnouncementPopup />

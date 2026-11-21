@@ -1,0 +1,21 @@
+.directory-hero{background:linear-gradient(130deg,#eaf4ff,#f1f5f9);padding:clamp(3rem,6vw,6rem) 0;text-align:center}
+.directory-hero h1{font-size:clamp(2.3rem,4vw,4rem);color:#102a56;margin:1rem 0}
+.directory-hero p{max-width:660px;margin:auto;color:#334155;font-size:1.1rem}
+.directory-catalog{max-width:1500px}.directory-filters{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;padding:1.4rem;background:#eaf4ff;border-radius:24px}
+.directory-filters label{flex:1 1 180px;min-width:0;font-weight:600;color:#102a56;display:grid;gap:.5rem}
+.directory-filters input,.directory-filters select{width:100%;min-width:0;padding:.8rem;border:1px solid #6699cc;border-radius:12px;background:#fff;color:#334155;font:inherit}
+.directory-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem}
+.directory-card{border:1px solid #dce8f5;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 9px 28px #102a5609;transition:transform .2s,box-shadow .2s}
+.directory-card:hover{transform:translateY(-5px);box-shadow:0 16px 38px #102a5616}
+.directory-photo{position:relative;background:#eaf4ff}.directory-photo img{width:100%;height:auto;aspect-ratio:1;object-fit:contain;display:block}
+.directory-rank{position:absolute;top:1rem;left:1rem;padding:.4rem .8rem;background:#102a56;color:white;border-radius:30px}
+.directory-card-body{padding:1.4rem;overflow-wrap:anywhere}.directory-card h2{font-size:1.18rem;line-height:1.5;margin:.5rem 0;color:#102a56}
+.directory-card p{font-size:1rem;margin:.6rem 0}.directory-subtitle{font-weight:600}.directory-scores{display:flex;flex-wrap:wrap;gap:1rem;padding-top:1rem;border-top:1px solid #eaf4ff}.directory-scores dd{margin:0;font-weight:700;color:#102a56}.directory-scores dt{font-size:.85rem}
+.directory-empty{padding:3rem;text-align:center;background:#f1f5f9;border-radius:24px}
+.fee-schedule{overflow-x:auto;border:1px solid #dce8f5;border-radius:24px}.fee-schedule table{border-collapse:collapse;width:100%;color:#334155}.fee-schedule caption{padding:1.5rem;font-weight:700;background:#eaf4ff;color:#102a56}.fee-schedule td,.fee-schedule th{padding:1.3rem;text-align:left;border-bottom:1px solid #eaf4ff}.fee-schedule thead,.fee-schedule tfoot{background:#102a56;color:white}.fee-schedule tfoot td{font-size:1.3rem;font-weight:700}
+.batch-upload-list{display:grid;gap:1rem}.batch-upload-item{display:flex;flex-wrap:wrap;gap:1rem;padding:1rem;border:1px solid #dce8f5;border-radius:12px}.batch-upload-item img{width:100px;height:80px;object-fit:contain}.batch-upload-item label{flex:1;min-width:160px}
+.lightbox-zoom-viewport{max-height:70vh;overflow:auto}.lightbox-zoom-viewport img{display:block;margin:auto}.lightbox-zoom-viewport.is-zoomed img{max-width:none;max-height:none;width:180%;height:auto}
+@media(max-width:1000px){.directory-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:768px){.directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fee-schedule td,.fee-schedule th{padding:.85rem .6rem}}
+@media(max-width:480px){.directory-grid{grid-template-columns:1fr}.directory-filters{padding:1rem}.fee-schedule{font-size:.86rem}}
+@media(prefers-reduced-motion:reduce){.directory-card{transition:none}.directory-card:hover{transform:none}}

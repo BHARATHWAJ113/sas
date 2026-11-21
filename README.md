@@ -1,5 +1,7 @@
 # St. Antony’s School · Neyveli
 
+The dynamic fees, honours, staff, toppers and gallery extension is documented in [the implementation and deployment guide](reports/school-sections-implementation.md). The source photo audit is available as [Markdown](reports/school-image-quality-report.md) and [CSV](reports/school-image-quality-report.csv), with a separate [cleanup report](reports/school-assets-cleanup-report.md).
+
 A complete React/Vite public school site and role-based Express CMS, with Prisma/MySQL persistence, bilingual English/Tamil content, event publishing, validated media uploads and admission enquiries.
 
 Gmail SMTP, the durable email queue, and administrator email history are described in [email operations](docs/EMAIL-AND-CONSENT.md). Configure the server email variables and apply the new migrations before enabling email.

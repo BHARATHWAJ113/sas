@@ -10,11 +10,14 @@ import { fail, hashToken, mountAuth, originGuard } from './auth.js';
 import { adminRouter } from './admin.js';
 import { enquirySchema, listQuery, parse } from './validation.js';
 import { galleryMedia } from './gallery.js';
+import { mountSchoolSections } from './school-sections.js';
+import { variantFilename } from './image-variants.js';
 import { saveEnquiry } from './enquiries.js';
 import { publicCache } from './public-cache.js';
 import { demoEvents, demoAnnouncements, demoPages, demoSettings } from './demo.js';
 import { schoolPages } from '../../shared/school-profile.js';
 import { schoolActivities, schoolActivityCategories } from '../../shared/school-activities.js';
+import campusPhotos from '../../shared/campus-photos.json' with { type: 'json' };
 const published = { status: 'PUBLISHED' };
 const publicMedia = { where: { media: published }, orderBy: { order: 'asc' }, include: { media: { select: { id: true, alt: true, altTa: true, mimeType: true } } } };
 const envelope = (items, total, page, limit, extra = {}) => ({ items, total, page, pages: Math.ceil(total / limit), ...extra });
@@ -36,6 +39,7 @@ export function createApp(db, options = {}) {
   });
   const databaseOnly = (_req, _res, next) => demo ? next(fail(503, 'This preview uses read-only demo content. Authentication and enquiry submission require a configured MySQL database.')) : next();
   app.use(cache.middleware);
+  mountSchoolSections(app, db, databaseOnly);
   app.get('/api/health', async (_req, res) => {
     if (demo) return res.json({ status: 'demo', database: 'unavailable', readOnly: true });
     try { await db.$queryRaw`SELECT 1`; res.json({ status: 'ok', database: 'connected', readOnly: false }); }
@@ -47,7 +51,7 @@ export function createApp(db, options = {}) {
     res.json({ settings, translations, demo, privacyRetentionDays: config.VISITOR_RETENTION_DAYS });
   });
   app.get('/api/sitemap.xml', async (_req, res) => {
-    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy'];
+    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy', 'fees', 'honours', 'staff', 'toppers'];
     const events = demo ? [] : await db.event.findMany({ where: published, select: { slug: true } });
     const base = config.SITE_URL.replace(/\/$/, '');
     const escape = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -135,7 +139,7 @@ export function createApp(db, options = {}) {
   });
   app.get('/api/galleries', async (req, res) => {
     const { page, limit } = listQuery.parse(req.query);
-    if (demo) return res.json(envelope([{ id: 'demo-gallery', title: 'A glimpse of school life · Illustrative images', titleTa: 'பள்ளி வாழ்க்கை · மாதிரி படங்கள்', summary: 'AI-created illustrations, not actual campus photographs.', summaryTa: 'இவை செயற்கை நுண்ணறிவால் உருவாக்கப்பட்ட மாதிரி படங்கள்.', isDemo: true, images: ['hero', 'discovery', 'sports'].map((key, i) => ({ id: key, media: { id: `demo-${i}`, url: `/images/${key}.webp`, alt: `Illustrative ${key} scene`, altTa: 'மாதிரி பள்ளிக் காட்சி' } })) }], 1, page, limit, { demo: true }));
+    if (demo) return res.json(envelope([{ id: 'campus-gallery', title: 'A glimpse of school life', titleTa: 'பள்ளி வாழ்க்கைக் காட்சிகள்', summary: 'Learning, reading and playing at St. Antony’s.', summaryTa: 'எங்கள் பள்ளியில் கற்றல், வாசிப்பு மற்றும் விளையாட்டு.', isDemo: false, images: campusPhotos.map(photo => ({ id: photo.key, media: { id: photo.key, url: `/images/${photo.key}.webp`, alt: photo.alt, altTa: photo.altTa } })) }], 1, page, limit, { demo: true }));
     const [items, total] = await Promise.all([db.gallery.findMany({ where: published, take: limit, skip: (page - 1) * limit, include: { images: publicMedia }, orderBy: { createdAt: 'desc' } }), db.gallery.count({ where: published })]);
     res.json(envelope(items, total, page, limit));
   });
@@ -148,7 +152,8 @@ export function createApp(db, options = {}) {
       if (!session || session.expiresAt <= new Date() || !session.user.active) throw fail(404, 'File not found.');
     }
     if (!/^[a-f0-9-]+\.(webp|pdf)$/.test(media.filename)) throw fail(404, 'File not found.');
-    const path = resolve(config.uploads, media.filename);
+    const width = z.enum(['640', '1200']).optional().parse(req.query.width);
+    const path = resolve(config.uploads, width && media.hasVariants ? variantFilename(media.filename, width) : media.filename);
     if (!path.startsWith(`${config.uploads}${sep}`)) throw fail(404, 'File not found.');
     res.type(media.mimeType).set('X-Content-Type-Options', 'nosniff').set('Cross-Origin-Resource-Policy', 'same-site');
     if (media.mimeType === 'application/pdf') res.attachment(media.originalName || 'attachment.pdf').set('Content-Security-Policy', "sandbox; default-src 'none'");

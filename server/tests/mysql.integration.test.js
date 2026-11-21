@@ -27,9 +27,12 @@ describe.skipIf(process.env.MYSQL_INTEGRATION !== 'true')('real MySQL integratio
       if (user) await db.emailMessage.deleteMany({ where: { userId: user.id } });
       await db.announcement.deleteMany({ where: { slug: prefix + '-popup' } });
       await db.event.deleteMany({ where: { slug: prefix } });
+      for (const model of ['fee', 'honour', 'staffMember', 'topper']) await db[model].deleteMany({ where: { sourceRef: prefix } });
+      await db.gallery.deleteMany({ where: { slug: prefix + '-gallery' } });
       await db.admissionEnquiry.deleteMany({ where: { email } });
       if (mediaId) await db.media.deleteMany({ where: { id: mediaId } });
       if (filename) await unlink(join(config.uploads, filename)).catch(() => {});
+      if (filename) { const { removeVariants } = await import('../src/image-variants.js'); await removeVariants(config.uploads, filename); }
       if (user) { await db.emailMessage.deleteMany({ where: { userId: user.id } }); await db.auditLog.deleteMany({ where: { userId: user.id } }); await db.user.delete({ where: { id: user.id } }); }
       if (createdRole && await db.user.count({ where: { roleId: role.id } }) === 0) await db.role.delete({ where: { id: role.id } });
     } finally { await db.$disconnect(); }
@@ -77,6 +80,44 @@ describe.skipIf(process.env.MYSQL_INTEGRATION !== 'true')('real MySQL integratio
     expect(audit.map(x => x.action)).toEqual(expect.arrayContaining(['LOGIN', 'CREATE', 'UPLOAD', 'UPDATE', 'DELETE']));
     await agent.post('/api/auth/logout').set('Origin', origin).set('x-csrf-token', csrf).expect(204);
     await agent.get('/api/auth/me').expect(401);
+  }, 30000);
+  it('persists all four school sections, photo metadata, ordering, variants and publication changes', async () => {
+    const origin = 'http://127.0.0.1:5173';
+    const agent = request.agent(app);
+    const login = await agent.post('/api/auth/login').set('Origin', origin).send({ email, password }).expect(200);
+    const mutate = (method, path, body) => agent[method]('/api/admin/' + path).set('Origin', origin).set('x-csrf-token', login.body.csrfToken).send(body);
+    const records = {
+      fees: { title: prefix, category: 'School fee', standard: 'LKG', academicYear: '2099-00', amount: 25.50, frequency: 'Term', installments: 3 },
+      honours: { name: prefix, title: 'Test award', standard: '10', academicYear: '2099-00', category: 'Academic', imageId: mediaId },
+      staff: { name: prefix, designation: 'Teacher', department: 'Science', category: 'Teaching', imageId: mediaId },
+      toppers: { name: prefix, standard: '10', academicYear: '2099-00', category: 'SSLC', marks: 490, maximumMarks: 500, percentage: 98, imageId: mediaId },
+    };
+    for (const [resource, values] of Object.entries(records)) {
+      const body = { ...values, sourceRef: prefix, status: 'DRAFT' };
+      const created = await mutate('post', resource, body).expect(201);
+      const url = `/api/${resource}?search=${prefix}&standard=${values.standard || ''}&academicYear=${values.academicYear || ''}`;
+      expect((await request(app).get(url).expect(200)).body.items).toHaveLength(0);
+      await mutate('put', resource + '/' + created.body.id, { ...body, status: 'PUBLISHED' }).expect(200);
+      const visible = (await request(app).get(url).expect(200)).body;
+      expect(visible.items).toHaveLength(1);
+      expect(visible.items[0].sourceRef).toBeUndefined();
+      if (resource === 'fees') expect(visible.annualTotal).toBe(76.50);
+      else expect(visible.items[0].image.id).toBe(mediaId);
+      if (resource !== 'fees') await mutate('delete', 'media/' + mediaId).expect(409);
+      await mutate('put', resource + '/' + created.body.id, { ...body, status: 'ARCHIVED' }).expect(200);
+      expect((await request(app).get(url).expect(200)).body.items).toHaveLength(0);
+      await mutate('delete', resource + '/' + created.body.id).expect(204);
+    }
+    await mutate('put', 'media/' + mediaId, { alt: prefix, altTa: prefix, status: 'PUBLISHED', description: 'Gallery caption', descriptionTa: '', eventDate: '2026-11-01T00:00:00.000Z' }).expect(200);
+    const album = { title: prefix, titleTa: prefix, slug: prefix + '-gallery', summary: 'Test gallery', summaryTa: 'Test gallery', imageIds: [mediaId], status: 'PUBLISHED', isDemo: true };
+    const saved = await mutate('post', 'galleries', album).expect(201);
+    const gallery = await request(app).get('/api/gallery-media?category=' + album.slug).expect(200);
+    expect(gallery.body.items[0].media).toMatchObject({ description: 'Gallery caption', hasVariants: true });
+    await request(app).get('/api/media/' + mediaId + '?width=640').expect(200).expect('Content-Type', /image\/webp/);
+    await request(app).get('/api/media/' + mediaId + '?width=99999').expect(422);
+    await mutate('put', 'galleries/' + saved.body.id, { ...album, imageIds: [], status: 'ARCHIVED' }).expect(200);
+    expect((await request(app).get('/api/gallery-media?category=' + album.slug).expect(200)).body.items).toHaveLength(0);
+    await mutate('delete', 'galleries/' + saved.body.id).expect(204);
   }, 30000);
   it('sends idempotent admin outbox jobs with concurrent worker claims', async () => {
     const origin = 'http://127.0.0.1:5173';

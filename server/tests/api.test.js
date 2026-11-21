@@ -22,11 +22,11 @@ describe('read-only preview API', () => {
   const app = createApp({}, { demo: true });
   it('reports read-only status honestly', async () => { const { body } = await request(app).get('/api/health').expect(200); expect(body).toMatchObject({ status: 'demo', database: 'unavailable', readOnly: true }); });
   it('serves marked demo events through the API', async () => { const { body } = await request(app).get('/api/events?limit=2').expect(200); expect(body.items).toHaveLength(2); expect(body.items.every(x => x.isDemo)).toBe(true); expect(body.pages).toBe(4); });
-  it('labels gallery illustrations and keeps counts for all categories when filtering', async () => {
-    const { body } = await request(app).get('/api/gallery-media?category=illustrations&limit=2&page=2').expect(200);
-    expect(body).toMatchObject({ allCount: 7, total: 3, page: 2, pages: 2 });
+  it('serves real campus photos and keeps counts for all categories when filtering', async () => {
+    const { body } = await request(app).get('/api/gallery-media?category=campus-life&limit=2&page=7').expect(200);
+    expect(body).toMatchObject({ allCount: 17, total: 13, page: 7, pages: 7 });
     expect(body.categories).toEqual(expect.arrayContaining([expect.objectContaining({ slug: 'school-archive', count: 4 })]));
-    expect(body.items).toEqual([expect.objectContaining({ gallery: expect.objectContaining({ slug: 'illustrations', isDemo: true }) })]);
+    expect(body.items).toEqual([expect.objectContaining({ gallery: expect.objectContaining({ slug: 'campus-life', isDemo: false }), media: expect.objectContaining({ url: '/images/campus-table-tennis.webp' }) })]);
   });
   it('supports event search, category filters and pagination', async () => { const { body } = await request(app).get('/api/events?search=play&category=Sports').expect(200); expect(body.total).toBe(1); expect(body.items[0].slug).toBe('demo-sports-meet'); });
   it('paginates the sourced activity catalog while retaining the category filters', async () => {

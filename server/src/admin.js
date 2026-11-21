@@ -6,8 +6,10 @@ import { schemas, parse, userSchema } from './validation.js';
 import { mountUploads } from './uploads.js';
 import { mountEmailAdmin } from './email-admin.js';
 import { adminList, listEnvelope } from './admin-list.js';
-const resources = { pages: 'page', events: 'event', activities: 'activity', 'activity-categories': 'activityCategory', announcements: 'announcement', translations: 'translation', galleries: 'gallery', settings: 'siteSetting', media: 'media' };
+import { schoolResources } from '../../shared/school-sections.js';
+const resources = { ...schoolResources, pages: 'page', events: 'event', activities: 'activity', 'activity-categories': 'activityCategory', announcements: 'announcement', translations: 'translation', galleries: 'gallery', settings: 'siteSetting', media: 'media' };
 const relations = {
+  honours: { image: true }, staff: { image: true }, toppers: { image: true },
   events: { images: { orderBy: { order: 'asc' }, include: { media: true } }, attachment: true },
   activities: { category: { select: { title: true, status: true } }, image: { select: { id: true, alt: true, status: true } } },
   galleries: { images: { orderBy: { order: 'asc' }, include: { media: true } } },
@@ -119,6 +121,8 @@ export function adminRouter(db, auth) {
     router.put(`/${resource}/:id`, allow(...privilege), parse(schemas[resource]), async (req, res) => res.json(await saveResource(db, req, resource, model, audit, true)));
     router.delete(`/${resource}/:id`, allow('ADMIN'), async (req, res) => {
       if (resource === 'media') {
+        const used = await Promise.all(['honour', 'staffMember', 'topper'].map(model => db[model].count({ where: { imageId: req.params.id } })));
+        if (used.some(Boolean)) throw fail(409, 'Remove this photo from honours, staff and toppers before deleting it.');
         const refs = await db.media.findUnique({ where: { id: req.params.id }, include: { _count: { select: { eventImages: true, attachments: true, galleryMedia: true, activities: true, announcementImages: true, emailAttachments: true } } } });
         if (refs && Object.values(refs._count).some(Boolean)) throw fail(409, 'Remove this media from events, galleries and activities before deleting it.');
         const covers = await db.event.count({ where: { cover: `/api/media/${req.params.id}` } });

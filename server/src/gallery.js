@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { listQuery } from './validation.js';
+import campusPhotos from '../../shared/campus-photos.json' with { type: 'json' };
 
 const query = listQuery.extend({ category: z.string().max(160).default('') });
 const published = { status: 'PUBLISHED' };
@@ -19,15 +20,11 @@ const starterAlbums = [
     ],
   },
   {
-    slug: 'illustrations',
-    title: 'Illustrations',
-    titleTa: 'மாதிரி படங்கள்',
-    isDemo: true,
-    photos: [
-      ['hero', 'Illustration of students walking together', 'மாணவர்கள் ஒன்றாக நடக்கும் மாதிரிப் படம்'],
-      ['discovery', 'Illustration of students learning in a classroom', 'வகுப்பறையில் மாணவர்கள் கற்கும் மாதிரிப் படம்'],
-      ['sports', 'Illustration of students playing sports', 'மாணவர்கள் விளையாடும் மாதிரிப் படம்'],
-    ],
+    slug: 'campus-life',
+    title: 'Campus life',
+    titleTa: 'பள்ளி வாழ்க்கை',
+    isDemo: false,
+    photos: campusPhotos.map(photo => [photo.key, photo.alt, photo.altTa]),
   },
 ];
 
@@ -39,7 +36,7 @@ export async function galleryMedia(db, input, demo) {
     select: { ...categoryFields, _count: { select: { images: { where: { media: photo } } } } },
     orderBy: [{ createdAt: 'desc' }, { slug: 'asc' }],
   });
-  const categories = albums.length
+  const categories = !demo || albums.length
     ? albums.map(({ _count, ...album }) => ({ ...album, count: _count.images }))
     : starterAlbums.map(({ photos, ...album }) => ({ ...album, count: photos.length }));
   const allCount = categories.reduce((sum, album) => sum + album.count, 0);
@@ -49,7 +46,7 @@ export async function galleryMedia(db, input, demo) {
   if (total > skip && albums.length) {
     items = await db.galleryMedia.findMany({
       where: { gallery: { ...published, ...(category && { slug: category }) }, media: photo },
-      select: { id: true, gallery: { select: categoryFields }, media: { select: { id: true, alt: true, altTa: true } } },
+      select: { id: true, gallery: { select: categoryFields }, media: { select: { id: true, alt: true, altTa: true, description: true, descriptionTa: true, eventDate: true, hasVariants: true } } },
       orderBy: [{ gallery: { createdAt: 'desc' } }, { galleryId: 'asc' }, { order: 'asc' }, { id: 'asc' }],
       skip, take: limit,
     });

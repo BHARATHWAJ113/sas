@@ -13,12 +13,13 @@
     "dev:demo": "concurrently -k -n API,WEB -c blue,cyan \"npm run demo -w server\" \"npm run dev -w client\"",
     "build": "npm run generate -w server && npm run build -w client",
     "start": "npm run start -w server",
-    "lint": "eslint client/src shared server/src server/prisma/seed.js server/tests client/vite.config.js",
+    "lint": "eslint client/src shared server/src server/prisma server/tests client/vite.config.js",
     "test": "vitest run",
     "test:mysql": "node scripts/test-mysql.mjs",
     "db:generate": "npm run generate -w server",
     "db:migrate": "npm run migrate -w server",
     "db:seed": "npm run seed -w server",
+    "assets:import": "npm run import:school -w server --",
     "db:studio": "npm run studio -w server"
   },
   "devDependencies": {

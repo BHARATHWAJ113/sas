@@ -1,0 +1,25 @@
+.social-sidebar { position: fixed; z-index: 35; right: 0; top: 48%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: flex-end; gap: 7px; pointer-events: none; }
+.social-sidebar a { pointer-events: auto; display: flex; align-items: center; gap: 0; width: 46px; min-height: 46px; border-radius: 26px 0 0 26px; background: var(--social-color); color: #fff; box-shadow: 0 2px 8px #102a5620; overflow: hidden; text-decoration: none; transition: width .2s ease; }
+.social-sidebar-label { width: 0; opacity: 0; white-space: nowrap; font-size: 14px; font-weight: 600; transition: opacity .2s ease; }
+.social-icon { flex-shrink: 0; display: grid; place-items: center; width: 46px; height: 46px; }
+.social-sidebar a:is(:hover, :focus-visible) { width: 155px; outline-offset: 3px; }
+.social-sidebar a:is(:hover, :focus-visible) .social-sidebar-label { width: 109px; padding-left: 20px; opacity: 1; }
+.social-x { font-size: 23px; line-height: 1; }
+.social-page { min-height: 65vh; background: #f5f8fc; }
+.social-page header { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+.social-page h1 { font-size: clamp(32px, 4vw, 56px); }
+.social-page-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.social-page-grid a { display: flex; flex-direction: column; align-items: flex-start; background: white; border: 1px solid var(--line); border-radius: 22px; padding: 28px; text-decoration: none; color: var(--navy); }
+.social-page-grid a:hover { border-color: var(--social-color); }
+.social-page-grid .social-icon { background: var(--social-color); color: white; border-radius: 14px; }
+.social-page-grid h2 { margin: 20px 0 12px; font-size: 24px; }
+.social-page-grid a > span:last-child { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.social-empty { text-align: center; padding: 24px; }
+@media (max-width: 760px) {
+  .social-sidebar { position: static; transform: none; flex-direction: row; flex-wrap: wrap; justify-content: center; padding: 20px; background: #f5f8fc; }
+  .social-sidebar a, .social-sidebar a:is(:hover, :focus-visible) { width: auto; border-radius: 24px; }
+  .social-sidebar .social-sidebar-label, .social-sidebar a:is(:hover, :focus-visible) .social-sidebar-label { width: auto; padding-left: 16px; opacity: 1; }
+  .social-page-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+}
+@media (max-width: 440px) { .social-page-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .social-sidebar a, .social-sidebar-label { transition: none; } }
