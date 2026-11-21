@@ -26,7 +26,7 @@ describe('read-only preview API', () => {
     const { body } = await request(app).get('/api/gallery-media?category=campus-life&limit=2&page=7').expect(200);
     expect(body).toMatchObject({ allCount: 17, total: 13, page: 7, pages: 7 });
     expect(body.categories).toEqual(expect.arrayContaining([expect.objectContaining({ slug: 'school-archive', count: 4 })]));
-    expect(body.items).toEqual([expect.objectContaining({ gallery: expect.objectContaining({ slug: 'campus-life', isDemo: false }), media: expect.objectContaining({ url: '/images/campus-table-tennis.webp' }) })]);
+    expect(body.items).toEqual([expect.objectContaining({ gallery: expect.objectContaining({ slug: 'campus-life', isDemo: false }), media: expect.objectContaining({ url: '/api/assets/images/campus-table-tennis.webp' }) })]);
   });
   it('supports event search, category filters and pagination', async () => { const { body } = await request(app).get('/api/events?search=play&category=Sports').expect(200); expect(body.total).toBe(1); expect(body.items[0].slug).toBe('demo-sports-meet'); });
   it('paginates the sourced activity catalog while retaining the category filters', async () => {

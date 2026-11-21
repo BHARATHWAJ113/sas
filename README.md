@@ -62,7 +62,12 @@ CLIENT_ORIGIN=http://127.0.0.1:5173,http://localhost:5173
 SITE_URL=http://127.0.0.1:5173
 COOKIE_SECURE=false
 TRUST_PROXY=0
-UPLOAD_DIR=./uploads
+MINIO_ENDPOINT=https://minio.tecnozard.com
+MINIO_URL=https://minio.tecnozard.com/stantonys
+MINIO_BUCKET=stantonys
+MINIO_REGION=us-east-1
+MINIO_ACCESS_KEY=your-private-application-key
+MINIO_SECRET_KEY=your-private-application-secret
 SEED_ADMIN_EMAIL=your-school-admin-address
 SEED_ADMIN_PASSWORD=your-unique-password-with-at-least-12-characters
 SEED_DEMO=true
@@ -92,7 +97,7 @@ After a successful seed, remove `SEED_ADMIN_PASSWORD` from the runtime environme
 
 ## Editorial workflow
 
-The original `assets/st_antonys_logo.jpeg` is preserved. `client/public/images/logo.webp` is an optimised display copy. The About page also uses four archival images supplied in `assets/schl_doc`. The general campus, classroom and sports illustrations remain labeled as AI-generated scenes. See [asset provenance and prompts](docs/ASSETS.md).
+The original `assets/st_antonys_logo.jpeg` is preserved. `assets/site-images/logo.webp` is the offline optimised display copy, migrated to MinIO. The About page also uses four archival images supplied in `assets/schl_doc`. The general campus, classroom and sports illustrations remain labeled as AI-generated scenes. See [asset provenance and prompts](docs/ASSETS.md).
 
 The school history and 2026–27 student handbook supply the baseline content, including contact details, vision and mission, leadership appointments, facilities, activities and admission guidance. The Events page also shows selected handbook dates separately from the sample event cards. Exact admission dates, current leadership tenure and current office hours need confirmation from the school. See [school source notes](docs/SCHOOL-SOURCES.md) for the page numbers and portrait filename references.
 
@@ -245,3 +250,5 @@ D:\SAS
 ## Reference inspection
 
 Both live references were opened in the browser before implementation. [Malla Reddy](https://www.mallareddyschool.com/) informed the full-width image hero, compact sticky navigation, academic stages, facilities/gallery hierarchy and footer. [Holy Angels events](https://holyangelsmhss.in/events/) informed the editorial events introduction and image-card approach. The references' navigation and actual event cards were inspected. Their underlying source, logos, photos, text, school claims and forms were not copied. Every breakpoint on the references was not exhaustively tested; the new implementation was tested independently at the requested three widths.
+
+Images are stored only in a private MinIO bucket at runtime. See [MinIO setup, migration and bulk-upload guide](deployment/MINIO.md) before deploying this release. Homepage images also require the site-asset migration; there is no filesystem fallback.

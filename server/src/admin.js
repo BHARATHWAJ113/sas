@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { allow, csrf, fail, safeUser } from './auth.js';
 import { schemas, parse, userSchema } from './validation.js';
 import { mountUploads } from './uploads.js';
+import { storage } from './storage.js';
+import { queueMediaDeletion, cleanStorage } from './storage-cleanup.js';
 import { mountEmailAdmin } from './email-admin.js';
 import { adminList, listEnvelope } from './admin-list.js';
 import { schoolResources } from '../../shared/school-sections.js';
@@ -15,7 +17,7 @@ const relations = {
   galleries: { images: { orderBy: { order: 'asc' }, include: { media: true } } },
 };
 const audit = (tx, req, action, entity, entityId) => tx.auditLog.create({ data: { userId: req.user.id, action, entity, entityId } });
-export function adminRouter(db, auth) {
+export function adminRouter(db, auth, store = storage) {
   const router = Router();
   router.use(auth, csrf);
   mountEmailAdmin(router, db, audit);
@@ -100,7 +102,7 @@ export function adminRouter(db, auth) {
     });
     res.status(204).end();
   });
-  mountUploads(router, db, audit);
+  mountUploads(router, db, audit, store);
   for (const [resource, model] of Object.entries(resources)) {
     const privilege = ['settings'].includes(resource) ? ['ADMIN'] : ['ADMIN', 'EDITOR'];
     router.get(`/${resource}`, async (req, res) => {
@@ -128,8 +130,13 @@ export function adminRouter(db, auth) {
         const covers = await db.event.count({ where: { cover: `/api/media/${req.params.id}` } });
         if (covers) throw fail(409, 'This image is used as an event cover. Remove that reference first.');
       }
-      await db.$transaction(async tx => { await tx[model].delete({ where: { id: req.params.id } }); await audit(tx, req, 'DELETE', resource, req.params.id); });
-      // Deleted media is immediately inaccessible. Unreferenced disk files are retained for backup and can be purged offline.
+      const removed = await db.$transaction(async tx => {
+        const deleted = await tx[model].delete({ where: { id: req.params.id } });
+        if (resource === 'media') await queueMediaDeletion(tx, deleted);
+        await audit(tx, req, 'DELETE', resource, req.params.id);
+        return deleted;
+      });
+      if (resource === 'media') await cleanStorage(db, store, removed.filename).catch(() => {});
       res.status(204).end();
     });
   }

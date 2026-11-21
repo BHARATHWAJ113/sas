@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import { resolve } from 'node:path';
 import { z } from 'zod';
 import { parseAdminRecipients } from './email-addresses.js';
 import { productionConfigErrors } from './production-config.js';
@@ -12,7 +11,12 @@ const env = z.object({
   TRUST_PROXY: z.coerce.number().int().min(0).max(2).default(0),
   COOKIE_SECURE: z.enum(['true', 'false']).optional(),
   DEMO_MODE: z.enum(['true', 'false']).default('false'),
-  UPLOAD_DIR: z.string().default('./uploads'),
+  MINIO_ENDPOINT: z.string().url().default('https://minio.tecnozard.com'),
+  MINIO_URL: z.string().url().default('https://minio.tecnozard.com/stantonys'),
+  MINIO_BUCKET: z.string().regex(/^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$/).default('stantonys'),
+  MINIO_REGION: z.string().min(1).default('us-east-1'),
+  MINIO_ACCESS_KEY: z.string().default(''),
+  MINIO_SECRET_KEY: z.string().default(''),
   SITE_URL: z.string().url().default('http://127.0.0.1:5173'),
   EMAIL_ENABLED: z.enum(['true', 'false']).default('false'),
   SMTP_USER: z.string().default(''),
@@ -33,4 +37,4 @@ const admins = parseAdminRecipients(env.ADMIN_NOTIFICATION_EMAILS || env.SMTP_NO
 if (env.EMAIL_ENABLED === 'true' && (!z.email().safeParse(env.SMTP_USER).success || !admins.length || !env.SMTP_APP_PASSWORD.trim())) {
   throw new Error('Enabled email requires SMTP_USER, SMTP_APP_PASSWORD and ADMIN_NOTIFICATION_EMAILS (or SMTP_NOTIFY_TO) in the server environment.');
 }
-export const config = { ...env, emailEnabled: env.EMAIL_ENABLED === 'true', origins: env.CLIENT_ORIGIN.split(',').map(s => s.trim()), demo: env.DEMO_MODE === 'true', secure: env.NODE_ENV === 'production' || env.COOKIE_SECURE === 'true', uploads: resolve(env.UPLOAD_DIR) };
+export const config = { ...env, emailEnabled: env.EMAIL_ENABLED === 'true', origins: env.CLIENT_ORIGIN.split(',').map(s => s.trim()), demo: env.DEMO_MODE === 'true', secure: env.NODE_ENV === 'production' || env.COOKIE_SECURE === 'true' };

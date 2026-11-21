@@ -52,7 +52,7 @@ export function SchoolLeadership() {
           {portraits.map((portrait) => (
             <figure className="leadership-card" key={portrait.image}>
               <img
-                src={`/images/${portrait.image}`}
+                src={`/api/assets/images/${portrait.image}`}
                 alt={pick(portrait, 'title')}
                 width={portrait.width}
                 height={portrait.height}

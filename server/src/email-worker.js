@@ -2,8 +2,7 @@ import nodemailer from 'nodemailer';
 import { randomUUID } from 'node:crypto';
 import { config } from './config.js';
 import { parseAdminRecipients } from './email-addresses.js';
-import { readFile } from 'node:fs/promises';
-import { resolve, sep } from 'node:path';
+import { storage, mediaKey } from './storage.js';
 
 export function gmailTransport() {
   return nodemailer.createTransport({
@@ -37,6 +36,7 @@ export function smtpFailure(error) {
 const log = (event, job, status) => console.info(JSON.stringify({ event, emailId: job.id, attempt: job.attempts, status }));
 
 export function emailWorker(db, transport, options = {}) {
+  const store = options.storage ?? storage;
   const maxAttempts = options.maxAttempts ?? config.EMAIL_MAX_ATTEMPTS;
   let stopped = false;
   let active;
@@ -81,9 +81,7 @@ export function emailWorker(db, transport, options = {}) {
       try {
         const media = await db.media.findUnique({ where: { id: job.attachmentId } });
         if (!media || !['image/jpeg', 'image/png', 'image/webp', 'application/pdf'].includes(media.mimeType) || media.size > 8 * 1024 * 1024) throw new Error();
-        const path = resolve(config.uploads, media.filename);
-        if (!path.startsWith(config.uploads + sep)) throw new Error();
-        const content = await readFile(path);
+        const content = await store.read(mediaKey(media.filename), 8 * 1024 * 1024);
         if (content.length > 8 * 1024 * 1024) throw new Error();
         attachments.push({ filename: media.originalName.replace(/[\r\n\\/]/g, '_'), content, contentType: media.mimeType });
       } catch {

@@ -9,7 +9,8 @@ import csv
 
 root = Path(__file__).resolve().parents[1]
 photos = json.loads((root / 'shared/campus-photos.json').read_text(encoding='utf-8'))
-output = root / 'client/public/images'
+output = root / 'assets/site-images'
+output.mkdir(parents=True, exist_ok=True)
 cms = root / 'assets/optimized-school'
 manifest_path = cms / 'manifest.json'
 manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
@@ -74,3 +75,7 @@ if audit_path.exists():
         lines.append('| ' + ' | '.join(str(row[key]).replace('|', '/') for key in ['path', 'dimensions', 'bytes', 'format', 'quality', 'issues', 'action', 'section', 'selected']) + ' |')
     (root / 'reports/school-image-quality-report.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
 print(f'{len(photos)} campus photos; {original_bytes:,} original bytes -> {optimized_bytes:,} main WebP bytes ({100*(1-optimized_bytes/original_bytes):.1f}% smaller). Responsive sizes: 640, 1200, 1800.')
+
+# Regenerate the immutable published asset inventory after offline preparation.
+site_manifest = [dict(filename=p.name, mimeType="image/svg+xml" if p.suffix == ".svg" else "image/webp", size=p.stat().st_size, sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in sorted(output.iterdir()) if p.suffix in [".webp", ".svg"]]
+(root / "shared/site-assets.json").write_text(json.dumps(site_manifest, indent=2) + "\n", encoding="utf-8")

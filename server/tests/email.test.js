@@ -7,6 +7,7 @@ import { emailWorker, smtpFailure } from '../src/email-worker.js';
 import { digest } from '../src/idempotency.js';
 import nodemailer from 'nodemailer';
 import { SMTPServer } from 'smtp-server';
+import { memoryStorage } from './memory-storage.js';
 
 const origin = 'http://127.0.0.1:5173';
 const raw = 'a'.repeat(64);
@@ -82,6 +83,24 @@ describe('email content and enquiry outbox', () => {
 
 describe('SMTP retry and claim safety', () => {
   const job = { id: 'email-1', to: 'parent@example.test', cc: [], subject: 'Hello', html: '<p>Hello</p>', text: 'Hello', attempts: 0, kind: 'ADMIN' };
+  it('reads attachments from private object storage without filesystem access', async () => {
+    const db = database(); const store = memoryStorage();
+    db.emailMessage.findFirst.mockResolvedValue({ ...job, attachmentId: 'photo' });
+    db.media = { findUnique: vi.fn(async () => ({ filename: 'abcdef.webp', originalName: 'school.webp', mimeType: 'image/webp', size: 5 })) };
+    await store.put('media/abcdef.webp', Buffer.from('photo'));
+    const transport = { sendMail: vi.fn().mockResolvedValue({ accepted: [job.to], rejected: [] }) };
+    await emailWorker(db, transport, { storage: store }).runOnce();
+    expect(transport.sendMail.mock.calls[0][0].attachments[0]).toMatchObject({ filename: 'school.webp', content: Buffer.from('photo') });
+  });
+  it('does not send email if its MinIO attachment is unavailable', async () => {
+    const db = database();
+    db.emailMessage.findFirst.mockResolvedValue({ ...job, attachmentId: 'photo' });
+    db.media = { findUnique: vi.fn(async () => ({ filename: 'abcdef.webp', originalName: 'school.webp', mimeType: 'image/webp', size: 5 })) };
+    const transport = { sendMail: vi.fn() };
+    await emailWorker(db, transport, { storage: memoryStorage() }).runOnce();
+    expect(transport.sendMail).not.toHaveBeenCalled();
+    expect(db.emailMessage.updateMany.mock.calls.at(-1)[0].data.status).toBe('FAILED');
+  });
   it('records SMTP acceptance after an atomic claim', async () => {
     const db = database();
     db.emailMessage.findFirst.mockResolvedValue(job);

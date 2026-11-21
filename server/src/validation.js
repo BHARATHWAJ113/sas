@@ -12,7 +12,7 @@ const bilingual = { title: text(), titleTa: text(), summary: text(2000), summary
 const body = { body: text(50000), bodyTa: text(50000) };
 const seo = { seoTitle: optionalText(255), seoDescription: optionalText(500) };
 const sortOrder = z.number().int().min(0).max(9999).default(0);
-export const eventSchema = z.object({ ...bilingual, ...body, ...seo, slug, category: text(80), categoryTa: text(120), date, endDate: date.nullable().optional(), location: text(), locationTa: text(), cover: z.string().regex(/^\/(?:images\/[a-z0-9-]+\.(?:webp|jpg|png)|api\/media\/[a-zA-Z0-9_-]+)$/).nullable().optional(), attachmentId: text(191).nullable().optional(), imageIds: z.array(text(191)).max(30).default([]), status, isDemo: z.boolean().default(false) }).strict().refine(v => !v.endDate || new Date(v.endDate) >= new Date(v.date), { message: 'End date must follow the start date.', path: ['endDate'] });
+export const eventSchema = z.object({ ...bilingual, ...body, ...seo, slug, category: text(80), categoryTa: text(120), date, endDate: date.nullable().optional(), location: text(), locationTa: text(), cover: z.string().regex(/^\/(?:(?:images|api\/assets\/images)\/[a-z0-9-]+\.(?:webp|jpg|png)|api\/media\/[a-zA-Z0-9_-]+)$/).nullable().optional(), attachmentId: text(191).nullable().optional(), imageIds: z.array(text(191)).max(30).default([]), status, isDemo: z.boolean().default(false) }).strict().refine(v => !v.endDate || new Date(v.endDate) >= new Date(v.date), { message: 'End date must follow the start date.', path: ['endDate'] });
 export const schemas = {
   ...schoolSchemas,
   pages: z.object({ ...bilingual, ...body, ...seo, slug, status, isDemo: z.boolean().default(false) }).strict(),

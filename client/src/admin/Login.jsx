@@ -24,7 +24,7 @@ export default function Login({ onLogin, error: initialError, retry }) {
   }
   const failure = error || initialError;
   return <div className="staff-login"><Seo title="Staff sign in"/>
-    <header className="staff-login-header"><Link to="/" className="staff-brand"><img src="/images/logo.webp" width="46" height="46" alt="School crest"/><span>St. Antony’s<small>NEYVELI · STAFF WORKSPACE</small></span></Link><ThemeToggle/></header>
+    <header className="staff-login-header"><Link to="/" className="staff-brand"><img src="/api/assets/images/logo.webp" width="46" height="46" alt="School crest"/><span>St. Antony’s<small>NEYVELI · STAFF WORKSPACE</small></span></Link><ThemeToggle/></header>
     <div className="staff-login-card">
       <section className="staff-login-story"><span className="login-story-label">A LITTLE CARE. A WORLD OF LEARNING.</span><h2>Great school days<br/>start with you.</h2><p>A welcoming space for the people behind every lesson, discovery and achievement.</p><SchoolCharacters focused={focused} watchingPassword={focused === 'password'} revealed={revealed}/><span className="login-story-footer">Strive and Shine <span>✦</span> Since 1994</span></section>
       <section className="staff-login-form"><div className="login-lock"><LockKeyhole size={24}/></div><h1>Welcome back.</h1><p>Sign in to your school workspace.</p>

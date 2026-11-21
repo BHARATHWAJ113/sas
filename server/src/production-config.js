@@ -1,5 +1,11 @@
 export function productionConfigErrors(env) {
   const errors = [];
+  try {
+    const endpoint = new URL(env.MINIO_ENDPOINT);
+    if (endpoint.protocol !== 'https:' || endpoint.pathname !== '/' || endpoint.username || endpoint.password || endpoint.search || endpoint.hash) throw new Error();
+    if (env.MINIO_URL?.replace(/\/$/, '') !== `${endpoint.origin}/${env.MINIO_BUCKET}`) throw new Error();
+    if (!env.MINIO_ACCESS_KEY?.trim() || !env.MINIO_SECRET_KEY?.trim()) throw new Error();
+  } catch { errors.push('Configure the HTTPS MinIO S3 endpoint, matching bucket URL, bucket and server-only access/secret keys.'); }
   if (env.DEMO_MODE === 'true') errors.push('DEMO_MODE must be false.');
   if (env.COOKIE_SECURE === 'false') errors.push('Secure session cookies are required.');
   try {

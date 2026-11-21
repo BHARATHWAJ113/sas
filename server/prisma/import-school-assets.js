@@ -1,12 +1,12 @@
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { resolve, join } from 'node:path';
+import { join } from 'node:path';
 import { createDatabase } from '../src/database.js';
-import { config } from '../src/config.js';
+import { storage } from '../src/storage.js';
 import { schoolResources } from '../../shared/school-sections.js';
 import { schoolSchemas } from '../src/school-sections.js';
 import { schemas } from '../src/validation.js';
-import { writeVariants } from '../src/image-variants.js';
+import { restoreImportedMedia } from './restore-imported-media.js';
 import { schoolSocialSettings } from '../../shared/social-links.js';
 
 const directory = fileURLToPath(new URL('../../assets/optimized-school/', import.meta.url));
@@ -26,8 +26,9 @@ if (!process.argv.includes('--apply')) {
 } else {
   const db = createDatabase();
   const created = {};
+  let restoredFiles = 0;
   try {
-    await mkdir(config.uploads, { recursive: true });
+    await storage.check();
     for (const [key, value] of Object.entries(schoolSocialSettings)) {
       schemas.settings.parse({ key, value, public: true });
       if (await db.siteSetting.findUnique({ where: { key } })) continue;
@@ -38,10 +39,10 @@ if (!process.argv.includes('--apply')) {
       created.settings = (created.settings || 0) + 1;
     }
     for (const media of manifest.media) {
-      if (await db.media.findUnique({ where: { id: media.id } })) continue;
+      const existing = await db.media.findUnique({ where: { id: media.id } });
+      const written = await restoreImportedMedia(directory, storage, media, existing);
+      if (existing) { restoredFiles += written; continue; }
       const buffer = await readFile(join(directory, media.filename));
-      await writeFile(resolve(config.uploads, media.filename), buffer);
-      await writeVariants(buffer, config.uploads, media.filename);
       const draft = manifest.toppers.some(row => row.imageId === media.id && row.status === 'DRAFT');
       await db.$transaction(async tx => {
         await tx.media.create({ data: { id: media.id, filename: media.filename, originalName: media.originalName, mimeType: 'image/webp', size: buffer.length, alt: media.alt, altTa: media.altTa, hasVariants: true, status: draft ? 'DRAFT' : 'PUBLISHED' } });
@@ -72,5 +73,6 @@ if (!process.argv.includes('--apply')) {
       if (changed.count) await tx.auditLog.create({ data: { action: 'ARCHIVE_REPLACED_DEMO_ALBUMS', entity: 'galleries' } });
     });
     console.log('Created:', created, 'Existing records and admin edits were preserved.');
+    console.log(`Restored ${restoredFiles} missing MinIO objects for existing imported media.`);
   } finally { await db.$disconnect(); }
 }

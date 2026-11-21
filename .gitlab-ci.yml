@@ -53,8 +53,7 @@ deploy_school:
         --exclude='uploads/' \
         --exclude='logs/' \
         --exclude='/artifacts/' \
-        --exclude='/assets/schl_doc/' \
-        --exclude='/assets/optimized-school-review/' \
+        --exclude='/assets/' \
         -e "ssh -i $SSH_PRIVATE_KEY -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
         ./ "${DEPLOY_USER}@${DEPLOY_HOST}:/var/www/stantonysneyveli.in/incoming/$CI_COMMIT_SHA/"
     - |

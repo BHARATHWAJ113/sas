@@ -1,10 +1,11 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { randomUUID } from 'node:crypto';
-import { readFile, unlink } from 'node:fs/promises';
-import { join } from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { memoryStorage } from './memory-storage.js';
 import request from 'supertest';
 import bcrypt from 'bcryptjs';
 describe.skipIf(process.env.MYSQL_INTEGRATION !== 'true')('real MySQL integration (explicit opt-in)', () => {
+  const store = memoryStorage();
   const prefix = `test-${randomUUID().slice(0, 8)}`;
   const email = `${prefix}@example.test`;
   const password = randomUUID() + '-test';
@@ -18,7 +19,7 @@ describe.skipIf(process.env.MYSQL_INTEGRATION !== 'true')('real MySQL integratio
     role = await db.role.findUnique({ where: { name: 'ADMIN' } });
     if (!role) { role = await db.role.create({ data: { name: 'ADMIN' } }); createdRole = true; }
     await db.user.create({ data: { name: 'Integration test staff', email, passwordHash: await bcrypt.hash(password, 12), roleId: role.id } });
-    app = createApp(db, { demo: false });
+    app = createApp(db, { demo: false, storage: store });
   }, 30000);
   afterAll(async () => {
     if (!db) return;
@@ -31,8 +32,7 @@ describe.skipIf(process.env.MYSQL_INTEGRATION !== 'true')('real MySQL integratio
       await db.gallery.deleteMany({ where: { slug: prefix + '-gallery' } });
       await db.admissionEnquiry.deleteMany({ where: { email } });
       if (mediaId) await db.media.deleteMany({ where: { id: mediaId } });
-      if (filename) await unlink(join(config.uploads, filename)).catch(() => {});
-      if (filename) { const { removeVariants } = await import('../src/image-variants.js'); await removeVariants(config.uploads, filename); }
+      if (filename) await db.storageDeletion.deleteMany({ where: { filename } });
       if (user) { await db.emailMessage.deleteMany({ where: { userId: user.id } }); await db.auditLog.deleteMany({ where: { userId: user.id } }); await db.user.delete({ where: { id: user.id } }); }
       if (createdRole && await db.user.count({ where: { roleId: role.id } }) === 0) await db.role.delete({ where: { id: role.id } });
     } finally { await db.$disconnect(); }
@@ -47,7 +47,7 @@ describe.skipIf(process.env.MYSQL_INTEGRATION !== 'true')('real MySQL integratio
     const content = { ...source, slug: prefix, status: 'DRAFT', imageIds: [], cover: null };
     const created = await agent.post('/api/admin/events').set('Origin', origin).set('x-csrf-token', csrf).send(content).expect(201);
     await request(app).get(`/api/events/${prefix}`).expect(404);
-    const image = await readFile(new URL('../../client/public/images/logo.webp', import.meta.url));
+    const image = await readFile(new URL('../../assets/site-images/logo.webp', import.meta.url));
     const upload = await agent.post('/api/admin/media/upload').set('Origin', origin).set('x-csrf-token', csrf).field('alt', 'Integration test image').field('altTa', 'மாதிரி படம்').attach('file', image, { filename: 'test.webp', contentType: 'image/webp' }).expect(201);
     mediaId = upload.body.id; filename = upload.body.filename;
     expect(upload.body.status).toBe('DRAFT');
@@ -59,6 +59,15 @@ describe.skipIf(process.env.MYSQL_INTEGRATION !== 'true')('real MySQL integratio
     expect(event.body.images).toHaveLength(1);
     expect(event.body.titleTa).toBe(content.titleTa);
     await request(app).get(`/api/media/${mediaId}`).expect('Content-Type', /image\/webp/).expect(200);
+    const oldFilename = filename;
+    const replacement = await agent.put(`/api/admin/media/${mediaId}/file`).set('Origin', origin).set('x-csrf-token', csrf).attach('file', image, { filename: 'replacement.webp', contentType: 'image/webp' }).expect(200);
+    filename = replacement.body.filename;
+    expect(replacement.body.id).toBe(mediaId);
+    expect(replacement.body.status).toBe('PUBLISHED');
+    expect(filename).not.toBe(oldFilename);
+    expect(await store.stat(`media/${oldFilename}`)).toBeNull();
+    expect(await db.storageDeletion.count({ where: { filename: oldFilename } })).toBe(0);
+    await request(app).get(`/api/media/${mediaId}?width=640`).expect(200);
     const enquiryData = { parentName: 'Test parent', studentName: 'Test student', email, phone: '9876543210', grade: 'LKG', locale: 'ta', consent: true, message: 'Integration test only.', metadataConsent: true, metadata: { language: 'ta-IN', timezone: 'Asia/Calcutta', location: { permission: 'denied' } } };
     const key = randomUUID();
     const enquiry = await request(app).post('/api/enquiries').set('Origin', origin).set('Idempotency-Key', key).send(enquiryData).expect(201);
@@ -147,8 +156,8 @@ describe.skipIf(process.env.MYSQL_INTEGRATION !== 'true')('real MySQL integratio
       const attempts = [];
       const delivered = [];
       const transport = { sendMail: async message => { attempts.push(message.messageId); delivered.push(message); return { accepted: [message.to, ...(message.cc || []), ...(message.bcc || [])], rejected: [], messageId: message.messageId }; } };
-      const workerA = emailWorker(scopedDb, transport);
-      const workerB = emailWorker(scopedDb, transport);
+      const workerA = emailWorker(scopedDb, transport, { storage: store });
+      const workerB = emailWorker(scopedDb, transport, { storage: store });
       for (let index = 0; index < 4; index++) await Promise.all([workerA.runOnce(), workerB.runOnce()]);
       expect(new Set(attempts).size).toBe(attempts.length);
       const stored = await db.emailMessage.findUnique({ where: { id: queued.body.id } });

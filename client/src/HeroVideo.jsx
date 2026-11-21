@@ -43,7 +43,7 @@ export function HeroVideo() {
 
   return (
     <>
-      <ResponsiveImage className="hero-image" sizes="100vw" src="/images/campus-students.webp" alt="" width="1800" height="1400" fetchPriority="high" />
+      <ResponsiveImage className="hero-image" sizes="100vw" src="/api/assets/images/campus-students.webp" alt="" width="1800" height="1400" fetchPriority="high" />
       {schoolVideo && <video
         ref={video}
         className={`hero-video${started && !failed ? ' is-visible' : ''}`}

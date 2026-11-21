@@ -11,7 +11,7 @@ export function AnnouncementContent({ item, preview = false, onNavigate }) {
   const { t, pick } = useSite();
   const image = item.image || (preview && item.imageId ? { id: item.imageId } : null);
   return <article className={`announcement-content theme-${(item.announcementType || 'NOTICE').toLowerCase()}`}>
-    <div className="popup-brand"><img src="/images/logo.webp" alt="" width="54" height="54"/><span>{t('school')}<small>{t('schoolSub')}</small></span></div>
+    <div className="popup-brand"><img src="/api/assets/images/logo.webp" alt="" width="54" height="54"/><span>{t('school')}<small>{t('schoolSub')}</small></span></div>
     <span className="popup-type"><Megaphone size={14}/>{t(`popupType${item.announcementType || 'NOTICE'}`)}</span>
     {item.isDemo && <p className="demo-badge">{t('demoContent')}</p>}
     <h2 id={preview ? undefined : 'announcement-heading'}>{pick(item, 'title')}</h2>

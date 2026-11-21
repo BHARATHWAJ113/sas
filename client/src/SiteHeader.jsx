@@ -179,7 +179,7 @@ export function SiteHeader() {
       <header className="campus-header">
         <div className="container campus-nav-shell" ref={shell}>
           <Link to="/" className="brand campus-brand" aria-label={t('schoolFull')} onClick={closeMenu}>
-            <img src="/images/logo.webp" width="58" height="58" alt="" />
+            <img src="/api/assets/images/logo.webp" width="58" height="58" alt="" />
             <span><strong>{t('school')}</strong><span>{t('schoolSub')}</span><small>{t('neyveli')}</small></span>
           </Link>
           <nav id="main-navigation" aria-label={t('mainNavigation')} className={`campus-nav${open ? ' is-open' : ''}`}>

@@ -54,7 +54,7 @@ export async function galleryMedia(db, input, demo) {
     items = starterAlbums
       .filter(album => !category || album.slug === category)
       .flatMap(({ photos, ...gallery }) => photos.map(([id, alt, altTa]) => ({
-        id, gallery, media: { id, url: `/images/${id}.webp`, alt, altTa },
+        id, gallery, media: { id, url: `/api/assets/images/${id}.webp`, alt, altTa },
       })))
       .slice(skip, skip + limit);
   }

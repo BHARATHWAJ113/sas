@@ -1,0 +1,326 @@
+[
+  {
+    "filename": "campus-carrom-1200.webp",
+    "mimeType": "image/webp",
+    "size": 87710,
+    "sha256": "e9adf9d24a28bf5165ae1d25d5ae758bd469debc3b2b65c40cf26844def20593"
+  },
+  {
+    "filename": "campus-carrom-640.webp",
+    "mimeType": "image/webp",
+    "size": 35468,
+    "sha256": "555513437c78b628b6d8b3c1dc7a2e6b078bf63c5cdc4e88d0bafd5f4f805c9b"
+  },
+  {
+    "filename": "campus-carrom.webp",
+    "mimeType": "image/webp",
+    "size": 154698,
+    "sha256": "7315b84956a52955182431379f09a5e870477dcfbbd75ca04d0534a00f7840b5"
+  },
+  {
+    "filename": "campus-chess-1200.webp",
+    "mimeType": "image/webp",
+    "size": 91452,
+    "sha256": "53b21c5ac8ade473c904f3323b333941cb24a51ebd5f161771246efaeaa6fc11"
+  },
+  {
+    "filename": "campus-chess-640.webp",
+    "mimeType": "image/webp",
+    "size": 38070,
+    "sha256": "4b4dd1d19e3545de3b9607038cd103e272c3858999b2a46682d736a6733123e7"
+  },
+  {
+    "filename": "campus-chess.webp",
+    "mimeType": "image/webp",
+    "size": 160898,
+    "sha256": "93728274f3f7d82e3d11dccc9de5337a4815899c89fb64b8a554e9783aacd44f"
+  },
+  {
+    "filename": "campus-classroom-1200.webp",
+    "mimeType": "image/webp",
+    "size": 129556,
+    "sha256": "d21d7b344b38dad3b363fafdb47dd1351caab742cd450789095bfc5538a2cb9d"
+  },
+  {
+    "filename": "campus-classroom-640.webp",
+    "mimeType": "image/webp",
+    "size": 45668,
+    "sha256": "bc72f8298e62f9a9e8935ffa547a267398f40efa450b716489c5754b31456255"
+  },
+  {
+    "filename": "campus-classroom.webp",
+    "mimeType": "image/webp",
+    "size": 239132,
+    "sha256": "ffd703d5fa2332adad1c27e8fc6d13b67ffb594df1b03f2d95594c5378939f0e"
+  },
+  {
+    "filename": "campus-english-1200.webp",
+    "mimeType": "image/webp",
+    "size": 140134,
+    "sha256": "28e66d9a1110b95e03443e89d8497918e8d411331c7d9eb38275049a7855c71b"
+  },
+  {
+    "filename": "campus-english-640.webp",
+    "mimeType": "image/webp",
+    "size": 49348,
+    "sha256": "d759a5f82ca3ec3253549f1acf7e6f5db7d1917b0b66b1868ff8d97595cece2f"
+  },
+  {
+    "filename": "campus-english.webp",
+    "mimeType": "image/webp",
+    "size": 255512,
+    "sha256": "30ca7516075bc993179340deffd782589ff9af36ea8671ae041db6c1909a200c"
+  },
+  {
+    "filename": "campus-learning-1200.webp",
+    "mimeType": "image/webp",
+    "size": 155186,
+    "sha256": "6f797d61066adc890759fa4117b41adfd9e98a54f2b71c9b8b1ec8a24e9c5011"
+  },
+  {
+    "filename": "campus-learning-640.webp",
+    "mimeType": "image/webp",
+    "size": 50332,
+    "sha256": "d48664513d4523890d67b372f037805b0c7735511f7babceaee6c1959d26d0cf"
+  },
+  {
+    "filename": "campus-learning.webp",
+    "mimeType": "image/webp",
+    "size": 280924,
+    "sha256": "7127fb00ae7094efff6da4ed17bd99ac67400eec08f805f8845eaf69349b8efd"
+  },
+  {
+    "filename": "campus-library-1200.webp",
+    "mimeType": "image/webp",
+    "size": 153410,
+    "sha256": "ec4fdfac629cc77de2a73df2a7b7639ec8d2c22b1142d51461a75bfe4352e39b"
+  },
+  {
+    "filename": "campus-library-640.webp",
+    "mimeType": "image/webp",
+    "size": 58730,
+    "sha256": "858d31da2e287434d8ca0e6832f99e92be74377095b1d6a4d34eb47d45364bb3"
+  },
+  {
+    "filename": "campus-library.webp",
+    "mimeType": "image/webp",
+    "size": 262820,
+    "sha256": "80d780d50a9d160253b627746a324ad1bff027855cca99ca01adf3362e5614d9"
+  },
+  {
+    "filename": "campus-physics-1200.webp",
+    "mimeType": "image/webp",
+    "size": 117460,
+    "sha256": "f76d6319b184d91b81c475ddd66dd4ff85311ade317b5346d911a2d45bab69cd"
+  },
+  {
+    "filename": "campus-physics-640.webp",
+    "mimeType": "image/webp",
+    "size": 43092,
+    "sha256": "b35eb39b44699029afd0b09238eefc6ecafbe755aaada639becbeedc71b46fd7"
+  },
+  {
+    "filename": "campus-physics.webp",
+    "mimeType": "image/webp",
+    "size": 221780,
+    "sha256": "8f67b3aa13d1325917098501c8447f729fada718e0f8bd4fb80f137594a9e752"
+  },
+  {
+    "filename": "campus-playground-1200.webp",
+    "mimeType": "image/webp",
+    "size": 235660,
+    "sha256": "c9c9e616bb8e64b38d37753a87b7b99b21f97178e2d47b604cd15b2805669927"
+  },
+  {
+    "filename": "campus-playground-640.webp",
+    "mimeType": "image/webp",
+    "size": 73700,
+    "sha256": "1b1737417294172faca921f89005e819a17ef32472b295664bfbc36e46655227"
+  },
+  {
+    "filename": "campus-playground.webp",
+    "mimeType": "image/webp",
+    "size": 471710,
+    "sha256": "f687a22d61504b8d86b462a64e0b1dda3761da7d2d7a38a170a1fce8234cd282"
+  },
+  {
+    "filename": "campus-primary-1200.webp",
+    "mimeType": "image/webp",
+    "size": 196906,
+    "sha256": "9595952ad753a90f47ca76a9dd30ce3d7ac834c1534e528bef1d6af7da65aea8"
+  },
+  {
+    "filename": "campus-primary-640.webp",
+    "mimeType": "image/webp",
+    "size": 64848,
+    "sha256": "20ad66999bfd64bf2b4767c36e0c2a412406dbe3506574ab081a2112d6a60cf3"
+  },
+  {
+    "filename": "campus-primary.webp",
+    "mimeType": "image/webp",
+    "size": 358176,
+    "sha256": "2a120cd6c66cfb11f6502fc6977effd2cab9233833fbc9e5eacd8ef4d5aee71e"
+  },
+  {
+    "filename": "campus-reading-1200.webp",
+    "mimeType": "image/webp",
+    "size": 158806,
+    "sha256": "b5ff2e8b4f72deef611eb603ff4bc69d01a58dd829c52cde71c63a80d42df58d"
+  },
+  {
+    "filename": "campus-reading-640.webp",
+    "mimeType": "image/webp",
+    "size": 60426,
+    "sha256": "6859d59645a3d0b3b236c3a9f045415af7e38996d03df1d7d0785b954a4a3485"
+  },
+  {
+    "filename": "campus-reading.webp",
+    "mimeType": "image/webp",
+    "size": 273702,
+    "sha256": "e639e38cb8adfa6a6583098d22a6aed26c9e9756b3ca46b6ee093fbd9b10f1e3"
+  },
+  {
+    "filename": "campus-smart-class-1200.webp",
+    "mimeType": "image/webp",
+    "size": 120350,
+    "sha256": "3f0ba0c7c6ae56286eddf340a4d40bc450e01ab179f2a8180f98d872ac77c72e"
+  },
+  {
+    "filename": "campus-smart-class-640.webp",
+    "mimeType": "image/webp",
+    "size": 40082,
+    "sha256": "5e200dc3f34455974fc62cb25957c5b019ff7f4cc51803b3957295780afafb87"
+  },
+  {
+    "filename": "campus-smart-class.webp",
+    "mimeType": "image/webp",
+    "size": 237818,
+    "sha256": "a2f24f33f937003dd155fad0f48c15d3bd09048027f602f9162ff5d0d69a9835"
+  },
+  {
+    "filename": "campus-students-1200.webp",
+    "mimeType": "image/webp",
+    "size": 136908,
+    "sha256": "5d68d0550051730683607497e85a765f1d27bf8f536feef8008d5dbce1d230a9"
+  },
+  {
+    "filename": "campus-students-640.webp",
+    "mimeType": "image/webp",
+    "size": 52878,
+    "sha256": "0c8c3ee8dff13187f7b53f6851a2c3bfe8d6a67b29cb495ec9e7ddab537413b8"
+  },
+  {
+    "filename": "campus-students.webp",
+    "mimeType": "image/webp",
+    "size": 246628,
+    "sha256": "384a8b045a05a589b46c5816ba940b69782fa62b3a8b125e88a8d9b8acc2e97c"
+  },
+  {
+    "filename": "campus-table-tennis-1200.webp",
+    "mimeType": "image/webp",
+    "size": 97684,
+    "sha256": "2840eaa55f81050777d3e8dde9e50f7adfcec95dbc4af0e765aaf6f24a7cc4c8"
+  },
+  {
+    "filename": "campus-table-tennis-640.webp",
+    "mimeType": "image/webp",
+    "size": 34756,
+    "sha256": "23dd574dcfca79dfd684c6a69cd5479634c80a8637a36624e67d04b18e48e565"
+  },
+  {
+    "filename": "campus-table-tennis.webp",
+    "mimeType": "image/webp",
+    "size": 177962,
+    "sha256": "bf6115fa23eab1ce9465c2e07b065a2059e79cbbc4e025554e6d52aa99ebd4d6"
+  },
+  {
+    "filename": "discovery-640.webp",
+    "mimeType": "image/webp",
+    "size": 49128,
+    "sha256": "4998c673d69dda5421a51b7a1c19d80cfba6b6062807582c3499f84e64da2419"
+  },
+  {
+    "filename": "discovery-960.webp",
+    "mimeType": "image/webp",
+    "size": 84150,
+    "sha256": "cf061f39236ffe7813aac6f7554482dc1f5152f09f37a1f97ad9f7c409be8bc3"
+  },
+  {
+    "filename": "discovery.webp",
+    "mimeType": "image/webp",
+    "size": 165056,
+    "sha256": "9337334ef6a29c6439409b08980006d3fd3b69e74dc6286ee2b0debbdfdd4702"
+  },
+  {
+    "filename": "fr-anandaraj.webp",
+    "mimeType": "image/webp",
+    "size": 19278,
+    "sha256": "1c059ef9c9e232cd4a05418b8be308eee1c7dc24e91406c496cded0f08889bf9"
+  },
+  {
+    "filename": "fr-e-thomas.webp",
+    "mimeType": "image/webp",
+    "size": 23352,
+    "sha256": "98c7a54e7776f2da68c1daaf3196fd5f2a0d90495e005ea8c16717ec87ef0b2b"
+  },
+  {
+    "filename": "fr-m-john-kennedy.webp",
+    "mimeType": "image/webp",
+    "size": 113584,
+    "sha256": "55992d7eff28ded300a0006b5eb350db2a1d8d6e6402369da15c481c66583b1e"
+  },
+  {
+    "filename": "fr-pascal-raj.webp",
+    "mimeType": "image/webp",
+    "size": 26120,
+    "sha256": "73ca1d94bdb3f0e0d795991d360bb99913599f834eb1e12134217d034ee5baf0"
+  },
+  {
+    "filename": "hero-640.webp",
+    "mimeType": "image/webp",
+    "size": 42588,
+    "sha256": "10494026d964b868e10d68460256485c9afdca6db5c0ffb0ff974e4518adbf6a"
+  },
+  {
+    "filename": "hero-960.webp",
+    "mimeType": "image/webp",
+    "size": 69792,
+    "sha256": "6376870605ff8191870d1e08a9d71c3c91cefa86250d11005100be13f5249b3b"
+  },
+  {
+    "filename": "hero.webp",
+    "mimeType": "image/webp",
+    "size": 177564,
+    "sha256": "e7f6076ab8b27700a102d84b3316e009e05051122baa6b74bddd8de09a081c53"
+  },
+  {
+    "filename": "logo.webp",
+    "mimeType": "image/webp",
+    "size": 10852,
+    "sha256": "67052a00c94f7a62798aaaa376bcf2b0ff8e2bc06eecd5ad240042b44daf6118"
+  },
+  {
+    "filename": "profile-placeholder.svg",
+    "mimeType": "image/svg+xml",
+    "size": 234,
+    "sha256": "1f08eea6f11d5a83d92a7ea855db588fc29075d240c1518069c69616c2c3f218"
+  },
+  {
+    "filename": "sports-640.webp",
+    "mimeType": "image/webp",
+    "size": 48836,
+    "sha256": "0a3a9f38f7d08d538c9fe9d5ea62a2260a8c6d516693b3df6adfdde3da1d4e70"
+  },
+  {
+    "filename": "sports-960.webp",
+    "mimeType": "image/webp",
+    "size": 81400,
+    "sha256": "19f14a97f3ac33f34f68ecf9306d2b83a32c53f7de35de8fd4a427f000b42bb9"
+  },
+  {
+    "filename": "sports.webp",
+    "mimeType": "image/webp",
+    "size": 159366,
+    "sha256": "55a08c8cce8cbcc88d3c674fd8da2063993ae1bf905113bc7362f0ba4f02780c"
+  }
+]

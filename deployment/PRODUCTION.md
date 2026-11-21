@@ -25,14 +25,14 @@ Use this layout:
   shared/server.env        protected production configuration
   shared/backup-confirmed  operator backup confirmation timestamp
   live -> releases/...     active release
-/var/lib/st-antonys/uploads/  persistent uploaded media
+MinIO stantonys bucket       persistent private image/media storage
 ```
 
-Create `school-api` as an unprivileged service user and `school-web` as a shared group. Add the deploy user, school-api and Apache user to school-web. Create the root, incoming, releases and shared directories with that group, setgid directory permissions and group traversal. Release files must be readable by school-api and Apache. Create a separate school-private group containing only school-api and the deployment operator. Give uploads ownership to school-api:school-private and mode 2770; uploaded files inherit the private group and the service umask makes them group-readable. This lets the operator run readiness checks and backups while excluding Apache from private media. Media is served through the API. Do not serve uploads as a public Apache directory because draft media needs access checks.
+Create `school-api` as an unprivileged service user and `school-web` as the shared group for readable release files. Add the deployment operator and Apache user as appropriate. Set up MinIO using [MINIO.md](./MINIO.md). The API no longer needs a writable uploads directory or school-private group. Keep the bucket private: the API performs publication and authentication checks before streaming images.
 
 Copy `server.env.production.example` to shared/server.env and configure it privately. Owner should be the deployment operator, group school-private, mode 0640, inside a shared directory with group school-private and mode 0750. Keep Apache out of school-private. Use a unique URL-encoded database password; replace every placeholder. Set NODE_ENV=production, DEMO_MODE=false, SEED_DEMO=false, COOKIE_SECURE=true and the supplied HTTPS site origins. The application rejects unsafe production settings. Keep `VITE_` values public; never use them for secrets.
 
-If `live` is currently a real directory, first back up and inspect its absolute path, stop the service in an agreed maintenance window, move it to a named release **within the same root**, and replace it with a symlink. Preserve its environment and uploads in shared storage before deploying. The deployment script refuses to overwrite an existing real live directory. Check the previous release also uses persistent media and shared configuration so rollback works.
+If `live` is currently a real directory, first back up and inspect its absolute path, stop the service in an agreed maintenance window, move it to a named release **within the same root**, and replace it with a symlink. Preserve its environment and back up its uploads; migrate them to MinIO before activating this release. The deployment script refuses to overwrite an existing real live directory. Check the previous release also uses persistent media and shared configuration so rollback works.
 
 Install the supplied school-api.service under `/etc/systemd/system/` and the Apache virtual host in the server’s enabled site configuration. Confirm the Node executable path. Enable ssl, headers, rewrite, proxy and proxy_http. Provision certificates covering both the apex domain and www before enabling the HTTPS virtual host. Run `apachectl configtest` and `systemctl daemon-reload`; enable school-api for boot. Grant the deploy user narrowly scoped passwordless permission to restart **school-api only**. Do not grant unrestricted sudo.
 
@@ -52,10 +52,11 @@ npm run db:seed
 # Review the source import first. --apply writes its approved source records.
 npm run assets:import
 npm run assets:import -- --apply
+npm run storage:migrate -- --site-only --apply
 npm run production:check
 ```
 
-Prefer restoring the approved existing database and matching uploads when moving this project. Do not seed over a live database as a routine deployment step. Review school facts, fees, staff names, Tamil translations, photos and topper spellings before publication. Four source topper images remain draft pending spelling verification. Local preparation archived 7 labelled sample events, 11 sample pages and 3 sample announcements; it did not delete them. Apply equivalent review on the production database. If explicitly desired, `npm run production:check -- --archive-demo` archives all published records marked isDemo in the supported content models.
+Restore the approved database and migrate its matching files into MinIO using the instructions in [MINIO.md](./MINIO.md). Do not seed over a live database as a routine deployment step. Review school facts, fees, staff names, Tamil translations, photos and topper spellings before publication. Four source topper images remain draft pending spelling verification. Local preparation archived 7 labelled sample events, 11 sample pages and 3 sample announcements; it did not delete them. Apply equivalent review on the production database. If explicitly desired, `npm run production:check -- --archive-demo` archives all published records marked isDemo in the supported content models.
 
 `production:check` is read-only by default. It requires an active administrator, no published labelled sample content, writable upload storage and all published media files present. It does not certify factual accuracy or live infrastructure.
 
@@ -82,7 +83,6 @@ Apache must be able to traverse the symlink target and read built assets. Keep p
 
 - Login failure: verify email and account state, allow rate limits to clear, check HTTPS cookies and origin configuration. An account update invalidates old sessions. Never send passwords in screenshots.
 - Site loads but data fails: check `systemctl status school-api`, `journalctl -u school-api`, `/api/health`, database connectivity and migration status. Redact personal data before sharing logs.
-- Missing photos: verify the configured persistent uploads directory, file ownership and that both media and album are PUBLISHED.
 - Email issue: inspect Email management status before retrying; UNKNOWN or PARTIAL may already have delivered to some recipients. See `docs/EMAIL-AND-CONSENT.md`.
 - Manual rollback: verify a known previous release remains compatible with the current database, atomically repoint live to it, restart school-api and check health and external HTTPS. Restore a database backup only with an agreed outage and reconciliation plan to avoid losing newer enquiries.
 
@@ -91,3 +91,5 @@ Apache must be able to traverse the symlink target and read built assets. Keep p
 Support contact: **Bharathwaj TP · 9600641464**. Provide the page URL, time, affected account role and a redacted screenshot. Do not include passwords, SMTP credentials or private student data. Keep school ownership of domain, hosting, source repository and recovery channels documented privately. Review staff accounts when employment changes and audit dependencies before each release.
 
 The root package override pins Effect 3.22.1 for the upstream [Effect security fix](https://github.com/advisories/GHSA-7589-6fvf-x4pw). Reassess this override when Prisma updates its dependency. Do not downgrade Prisma across a major version as an automatic audit fix.
+- Missing photos: verify MinIO environment variables, bucket permissions, object prefixes and publication status. Follow [MINIO.md](./MINIO.md) for bulk transfer and checksum verification; database migration does not transfer images.
+- Back up MinIO objects and the database together. The running application no longer stores images on disk.

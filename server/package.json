@@ -13,9 +13,12 @@
     "seed": "node prisma/seed.js",
     "import:school": "node prisma/import-school-assets.js",
     "studio": "prisma studio",
-    "production:check": "node prisma/production-readiness.js"
+    "production:check": "node prisma/production-readiness.js",
+    "storage:migrate": "node prisma/migrate-minio.js",
+    "storage:cleanup": "node prisma/cleanup-minio.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1175.0",
     "@prisma/adapter-mariadb": "^7.10.1",
     "@prisma/client": "^7.10.1",
     "bcryptjs": "^3.0.2",

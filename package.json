@@ -23,7 +23,9 @@
     "db:seed": "npm run seed -w server",
     "assets:import": "npm run import:school -w server --",
     "db:studio": "npm run studio -w server",
-    "production:check": "npm run production:check -w server --"
+    "production:check": "npm run production:check -w server --",
+    "storage:migrate": "npm run storage:migrate -w server --",
+    "storage:cleanup": "npm run storage:cleanup -w server --"
   },
   "overrides": {
     "effect": "3.22.1"

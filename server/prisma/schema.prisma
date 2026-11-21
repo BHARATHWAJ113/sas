@@ -161,6 +161,15 @@ model EventImage {
   @@unique([eventId, mediaId])
   @@map("event_images")
 }
+model StorageDeletion {
+  filename String @id @db.VarChar(255)
+  hasVariants Boolean @default(false)
+  notBefore DateTime @default(now())
+  createdAt DateTime @default(now())
+  @@index([notBefore])
+  @@map("storage_deletions")
+}
+
 model Media {
   id          String @id @default(cuid()) @db.VarChar(191)
   filename    String @unique @db.VarChar(255)

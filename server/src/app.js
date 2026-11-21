@@ -4,7 +4,9 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { rateLimit } from 'express-rate-limit';
 import { z } from 'zod';
-import { resolve, sep } from 'node:path';
+import { storage, mediaKey } from './storage.js';
+import { serveObject } from './serve-storage.js';
+import siteAssets from '../../shared/site-assets.json' with { type: 'json' };
 import { config } from './config.js';
 import { fail, hashToken, mountAuth, originGuard } from './auth.js';
 import { adminRouter } from './admin.js';
@@ -23,6 +25,7 @@ const publicMedia = { where: { media: published }, orderBy: { order: 'asc' }, in
 const envelope = (items, total, page, limit, extra = {}) => ({ items, total, page, pages: Math.ceil(total / limit), ...extra });
 export function createApp(db, options = {}) {
   const demo = options.demo ?? config.demo;
+  const store = options.storage ?? storage;
   const app = express();
   const cache = publicCache();
   app.disable('x-powered-by');
@@ -30,6 +33,14 @@ export function createApp(db, options = {}) {
   app.use(helmet(), cors({ origin: config.origins, credentials: true }), cookieParser());
   app.use('/api', rateLimit({ windowMs: 15 * 60 * 1000, limit: 500, standardHeaders: 'draft-8', legacyHeaders: false, message: { error: 'Too many requests. Please try again shortly.' } }));
   app.use(express.json({ limit: '512kb' }), originGuard);
+  // Only the published site-asset allowlist is accessible without a media record.
+  // The legacy route keeps saved /images/ links working without local files.
+  app.get(['/api/assets/images/:filename', '/images/:filename'], async (req, res) => {
+    const asset = siteAssets.find(item => item.filename === req.params.filename);
+    if (!asset) throw fail(404, 'File not found.');
+    res.type(asset.mimeType).set('Cache-Control', 'public, max-age=3600').set('Cross-Origin-Resource-Policy', 'same-site');
+    await serveObject(store, `assets/images/${asset.filename}`, res);
+  });
   app.use('/api', (req, res, next) => {
     res.set('Cache-Control', 'no-store');
     if (req.cookies.school_consent) {
@@ -139,7 +150,7 @@ export function createApp(db, options = {}) {
   });
   app.get('/api/galleries', async (req, res) => {
     const { page, limit } = listQuery.parse(req.query);
-    if (demo) return res.json(envelope([{ id: 'campus-gallery', title: 'A glimpse of school life', titleTa: 'பள்ளி வாழ்க்கைக் காட்சிகள்', summary: 'Learning, reading and playing at St. Antony’s.', summaryTa: 'எங்கள் பள்ளியில் கற்றல், வாசிப்பு மற்றும் விளையாட்டு.', isDemo: false, images: campusPhotos.map(photo => ({ id: photo.key, media: { id: photo.key, url: `/images/${photo.key}.webp`, alt: photo.alt, altTa: photo.altTa } })) }], 1, page, limit, { demo: true }));
+    if (demo) return res.json(envelope([{ id: 'campus-gallery', title: 'A glimpse of school life', titleTa: 'பள்ளி வாழ்க்கைக் காட்சிகள்', summary: 'Learning, reading and playing at St. Antony’s.', summaryTa: 'எங்கள் பள்ளியில் கற்றல், வாசிப்பு மற்றும் விளையாட்டு.', isDemo: false, images: campusPhotos.map(photo => ({ id: photo.key, media: { id: photo.key, url: `/api/assets/images/${photo.key}.webp`, alt: photo.alt, altTa: photo.altTa } })) }], 1, page, limit, { demo: true }));
     const [items, total] = await Promise.all([db.gallery.findMany({ where: published, take: limit, skip: (page - 1) * limit, include: { images: publicMedia }, orderBy: { createdAt: 'desc' } }), db.gallery.count({ where: published })]);
     res.json(envelope(items, total, page, limit));
   });
@@ -153,11 +164,10 @@ export function createApp(db, options = {}) {
     }
     if (!/^[a-f0-9-]+\.(webp|pdf)$/.test(media.filename)) throw fail(404, 'File not found.');
     const width = z.enum(['640', '1200']).optional().parse(req.query.width);
-    const path = resolve(config.uploads, width && media.hasVariants ? variantFilename(media.filename, width) : media.filename);
-    if (!path.startsWith(`${config.uploads}${sep}`)) throw fail(404, 'File not found.');
+    const key = mediaKey(width && media.hasVariants ? variantFilename(media.filename, width) : media.filename);
     res.type(media.mimeType).set('X-Content-Type-Options', 'nosniff').set('Cross-Origin-Resource-Policy', 'same-site');
     if (media.mimeType === 'application/pdf') res.attachment(media.originalName || 'attachment.pdf').set('Content-Security-Policy', "sandbox; default-src 'none'");
-    res.sendFile(path, err => { if (err && !res.headersSent) res.status(404).json({ error: 'File unavailable.' }); });
+    await serveObject(store, key, res);
   });
   app.post('/api/enquiries', databaseOnly, rateLimit({ windowMs: 60 * 60 * 1000, limit: 5, standardHeaders: 'draft-8', legacyHeaders: false, message: { error: 'Enquiry limit reached. Please try again later.' } }), parse(enquirySchema), async (req, res) => {
     res.status(201).json(await saveEnquiry(db, req));
@@ -166,7 +176,7 @@ export function createApp(db, options = {}) {
   app.use('/api/admin', (req, res, next) => {
     if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method)) res.once('finish', () => { if (res.statusCode < 400) cache.clear(); });
     next();
-  }, databaseOnly, adminRouter(db, auth));
+  }, databaseOnly, adminRouter(db, auth, store));
   app.use((_req, _res, next) => next(fail(404, 'Endpoint not found.')));
   app.use((error, _req, res, _next) => {
     if (error instanceof z.ZodError) return res.status(422).json({ error: 'Please check the highlighted information.', fields: Object.fromEntries(error.issues.map(i => [i.path.join('.'), i.message])) });
