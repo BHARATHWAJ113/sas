@@ -1,3 +1,4 @@
+import { mountTranslation } from './translation.js';
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
@@ -20,6 +21,7 @@ const audit = (tx, req, action, entity, entityId) => tx.auditLog.create({ data: 
 export function adminRouter(db, auth, store = storage) {
   const router = Router();
   router.use(auth, csrf);
+  mountTranslation(router);
   mountEmailAdmin(router, db, audit);
   router.get('/dashboard', async (req, res) => {
     const [events, pages, enquiries, media, recent] = await Promise.all([db.event.count(), db.page.count(), ['ADMIN', 'EDITOR'].includes(req.user.role.name) ? db.admissionEnquiry.count({ where: { status: 'NEW' } }) : Promise.resolve(null), db.media.count(), req.user.role.name === 'ADMIN' ? db.auditLog.findMany({ take: 8, orderBy: { createdAt: 'desc' }, include: { user: { select: { name: true } } } }) : Promise.resolve([])]);

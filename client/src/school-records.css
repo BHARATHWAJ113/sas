@@ -72,3 +72,5 @@
     grid-template-columns: 1fr;
   }
 }
+
+.leadership-card{display:flex;align-items:center;gap:12px;text-align:left;padding:12px;background:var(--surface);border-color:var(--border);color:var(--text-primary)}.leadership-card img{width:64px;height:84px;flex-shrink:0;border-radius:8px;background:var(--surface-soft)}.leadership-caption h3{font-size:.9rem;line-height:1.5;color:var(--text-primary);margin:0 0 8px}.leadership-caption small{font-size:.73rem;color:var(--text-secondary)}@media(max-width:1100px){.leadership-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.leadership-grid{grid-template-columns:1fr}}

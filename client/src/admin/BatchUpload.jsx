@@ -1,3 +1,5 @@
+import { useAutoTranslation } from './useAutoTranslation';
+import TranslationControls from './TranslationControls';
 import { useEffect, useRef, useState } from 'react';
 import '../school-sections.css';
 import { Loader } from '../Loading';
@@ -6,6 +8,7 @@ export default function BatchUpload({ mutate, onSaved }) {
   const [items, setItems] = useState([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [translating, setTranslating] = useState({});
   const urls = useRef([]);
   useEffect(() => () => urls.current.forEach(URL.revokeObjectURL), []);
   function select(files) {
@@ -14,10 +17,10 @@ export default function BatchUpload({ mutate, onSaved }) {
       if (url) urls.current.push(url);
       return { file, url, alt: '', altTa: '', altHi: '', status: 'Ready' };
     });
-    setItems(next); setError(files.length > 30 ? 'Select no more than 30 files per batch.' : '');
+    setTranslating({}); setItems(next); setError(files.length > 30 ? 'Select no more than 30 files per batch.' : '');
   }
   async function upload(event) {
-    event.preventDefault(); if (busy || !items.length) return;
+    event.preventDefault(); if (busy || Object.values(translating).some(Boolean) || !items.length) return;
     setBusy(true); setError('');
     const next = [...items];
     try {
@@ -41,8 +44,18 @@ export default function BatchUpload({ mutate, onSaved }) {
     <label>Choose files<input type="file" multiple accept="image/jpeg,image/png,image/webp,application/pdf" disabled={busy} onChange={e => select(e.target.files)}/></label>
     <div className="batch-upload-list">{items.map((item, i) => <div key={i} className="batch-upload-item">
       {item.url && <img src={item.url} alt="Upload preview"/>}<span>{item.file.name}<small role="status">{item.status}</small></span>
-      {['alt', 'altTa', 'altHi'].map(key => <label key={key}>{key === 'altHi' ? 'Title / alternative text · Hindi (optional)' : key === 'alt' ? 'Title / alternative text · English' : 'Title / alternative text · Tamil'}<input required={key !== 'altHi'} maxLength={255} disabled={busy || item.status === 'Uploaded'} value={item[key]} onChange={e => setItems(current => current.map((row, index) => index === i ? { ...row, [key]: e.target.value } : row))}/></label>)}
+      <CaptionFields key={item.url} item={item} busy={busy} mutate={mutate} onBusy={value => setTranslating(current => current[i] === value ? current : { ...current, [i]: value })} setItem={update => setItems(current => current.map((row, index) => index === i ? update(row) : row))}/>
+
     </div>)}</div>
-    {complete ? <button type="button" className="button" onClick={onSaved}>Done · manage uploaded files</button> : <button className="button" disabled={busy || !items.length}>{busy ? <Loader label="Uploading…" compact/> : 'Upload / retry remaining files'}</button>}
+    {complete ? <button type="button" className="button" onClick={onSaved}>Done · manage uploaded files</button> : <button className="button" disabled={busy || Object.values(translating).some(Boolean) || !items.length}>{busy ? <Loader label="Uploading…" compact/> : 'Upload / retry remaining files'}</button>}
   </form>;
+}
+
+function CaptionFields({ item, busy, mutate, setItem, onBusy }) {
+  const translation = useAutoTranslation(item, setItem, ['alt'], mutate);
+  useEffect(() => { onBusy(translation.busy); }, [translation.busy, onBusy]);
+  return <fieldset disabled={busy || item.status === 'Uploaded'} className="batch-captions">
+    <TranslationControls translation={translation}/>
+    {['alt', 'altTa', 'altHi'].map(key => <label key={key}>{key === 'altHi' ? 'Title / alternative text · Hindi (optional)' : key === 'alt' ? 'Title / alternative text · English' : 'Title / alternative text · Tamil'}<input required={key !== 'altHi'} maxLength={255} value={item[key]} onChange={event => translation.change(key, event.target.value)}/></label>)}
+  </fieldset>;
 }

@@ -21,7 +21,7 @@ In the admin panel:
 - Open Pages, Events, Announcements, Activities, Gallery albums, Staff, Honours, Toppers or Fees. Enter text in the optional **हिन्दी / Hindi** fields and save. Existing publication controls still apply.
 - Edit photo captions and descriptions in Media library. Batch uploads also accept an optional Hindi caption.
 - Open **Languages** to override an interface label. Select `hi`, enter its key and Hindi text, then publish. For example, `home` controls the home navigation label. Keys are defined in `client/src/i18n.js` and `client/src/school-copy.js`; Hindi defaults are in `client/src/hi.js`.
-- Blank Hindi content fields display the English value. Staff must provide translations for custom records; the website does not automatically translate them. The admin workspace's own controls remain in English.
+- Blank Hindi content fields display the English value. Existing records are not translated in bulk. The CMS now generates Tamil and Hindi when English content is edited; review the results before publishing. See `AUTO-TRANSLATION.md` for the free-service limits and manual controls. The admin workspace's own controls remain in English.
 
 Hindi admission enquiries save their language and receive a Hindi acknowledgement when email delivery is enabled. The acknowledgement does not confirm admission.
 

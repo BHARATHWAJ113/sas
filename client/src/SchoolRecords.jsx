@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import ProfileModal from './ProfileModal';
 import { localeFor } from '../../shared/languages.js';
 import { useSite } from './context';
 import { SectionHeading } from './components';
@@ -44,6 +46,7 @@ const portraits = [
 
 export function SchoolLeadership() {
   const { t, pick } = useSite();
+  const [selected, setSelected] = useState(null);
 
   return (
     <section className="section school-leadership" id="school-leadership" aria-label={t('leadershipTitle')}>
@@ -51,7 +54,7 @@ export function SchoolLeadership() {
         <SectionHeading eyebrow={t('leadershipTag')} title={t('leadershipTitle')} text={t('leadershipIntro')} />
         <div className="leadership-grid">
           {portraits.map((portrait) => (
-            <figure className="leadership-card" key={portrait.image}>
+            <button type="button" className="leadership-card" key={portrait.image} onClick={() => setSelected(portrait)} aria-haspopup="dialog" aria-label={`${t('viewDetails')}: ${pick(portrait, 'title')}`}>
               <img
                 src={`/api/assets/images/${portrait.image}`}
                 alt={pick(portrait, 'title')}
@@ -59,14 +62,15 @@ export function SchoolLeadership() {
                 height={portrait.height}
                 loading="lazy"
               />
-              <figcaption>
+              <span className="leadership-caption">
                 <h3>{pick(portrait, 'title')}</h3>
-                <p>{pick(portrait, 'text')}</p>
-              </figcaption>
-            </figure>
+                <small>{t('viewDetails')} ↗</small>
+              </span>
+            </button>
           ))}
         </div>
       </div>
+      {selected && <ProfileModal title={pick(selected, 'title')} image={`/api/assets/images/${selected.image}`} onClose={() => setSelected(null)}><p>{pick(selected, 'text')}</p></ProfileModal>}
     </section>
   );
 }

@@ -1,6 +1,7 @@
+import ProfileModal from './ProfileModal';
 import { localeFor } from '../../shared/languages.js';
 import { useState } from 'react';
-import { Award, Users, BookOpen } from 'lucide-react';
+import { Award, Users, BookOpen, Search, X, SlidersHorizontal, ArrowUpRight } from 'lucide-react';
 import { useApi, mediaUrl } from './api';
 import { useSite } from './context';
 import { Seo, Pagination, StateBox } from './components';
@@ -8,9 +9,10 @@ import { standards, schoolLabels } from '../../shared/school-sections.js';
 import './school-sections.css';
 
 export default function SchoolSection({ resource }) {
-  const { lang, pick } = useSite();
+  const { lang, pick, t } = useSite();
   const labels = schoolLabels[lang];
   const fees = resource === 'fees';
+  const [selected, setSelected] = useState(null);
   const [selection, setSelection] = useState({ standard: fees ? 'LKG' : '', academicYear: '', category: '', department: '', search: '', page: 1 });
   const options = useApi(`/${resource}?limit=1`);
   const year = selection.academicYear || (fees ? options.data?.filters.academicYear?.[0] || '' : '');
@@ -25,12 +27,16 @@ export default function SchoolSection({ resource }) {
     <Seo title={labels[resource]} description={labels.intro}/>
     <section className="directory-hero"><div className="container"><span className="eyebrow"><Icon size={18}/> St. Antony’s</span><h1>{labels[resource]}</h1><p>{labels.intro}</p></div></section>
     <section className="section"><div className="container directory-catalog">
-      <div className="directory-filters">
-        {resource !== 'staff' && filter('academicYear', labels.year, filters.academicYear || [])}
-        {resource !== 'staff' && filter('standard', labels.standard, standards)}
-        {resource === 'staff' && filter('department', labels.department, filters.department || [])}
-        {!fees && filter('category', labels.category, filters.category || [])}
-        {!fees && <label>{labels.search}<input type="search" maxLength={100} value={selection.search} onChange={e => change('search', e.target.value)}/></label>}
+      <div className="directory-filter-panel">
+        {!fees && <div className="directory-segments" role="group" aria-label={labels.category}>{['', ...(filters.category || [])].map(category => <button type="button" key={category} aria-pressed={selection.category === category} onClick={() => change('category', category)}><Icon size={18}/>{category || labels.all}</button>)}</div>}
+        {!fees && <div className="directory-search"><Search size={21} aria-hidden="true"/><input type="search" aria-label={labels.search} placeholder={labels.search} maxLength={100} value={selection.search} onChange={event => change('search', event.target.value)}/>{selection.search && <button type="button" onClick={() => change('search', '')} aria-label={t('clearFilters')}><X size={18}/></button>}</div>}
+        <div className="directory-filters">
+          {resource !== 'staff' && filter('academicYear', labels.year, filters.academicYear || [])}
+          {resource !== 'staff' && filter('standard', labels.standard, standards)}
+          {resource === 'staff' && filter('department', labels.department, filters.department || [])}
+          {!fees && <button type="button" className="directory-reset" onClick={() => setSelection({ standard: '', academicYear: '', category: '', department: '', search: '', page: 1 })}><SlidersHorizontal size={16}/>{t('clearFilters')}</button>}
+        </div>
+        {!fees && <p className="directory-result-count" role="status" aria-live="polite">{results.loading ? t('loading') : <><strong>{results.data?.total || 0}</strong> / {options.data?.total || 0} {labels[resource]}</>}</p>}
       </div>
       <StateBox {...results}/>
       {!results.loading && !results.error && results.data?.items.length === 0 && <p className="directory-empty">{labels.empty}</p>}
@@ -40,16 +46,17 @@ export default function SchoolSection({ resource }) {
           <tfoot><tr><th colSpan={2} scope="row">{labels.total}</th><td colSpan={2}>{money.format(results.data.annualTotal)}</td></tr></tfoot>
         </table>
       </div>}
-      {!fees && <div className="directory-grid">{results.data?.items.map(item => <article className="directory-card" key={item.id}>
-        <div className="directory-photo"><img src={item.image ? mediaUrl(item.image.id) : '/api/assets/images/profile-placeholder.svg'} srcSet={item.image?.hasVariants ? `${mediaUrl(item.image.id)}?width=640 640w, ${mediaUrl(item.image.id)}?width=1200 1200w` : undefined} sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 25vw" width="400" height="400" loading="lazy" decoding="async" alt={pick(item, 'name')} onError={event => { event.currentTarget.removeAttribute('srcset'); event.currentTarget.src = '/api/assets/images/profile-placeholder.svg'; }}/>{item.rank != null && <span className="directory-rank">{labels.rank} {item.rank}</span>}</div>
-        <div className="directory-card-body"><span className="eyebrow">{item.category}</span><h2>{pick(item, 'name')}</h2>
-          <p className="directory-subtitle">{resource === 'staff' ? pick(item, 'designation') : resource === 'honours' ? pick(item, 'title') : `${labels.standard} ${item.standard}`}</p>
-          <p>{item.department || item.academicYear}{resource === 'honours' && ` · ${labels.standard} ${item.standard}`}</p>
-          {item.description && <p>{pick(item, 'description')}</p>}
-          {resource === 'toppers' && <dl className="directory-scores">{item.marks != null && <div><dt>{labels.marks}</dt><dd>{item.marks}{item.maximumMarks != null && ` / ${item.maximumMarks}`}</dd></div>}{(item.percentage != null || item.maximumMarks != null && item.marks != null) && <div><dt>{labels.percentage}</dt><dd>{Number(item.percentage ?? Number(item.marks) / Number(item.maximumMarks) * 100).toFixed(2)}%</dd></div>}</dl>}
-        </div>
-      </article>)}</div>}
+      {!fees && !results.loading && !results.error && <div className="directory-grid">{results.data?.items.map(item => <button type="button" className="directory-card" key={item.id} onClick={() => setSelected(item)} aria-label={`${t('viewDetails')}: ${pick(item, 'name')}`} aria-haspopup="dialog">
+        <div className="directory-photo"><img src={item.image ? `${mediaUrl(item.image.id)}${item.image.hasVariants ? '?width=640' : ''}` : '/api/assets/images/profile-placeholder.svg'} width="88" height="104" loading="lazy" decoding="async" alt="" onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = '/api/assets/images/profile-placeholder.svg'; }}/></div>
+        <div className="directory-card-body"><span className="directory-category">{item.category}</span><h2>{pick(item, 'name')}</h2><p className="directory-subtitle">{resource === 'staff' ? pick(item, 'designation') : resource === 'honours' ? pick(item, 'title') : `${labels.standard} ${item.standard}`}</p><small>{item.department || item.academicYear}{item.rank != null && ` · ${labels.rank} ${item.rank}`}</small></div><ArrowUpRight className="directory-open" size={16}/>
+      </button>)}</div>}
       {!fees && <Pagination page={selection.page} pages={results.data?.pages || 0} onChange={page => setSelection(current => ({ ...current, page }))}/>}
     </div></section>
+    {selected && <ProfileModal title={pick(selected, 'name')} image={selected.image ? mediaUrl(selected.image.id) : '/api/assets/images/profile-placeholder.svg'} onClose={() => setSelected(null)}>
+      <p className="directory-subtitle">{resource === 'staff' ? pick(selected, 'designation') : pick(selected, 'title')}</p>
+      <dl className="profile-facts">{[['category', labels.category], ['department', labels.department], ['academicYear', labels.year], ['standard', labels.standard], ['rank', labels.rank]].filter(([key]) => selected[key] != null && selected[key] !== '').map(([key, label]) => <div key={key}><dt>{label}</dt><dd>{selected[key]}</dd></div>)}</dl>
+      {pick(selected, 'description') && <p>{pick(selected, 'description')}</p>}
+      {resource === 'toppers' && <dl className="directory-scores">{selected.marks != null && <div><dt>{labels.marks}</dt><dd>{selected.marks}{selected.maximumMarks != null && ` / ${selected.maximumMarks}`}</dd></div>}{(selected.percentage != null || selected.maximumMarks > 0 && selected.marks != null) && <div><dt>{labels.percentage}</dt><dd>{Number(selected.percentage ?? Number(selected.marks) / Number(selected.maximumMarks) * 100).toFixed(2)}%</dd></div>}</dl>}
+    </ProfileModal>}
   </>;
 }

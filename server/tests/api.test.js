@@ -142,3 +142,17 @@ describe('CMS security and content operations', () => {
     const cookieToken = res.headers['set-cookie'][0].match(/school_session=([a-f0-9]+)/)[1]; expect(db.session.create.mock.calls[0][0].data.id).toBe(hashToken(cookieToken));
   });
 });
+
+describe('translation endpoint access', () => {
+  it('requires an authenticated session', async () => {
+    const db = database(); db.session.findUnique.mockResolvedValue(null);
+    await request(createApp(db, { demo: false })).post('/api/admin/translate').set('Origin', origin).send({ text: 'School' }).expect(401);
+  });
+  it('denies viewers and rejects missing CSRF tokens', async () => {
+    await auth(request(createApp(database('VIEWER'), { demo: false })).post('/api/admin/translate')).send({ text: 'School' }).expect(403);
+    await request(createApp(database(), { demo: false })).post('/api/admin/translate').set('Cookie', `school_session=${token}`).set('Origin', origin).send({ text: 'School' }).expect(403);
+  });
+  it('validates input before contacting the provider', async () => {
+    await auth(request(createApp(database(), { demo: false })).post('/api/admin/translate')).send({ text: 'x'.repeat(5001) }).expect(422);
+  });
+});
