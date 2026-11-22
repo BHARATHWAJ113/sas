@@ -107,7 +107,7 @@ export function adminRouter(db, auth, store = storage) {
     const privilege = ['settings'].includes(resource) ? ['ADMIN'] : ['ADMIN', 'EDITOR'];
     router.get(`/${resource}`, async (req, res) => {
       const { query, ...args } = adminList(resource, req.query);
-      const omit = ['pages', 'events', 'announcements'].includes(resource) ? { omit: { body: true, bodyTa: true } } : {};
+      const omit = ['pages', 'events', 'announcements'].includes(resource) ? { omit: { body: true, bodyTa: true, bodyHi: true } } : {};
       const [items, total] = await Promise.all([db[model].findMany({ ...args, ...omit, ...(relations[resource] ? { include: relations[resource] } : {}) }), db[model].count({ where: args.where })]);
       res.json(listEnvelope(items, total, query));
     });

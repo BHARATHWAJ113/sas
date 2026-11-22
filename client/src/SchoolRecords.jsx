@@ -1,10 +1,11 @@
+import { localeFor } from '../../shared/languages.js';
 import { useSite } from './context';
 import { SectionHeading } from './components';
 import './school-records.css';
 
 const portraits = [
   {
-    image: 'fr-e-thomas.webp',
+    image: 'fr-e-thomas.webp', titleHi: 'रेवरेंड फादर ई. थॉमस', textHi: 'सेंट पॉल्स के प्रधानाचार्य के रूप में उन्होंने 1994 में ब्लॉक 29 में किंडरगार्टन की शाखा शुरू की।',
     width: 560,
     height: 801,
     title: 'Rev. Fr. E. Thomas',
@@ -13,7 +14,7 @@ const portraits = [
     textTa: 'புனித பவுல் பள்ளியின் முதல்வராக இருந்தபோது, 1994ஆம் ஆண்டு பிளாக் 29-இல் மழலையர் பள்ளிக் கிளையைத் தொடங்கினார்.',
   },
   {
-    image: 'fr-pascal-raj.webp',
+    image: 'fr-pascal-raj.webp', titleHi: 'रेवरेंड फादर पास्कल राज', textHi: 'विद्यालय के इतिहास में सेंट एंटनीज़ के प्रारंभिक विस्तार के दौरान उनका नाम प्रधानाचार्य के रूप में दर्ज है।',
     width: 560,
     height: 720,
     title: 'Rev. Fr. Pascal Raj',
@@ -22,7 +23,7 @@ const portraits = [
     textTa: 'புனித அந்தோணியார் பள்ளியின் தொடக்ககால விரிவாக்கத்தின்போது அவர் முதல்வராக இருந்ததாகப் பள்ளி வரலாறு குறிப்பிடுகிறது.',
   },
   {
-    image: 'fr-anandaraj.webp',
+    image: 'fr-anandaraj.webp', titleHi: 'रेवरेंड फादर आनंदराज', textHi: 'उन्होंने जून 2015 में प्रबंधक और प्रधानाचार्य का कार्यभार सँभाला। उनके नेतृत्व में 2017 में उच्चतर माध्यमिक विभाग शुरू हुआ।',
     width: 560,
     height: 720,
     title: 'Rev. Fr. Anandaraj',
@@ -31,7 +32,7 @@ const portraits = [
     textTa: '2015 ஜூனில் தாளாளராகவும் முதல்வராகவும் பொறுப்பேற்றார். அவரது தலைமையில் 2017ஆம் ஆண்டு மேல்நிலைப் பிரிவு திறக்கப்பட்டது.',
   },
   {
-    image: 'fr-m-john-kennedy.webp',
+    image: 'fr-m-john-kennedy.webp', titleHi: 'रेवरेंड फादर एम. जॉन केनेडी', textHi: 'विद्यालय के इतिहास में 13 जून 2023 को प्रबंधक और प्रधानाचार्य के रूप में उनकी नियुक्ति दर्ज है।',
     width: 1200,
     height: 800,
     title: 'Rev. Fr. M. John Kennedy',
@@ -71,19 +72,19 @@ export function SchoolLeadership() {
 }
 
 const diaryDates = [
-  { date: '2026-11-11', title: 'Second mid-term examinations begin', titleTa: 'இரண்டாம் இடைப்பருவத் தேர்வுகள் தொடக்கம்' },
-  { date: '2026-11-14', title: 'Children’s Day', titleTa: 'குழந்தைகள் தினம்' },
-  { date: '2026-12-05', title: 'Fancy dress, LKG to Class V', titleTa: 'எல்.கே.ஜி. முதல் 5ஆம் வகுப்பு வரை மாறுவேட நிகழ்ச்சி' },
-  { date: '2026-12-16', title: 'Half-yearly examinations begin', titleTa: 'அரையாண்டுத் தேர்வுகள் தொடக்கம்' },
-  { date: '2027-01-04', title: 'Third term begins', titleTa: 'மூன்றாம் பருவம் தொடக்கம்' },
-  { date: '2027-02-16', title: 'Third mid-term examinations begin', titleTa: 'மூன்றாம் இடைப்பருவத் தேர்வுகள் தொடக்கம்' },
-  { date: '2027-03-26', title: 'Good Friday holiday', titleTa: 'புனித வெள்ளி விடுமுறை' },
-  { date: '2027-04-23', title: 'Last day of the academic year', titleTa: 'கல்வியாண்டின் கடைசி நாள்' },
+  { date: '2026-11-11', titleHi: 'दूसरी मध्यावधि परीक्षाएँ शुरू', title: 'Second mid-term examinations begin', titleTa: 'இரண்டாம் இடைப்பருவத் தேர்வுகள் தொடக்கம்' },
+  { date: '2026-11-14', titleHi: 'बाल दिवस', title: 'Children’s Day', titleTa: 'குழந்தைகள் தினம்' },
+  { date: '2026-12-05', titleHi: 'एलकेजी से कक्षा 5 तक फैंसी ड्रेस कार्यक्रम', title: 'Fancy dress, LKG to Class V', titleTa: 'எல்.கே.ஜி. முதல் 5ஆம் வகுப்பு வரை மாறுவேட நிகழ்ச்சி' },
+  { date: '2026-12-16', titleHi: 'अर्धवार्षिक परीक्षाएँ शुरू', title: 'Half-yearly examinations begin', titleTa: 'அரையாண்டுத் தேர்வுகள் தொடக்கம்' },
+  { date: '2027-01-04', titleHi: 'तीसरा सत्र शुरू', title: 'Third term begins', titleTa: 'மூன்றாம் பருவம் தொடக்கம்' },
+  { date: '2027-02-16', titleHi: 'तीसरी मध्यावधि परीक्षाएँ शुरू', title: 'Third mid-term examinations begin', titleTa: 'மூன்றாம் இடைப்பருவத் தேர்வுகள் தொடக்கம்' },
+  { date: '2027-03-26', titleHi: 'गुड फ़्राइडे का अवकाश', title: 'Good Friday holiday', titleTa: 'புனித வெள்ளி விடுமுறை' },
+  { date: '2027-04-23', titleHi: 'शैक्षणिक वर्ष का अंतिम दिन', title: 'Last day of the academic year', titleTa: 'கல்வியாண்டின் கடைசி நாள்' },
 ];
 
 export function SchoolDiary() {
   const { lang, pick, t } = useSite();
-  const dateFormat = new Intl.DateTimeFormat(lang === 'ta' ? 'ta-IN' : 'en-IN', {
+  const dateFormat = new Intl.DateTimeFormat(localeFor(lang), {
     day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata',
   });
 

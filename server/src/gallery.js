@@ -5,11 +5,11 @@ import campusPhotos from '../../shared/campus-photos.json' with { type: 'json' }
 const query = listQuery.extend({ category: z.string().max(160).default('') });
 const published = { status: 'PUBLISHED' };
 const photo = { ...published, mimeType: { startsWith: 'image/' } };
-const categoryFields = { slug: true, title: true, titleTa: true, isDemo: true };
+const categoryFields = { slug: true, title: true, titleTa: true, titleHi: true, isDemo: true };
 const starterAlbums = [
   {
     slug: 'school-archive',
-    title: 'School archive',
+    title: 'School archive', titleHi: 'विद्यालय का अभिलेख',
     titleTa: 'பள்ளி ஆவணப் படங்கள்',
     isDemo: false,
     photos: [
@@ -21,10 +21,10 @@ const starterAlbums = [
   },
   {
     slug: 'campus-life',
-    title: 'Campus life',
+    title: 'Campus life', titleHi: 'परिसर का जीवन',
     titleTa: 'பள்ளி வாழ்க்கை',
     isDemo: false,
-    photos: campusPhotos.map(photo => [photo.key, photo.alt, photo.altTa]),
+    photos: campusPhotos.map(photo => [photo.key, photo.alt, photo.altTa, photo.altHi]),
   },
 ];
 
@@ -46,15 +46,15 @@ export async function galleryMedia(db, input, demo) {
   if (total > skip && albums.length) {
     items = await db.galleryMedia.findMany({
       where: { gallery: { ...published, ...(category && { slug: category }) }, media: photo },
-      select: { id: true, gallery: { select: categoryFields }, media: { select: { id: true, alt: true, altTa: true, description: true, descriptionTa: true, eventDate: true, hasVariants: true } } },
+      select: { id: true, gallery: { select: categoryFields }, media: { select: { id: true, alt: true, altTa: true, altHi: true, description: true, descriptionTa: true, descriptionHi: true, eventDate: true, hasVariants: true } } },
       orderBy: [{ gallery: { createdAt: 'desc' } }, { galleryId: 'asc' }, { order: 'asc' }, { id: 'asc' }],
       skip, take: limit,
     });
   } else if (total > skip) {
     items = starterAlbums
       .filter(album => !category || album.slug === category)
-      .flatMap(({ photos, ...gallery }) => photos.map(([id, alt, altTa]) => ({
-        id, gallery, media: { id, url: `/api/assets/images/${id}.webp`, alt, altTa },
+      .flatMap(({ photos, ...gallery }) => photos.map(([id, alt, altTa, altHi]) => ({
+        id, gallery, media: { id, url: `/api/assets/images/${id}.webp`, alt, altTa, altHi },
       })))
       .slice(skip, skip + limit);
   }

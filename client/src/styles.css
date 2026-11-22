@@ -11,3 +11,7 @@
 .language-button{min-height:44px;min-width:40px}.menu-toggle{min-height:44px;min-width:36px}.hero-second{min-height:44px}.dialog-close{width:40px;height:40px}.filter-tabs button{min-height:42px}
 @media(max-width:650px){.hero-caption{bottom:18px;right:20px;max-width:180px}[lang=ta] .hero-content>p{font-size:12px}}
 h1,h2,h3,p{overflow-wrap:anywhere}
+
+html[lang="hi"] body, html[lang="hi"] button, html[lang="hi"] input, html[lang="hi"] select, html[lang="hi"] textarea { font-family: "Noto Sans Devanagari", Inter, sans-serif; }
+html[lang="hi"] h1, html[lang="hi"] h2, html[lang="hi"] h3 { line-height: 1.45; letter-spacing: normal; }
+.campus-language { max-width: 110px; cursor: pointer; }

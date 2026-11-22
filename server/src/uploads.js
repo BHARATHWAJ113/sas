@@ -16,7 +16,7 @@ export function mountUploads(router, db, audit, store = storage) {
     if (replacing && !existing) throw fail(404, 'Media unavailable.');
     let metadata;
     try { metadata = req.body.metadata ? JSON.parse(req.body.metadata) : null; } catch { throw fail(400, 'Invalid image details.'); }
-    const captions = replacing ? (metadata ? schemas.media.parse(metadata) : {}) : z.object({ alt: z.string().trim().min(1).max(255), altTa: z.string().trim().min(1).max(255) }).parse(req.body);
+    const captions = replacing ? (metadata ? schemas.media.parse(metadata) : {}) : z.object({ alt: z.string().trim().min(1).max(255), altTa: z.string().trim().min(1).max(255), altHi: z.string().trim().max(255).optional() }).parse(req.body);
     const type = await fileTypeFromBuffer(req.file.buffer);
     if (!type || !['image/jpeg', 'image/png', 'image/webp', 'application/pdf'].includes(type.mime)) throw fail(400, 'The file contents are not a supported image or PDF.');
     if (existing && existing.mimeType.startsWith('image/') !== type.mime.startsWith('image/')) throw fail(400, 'Replace an image with an image, or a PDF with a PDF, to preserve existing references.');

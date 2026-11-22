@@ -1,3 +1,4 @@
+import { localeFor } from '../../shared/languages.js';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, ChevronLeft, ChevronRight, Images, X, ZoomIn, ZoomOut } from 'lucide-react';
 import { mediaUrl, useApi } from './api';
@@ -54,7 +55,7 @@ export function ImageGrid({ images, gallery = false, carousel = false }) {
             style={carousel ? { '--offset': offset, '--distance': Math.abs(offset), zIndex: 3 - Math.abs(offset) } : undefined}
             tabIndex={carousel && offset !== 0 ? -1 : undefined}
             onClick={() => { if (carousel && offset !== 0) setFeatured(index); else { setZoom(false); setActive(index); } }}
-            aria-label={`${carousel && offset !== 0 ? (lang === 'ta' ? 'படத்தைக் காட்டு' : 'Show photo') : t('galleryOpen')}: ${pick(item.media, 'alt')}`}
+            aria-label={`${carousel && offset !== 0 ? (lang === 'hi' ? 'तस्वीर दिखाएँ' : lang === 'ta' ? 'படத்தைக் காட்டு' : 'Show photo') : t('galleryOpen')}: ${pick(item.media, 'alt')}`}
           >
             <ResponsiveImage src={imageSource(item.media)} srcSet={item.media.hasVariants ? `${imageSource(item.media)}?width=640 640w, ${imageSource(item.media)}?width=1200 1200w` : undefined} alt={pick(item.media, 'alt')} loading="lazy" decoding="async" width="600" height="450" sizes="(max-width: 440px) 100vw, (max-width: 800px) 50vw, 33vw" />
             {item.gallery?.isDemo && <small className="gallery-demo-label">{t(item.gallery.slug === 'illustrations' ? 'galleryIllustration' : 'demo')}</small>}
@@ -84,8 +85,8 @@ export function ImageGrid({ images, gallery = false, carousel = false }) {
             <div className={`lightbox-zoom-viewport${zoom ? ' is-zoomed' : ''}`} tabIndex={0}><ResponsiveImage src={imageSource(selected)} alt={pick(selected, 'alt')} sizes="min(920px, 90vw)" /></div>
             <p>{pick(selected, 'alt')}</p>
             {selected.description && <p>{pick(selected, 'description')}</p>}
-            {selected.eventDate && <p>{new Date(selected.eventDate).toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: 'Asia/Kolkata' })}</p>}
-            <button type="button" aria-pressed={zoom} onClick={() => setZoom(value => !value)}>{zoom ? <ZoomOut/> : <ZoomIn/>}{lang === 'ta' ? 'பெரிதாக்கு' : 'Zoom'}</button>
+            {selected.eventDate && <p>{new Date(selected.eventDate).toLocaleDateString(localeFor(lang), { timeZone: 'Asia/Kolkata' })}</p>}
+            <button type="button" aria-pressed={zoom} onClick={() => setZoom(value => !value)}>{zoom ? <ZoomOut/> : <ZoomIn/>}{lang === 'hi' ? 'ज़ूम' : lang === 'ta' ? 'பெரிதாக்கு' : 'Zoom'}</button>
             {images.length > 1 && (
               <div className="lightbox-controls">
                 <button type="button" aria-label={t('previous')} onClick={() => move(-1)}><ChevronLeft /></button>
@@ -110,7 +111,7 @@ function GalleryMedia({ preview = false }) {
   const all = useApi(path);
   const filtered = useApi(category || page > 1 ? `${path}&category=${encodeURIComponent(category)}&page=${page}` : null);
   const results = category || page > 1 ? filtered : all;
-  const count = new Intl.NumberFormat(lang === 'ta' ? 'ta-IN' : 'en-IN');
+  const count = new Intl.NumberFormat(localeFor(lang));
 
   function selectCategory(slug) {
     setCategory(slug);
@@ -131,13 +132,13 @@ function GalleryMedia({ preview = false }) {
             </button>
           ))}
         </div>
-        <button type="button" className="gallery-expand" aria-expanded={expanded} aria-controls={preview ? 'home-gallery-albums' : 'gallery-albums'} onClick={() => setExpanded(value => !value)}>{lang === 'ta' ? (expanded ? 'சுருக்கு' : 'அனைத்து ஆல்பங்கள்') : (expanded ? 'Show less' : 'All albums')}</button>
+        <button type="button" className="gallery-expand" aria-expanded={expanded} aria-controls={preview ? 'home-gallery-albums' : 'gallery-albums'} onClick={() => setExpanded(value => !value)}>{lang === 'hi' ? (expanded ? 'कम दिखाएँ' : 'सभी एल्बम') : lang === 'ta' ? (expanded ? 'சுருக்கு' : 'அனைத்து ஆல்பங்கள்') : (expanded ? 'Show less' : 'All albums')}</button>
         </div>
       )}
       <div aria-busy={results.loading}>
         <StateBox {...results} empty={results.data?.items.length === 0} />
         {!results.loading && results.data?.items.length > 0 && <ImageGrid key={`${category}:${page}`} images={results.data.items} gallery carousel={!grid} />}
-        {!preview && results.data?.items.length > 0 && <div className="gallery-view-switch"><button type="button" className="gallery-expand" aria-pressed={grid} onClick={() => setGrid(value => !value)}>{lang === 'ta' ? (grid ? 'படத் தொகுப்பைக் காட்டு' : 'அனைத்துப் படங்களைக் காட்டு') : (grid ? 'Carousel view' : 'View all photos')}</button></div>}
+        {!preview && results.data?.items.length > 0 && <div className="gallery-view-switch"><button type="button" className="gallery-expand" aria-pressed={grid} onClick={() => setGrid(value => !value)}>{lang === 'hi' ? (grid ? 'स्लाइड दृश्य' : 'सभी तस्वीरें देखें') : lang === 'ta' ? (grid ? 'படத் தொகுப்பைக் காட்டு' : 'அனைத்துப் படங்களைக் காட்டு') : (grid ? 'Carousel view' : 'View all photos')}</button></div>}
         {!preview && <Pagination page={page} pages={results.data?.pages || 0} onChange={setPage} />}
       </div>
       {preview && <div className="gallery-more"><TextLink to="/gallery">{t('allGallery')}</TextLink></div>}

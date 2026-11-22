@@ -1,3 +1,4 @@
+import { localeFor } from '../../shared/languages.js';
 import { ThemeToggle } from './Theme';
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
@@ -24,7 +25,7 @@ function NoticeBar() {
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const ticker = !reducedMotion && !loading;
-  const date = new Intl.DateTimeFormat(lang === 'ta' ? 'ta-IN' : 'en-IN', {
+  const date = new Intl.DateTimeFormat(localeFor(lang), {
     day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata',
   });
 
@@ -202,7 +203,7 @@ export function SiteHeader() {
             </div>
           </nav>
           <div className="campus-nav-actions"><ThemeToggle/>
-            <button type="button" className="campus-language" onClick={() => setLang(lang === 'en' ? 'ta' : 'en')} aria-label={lang === 'en' ? 'Switch to Tamil' : 'Switch to English'}>{t('language')}</button>
+            <select className="campus-language" value={lang} onChange={event => setLang(event.target.value)} aria-label="Language / மொழி / भाषा"><option value="en">English</option><option value="ta">தமிழ்</option><option value="hi">हिन्दी</option></select>
             {hasPhone && <a className="campus-call" href={`tel:${phone}`} aria-label={t('callSchool')}><Phone size={16} aria-hidden="true" /><span>{t('callSchool')}</span></a>}
             <Link className="campus-enquire" to="/admissions#enquiry" onClick={closeMenu}>{t('enquire')}<ArrowUpRight size={16} aria-hidden="true" /></Link>
             <button ref={menuButton} type="button" className="campus-menu-toggle" onClick={() => open ? closeMenu() : setOpen(true)} aria-expanded={open} aria-controls="main-navigation" aria-label={t(open ? 'closeNavigation' : 'openNavigation')}>{open ? <X size={22} /> : <Menu size={22} />}</button>

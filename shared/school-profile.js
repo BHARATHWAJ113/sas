@@ -1,3 +1,4 @@
+import { schoolPagesHi } from './school-profile-hi.js';
 export const schoolContacts = {
   phone: '04142-219542',
   email: 'stantonysneyveli@yahoo.com',
@@ -6,6 +7,9 @@ export const schoolContacts = {
 function schoolPage(slug, en, ta) {
   return {
     slug,
+    titleHi: schoolPagesHi[slug]?.title,
+    summaryHi: schoolPagesHi[slug]?.summary,
+    bodyHi: schoolPagesHi[slug]?.body,
     title: en.title,
     titleTa: ta.title,
     summary: en.summary,

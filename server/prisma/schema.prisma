@@ -68,10 +68,13 @@ model Page {
   slug           String @unique @db.VarChar(160)
   title          String @db.VarChar(255)
   titleTa        String @db.VarChar(255)
+  titleHi String? @db.VarChar(255)
   summary        String @db.Text
   summaryTa      String @db.Text
+  summaryHi String? @db.Text
   body           String @db.LongText
   bodyTa         String @db.LongText
+  bodyHi String? @db.LongText
   seoTitle       String? @db.VarChar(255)
   seoDescription String? @db.VarChar(500)
   status         ContentStatus @default(DRAFT)
@@ -96,10 +99,13 @@ model Announcement {
   slug        String @unique @db.VarChar(160)
   title       String @db.VarChar(255)
   titleTa     String @db.VarChar(255)
+  titleHi String? @db.VarChar(255)
   summary     String @db.Text
   summaryTa   String @db.Text
+  summaryHi String? @db.Text
   body        String @db.LongText
   bodyTa      String @db.LongText
+  bodyHi String? @db.LongText
   kind        AnnouncementKind @default(NOTICE)
   status      ContentStatus @default(DRAFT)
   isDemo      Boolean @default(false)
@@ -112,10 +118,13 @@ model Announcement {
   image       Media? @relation("AnnouncementImage", fields: [imageId], references: [id], onDelete: SetNull)
   footerMessage String? @db.VarChar(500)
   footerMessageTa String? @db.VarChar(500)
+  footerMessageHi String? @db.VarChar(500)
   wishes      String? @db.Text
   wishesTa    String? @db.Text
+  wishesHi String? @db.Text
   ctaLabel    String? @db.VarChar(80)
   ctaLabelTa  String? @db.VarChar(120)
+  ctaLabelHi String? @db.VarChar(120)
   ctaPath     String? @db.VarChar(255)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -128,16 +137,21 @@ model Event {
   slug           String @unique @db.VarChar(160)
   title          String @db.VarChar(255)
   titleTa        String @db.VarChar(255)
+  titleHi String? @db.VarChar(255)
   summary        String @db.Text
   summaryTa      String @db.Text
+  summaryHi String? @db.Text
   body           String @db.LongText
   bodyTa         String @db.LongText
+  bodyHi String? @db.LongText
   category       String @db.VarChar(80)
   categoryTa     String @db.VarChar(120)
+  categoryHi String? @db.VarChar(120)
   date           DateTime
   endDate        DateTime?
   location       String @db.VarChar(255)
   locationTa     String @db.VarChar(255)
+  locationHi String? @db.VarChar(255)
   cover          String? @db.VarChar(500)
   attachmentId   String? @db.VarChar(191)
   attachment     Media? @relation("EventAttachment", fields: [attachmentId], references: [id], onDelete: SetNull)
@@ -178,12 +192,14 @@ model Media {
   size        Int
   alt         String @db.VarChar(255)
   altTa       String @db.VarChar(255)
+  altHi String? @db.VarChar(255)
   status      ContentStatus @default(DRAFT)
   honours Honour[]
   staffMembers StaffMember[]
   toppers Topper[]
   description String? @db.Text
   descriptionTa String? @db.Text
+  descriptionHi String? @db.Text
   eventDate DateTime?
   hasVariants Boolean @default(false)
   eventImages EventImage[]
@@ -201,6 +217,7 @@ model ActivityCategory {
   slug       String @unique @db.VarChar(80)
   title      String @db.VarChar(120)
   titleTa    String @db.VarChar(160)
+  titleHi String? @db.VarChar(160)
   icon       String @default("sparkles") @db.VarChar(24)
   sortOrder  Int @default(0)
   status     ContentStatus @default(DRAFT)
@@ -215,8 +232,10 @@ model Activity {
   slug       String @unique @db.VarChar(160)
   title      String @db.VarChar(255)
   titleTa    String @db.VarChar(255)
+  titleHi String? @db.VarChar(255)
   summary    String @db.Text
   summaryTa  String @db.Text
+  summaryHi String? @db.Text
   categoryId String @db.VarChar(191)
   category   ActivityCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   imageId    String? @db.VarChar(191)
@@ -235,8 +254,10 @@ model Gallery {
   slug      String @unique @db.VarChar(160)
   title     String @db.VarChar(255)
   titleTa   String @db.VarChar(255)
+  titleHi String? @db.VarChar(255)
   summary   String @db.Text
   summaryTa String @db.Text
+  summaryHi String? @db.Text
   status    ContentStatus @default(DRAFT)
   isDemo    Boolean @default(false)
   images    GalleryMedia[]
@@ -383,6 +404,7 @@ model Fee {
   id String @id @default(cuid()) @db.VarChar(191)
   title String @db.VarChar(255)
   titleTa String @default("") @db.VarChar(255)
+  titleHi String? @db.VarChar(255)
   standard String @db.VarChar(10)
   academicYear String @db.VarChar(9)
   category String @db.VarChar(120)
@@ -402,13 +424,16 @@ model Honour {
   id String @id @default(cuid()) @db.VarChar(191)
   name String @db.VarChar(120)
   nameTa String @default("") @db.VarChar(160)
+  nameHi String? @db.VarChar(160)
   title String @db.VarChar(255)
   titleTa String @default("") @db.VarChar(255)
+  titleHi String? @db.VarChar(255)
   academicYear String @db.VarChar(9)
   standard String @db.VarChar(10)
   category String @db.VarChar(120)
   description String @db.Text
   descriptionTa String @db.Text
+  descriptionHi String? @db.Text
   imageId String? @db.VarChar(191)
   image Media? @relation(fields: [imageId], references: [id], onDelete: SetNull)
   sourceRef String? @db.VarChar(500)
@@ -424,12 +449,15 @@ model StaffMember {
   id String @id @default(cuid()) @db.VarChar(191)
   name String @db.VarChar(120)
   nameTa String @default("") @db.VarChar(160)
+  nameHi String? @db.VarChar(160)
   designation String @db.VarChar(160)
   designationTa String @default("") @db.VarChar(200)
+  designationHi String? @db.VarChar(200)
   department String @db.VarChar(120)
   category String @db.VarChar(120)
   description String @db.Text
   descriptionTa String @db.Text
+  descriptionHi String? @db.Text
   imageId String? @db.VarChar(191)
   image Media? @relation(fields: [imageId], references: [id], onDelete: SetNull)
   sourceRef String? @db.VarChar(500)
@@ -445,6 +473,7 @@ model Topper {
   id String @id @default(cuid()) @db.VarChar(191)
   name String @db.VarChar(120)
   nameTa String @default("") @db.VarChar(160)
+  nameHi String? @db.VarChar(160)
   standard String @db.VarChar(10)
   academicYear String @db.VarChar(9)
   category String @db.VarChar(120)

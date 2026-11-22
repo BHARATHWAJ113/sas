@@ -117,11 +117,12 @@ describe.skipIf(process.env.MYSQL_INTEGRATION !== 'true')('real MySQL integratio
       expect((await request(app).get(url).expect(200)).body.items).toHaveLength(0);
       await mutate('delete', resource + '/' + created.body.id).expect(204);
     }
-    await mutate('put', 'media/' + mediaId, { alt: prefix, altTa: prefix, status: 'PUBLISHED', description: 'Gallery caption', descriptionTa: '', eventDate: '2026-11-01T00:00:00.000Z' }).expect(200);
-    const album = { title: prefix, titleTa: prefix, slug: prefix + '-gallery', summary: 'Test gallery', summaryTa: 'Test gallery', imageIds: [mediaId], status: 'PUBLISHED', isDemo: true };
+    await mutate('put', 'media/' + mediaId, { alt: prefix, altTa: prefix, status: 'PUBLISHED', description: 'Gallery caption', descriptionTa: '', altHi: 'विद्यालय की तस्वीर', descriptionHi: 'विद्यालय का कार्यक्रम', eventDate: '2026-11-01T00:00:00.000Z' }).expect(200);
+    const album = { title: prefix, titleTa: prefix, titleHi: 'विद्यालय जीवन', slug: prefix + '-gallery', summary: 'Test gallery', summaryTa: 'Test gallery', imageIds: [mediaId], status: 'PUBLISHED', isDemo: true };
     const saved = await mutate('post', 'galleries', album).expect(201);
     const gallery = await request(app).get('/api/gallery-media?category=' + album.slug).expect(200);
-    expect(gallery.body.items[0].media).toMatchObject({ description: 'Gallery caption', hasVariants: true });
+    expect(gallery.body.items[0].gallery.titleHi).toBe('विद्यालय जीवन');
+    expect(gallery.body.items[0].media).toMatchObject({ description: 'Gallery caption', altHi: 'विद्यालय की तस्वीर', descriptionHi: 'विद्यालय का कार्यक्रम', hasVariants: true });
     await request(app).get('/api/media/' + mediaId + '?width=640').expect(200).expect('Content-Type', /image\/webp/);
     await request(app).get('/api/media/' + mediaId + '?width=99999').expect(422);
     await mutate('put', 'galleries/' + saved.body.id, { ...album, imageIds: [], status: 'ARCHIVED' }).expect(200);

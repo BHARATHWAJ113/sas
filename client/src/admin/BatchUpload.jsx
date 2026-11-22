@@ -12,7 +12,7 @@ export default function BatchUpload({ mutate, onSaved }) {
     const next = [...files].slice(0, 30).map(file => {
       const url = file.type.startsWith('image/') ? URL.createObjectURL(file) : '';
       if (url) urls.current.push(url);
-      return { file, url, alt: '', altTa: '', status: 'Ready' };
+      return { file, url, alt: '', altTa: '', altHi: '', status: 'Ready' };
     });
     setItems(next); setError(files.length > 30 ? 'Select no more than 30 files per batch.' : '');
   }
@@ -26,7 +26,7 @@ export default function BatchUpload({ mutate, onSaved }) {
         const item = next[i];
         if (item.file.size > 8 * 1024 * 1024) throw new Error(`${item.file.name} exceeds 8 MB.`);
         next[i] = { ...item, status: 'Uploading…' }; setItems([...next]);
-        const body = new FormData(); body.append('file', item.file); body.append('alt', item.alt); body.append('altTa', item.altTa);
+        const body = new FormData(); body.append('file', item.file); body.append('alt', item.alt); body.append('altTa', item.altTa); body.append('altHi', item.altHi);
         try { await mutate('/media/upload', 'POST', body); }
         catch (error) { next[i].status = 'Failed'; setItems([...next]); throw error; }
         next[i].status = 'Uploaded'; setItems([...next]);
@@ -41,7 +41,7 @@ export default function BatchUpload({ mutate, onSaved }) {
     <label>Choose files<input type="file" multiple accept="image/jpeg,image/png,image/webp,application/pdf" disabled={busy} onChange={e => select(e.target.files)}/></label>
     <div className="batch-upload-list">{items.map((item, i) => <div key={i} className="batch-upload-item">
       {item.url && <img src={item.url} alt="Upload preview"/>}<span>{item.file.name}<small role="status">{item.status}</small></span>
-      {['alt', 'altTa'].map(key => <label key={key}>{key === 'alt' ? 'Title / alternative text · English' : 'Title / alternative text · Tamil'}<input required maxLength={255} disabled={busy || item.status === 'Uploaded'} value={item[key]} onChange={e => setItems(current => current.map((row, index) => index === i ? { ...row, [key]: e.target.value } : row))}/></label>)}
+      {['alt', 'altTa', 'altHi'].map(key => <label key={key}>{key === 'altHi' ? 'Title / alternative text · Hindi (optional)' : key === 'alt' ? 'Title / alternative text · English' : 'Title / alternative text · Tamil'}<input required={key !== 'altHi'} maxLength={255} disabled={busy || item.status === 'Uploaded'} value={item[key]} onChange={e => setItems(current => current.map((row, index) => index === i ? { ...row, [key]: e.target.value } : row))}/></label>)}
     </div>)}</div>
     {complete ? <button type="button" className="button" onClick={onSaved}>Done · manage uploaded files</button> : <button className="button" disabled={busy || !items.length}>{busy ? <Loader label="Uploading…" compact/> : 'Upload / retry remaining files'}</button>}
   </form>;

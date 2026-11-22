@@ -12,7 +12,7 @@ export function Loader({ label = 'Loading…', compact = false, full = false }) 
 
 export function WelcomeLoader() {
   const { pathname } = useLocation();
-  const { lang } = useSite();
+  const { lang, t } = useSite();
   const [visible, setVisible] = useState(() => {
     if (pathname !== '/') return false;
     try { return sessionStorage.getItem('school-welcome-seen') !== '1'; } catch { return true; }
@@ -28,7 +28,7 @@ export function WelcomeLoader() {
   if (!visible || pathname !== '/') return null;
   return <div className="welcome-loader">
     <div className="welcome-orbit" aria-hidden="true"/>
-    <div className="welcome-content" role="status"><img src="/api/assets/images/logo.webp" alt="" width="96" height="96"/><span>{lang === 'ta' ? 'வரவேற்கிறோம்' : 'WELCOME TO'}</span><h1>{lang === 'ta' ? 'புனித அந்தோணியார் பள்ளி' : 'St. Antony’s'}</h1><p>{lang === 'ta' ? 'முயன்று ஒளிர்வோம்' : 'Strive and Shine'}</p><div className="welcome-progress" aria-hidden="true"><i/></div></div>
-    <button className="welcome-skip" type="button" onClick={() => setVisible(false)}>{lang === 'ta' ? 'தொடர்க' : 'Enter school website'}</button>
+    <div className="welcome-content" role="status"><img src="/api/assets/images/logo.webp" alt="" width="96" height="96"/><span>{lang === 'hi' ? 'आपका स्वागत है' : lang === 'ta' ? 'வரவேற்கிறோம்' : 'WELCOME TO'}</span><h1>{t('school')}</h1><p>{t('motto')}</p><div className="welcome-progress" aria-hidden="true"><i/></div></div>
+    <button className="welcome-skip" type="button" onClick={() => setVisible(false)}>{lang === 'hi' ? 'विद्यालय की वेबसाइट खोलें' : lang === 'ta' ? 'தொடர்க' : 'Enter school website'}</button>
   </div>;
 }

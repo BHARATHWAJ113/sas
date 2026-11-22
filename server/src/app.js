@@ -21,7 +21,7 @@ import { schoolPages } from '../../shared/school-profile.js';
 import { schoolActivities, schoolActivityCategories } from '../../shared/school-activities.js';
 import campusPhotos from '../../shared/campus-photos.json' with { type: 'json' };
 const published = { status: 'PUBLISHED' };
-const publicMedia = { where: { media: published }, orderBy: { order: 'asc' }, include: { media: { select: { id: true, alt: true, altTa: true, mimeType: true } } } };
+const publicMedia = { where: { media: published }, orderBy: { order: 'asc' }, include: { media: { select: { id: true, alt: true, altTa: true, altHi: true, mimeType: true } } } };
 const envelope = (items, total, page, limit, extra = {}) => ({ items, total, page, pages: Math.ceil(total / limit), ...extra });
 export function createApp(db, options = {}) {
   const demo = options.demo ?? config.demo;
@@ -84,9 +84,9 @@ export function createApp(db, options = {}) {
       const filtered = demoEvents.filter(x => (!search || `${x.title} ${x.titleTa} ${x.summary}`.toLowerCase().includes(search.toLowerCase())) && (!category || x.category === category) && (period === 'all' || (period === 'upcoming' ? new Date(x.date) >= now : new Date(x.date) < now))).sort((a, b) => period === 'past' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date));
       return res.json(envelope(filtered.slice((page - 1) * limit, page * limit), filtered.length, page, limit, { categories: [...new Set(demoEvents.map(x => x.category))], demo: true }));
     }
-    const where = { ...published, ...(search ? { OR: ['title', 'titleTa', 'summary', 'summaryTa'].map(key => ({ [key]: { contains: search } })) } : {}), ...(category ? { category } : {}), ...(period === 'all' ? {} : { date: period === 'upcoming' ? { gte: now } : { lt: now } }) };
-    const [items, total, categories] = await Promise.all([db.event.findMany({ where, take: limit, skip: (page - 1) * limit, orderBy: { date: period === 'past' ? 'desc' : 'asc' } }), db.event.count({ where }), db.event.findMany({ where: published, distinct: ['category'], select: { category: true, categoryTa: true } })]);
-    res.json(envelope(items, total, page, limit, { categories: categories.map(x => x.category), categoryTranslations: Object.fromEntries(categories.map(x => [x.category, x.categoryTa])) }));
+    const where = { ...published, ...(search ? { OR: ['title', 'titleTa', 'titleHi', 'summary', 'summaryTa', 'summaryHi'].map(key => ({ [key]: { contains: search } })) } : {}), ...(category ? { category } : {}), ...(period === 'all' ? {} : { date: period === 'upcoming' ? { gte: now } : { lt: now } }) };
+    const [items, total, categories] = await Promise.all([db.event.findMany({ where, take: limit, skip: (page - 1) * limit, orderBy: { date: period === 'past' ? 'desc' : 'asc' } }), db.event.count({ where }), db.event.findMany({ where: published, distinct: ['category'], select: { category: true, categoryTa: true, categoryHi: true } })]);
+    res.json(envelope(items, total, page, limit, { categories: categories.map(x => x.category), categoryTranslations: Object.fromEntries(categories.map(x => [x.category, x.categoryTa])), categoryTranslationsHi: Object.fromEntries(categories.map(x => [x.category, x.categoryHi])) }));
   });
   app.get('/api/events/:slug', async (req, res) => {
     const item = demo ? demoEvents.find(x => x.slug === req.params.slug) : await db.event.findFirst({ where: { slug: req.params.slug, ...published }, include: { images: publicMedia, attachment: { select: { id: true, originalName: true, status: true } } } });
@@ -105,15 +105,15 @@ export function createApp(db, options = {}) {
       }));
       return res.json(envelope(items, filtered.length, page, limit, { categories, demo: true }));
     }
-    const categoryFields = { slug: true, title: true, titleTa: true, icon: true };
+    const categoryFields = { slug: true, title: true, titleTa: true, titleHi: true, icon: true };
     const where = { ...published, category: { ...published, ...(category && { slug: category }) } };
     const [rows, total, categories] = await Promise.all([
       db.activity.findMany({
         where, take: limit, skip, orderBy: [{ sortOrder: 'asc' }, { slug: 'asc' }],
         select: {
-          id: true, slug: true, title: true, titleTa: true, summary: true, summaryTa: true, isDemo: true,
+          id: true, slug: true, title: true, titleTa: true, titleHi: true, summary: true, summaryTa: true, summaryHi: true, isDemo: true,
           category: { select: categoryFields },
-          image: { select: { id: true, alt: true, altTa: true, status: true, mimeType: true } },
+          image: { select: { id: true, alt: true, altTa: true, altHi: true, status: true, mimeType: true } },
         },
       }),
       db.activity.count({ where }),
@@ -130,7 +130,7 @@ export function createApp(db, options = {}) {
   });
   app.get('/api/home-announcements', async (_req, res) => {
     const now = new Date();
-    const items = demo ? demoAnnouncements.filter(item => item.showPopup && new Date(item.publishedAt) <= now && (!item.expiresAt || new Date(item.expiresAt) > now)) : await db.announcement.findMany({ where: { ...published, showPopup: true, publishedAt: { lte: now }, OR: [{ expiresAt: null }, { expiresAt: { gt: now } }] }, include: { image: { select: { id: true, alt: true, altTa: true, status: true } } }, orderBy: [{ priority: 'desc' }, { publishedAt: 'desc' }, { id: 'asc' }], take: 50 });
+    const items = demo ? demoAnnouncements.filter(item => item.showPopup && new Date(item.publishedAt) <= now && (!item.expiresAt || new Date(item.expiresAt) > now)) : await db.announcement.findMany({ where: { ...published, showPopup: true, publishedAt: { lte: now }, OR: [{ expiresAt: null }, { expiresAt: { gt: now } }] }, include: { image: { select: { id: true, alt: true, altTa: true, altHi: true, status: true } } }, orderBy: [{ priority: 'desc' }, { publishedAt: 'desc' }, { id: 'asc' }], take: 50 });
     res.json({ items: items.map(({ image, ...item }) => ({ ...item, image: image?.status === 'PUBLISHED' ? image : null })) });
   });
   app.get('/api/announcements', async (req, res) => {
@@ -139,7 +139,7 @@ export function createApp(db, options = {}) {
     const now = new Date();
     if (demo) { const items = demoAnnouncements.filter(x => !kind || (kind === 'NOTICE_BOARD' ? x.kind !== 'NEWS' : x.kind === kind)); return res.json(envelope(items.slice((page - 1) * limit, page * limit).map(({ body: _body, bodyTa: _bodyTa, ...item }) => item), items.length, page, limit, { demo: true })); }
     const where = { ...published, ...(kind ? { kind: kind === 'NOTICE_BOARD' ? { in: ['ANNOUNCEMENT', 'NOTICE'] } : kind } : {}), publishedAt: { lte: now }, OR: [{ expiresAt: null }, { expiresAt: { gt: now } }] };
-    const [items, total] = await Promise.all([db.announcement.findMany({ where, take: limit, skip: (page - 1) * limit, omit: { body: true, bodyTa: true }, orderBy: { publishedAt: 'desc' } }), db.announcement.count({ where })]);
+    const [items, total] = await Promise.all([db.announcement.findMany({ where, take: limit, skip: (page - 1) * limit, omit: { body: true, bodyTa: true, bodyHi: true }, orderBy: { publishedAt: 'desc' } }), db.announcement.count({ where })]);
     res.json(envelope(items, total, page, limit));
   });
   app.get('/api/announcements/:slug', async (req, res) => {

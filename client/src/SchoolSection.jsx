@@ -1,3 +1,4 @@
+import { localeFor } from '../../shared/languages.js';
 import { useState } from 'react';
 import { Award, Users, BookOpen } from 'lucide-react';
 import { useApi, mediaUrl } from './api';
@@ -17,7 +18,7 @@ export default function SchoolSection({ resource }) {
   const results = useApi(`/${resource}?${query}`, { debounceMs: 250 });
   const filters = options.data?.filters || {};
   const change = (key, value) => setSelection(current => ({ ...current, [key]: value, page: 1 }));
-  const money = new Intl.NumberFormat(lang === 'ta' ? 'ta-IN' : 'en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 });
+  const money = new Intl.NumberFormat(localeFor(lang), { style: 'currency', currency: 'INR', maximumFractionDigits: 2 });
   const Icon = fees ? BookOpen : resource === 'staff' ? Users : Award;
   const filter = (key, label, values) => <label key={key}>{label}<select aria-label={label} value={key === 'academicYear' ? year : selection[key]} onChange={e => change(key, e.target.value)}>{!(fees && ['standard', 'academicYear'].includes(key)) && <option value="">{labels.all}</option>}{values.map(value => <option key={value} value={value}>{value}</option>)}</select></label>;
   return <>

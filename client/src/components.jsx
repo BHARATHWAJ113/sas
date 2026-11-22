@@ -1,3 +1,4 @@
+import { localeFor } from '../../shared/languages.js';
 import { Loader } from './Loading';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -152,7 +153,7 @@ export function ContactBlock({ full = false }) {
 }
 export function EventCard({ event }) {
   const { t, pick, lang } = useSite(); const date = new Date(event.date);
-  return <article className="event-card"><Link to={`/events/${event.slug}`} className="event-image" tabIndex={-1} aria-hidden="true"><ResponsiveImage src={assetUrl(event.cover) || '/api/assets/images/campus-smart-class.webp'} alt={event.isDemo || !event.cover ? t('illustrative') : pick(event, 'title')} width="600" height="400" loading="lazy"/><div className="date-badge"><strong>{new Intl.DateTimeFormat(lang === 'ta' ? 'ta-IN' : 'en-GB', { day: '2-digit', timeZone: 'Asia/Kolkata' }).format(date)}</strong><span>{new Intl.DateTimeFormat(lang === 'ta' ? 'ta-IN' : 'en-GB', { month: 'short', timeZone: 'Asia/Kolkata' }).format(date)}</span></div>{event.isDemo && <DemoBadge/>}</Link><div className="event-body"><div className="event-meta"><span>{pick(event, 'category')}</span><span>{new Intl.DateTimeFormat('en', { year: 'numeric', timeZone: 'Asia/Kolkata' }).format(date)}</span></div><h3><Link to={`/events/${event.slug}`}>{pick(event, 'title')}</Link></h3><p>{pick(event, 'summary')}</p><TextLink to={`/events/${event.slug}`}>{t('viewDetails')}</TextLink>{event.isDemo && <small className="event-demo">{t('sampleEvent')}</small>}</div></article>;
+  return <article className="event-card"><Link to={`/events/${event.slug}`} className="event-image" tabIndex={-1} aria-hidden="true"><ResponsiveImage src={assetUrl(event.cover) || '/api/assets/images/campus-smart-class.webp'} alt={event.isDemo || !event.cover ? t('illustrative') : pick(event, 'title')} width="600" height="400" loading="lazy"/><div className="date-badge"><strong>{new Intl.DateTimeFormat(localeFor(lang), { day: '2-digit', timeZone: 'Asia/Kolkata' }).format(date)}</strong><span>{new Intl.DateTimeFormat(localeFor(lang), { month: 'short', timeZone: 'Asia/Kolkata' }).format(date)}</span></div>{event.isDemo && <DemoBadge/>}</Link><div className="event-body"><div className="event-meta"><span>{pick(event, 'category')}</span><span>{new Intl.DateTimeFormat('en', { year: 'numeric', timeZone: 'Asia/Kolkata' }).format(date)}</span></div><h3><Link to={`/events/${event.slug}`}>{pick(event, 'title')}</Link></h3><p>{pick(event, 'summary')}</p><TextLink to={`/events/${event.slug}`}>{t('viewDetails')}</TextLink>{event.isDemo && <small className="event-demo">{t('sampleEvent')}</small>}</div></article>;
 }
 export function EventPreview() {
   const { t } = useSite(); const state = useApi('/events?period=upcoming&limit=3');

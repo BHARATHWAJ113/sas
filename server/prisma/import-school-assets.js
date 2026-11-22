@@ -45,7 +45,7 @@ if (!process.argv.includes('--apply')) {
       const buffer = await readFile(join(directory, media.filename));
       const draft = manifest.toppers.some(row => row.imageId === media.id && row.status === 'DRAFT');
       await db.$transaction(async tx => {
-        await tx.media.create({ data: { id: media.id, filename: media.filename, originalName: media.originalName, mimeType: 'image/webp', size: buffer.length, alt: media.alt, altTa: media.altTa, hasVariants: true, status: draft ? 'DRAFT' : 'PUBLISHED' } });
+        await tx.media.create({ data: { id: media.id, filename: media.filename, originalName: media.originalName, mimeType: 'image/webp', size: buffer.length, alt: media.alt, altTa: media.altTa, altHi: media.altHi || null, hasVariants: true, status: draft ? 'DRAFT' : 'PUBLISHED' } });
         await tx.auditLog.create({ data: { action: 'SOURCE_IMPORT', entity: 'media', entityId: media.id } });
       });
       created.media = (created.media || 0) + 1;
