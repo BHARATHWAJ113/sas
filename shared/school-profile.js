@@ -32,36 +32,58 @@ export const schoolPages = {
     body: '1994ஆம் ஆண்டு பிளாக் 29-இல் புனித பவுல் பள்ளியின் கிளையாக 164 மழலையர்களுடன் எங்கள் பயணம் தொடங்கியது. 2009ஆம் ஆண்டு தனிப் பள்ளியாக உருவானது. 2017ஆம் ஆண்டு மேல்நிலைப் பிரிவு தொடங்கப்பட்டது.',
   }),
   about: schoolPage('about', {
-    title: 'History of the School',
-    summary: 'From St. Paul’s Annexe in 1994 to today’s St. Antony’s Matriculation Higher Secondary School in Block 29, Neyveli.',
-    body: [
-      'St. Antony’s Matriculation Higher Secondary School, Block 29, Neyveli, was originally established as St. Paul’s Annexe in 1994 by Rev. Fr. E. Thomas, the then Principal of St. Paul’s Matriculation Higher Secondary School, Block 4. It began with a KG section and 164 students, providing quality education closer to the residents of Block 29.',
-      'In June 2009, on the initiative of Rev. Fr. P. Arulnathan, the annexe was bifurcated from St. Paul’s School and established as an independent institution by His Grace Most Rev. Dr. Antony Anandarayar, Archbishop of Pondicherry and Cuddalore. Rev. Fr. R. Pascal Raj was appointed as its first Principal. The school received official recognition on 3 May 2010 for classes LKG to VIII. Classes IX and X were subsequently introduced in 2010 and 2011, completing the High School section.',
-      'In 2015, the Archbishop Anandarayar Block, comprising 21 classrooms, was inaugurated. The school also secured a five-acre land lease from NLCIL, including a spacious playground. Under the leadership of Rev. Fr. R. Anandaraj, an Administrative Block with modern staff and office facilities was inaugurated on 8 October 2016. The Higher Secondary Section was introduced on 6 June 2017 in the newly constructed St. Thomas Block. In 2019, four additional classrooms were built with the support of NLCIL CSR funds. Four new buses were also purchased to ensure safe transportation for students. A chapel and St. Antony’s Grotto were established to strengthen the spiritual atmosphere of the campus.',
-      'Following the challenges caused by the COVID-19 pandemic, Rev. Fr. R. Joseph Paul was appointed Correspondent and Rev. Fr. M. John Kennedy was appointed Principal-in-Charge on 25 October 2021. During their leadership, the Audio-Visual Room and Knowledge Centre (Library) were inaugurated.',
-      'On 13 June 2023, Rev. Fr. M. John Kennedy assumed charge as Correspondent and Principal. His leadership focused on ensuring the financial stability and academic development of the institution. A Tabernacle was installed in the chapel, and a separate Physics Laboratory and Indoor Games Room were established. The school also organised its first Annual Sports Meet and launched its magazine, St. Antony’s Flair (Firmly).',
-      'During the academic year 2024–2025, the teachers achieved a remarkable milestone by writing and publishing 34 books on Spoken English, Junior IAS, Moral Values and Computer Science. These books were released by His Grace Most Rev. Dr. Francis Kalist, making the school one of the pioneering institutions in the Archdiocese to publish its own student-oriented academic books. The Dr. Anthony Anandarayar Building was also renovated and repainted.',
-      'The newly constructed Grotto dedicated to Our Lady Undoer of Knots was solemnly blessed on 23 March 2024. With the support of NLCIL CSR funds, a modern boys’ restroom building comprising 24 toilets with urinals across the ground and first floors was constructed. It was inaugurated on 9 September 2025 by Mr. I. S. Jasper Rose, Executive Director, Mines and Land, and blessed by Rev. Fr. Peter Rajendiram, Episcopal Vicar for Education. The renovated Audio-Visual Room was blessed on 21 March 2026.',
-      'Two interactive panels were blessed and inaugurated on 26 June 2026 by Correspondent and Principal Rev. Fr. M. John Kennedy to promote digital learning, making classroom teaching more engaging, effective and technology-driven.',
-      'Spiritual growth remains an integral part of the institution. Regular Tuesday Mass, First Friday Eucharistic Adoration, Advent prayers, Lenten retreats and the annual Feast of St. Antony, accompanied by a three-day Novena, have become an essential part of the school’s spiritual life.',
-      'Today, St. Antony’s Matriculation Higher Secondary School stands as a testament to faith, perseverance and commitment to excellence, striving to nurture students through quality education, discipline, moral values and spiritual formation.',
-    ].join('\n\n'),
-  }, {
-    title: 'பள்ளியின் வரலாறு',
-    summary: '1994ஆம் ஆண்டு புனித பவுல் பள்ளியின் கிளையாகத் தொடங்கி, இன்று நெய்வேலி பிளாக் 29-இல் புனித அந்தோணியார் மெட்ரிகுலேஷன் மேல்நிலைப் பள்ளியாக வளர்ந்த பயணம்.',
-    body: [
-      'நெய்வேலி பிளாக் 29-இல் உள்ள புனித அந்தோணியார் மெட்ரிகுலேஷன் மேல்நிலைப் பள்ளி, 1994ஆம் ஆண்டு அப்போதைய பிளாக் 4 புனித பவுல் மெட்ரிகுலேஷன் மேல்நிலைப் பள்ளி முதல்வரான அருட்தந்தை இ. தாமஸ் அவர்களால் புனித பவுல் பள்ளியின் கிளையாகத் தொடங்கப்பட்டது. 164 மாணவர்களுடன் மழலையர் பிரிவாகத் தொடங்கிய இப்பள்ளி, பிளாக் 29 குடியிருப்பாளர்களுக்கு அருகிலேயே தரமான கல்வியை வழங்கியது.',
-      '2009 ஜூனில் அருட்தந்தை பி. அருள்நாதன் அவர்களின் முயற்சியால் இக்கிளை புனித பவுல் பள்ளியிலிருந்து பிரிக்கப்பட்டு, புதுச்சேரி மற்றும் கடலூர் பேராயர் மேதகு முனைவர் அந்தோணி ஆனந்தராயர் அவர்களால் தனித்த கல்வி நிறுவனமாக நிறுவப்பட்டது. அருட்தந்தை ஆர். பாஸ்கல் ராஜ் முதல் முதல்வராக நியமிக்கப்பட்டார். 2010 மே 3 அன்று எல்.கே.ஜி. முதல் 8ஆம் வகுப்பு வரை அரசின் அதிகாரப்பூர்வ அங்கீகாரம் கிடைத்தது. தொடர்ந்து 2010 மற்றும் 2011ஆம் ஆண்டுகளில் 9 மற்றும் 10ஆம் வகுப்புகள் தொடங்கப்பட்டு உயர்நிலைப் பிரிவு முழுமை பெற்றது.',
-      '2015ஆம் ஆண்டு 21 வகுப்பறைகள் கொண்ட பேராயர் ஆனந்தராயர் கட்டடம் திறந்து வைக்கப்பட்டது. விசாலமான விளையாட்டு மைதானம் உட்பட ஐந்து ஏக்கர் நிலம் என்.எல்.சி.ஐ.எல். நிறுவனத்திடமிருந்து குத்தகையாகப் பெறப்பட்டது. அருட்தந்தை ஆர். ஆனந்தராஜ் அவர்களின் தலைமையில் நவீன ஆசிரியர் மற்றும் அலுவலக வசதிகளுடன் நிர்வாகக் கட்டடம் 2016 அக்டோபர் 8 அன்று திறக்கப்பட்டது. புதிதாகக் கட்டப்பட்ட புனித தாமஸ் கட்டடத்தில் 2017 ஜூன் 6 அன்று மேல்நிலைப் பிரிவு தொடங்கப்பட்டது. 2019ஆம் ஆண்டு என்.எல்.சி.ஐ.எல். சமூகப் பொறுப்பு நிதியுதவியுடன் மேலும் நான்கு வகுப்பறைகள் கட்டப்பட்டன. மாணவர்களின் பாதுகாப்பான போக்குவரத்துக்காக நான்கு புதிய பேருந்துகளும் வாங்கப்பட்டன. வளாகத்தின் ஆன்மிகச் சூழலை வலுப்படுத்த சிற்றாலயமும் புனித அந்தோணியார் கெபியும் அமைக்கப்பட்டன.',
-      'கோவிட்-19 பெருந்தொற்றால் ஏற்பட்ட சவால்களைத் தொடர்ந்து, 2021 அக்டோபர் 25 அன்று அருட்தந்தை ஆர். ஜோசப் பால் தாளாளராகவும், அருட்தந்தை எம். ஜான் கென்னடி பொறுப்பு முதல்வராகவும் நியமிக்கப்பட்டனர். அவர்களது தலைமையில் ஒலி-ஒளி அறையும் அறிவு மையமும் (நூலகம்) திறந்து வைக்கப்பட்டன.',
-      '2023 ஜூன் 13 அன்று அருட்தந்தை எம். ஜான் கென்னடி தாளாளர் மற்றும் முதல்வராகப் பொறுப்பேற்றார். நிறுவனத்தின் நிதி நிலைத்தன்மை மற்றும் கல்வி வளர்ச்சியை உறுதி செய்வதில் அவரது தலைமை கவனம் செலுத்தியது. சிற்றாலயத்தில் திருப்பேழை நிறுவப்பட்டதுடன், தனி இயற்பியல் ஆய்வகமும் உள்விளையாட்டு அறையும் அமைக்கப்பட்டன. பள்ளியின் முதல் ஆண்டு விளையாட்டு விழா நடத்தப்பட்டு, “St. Antony’s Flair (Firmly)” என்ற பள்ளி இதழும் தொடங்கப்பட்டது.',
-      '2024–2025 கல்வியாண்டில் ஆசிரியர்கள் பேச்சு ஆங்கிலம், ஜூனியர் ஐ.ஏ.எஸ்., ஒழுக்க விழுமியங்கள் மற்றும் கணினி அறிவியல் தொடர்பான 34 நூல்களை எழுதி வெளியிட்டு குறிப்பிடத்தக்க சாதனை படைத்தனர். மேதகு முனைவர் பிரான்சிஸ் கலிஸ்ட் அவர்களால் வெளியிடப்பட்ட இந்நூல்கள், மாணவர்களுக்கான சொந்தக் கல்வி நூல்களை வெளியிட்ட மறைமாவட்டத்தின் முன்னோடி நிறுவனங்களில் ஒன்றாகப் பள்ளியை உயர்த்தின. முனைவர் அந்தோணி ஆனந்தராயர் கட்டடமும் புதுப்பிக்கப்பட்டு மீண்டும் வர்ணம் பூசப்பட்டது.',
-      'முடிச்சுகளை அவிழ்க்கும் அன்னை மரியாவுக்கு அர்ப்பணிக்கப்பட்ட புதிய கெபி 2024 மார்ச் 23 அன்று மந்திரிக்கப்பட்டது. என்.எல்.சி.ஐ.எல். சமூகப் பொறுப்பு நிதியுதவியுடன் தரை மற்றும் முதல் தளங்களில் சிறுநீர் கழிப்பிடங்களுடன் 24 கழிப்பறைகள் கொண்ட நவீன மாணவர் கழிப்பறைக் கட்டடம் கட்டப்பட்டது. சுரங்கங்கள் மற்றும் நிலத்துறை செயல் இயக்குநர் திரு. ஐ. எஸ். ஜாஸ்பர் ரோஸ் அவர்களால் 2025 செப்டம்பர் 9 அன்று திறந்து வைக்கப்பட்ட இக்கட்டடத்தை கல்விக்கான ஆயர் பிரதிநிதி அருட்தந்தை பீட்டர் ராஜேந்திரம் மந்திரித்தார். புதுப்பிக்கப்பட்ட ஒலி-ஒளி அறை 2026 மார்ச் 21 அன்று மந்திரிக்கப்பட்டது.',
-      'மின்னணுக் கற்றலை ஊக்குவித்து வகுப்பறைக் கற்பித்தலை ஈர்க்கக்கூடியதாகவும் பயனுள்ளதாகவும் தொழில்நுட்பம் சார்ந்ததாகவும் மாற்றுவதற்காக இரண்டு ஊடாடும் காட்சிப்பலகைகள் 2026 ஜூன் 26 அன்று தாளாளர் மற்றும் முதல்வர் அருட்தந்தை எம். ஜான் கென்னடி அவர்களால் மந்திரிக்கப்பட்டு திறந்து வைக்கப்பட்டன.',
-      'ஆன்மிக வளர்ச்சி நிறுவனத்தின் இன்றியமையாத அங்கமாகத் தொடர்கிறது. செவ்வாய்க்கிழமை திருப்பலி, முதல் வெள்ளி நற்கருணை ஆராதனை, திருவருகைக்கால செபங்கள், தவக்கால தியானங்கள் மற்றும் மூன்று நாள் நவநாளுடன் கொண்டாடப்படும் ஆண்டு புனித அந்தோணியார் திருவிழா ஆகியவை பள்ளியின் ஆன்மிக வாழ்வின் முக்கியப் பகுதிகளாகியுள்ளன.',
-      'இன்று புனித அந்தோணியார் மெட்ரிகுலேஷன் மேல்நிலைப் பள்ளி நம்பிக்கை, விடாமுயற்சி மற்றும் சிறப்பிற்கான அர்ப்பணிப்பின் சான்றாகத் திகழ்ந்து, தரமான கல்வி, ஒழுக்கம், நன்னெறி விழுமியங்கள் மற்றும் ஆன்மிக உருவாக்கத்தின் மூலம் மாணவர்களை வளர்க்கிறது.',
-    ].join('\n\n'),
-  }),
+  title: 'History of the School',
+  summary: 'From St. Paul’s Annexe in 1994 to today’s St. Antony’s Matriculation Higher Secondary School in Block 29, Neyveli.',
+  body: [
+    'St. Antony’s Matriculation Higher Secondary School, Block–29, Neyveli, was originally established as St. Paul’s Annexe in 1994 by Rev. Fr. E. Thomas, the then Principal of St. Paul’s Matriculation Higher Secondary School, Block–4. It began with a KG section and 164 students, providing quality education closer to the residents of Block–29.',
+
+    'In June 2009, on the initiative of Rev. Fr. P. Arulnathan, the annexe was bifurcated from St. Paul’s School and established as an independent institution by His Grace Most Rev. Dr. Antony Anandarayar, Archbishop of Pondicherry and Cuddalore. Rev. Fr. R. Pascal Raj was appointed as its first Principal. The school received official recognition on 3 May 2010 for classes LKG to VIII. Classes IX and X were subsequently introduced in 2010 and 2011, completing the High School section.',
+
+    'In 2015, the Archbishop Anandarayar Block, comprising 21 classrooms, was inaugurated. The school also secured a five-acre land lease from NLCIL, including a spacious playground. Under the leadership of Rev. Fr. R. Anandaraj, an Administrative Block with modern staff and office facilities was inaugurated on 8 October 2016. The Higher Secondary Section was introduced on 6 June 2017 in the newly constructed St. Thomas Block. In 2019, four additional classrooms were built with the support of NLCIL CSR funds. Four new buses were also purchased to ensure safe transportation for students. A chapel and St. Antony’s Grotto were established to strengthen the spiritual atmosphere of the campus.',
+
+    'Following the challenges caused by the COVID-19 pandemic, Rev. Fr. R. Joseph Paul was appointed as Correspondent and Rev. Fr. M. John Kennedy was appointed as Principal-in-Charge on 25 October 2021. During their leadership, the Audio-Visual Room and Knowledge Centre (Library) were inaugurated.',
+
+    'On 13 June 2023, Rev. Fr. M. John Kennedy assumed charge as Correspondent and Principal. His leadership focused on ensuring the financial stability and academic development of the institution. A Tabernacle was installed in the chapel, and a separate Physics Laboratory and Indoor Games Room were established. The school also organised its first Annual Sports Meet and launched its magazine, St. Antony’s Flair (Firmly).',
+
+    'During the academic year 2024–2025, the teachers achieved a remarkable milestone by writing and publishing 34 books on Spoken English, Junior IAS, Moral Values and Computer Science. These books were released by His Grace Most Rev. Dr. Francis Kalist, making the school one of the pioneering institutions in the Archdiocese to publish its own student-oriented academic books.',
+
+    'The newly constructed Grotto dedicated to Our Lady Undoer of Knots was solemnly blessed on 23 March 2024. With the support of NLCIL CSR funds, a modern boys’ restroom building comprising 24 toilets with urinals across the ground and first floors was constructed. It was inaugurated on 9 September 2025 by Mr. I. S. Jasper Rose, Executive Director, Mines and Land, and blessed by Rev. Fr. Peter Rajendiram, Episcopal Vicar for Education. The renovated Audio-Visual Room was blessed on 21 March 2026.',
+
+    'Two interactive panels were blessed and inaugurated on 26 June 2026 by our Correspondent and Principal, Rev. Fr. M. John Kennedy, to promote digital learning, making classroom teaching more engaging, effective and technology-driven.',
+
+    'The Kindergarten Playground was blessed on 7 July 2026 by Rev. Fr. G. Arockia Samy, MSFS, from St. Lucia, West Indies. The occasion was marked by prayers and blessings, invoking God’s grace and protection upon the playground and all the little children who will enjoy this space.',
+
+    'Spiritual growth remains an integral part of the institution. Regular Tuesday Mass, First Friday Eucharistic Adoration, Advent prayers, Lenten retreats and the annual Feast of St. Antony, accompanied by a three-day Novena, have become an essential part of the school’s spiritual life.',
+
+    'Today, St. Antony’s Matriculation Higher Secondary School stands as a testament to faith, perseverance and commitment to excellence, striving to nurture students through quality education, discipline, moral values and spiritual formation.',
+  ].join('\n\n'),
+}, {
+  title: 'பள்ளியின் வரலாறு',
+  summary: '1994ஆம் ஆண்டு புனித பவுல் பள்ளியின் கிளையாகத் தொடங்கி, இன்று நெய்வேலி பிளாக் 29-இல் புனித அந்தோணியார் மெட்ரிகுலேஷன் மேல்நிலைப் பள்ளியாக வளர்ந்த சிறப்புமிக்க பயணம்.',
+  body: [
+    'நெய்வேலி பிளாக் 29-இல் உள்ள புனித அந்தோணியார் மெட்ரிகுலேஷன் மேல்நிலைப் பள்ளி, 1994ஆம் ஆண்டு அப்போதைய பிளாக் 4 புனித பவுல் மெட்ரிகுலேஷன் மேல்நிலைப் பள்ளியின் முதல்வரான அருட்தந்தை இ. தாமஸ் அவர்களால் புனித பவுல் பள்ளியின் கிளையாகத் தொடங்கப்பட்டது. 164 மாணவர்களுடன் மழலையர் பிரிவாகத் தொடங்கிய இப்பள்ளி, பிளாக் 29 குடியிருப்புப் பகுதி மக்களுக்கு அருகிலேயே தரமான கல்வியை வழங்கியது.',
+
+    '2009ஆம் ஆண்டு ஜூன் மாதத்தில் அருட்தந்தை பி. அருள்நாதன் அவர்களின் முயற்சியால் இக்கிளை புனித பவுல் பள்ளியிலிருந்து பிரிக்கப்பட்டு, புதுச்சேரி மற்றும் கடலூர் பேராயர் மேதகு முனைவர் அந்தோணி ஆனந்தராயர் அவர்களால் தனித்த கல்வி நிறுவனமாக நிறுவப்பட்டது. அருட்தந்தை ஆர். பாஸ்கல் ராஜ் பள்ளியின் முதல் முதல்வராக நியமிக்கப்பட்டார். 2010ஆம் ஆண்டு மே 3 அன்று எல்.கே.ஜி. முதல் 8ஆம் வகுப்பு வரை அரசின் அதிகாரப்பூர்வ அங்கீகாரம் பெறப்பட்டது. தொடர்ந்து 2010 மற்றும் 2011ஆம் ஆண்டுகளில் முறையே 9 மற்றும் 10ஆம் வகுப்புகள் தொடங்கப்பட்டு உயர்நிலைப் பிரிவு முழுமை பெற்றது.',
+
+    '2015ஆம் ஆண்டு 21 வகுப்பறைகளைக் கொண்ட பேராயர் ஆனந்தராயர் கட்டடம் திறந்து வைக்கப்பட்டது. விசாலமான விளையாட்டு மைதானம் உட்பட ஐந்து ஏக்கர் நிலம் என்.எல்.சி.ஐ.எல். நிறுவனத்திடமிருந்து குத்தகையாகப் பெறப்பட்டது. அருட்தந்தை ஆர். ஆனந்தராஜ் அவர்களின் தலைமையில் நவீன ஆசிரியர் மற்றும் அலுவலக வசதிகளுடன் கூடிய நிர்வாகக் கட்டடம் 2016ஆம் ஆண்டு அக்டோபர் 8 அன்று திறந்து வைக்கப்பட்டது. புதிதாகக் கட்டப்பட்ட புனித தாமஸ் கட்டடத்தில் 2017ஆம் ஆண்டு ஜூன் 6 அன்று மேல்நிலைப் பிரிவு தொடங்கப்பட்டது. 2019ஆம் ஆண்டு என்.எல்.சி.ஐ.எல். நிறுவனத்தின் சமூகப் பொறுப்பு நிதியுதவியுடன் மேலும் நான்கு வகுப்பறைகள் கட்டப்பட்டன. மாணவர்களின் பாதுகாப்பான போக்குவரத்திற்காக நான்கு புதிய பள்ளிப் பேருந்துகளும் வாங்கப்பட்டன. பள்ளி வளாகத்தின் ஆன்மிகச் சூழலை வலுப்படுத்த சிற்றாலயமும் புனித அந்தோணியார் கெபியும் அமைக்கப்பட்டன.',
+
+    'கோவிட்-19 பெருந்தொற்றால் ஏற்பட்ட சவால்களைத் தொடர்ந்து, 2021ஆம் ஆண்டு அக்டோபர் 25 அன்று அருட்தந்தை ஆர். ஜோசப் பால் தாளாளராகவும், அருட்தந்தை எம். ஜான் கென்னடி பொறுப்பு முதல்வராகவும் நியமிக்கப்பட்டனர். அவர்களது தலைமையில் ஒலி-ஒளி அறையும் அறிவு மையமும் (நூலகம்) திறந்து வைக்கப்பட்டன.',
+
+    '2023ஆம் ஆண்டு ஜூன் 13 அன்று அருட்தந்தை எம். ஜான் கென்னடி தாளாளராகவும் முதல்வராகவும் பொறுப்பேற்றார். அவரது தலைமைப் பணியில் பள்ளியின் நிதி நிலைத்தன்மை மற்றும் கல்வி வளர்ச்சிக்கு முக்கியத்துவம் அளிக்கப்பட்டது. சிற்றாலயத்தில் திருப்பேழை நிறுவப்பட்டதுடன், தனி இயற்பியல் ஆய்வகமும் உள்ளரங்கு விளையாட்டு அறையும் அமைக்கப்பட்டன. பள்ளியின் முதல் ஆண்டு விளையாட்டு விழா சிறப்பாக நடத்தப்பட்டு, “St. Antony’s Flair (Firmly)” என்ற பள்ளி இதழும் அறிமுகப்படுத்தப்பட்டது.',
+
+    '2024–2025 கல்வியாண்டில் பள்ளி ஆசிரியர்கள் பேச்சு ஆங்கிலம், ஜூனியர் ஐ.ஏ.எஸ்., நன்னெறி விழுமியங்கள் மற்றும் கணினி அறிவியல் ஆகிய பாடப்பிரிவுகளில் 34 நூல்களை எழுதி வெளியிட்டு குறிப்பிடத்தக்க சாதனை படைத்தனர். இந்நூல்கள் மேதகு பேராயர் முனைவர் பிரான்சிஸ் கலிஸ்ட் அவர்களால் வெளியிடப்பட்டன. இதன் மூலம் மாணவர்களுக்கான சொந்தக் கல்வி நூல்களை வெளியிட்ட உயர் மறைமாவட்டத்தின் முன்னோடிக் கல்வி நிறுவனங்களில் ஒன்றாக இப்பள்ளி திகழ்ந்தது.',
+
+    'முடிச்சுகளை அவிழ்க்கும் அன்னை மரியாவுக்கு அர்ப்பணிக்கப்பட்ட புதிதாகக் கட்டப்பட்ட கெபி 2024ஆம் ஆண்டு மார்ச் 23 அன்று சிறப்பாக ஆசீர்வதிக்கப்பட்டது. என்.எல்.சி.ஐ.எல். நிறுவனத்தின் சமூகப் பொறுப்பு நிதியுதவியுடன் தரைத்தளம் மற்றும் முதல் தளத்தில் சிறுநீர் கழிப்பிடங்களுடன் கூடிய 24 கழிப்பறைகளைக் கொண்ட நவீன மாணவர் கழிப்பறைக் கட்டடம் கட்டப்பட்டது. இக்கட்டடம் 2025ஆம் ஆண்டு செப்டம்பர் 9 அன்று சுரங்கங்கள் மற்றும் நிலத்துறை செயல் இயக்குநர் திரு. ஐ. எஸ். ஜாஸ்பர் ரோஸ் அவர்களால் திறந்து வைக்கப்பட்டு, கல்விக்கான ஆயர் பிரதிநிதி அருட்தந்தை பீட்டர் ராஜேந்திரம் அவர்களால் ஆசீர்வதிக்கப்பட்டது. புதுப்பிக்கப்பட்ட ஒலி-ஒளி அறை 2026ஆம் ஆண்டு மார்ச் 21 அன்று ஆசீர்வதிக்கப்பட்டது.',
+
+    'மின்னணுக் கற்றலை ஊக்குவித்து, வகுப்பறைக் கற்பித்தலை மேலும் ஆர்வமூட்டுவதாகவும், பயனுள்ளதாகவும், தொழில்நுட்பம் சார்ந்ததாகவும் மாற்றும் நோக்கில் இரண்டு ஊடாடும் மின்னணுக் காட்சிப்பலகைகள் 2026ஆம் ஆண்டு ஜூன் 26 அன்று பள்ளியின் தாளாளரும் முதல்வருமான அருட்தந்தை எம். ஜான் கென்னடி அவர்களால் ஆசீர்வதிக்கப்பட்டு திறந்து வைக்கப்பட்டன.',
+
+    'மழலையர் விளையாட்டு மைதானம் 2026ஆம் ஆண்டு ஜூலை 7 அன்று மேற்கிந்தியத் தீவுகளின் செயின்ட் லூசியாவிலிருந்து வருகை தந்த அருட்தந்தை ஜி. ஆரோக்கியசாமி, MSFS, அவர்களால் ஆசீர்வதிக்கப்பட்டது. இந்நிகழ்வில் சிறப்புச் செபங்களும் ஆசீர்வாதங்களும் இடம்பெற்றன. விளையாட்டு மைதானத்திற்கும், அங்கு மகிழ்ச்சியுடன் விளையாடவிருக்கும் அனைத்து மழலைக் குழந்தைகளுக்கும் இறைவனின் அருளும் பாதுகாப்பும் கிடைக்க வேண்டிச் செபிக்கப்பட்டது.',
+
+    'ஆன்மிக வளர்ச்சி இக்கல்வி நிறுவனத்தின் இன்றியமையாத அங்கமாகத் தொடர்கிறது. வாரந்தோறும் செவ்வாய்க்கிழமை திருப்பலி, மாதத்தின் முதல் வெள்ளிக்கிழமை நற்கருணை ஆராதனை, திருவருகைக்கால செபங்கள், தவக்காலத் தியானங்கள் மற்றும் மூன்று நாள் நவநாள் செபத்துடன் கொண்டாடப்படும் புனித அந்தோணியாரின் ஆண்டுத் திருவிழா ஆகியவை பள்ளியின் ஆன்மிக வாழ்வின் முக்கியப் பகுதிகளாக அமைந்துள்ளன.',
+
+    'இன்று புனித அந்தோணியார் மெட்ரிகுலேஷன் மேல்நிலைப் பள்ளி இறைநம்பிக்கை, விடாமுயற்சி மற்றும் சிறப்பிற்கான அர்ப்பணிப்பின் சான்றாகத் திகழ்கிறது. தரமான கல்வி, ஒழுக்கம், நன்னெறி விழுமியங்கள் மற்றும் ஆன்மிக வளர்ச்சியின் மூலம் மாணவர்களைச் சிறந்த மனிதர்களாக உருவாக்கும் உயரிய நோக்கத்துடன் தொடர்ந்து செயல்பட்டு வருகிறது.',
+  ].join('\n\n'),
+}),
   academics: schoolPage('academics', {
     title: 'Academic year and assessment',
     summary: 'The school year runs from June to April.',
@@ -151,15 +173,6 @@ export const schoolPages = {
     title: '2025–26 ஆண்டு அறிக்கை',
     summary: '2025–26 கல்வியாண்டிற்கான பள்ளியின் ஆண்டு அறிக்கையைப் பாருங்கள்.',
     body: 'கல்வியாண்டின் நிகழ்ச்சிகள், செயல்பாடுகள் மற்றும் வளர்ச்சியை இவ்வறிக்கை பதிவு செய்கிறது. முழு அறிக்கையைத் திறக்க கீழே உள்ள PDF பொத்தானைப் பயன்படுத்தவும்.',
-  }),
-  'e-communication': schoolPage('e-communication', {
-    title: 'e-Communication',
-    summary: 'Official digital communication keeps families connected with school information.',
-    body: 'Current notices and announcements are published on this website. Families should use the contact details registered with the school and follow instructions issued by the school office. For access support or a change of contact details, contact the office directly.',
-  }, {
-    title: 'மின்னணுத் தொடர்பு',
-    summary: 'பள்ளியின் அதிகாரப்பூர்வ தகவல்களை குடும்பங்களுடன் இணைக்க மின்னணுத் தொடர்பு உதவுகிறது.',
-    body: 'தற்போதைய அறிவிப்புகள் இந்த இணையதளத்தில் வெளியிடப்படுகின்றன. பள்ளியில் பதிவு செய்யப்பட்ட தொடர்பு விவரங்களைப் பயன்படுத்தி அலுவலகம் வழங்கும் அறிவுறுத்தல்களைப் பின்பற்றவும். அணுகல் உதவி அல்லது தொடர்பு விவர மாற்றத்திற்கு அலுவலகத்தை நேரடியாகத் தொடர்புகொள்ளுங்கள்.',
   }),
   'e-magazine': schoolPage('e-magazine', {
     title: 'e-Magazine',

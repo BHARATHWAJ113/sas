@@ -284,12 +284,29 @@ model LeaderProfile {
   imageId     String? @db.VarChar(191)
   image       Media? @relation(fields: [imageId], references: [id], onDelete: SetNull)
   imageAsset  String? @db.VarChar(255)
+  groupId     String? @db.VarChar(191)
+  group       LeadershipGroup? @relation(fields: [groupId], references: [id], onDelete: SetNull)
   sortOrder   Int @default(0)
   status      ContentStatus @default(DRAFT)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   @@index([status, sortOrder])
+  @@index([groupId, status, sortOrder])
   @@map("leader_profiles")
+}
+
+model LeadershipGroup {
+  id        String @id @default(cuid()) @db.VarChar(191)
+  title     String @db.VarChar(160)
+  titleTa   String? @db.VarChar(160)
+  titleHi   String? @db.VarChar(160)
+  sortOrder Int @default(0)
+  status    ContentStatus @default(DRAFT)
+  leaders   LeaderProfile[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([status, sortOrder])
+  @@map("leadership_groups")
 }
 model ActivityCategory {
   id         String @id @default(cuid()) @db.VarChar(191)

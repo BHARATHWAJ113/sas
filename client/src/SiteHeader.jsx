@@ -2,7 +2,7 @@ import { localeFor } from '../../shared/languages.js';
 import { ThemeToggle } from './Theme';
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ArrowUpRight, Bell, ChevronDown, ChevronLeft, ChevronRight, Menu, Pause, Phone, Play, X } from 'lucide-react';
+import { ArrowUpRight, Bell, ChevronDown, ChevronLeft, ChevronRight, Menu, Pause, Play, X } from 'lucide-react';
 import { useApi } from './api';
 import { useSite } from './context';
 
@@ -11,7 +11,7 @@ const navigation = [
   { label: 'ourSchool', pages: [['about', '/about'], ['principalDesk', '/about#principal-desk'], ['leadershipTitle', '/about#school-leadership'], ['staffDirectory', '/staff'], ['schoolAnthem', '/school-anthem'], ['annualReport', '/annual-report'], ['eMagazine', '/e-magazine']] },
   { label: 'academics', pages: [['academics', '/academics'], ['honours', '/honours'], ['toppers', '/toppers']] },
   { label: 'studentLife', pages: [['studentLife', '/student-life'], ['activitiesNav', '/student-life#activities'], ['events', '/events'], ['news', '/news']] },
-  { label: 'facilitiesMenu', pages: [['infrastructure', '/infrastructure'], ['library', '/library'], ['laboratories', '/laboratories'], ['smartClass', '/smart-class'], ['eCommunication', '/e-communication'], ['schoolChimes', '/school-chimes'], ['transport', '/transport']] },
+  { label: 'facilitiesMenu', pages: [['infrastructure', '/infrastructure'], ['library', '/library'], ['laboratories', '/laboratories'], ['smartClass', '/smart-class'], ['schoolChimes', '/school-chimes'], ['transport', '/transport']] },
   { label: 'gallery', path: '/gallery' },
   { label: 'admissions', pages: [['admissions', '/admissions'], ['fees', '/fees']] },
   { label: 'contact', pages: [['contact', '/contact'], ['socialMedia', '/social-media']] },
@@ -95,7 +95,6 @@ function NoticeBar() {
       return (
         <>
           <li><Link to="/notices" className="notice-item" tabIndex={tabIndex}>{t('allNotices')}<ArrowUpRight size={15} aria-hidden="true" /></Link></li>
-          <li><Link to="/admissions#enquiry" className="notice-item" tabIndex={tabIndex}>{t('enquire')}<ArrowUpRight size={15} aria-hidden="true" /></Link></li>
         </>
       );
     }
@@ -138,13 +137,11 @@ function NoticeBar() {
 }
 
 export function SiteHeader() {
-  const { t, lang, setLang, site, setting } = useSite();
+  const { t, lang, setLang, site } = useSite();
   const [open, setOpen] = useState(false);
   const shell = useRef(null);
   const menuButton = useRef(null);
   const { pathname } = useLocation();
-  const phone = setting('phone').replace(/[ ().-]/g, '');
-  const hasPhone = /^\+?\d{7,15}$/.test(phone);
 
   function closeMenu() {
     setOpen(false);
@@ -198,15 +195,9 @@ export function SiteHeader() {
                 </div>
               </details>
             ) : <NavLink key={label} to={path} end={path === '/'} onClick={closeMenu}>{t(label)}</NavLink>)}
-            <div className="campus-mobile-actions">
-              {hasPhone && <a className="campus-call" href={`tel:${phone}`}><Phone size={16} aria-hidden="true" />{t('callSchool')}</a>}
-              <Link className="campus-enquire" to="/admissions#enquiry" onClick={closeMenu}>{t('enquire')}<ArrowUpRight size={16} aria-hidden="true" /></Link>
-            </div>
           </nav>
           <div className="campus-nav-actions"><ThemeToggle/>
             <select className="campus-language" value={lang} onChange={event => setLang(event.target.value)} aria-label="Language / மொழி / भाषा"><option value="en">English</option><option value="ta">தமிழ்</option><option value="hi">हिन्दी</option></select>
-            {hasPhone && <a className="campus-call" href={`tel:${phone}`} aria-label={t('callSchool')}><Phone size={16} aria-hidden="true" /><span>{t('callSchool')}</span></a>}
-            <Link className="campus-enquire" to="/admissions#enquiry" onClick={closeMenu}>{t('enquire')}<ArrowUpRight size={16} aria-hidden="true" /></Link>
             <button ref={menuButton} type="button" className="campus-menu-toggle" onClick={() => open ? closeMenu() : setOpen(true)} aria-expanded={open} aria-controls="main-navigation" aria-label={t(open ? 'closeNavigation' : 'openNavigation')}>{open ? <X size={22} /> : <Menu size={22} />}</button>
           </div>
         </div>

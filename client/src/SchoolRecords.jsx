@@ -85,25 +85,41 @@ export function SchoolLeadership() {
   const [selected, setSelected] = useState(null);
   const { data } = useApi('/leadership');
   const leaders = data?.items?.length ? data.items : fallbackLeaders;
+  const midpoint = Math.ceil(leaders.length / 2);
+  const groups = data?.groups?.length ? data.groups : [
+    { id: 'leadership-foundations', title: 'Foundations & Early Leadership', titleTa: 'அடித்தளம் மற்றும் தொடக்ககால தலைமை', titleHi: 'नींव और आरंभिक नेतृत्व', items: leaders.slice(0, midpoint) },
+    { id: 'leadership-growth', title: 'Growth & Contemporary Leadership', titleTa: 'வளர்ச்சி மற்றும் தற்கால தலைமை', titleHi: 'विकास और समकालीन नेतृत्व', items: leaders.slice(midpoint) },
+  ];
   const imageFor = leader => leader.image?.id ? mediaUrl(leader.image.id) : `/api/assets/images/${leader.imageAsset || leader.image}`;
 
   return (
     <section className="section school-leadership" id="school-leadership" aria-label={t('leadershipTitle')}>
       <div className="container">
         <SectionHeading eyebrow={t('leadershipTag')} title={t('leadershipTitle')} text={t('leadershipIntro')} />
-        <div className="leadership-grid">
-          {leaders.map((leader) => (
-            <button type="button" className="leadership-card" key={leader.id} onClick={() => setSelected(leader)} aria-haspopup="dialog" aria-label={`${t('viewDetails')}: ${pick(leader, 'name')}`}>
-              <span className="leadership-photo">
-                <img src={imageFor(leader)} alt={pick(leader, 'name')} width={leader.width || 700} height={leader.height || 860} loading="lazy" />
-                {leader.tenure && <span className="leadership-tenure"><CalendarDays size={13} aria-hidden="true" />{leader.tenure}</span>}
-              </span>
-              <span className="leadership-caption">
-                <h3>{pick(leader, 'name')}</h3>
-                <span><Medal size={14} aria-hidden="true" />{pick(leader, 'designation')}</span>
-                <small>{t('viewDetails')} ↗</small>
-              </span>
-            </button>
+        <div className="leadership-partitions">
+          {groups.filter(group => group.items?.length).map(group => (
+            <section className="leadership-partition" key={group.id} aria-labelledby={`leadership-group-${group.id}`}>
+              <div className="leadership-group-heading">
+                <span aria-hidden="true" />
+                <h3 id={`leadership-group-${group.id}`}>{pick(group, 'title')}</h3>
+                <span aria-hidden="true" />
+              </div>
+              <div className="leadership-grid">
+                {group.items.map((leader) => (
+                  <button type="button" className="leadership-card" key={leader.id} onClick={() => setSelected(leader)} aria-haspopup="dialog" aria-label={`${t('viewDetails')}: ${pick(leader, 'name')}`}>
+                    <span className="leadership-photo">
+                      <img src={imageFor(leader)} alt={pick(leader, 'name')} width={leader.width || 700} height={leader.height || 860} loading="lazy" />
+                      {leader.tenure && <span className="leadership-tenure"><CalendarDays size={13} aria-hidden="true" />{leader.tenure}</span>}
+                    </span>
+                    <span className="leadership-caption">
+                      <h3>{pick(leader, 'name')}</h3>
+                      <span><Medal size={14} aria-hidden="true" />{pick(leader, 'designation')}</span>
+                      <small>{t('viewDetails')} ↗</small>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       </div>

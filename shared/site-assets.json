@@ -258,6 +258,24 @@
     "sha256": "9337334ef6a29c6439409b08980006d3fd3b69e74dc6286ee2b0debbdfdd4702"
   },
   {
+    "filename": "e-magazine-cover-1200.webp",
+    "mimeType": "image/webp",
+    "size": 146096,
+    "sha256": "68886edef3c6a3854e869fe0468afd7cbdff410a854a97a929f98c7d9da423e5"
+  },
+  {
+    "filename": "e-magazine-cover-640.webp",
+    "mimeType": "image/webp",
+    "size": 97154,
+    "sha256": "ff67e7b0fa4c40f2f1423c67a7e41ece52057488153b886bde33cdf23034d368"
+  },
+  {
+    "filename": "e-magazine-cover.webp",
+    "mimeType": "image/webp",
+    "size": 146096,
+    "sha256": "68886edef3c6a3854e869fe0468afd7cbdff410a854a97a929f98c7d9da423e5"
+  },
+  {
     "filename": "e-magazine-edition-01.pdf",
     "mimeType": "application/pdf",
     "size": 1509257,
@@ -460,6 +478,24 @@
     "mimeType": "application/pdf",
     "size": 255411,
     "sha256": "674f7d233142e067ea8698f10e0450100720a950a6f0aa9de83e22b92ed0ab80"
+  },
+  {
+    "filename": "school-transport-1200.webp",
+    "mimeType": "image/webp",
+    "size": 229486,
+    "sha256": "362427fbf4765ff7e736c04e2665b984c08fd6602c3dc3c96ace4d750c60bf72"
+  },
+  {
+    "filename": "school-transport-640.webp",
+    "mimeType": "image/webp",
+    "size": 84370,
+    "sha256": "4830d386af6ed8d6a22c22df56b709ce22ce3fef040a36ce706aba707d26706b"
+  },
+  {
+    "filename": "school-transport.webp",
+    "mimeType": "image/webp",
+    "size": 339640,
+    "sha256": "809910c3cc5126ad7f3108dd251f28953c0beeb774015ebadfa6a57bd521781a"
   },
   {
     "filename": "sports-640.webp",

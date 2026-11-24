@@ -52,7 +52,7 @@ function PublicSite() {
           <Route path="/admissions" element={<Admissions />} />
           <Route path="/infrastructure" element={<Infrastructure />} />
           <Route path="/student-life" element={<StudentLife />} />
-          {['school-anthem', 'annual-report', 'e-communication', 'e-magazine', 'school-chimes', 'library', 'laboratories', 'smart-class', 'transport'].map(slug => <Route key={slug} path={`/${slug}`} element={<SchoolResourcePage slug={slug}/>}/>)}
+          {['school-anthem', 'annual-report', 'e-magazine', 'school-chimes', 'library', 'laboratories', 'smart-class', 'transport'].map(slug => <Route key={slug} path={`/${slug}`} element={<SchoolResourcePage slug={slug}/>}/>)}
           {['fees', 'honours', 'staff', 'toppers'].map(resource => <Route key={resource} path={`/${resource}`} element={<SchoolSection key={resource} resource={resource}/>}/>)}
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/social-media" element={<SocialMedia />} />

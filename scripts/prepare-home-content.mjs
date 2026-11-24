@@ -11,8 +11,13 @@ const output = join(root, 'assets', 'site-images');
 const manifestPath = join(root, 'shared', 'site-assets.json');
 await mkdir(output, { recursive: true });
 
-async function webp(input, filename, width, rotate = null) {
+async function webp(input, filename, width, rotate = null, crop = null) {
   let pipeline = sharp(input, { failOn: 'warning' });
+  if (crop === 'right-half') {
+    const metadata = await pipeline.metadata();
+    const left = Math.floor(metadata.width / 2);
+    pipeline = sharp(input, { failOn: 'warning' }).extract({ left, top: 0, width: metadata.width - left, height: metadata.height });
+  }
   pipeline = rotate === null ? pipeline.rotate() : pipeline.rotate(rotate);
   await pipeline.resize({ width, withoutEnlargement: true }).webp({ quality: 86, effort: 5 }).toFile(join(output, filename));
 }
@@ -22,12 +27,14 @@ const imageSets = [
   { source: 'fr-m-john-kennedy.webp', name: 'fr-m-john-kennedy', width: 1600 },
   { source: 'school anthem.jpeg', name: 'school-anthem', width: 1400, rotate: 90 },
   { source: join('..', 'school chimes', 'IMG_1181.PNG'), name: 'school-chimes', width: 1800 },
+  { source: join('..', 'e-magazine', 'edition-1-spread.png'), name: 'e-magazine-cover', width: 1200, crop: 'right-half' },
+  { source: join('..', 'WhatsApp Image 2026-10-19 at 10(1).jpg.jpeg'), name: 'school-transport', width: 1800 },
 ];
 for (const image of imageSets) {
   const input = image.source.startsWith('..') ? join(schoolDocs, image.source.slice(3)) : join(source, image.source);
-  await webp(input, `${image.name}.webp`, image.width, image.rotate);
-  await webp(input, `${image.name}-1200.webp`, 1200, image.rotate);
-  await webp(input, `${image.name}-640.webp`, 640, image.rotate);
+  await webp(input, `${image.name}.webp`, image.width, image.rotate, image.crop);
+  await webp(input, `${image.name}-1200.webp`, 1200, image.rotate, image.crop);
+  await webp(input, `${image.name}-640.webp`, 640, image.rotate, image.crop);
 }
 const documents = [
   [join(source, 'Annual_Report_2025-26_web.pdf'), 'annual-report-2025-26.pdf'],

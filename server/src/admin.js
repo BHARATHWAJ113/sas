@@ -1,148 +1,405 @@
-import { mountTranslation } from './translation.js';
-import { Router } from 'express';
-import bcrypt from 'bcryptjs';
-import { z } from 'zod';
-import { allow, csrf, fail, safeUser } from './auth.js';
-import { schemas, parse, userSchema } from './validation.js';
-import { mountUploads } from './uploads.js';
-import { storage } from './storage.js';
-import { queueMediaDeletion, cleanStorage } from './storage-cleanup.js';
-import { mountEmailAdmin } from './email-admin.js';
-import { adminList, listEnvelope } from './admin-list.js';
-import { schoolResources } from '../../shared/school-sections.js';
-import { homeContentResources } from '../../shared/home-content.js';
-const resources = { ...schoolResources, ...homeContentResources, pages: 'page', events: 'event', activities: 'activity', 'activity-categories': 'activityCategory', announcements: 'announcement', translations: 'translation', galleries: 'gallery', settings: 'siteSetting', media: 'media' };
-const relations = {
-  honours: { image: true }, staff: { image: true }, toppers: { image: true },
-  events: { images: { orderBy: { order: 'asc' }, include: { media: true } }, attachment: true },
-  activities: { category: { select: { title: true, status: true } }, image: { select: { id: true, alt: true, status: true } } },
-  galleries: { images: { orderBy: { order: 'asc' }, include: { media: true } } },
-  'home-slides': { media: true, poster: true },
-  'principal-desks': { image: true },
-  leadership: { image: true },
+import { mountTranslation } from "./translation.js";
+import { Router } from "express";
+import bcrypt from "bcryptjs";
+import { z } from "zod";
+import { allow, csrf, fail, safeUser } from "./auth.js";
+import { schemas, parse, userSchema } from "./validation.js";
+import { mountUploads } from "./uploads.js";
+import { storage } from "./storage.js";
+import { queueMediaDeletion, cleanStorage } from "./storage-cleanup.js";
+import { mountEmailAdmin } from "./email-admin.js";
+import { adminList, listEnvelope } from "./admin-list.js";
+import { schoolResources } from "../../shared/school-sections.js";
+import { homeContentResources } from "../../shared/home-content.js";
+const resources = {
+  ...schoolResources,
+  ...homeContentResources,
+  pages: "page",
+  events: "event",
+  activities: "activity",
+  "activity-categories": "activityCategory",
+  announcements: "announcement",
+  translations: "translation",
+  galleries: "gallery",
+  settings: "siteSetting",
+  media: "media",
 };
-const audit = (tx, req, action, entity, entityId) => tx.auditLog.create({ data: { userId: req.user.id, action, entity, entityId } });
+const relations = {
+  honours: { image: true },
+  staff: { image: true },
+  toppers: { image: true },
+  events: {
+    images: { orderBy: { order: "asc" }, include: { media: true } },
+    attachment: true,
+  },
+  activities: {
+    category: { select: { title: true, status: true } },
+    image: { select: { id: true, alt: true, status: true } },
+  },
+  galleries: {
+    images: { orderBy: { order: "asc" }, include: { media: true } },
+  },
+  "home-slides": { media: true, poster: true },
+  "principal-desks": { image: true },
+  leadership: {
+    image: true,
+    group: { select: { id: true, title: true, status: true } },
+  },
+};
+const audit = (tx, req, action, entity, entityId) =>
+  tx.auditLog.create({
+    data: { userId: req.user.id, action, entity, entityId },
+  });
 export function adminRouter(db, auth, store = storage) {
   const router = Router();
   router.use(auth, csrf);
   mountTranslation(router);
   mountEmailAdmin(router, db, audit);
-  router.get('/dashboard', async (req, res) => {
-    const [events, pages, enquiries, media, recent] = await Promise.all([db.event.count(), db.page.count(), ['ADMIN', 'EDITOR'].includes(req.user.role.name) ? db.admissionEnquiry.count({ where: { status: 'NEW' } }) : Promise.resolve(null), db.media.count(), req.user.role.name === 'ADMIN' ? db.auditLog.findMany({ take: 8, orderBy: { createdAt: 'desc' }, include: { user: { select: { name: true } } } }) : Promise.resolve([])]);
+  router.get("/dashboard", async (req, res) => {
+    const [events, pages, enquiries, media, recent] = await Promise.all([
+      db.event.count(),
+      db.page.count(),
+      ["ADMIN", "EDITOR"].includes(req.user.role.name)
+        ? db.admissionEnquiry.count({ where: { status: "NEW" } })
+        : Promise.resolve(null),
+      db.media.count(),
+      req.user.role.name === "ADMIN"
+        ? db.auditLog.findMany({
+            take: 8,
+            orderBy: { createdAt: "desc" },
+            include: { user: { select: { name: true } } },
+          })
+        : Promise.resolve([]),
+    ]);
     res.json({ events, pages, enquiries, media, recent });
   });
-  router.get('/roles', allow('ADMIN'), async (_req, res) => res.json({ items: await db.role.findMany() }));
-  router.get('/activity-category-options', allow('ADMIN', 'EDITOR'), async (_req, res) => {
-    const items = await db.activityCategory.findMany({ select: { id: true, slug: true, title: true, status: true }, orderBy: [{ sortOrder: 'asc' }, { title: 'asc' }] });
-    res.json({ items });
-  });
-  router.get('/users', allow('ADMIN'), async (req, res) => {
-    const { query, ...args } = adminList('users', req.query);
-    const [items, total] = await Promise.all([db.user.findMany({ ...args, include: { role: true } }), db.user.count({ where: args.where })]);
+  router.get("/roles", allow("ADMIN"), async (_req, res) =>
+    res.json({ items: await db.role.findMany() }),
+  );
+  router.get(
+    "/activity-category-options",
+    allow("ADMIN", "EDITOR"),
+    async (_req, res) => {
+      const items = await db.activityCategory.findMany({
+        select: { id: true, slug: true, title: true, status: true },
+        orderBy: [{ sortOrder: "asc" }, { title: "asc" }],
+      });
+      res.json({ items });
+    },
+  );
+  router.get(
+    "/leadership-group-options",
+    allow("ADMIN", "EDITOR"),
+    async (_req, res) => {
+      const items = await db.leadershipGroup.findMany({
+        select: { id: true, title: true, status: true },
+        orderBy: [{ sortOrder: "asc" }, { title: "asc" }],
+      });
+      res.json({ items });
+    },
+  );
+  router.get("/users", allow("ADMIN"), async (req, res) => {
+    const { query, ...args } = adminList("users", req.query);
+    const [items, total] = await Promise.all([
+      db.user.findMany({ ...args, include: { role: true } }),
+      db.user.count({ where: args.where }),
+    ]);
     res.json(listEnvelope(items.map(safeUser), total, query));
   });
-  router.post('/users', allow('ADMIN'), parse(userSchema.refine(v => !!v.password, { message: 'A password is required.', path: ['password'] })), async (req, res) => {
-    const { password, ...data } = req.validated;
-    const passwordHash = await bcrypt.hash(password, 12);
-    const result = await db.$transaction(async tx => {
-      const user = await tx.user.create({ data: { ...data, passwordHash }, include: { role: true } });
-      await audit(tx, req, 'CREATE', 'user', user.id);
-      return user;
+  router.post(
+    "/users",
+    allow("ADMIN"),
+    parse(
+      userSchema.refine((v) => !!v.password, {
+        message: "A password is required.",
+        path: ["password"],
+      }),
+    ),
+    async (req, res) => {
+      const { password, ...data } = req.validated;
+      const passwordHash = await bcrypt.hash(password, 12);
+      const result = await db.$transaction(async (tx) => {
+        const user = await tx.user.create({
+          data: { ...data, passwordHash },
+          include: { role: true },
+        });
+        await audit(tx, req, "CREATE", "user", user.id);
+        return user;
+      });
+      res.status(201).json(safeUser(result));
+    },
+  );
+  router.get("/users/:id", allow("ADMIN"), async (req, res) => {
+    const user = await db.user.findUnique({
+      where: { id: req.params.id },
+      include: { role: true },
     });
-    res.status(201).json(safeUser(result));
-  });
-  router.get('/users/:id', allow('ADMIN'), async (req, res) => {
-    const user = await db.user.findUnique({ where: { id: req.params.id }, include: { role: true } });
-    if (!user) throw fail(404, 'User unavailable.');
+    if (!user) throw fail(404, "User unavailable.");
     res.json(safeUser(user));
   });
-  router.put('/users/:id', allow('ADMIN'), parse(userSchema), async (req, res) => {
-    if (req.params.id === req.user.id && (!req.validated.active || req.validated.roleId !== req.user.roleId)) throw fail(400, 'You cannot disable your own account or change your own role.');
-    const { password, ...data } = req.validated;
-    const passwordHash = password ? await bcrypt.hash(password, 12) : undefined;
-    const result = await db.$transaction(async tx => {
-      const user = await tx.user.update({ where: { id: req.params.id }, data: { ...data, ...(passwordHash ? { passwordHash } : {}) }, include: { role: true } });
-      // Revoke sessions after every account or role change.
-      await tx.session.deleteMany({ where: { userId: user.id } });
-      await audit(tx, req, 'UPDATE', 'user', user.id);
-      return user;
+  router.put(
+    "/users/:id",
+    allow("ADMIN"),
+    parse(userSchema),
+    async (req, res) => {
+      if (
+        req.params.id === req.user.id &&
+        (!req.validated.active || req.validated.roleId !== req.user.roleId)
+      )
+        throw fail(
+          400,
+          "You cannot disable your own account or change your own role.",
+        );
+      const { password, ...data } = req.validated;
+      const passwordHash = password
+        ? await bcrypt.hash(password, 12)
+        : undefined;
+      const result = await db.$transaction(async (tx) => {
+        const user = await tx.user.update({
+          where: { id: req.params.id },
+          data: { ...data, ...(passwordHash ? { passwordHash } : {}) },
+          include: { role: true },
+        });
+        // Revoke sessions after every account or role change.
+        await tx.session.deleteMany({ where: { userId: user.id } });
+        await audit(tx, req, "UPDATE", "user", user.id);
+        return user;
+      });
+      res.json(safeUser(result));
+    },
+  );
+  router.delete("/users/:id", allow("ADMIN"), async (req, res) => {
+    if (req.params.id === req.user.id)
+      throw fail(400, "You cannot delete your own account.");
+    await db.$transaction(async (tx) => {
+      await tx.user.delete({ where: { id: req.params.id } });
+      await audit(tx, req, "DELETE", "user", req.params.id);
     });
-    res.json(safeUser(result));
-  });
-  router.delete('/users/:id', allow('ADMIN'), async (req, res) => {
-    if (req.params.id === req.user.id) throw fail(400, 'You cannot delete your own account.');
-    await db.$transaction(async tx => { await tx.user.delete({ where: { id: req.params.id } }); await audit(tx, req, 'DELETE', 'user', req.params.id); });
     res.status(204).end();
   });
-  router.get('/audit-logs', allow('ADMIN'), async (req, res) => {
-    const { query, ...args } = adminList('audit-logs', req.query);
-    const [items, total] = await Promise.all([db.auditLog.findMany({ ...args, include: { user: { select: { name: true } } } }), db.auditLog.count({ where: args.where })]);
+  router.get("/audit-logs", allow("ADMIN"), async (req, res) => {
+    const { query, ...args } = adminList("audit-logs", req.query);
+    const [items, total] = await Promise.all([
+      db.auditLog.findMany({
+        ...args,
+        include: { user: { select: { name: true } } },
+      }),
+      db.auditLog.count({ where: args.where }),
+    ]);
     res.json(listEnvelope(items, total, query));
   });
-  router.get('/enquiries', allow('ADMIN', 'EDITOR'), async (req, res) => {
-    const { query, ...args } = adminList('enquiries', req.query);
-    const select = Object.fromEntries(['id', 'parentName', 'studentName', 'email', 'phone', 'grade', 'message', 'locale', 'status', 'createdAt', 'updatedAt'].map(key => [key, true]));
-    const [items, total] = await Promise.all([db.admissionEnquiry.findMany({ ...args, select }), db.admissionEnquiry.count({ where: args.where })]);
+  router.get("/enquiries", allow("ADMIN", "EDITOR"), async (req, res) => {
+    const { query, ...args } = adminList("enquiries", req.query);
+    const select = Object.fromEntries(
+      [
+        "id",
+        "parentName",
+        "studentName",
+        "email",
+        "phone",
+        "grade",
+        "message",
+        "locale",
+        "status",
+        "createdAt",
+        "updatedAt",
+      ].map((key) => [key, true]),
+    );
+    const [items, total] = await Promise.all([
+      db.admissionEnquiry.findMany({ ...args, select }),
+      db.admissionEnquiry.count({ where: args.where }),
+    ]);
     res.json(listEnvelope(items, total, query));
   });
-  router.get('/enquiries/:id', allow('ADMIN'), async (req, res) => {
-    const item = await db.admissionEnquiry.findUnique({ where: { id: req.params.id }, include: { emails: { select: { id: true, to: true, status: true, kind: true, attempts: true, sentAt: true, lastError: true } } } });
-    if (!item) throw fail(404, 'Enquiry unavailable.');
-    if (item.metadataExpiresAt && item.metadataExpiresAt <= new Date()) { item.metadata = null; item.metadataExpiresAt = null; }
-    const history = await db.auditLog.findMany({ where: { entity: 'enquiry', entityId: item.id }, orderBy: { createdAt: 'asc' }, select: { action: true, createdAt: true } });
-    const { requestKey: _requestKey, payloadHash: _payloadHash, fingerprint: _fingerprint, ...details } = item;
+  router.get("/enquiries/:id", allow("ADMIN"), async (req, res) => {
+    const item = await db.admissionEnquiry.findUnique({
+      where: { id: req.params.id },
+      include: {
+        emails: {
+          select: {
+            id: true,
+            to: true,
+            status: true,
+            kind: true,
+            attempts: true,
+            sentAt: true,
+            lastError: true,
+          },
+        },
+      },
+    });
+    if (!item) throw fail(404, "Enquiry unavailable.");
+    if (item.metadataExpiresAt && item.metadataExpiresAt <= new Date()) {
+      item.metadata = null;
+      item.metadataExpiresAt = null;
+    }
+    const history = await db.auditLog.findMany({
+      where: { entity: "enquiry", entityId: item.id },
+      orderBy: { createdAt: "asc" },
+      select: { action: true, createdAt: true },
+    });
+    const {
+      requestKey: _requestKey,
+      payloadHash: _payloadHash,
+      fingerprint: _fingerprint,
+      ...details
+    } = item;
     res.json({ ...details, history });
   });
-  router.patch('/enquiries/:id', allow('ADMIN', 'EDITOR'), parse(z.object({ status: z.enum(['NEW', 'CONTACTED', 'CLOSED']) }).strict()), async (req, res) => {
-    const item = await db.$transaction(async tx => { const item = await tx.admissionEnquiry.update({ where: { id: req.params.id }, data: req.validated }); await audit(tx, req, 'UPDATE', 'enquiry', item.id); return item; });
-    res.json(item);
-  });
-  router.delete('/enquiries/:id', allow('ADMIN'), async (req, res) => {
-    await db.$transaction(async tx => {
+  router.patch(
+    "/enquiries/:id",
+    allow("ADMIN", "EDITOR"),
+    parse(
+      z.object({ status: z.enum(["NEW", "CONTACTED", "CLOSED"]) }).strict(),
+    ),
+    async (req, res) => {
+      const item = await db.$transaction(async (tx) => {
+        const item = await tx.admissionEnquiry.update({
+          where: { id: req.params.id },
+          data: req.validated,
+        });
+        await audit(tx, req, "UPDATE", "enquiry", item.id);
+        return item;
+      });
+      res.json(item);
+    },
+  );
+  router.delete("/enquiries/:id", allow("ADMIN"), async (req, res) => {
+    await db.$transaction(async (tx) => {
       // Lock queued rows before the sending check so a waiting worker cannot claim them during deletion.
-      await tx.emailMessage.updateMany({ where: { enquiryId: req.params.id, status: 'PENDING' }, data: { status: 'FAILED' } });
-      const sending = await tx.emailMessage.count({ where: { enquiryId: req.params.id, status: 'SENDING' } });
-      if (sending) throw fail(409, 'An email for this enquiry is being sent. Try deleting it again shortly.');
+      await tx.emailMessage.updateMany({
+        where: { enquiryId: req.params.id, status: "PENDING" },
+        data: { status: "FAILED" },
+      });
+      const sending = await tx.emailMessage.count({
+        where: { enquiryId: req.params.id, status: "SENDING" },
+      });
+      if (sending)
+        throw fail(
+          409,
+          "An email for this enquiry is being sent. Try deleting it again shortly.",
+        );
       await tx.admissionEnquiry.delete({ where: { id: req.params.id } });
-      await audit(tx, req, 'DELETE', 'enquiry', req.params.id);
+      await audit(tx, req, "DELETE", "enquiry", req.params.id);
     });
     res.status(204).end();
   });
   mountUploads(router, db, audit, store);
   for (const [resource, model] of Object.entries(resources)) {
-    const privilege = ['settings'].includes(resource) ? ['ADMIN'] : ['ADMIN', 'EDITOR'];
+    const privilege = ["settings"].includes(resource)
+      ? ["ADMIN"]
+      : ["ADMIN", "EDITOR"];
     router.get(`/${resource}`, async (req, res) => {
       const { query, ...args } = adminList(resource, req.query);
-      const omit = ['pages', 'events', 'announcements'].includes(resource) ? { omit: { body: true, bodyTa: true, bodyHi: true } } : {};
-      const [items, total] = await Promise.all([db[model].findMany({ ...args, ...omit, ...(relations[resource] ? { include: relations[resource] } : {}) }), db[model].count({ where: args.where })]);
+      const omit = ["pages", "events", "announcements"].includes(resource)
+        ? { omit: { body: true, bodyTa: true, bodyHi: true } }
+        : {};
+      const [items, total] = await Promise.all([
+        db[model].findMany({
+          ...args,
+          ...omit,
+          ...(relations[resource] ? { include: relations[resource] } : {}),
+        }),
+        db[model].count({ where: args.where }),
+      ]);
       res.json(listEnvelope(items, total, query));
     });
-    router.get(`/${resource}/:id`, ...(resource === 'settings' ? [allow('ADMIN')] : []), async (req, res) => {
-      const item = await db[model].findUnique({ where: { id: req.params.id }, ...(relations[resource] ? { include: relations[resource] } : {}) });
-      if (!item) throw fail(404, 'Record unavailable.');
-      res.json(item);
-    });
-    if (resource !== 'media') router.post(`/${resource}`, allow(...privilege), parse(schemas[resource]), async (req, res) => {
-      const result = await saveResource(db, req, resource, model, audit, false);
-      res.status(201).json(result);
-    });
-    router.put(`/${resource}/:id`, allow(...privilege), parse(schemas[resource]), async (req, res) => res.json(await saveResource(db, req, resource, model, audit, true)));
-    router.delete(`/${resource}/:id`, allow('ADMIN'), async (req, res) => {
-      if (resource === 'media') {
-        const used = await Promise.all(['honour', 'staffMember', 'topper'].map(model => db[model].count({ where: { imageId: req.params.id } })));
-        if (used.some(Boolean)) throw fail(409, 'Remove this photo from honours, staff and toppers before deleting it.');
-        const refs = await db.media.findUnique({ where: { id: req.params.id }, include: { _count: { select: { eventImages: true, attachments: true, galleryMedia: true, activities: true, announcementImages: true, emailAttachments: true, homeSlides: true, homeSlidePosters: true, principalDesks: true, leaderProfiles: true } } } });
-        if (refs && Object.values(refs._count).some(Boolean)) throw fail(409, 'Remove this media from events, galleries and activities before deleting it.');
-        const covers = await db.event.count({ where: { cover: `/api/media/${req.params.id}` } });
-        if (covers) throw fail(409, 'This image is used as an event cover. Remove that reference first.');
+    router.get(
+      `/${resource}/:id`,
+      ...(resource === "settings" ? [allow("ADMIN")] : []),
+      async (req, res) => {
+        const item = await db[model].findUnique({
+          where: { id: req.params.id },
+          ...(relations[resource] ? { include: relations[resource] } : {}),
+        });
+        if (!item) throw fail(404, "Record unavailable.");
+        res.json(item);
+      },
+    );
+    if (resource !== "media")
+      router.post(
+        `/${resource}`,
+        allow(...privilege),
+        parse(schemas[resource]),
+        async (req, res) => {
+          const result = await saveResource(
+            db,
+            req,
+            resource,
+            model,
+            audit,
+            false,
+          );
+          res.status(201).json(result);
+        },
+      );
+    router.put(
+      `/${resource}/:id`,
+      allow(...privilege),
+      parse(schemas[resource]),
+      async (req, res) =>
+        res.json(await saveResource(db, req, resource, model, audit, true)),
+    );
+    router.delete(`/${resource}/:id`, allow("ADMIN"), async (req, res) => {
+      if (resource === "leadership-groups")
+        throw fail(
+          409,
+          "The two leadership sections are fixed. Edit their titles instead of deleting them.",
+        );
+      if (resource === "media") {
+        const used = await Promise.all(
+          ["honour", "staffMember", "topper"].map((model) =>
+            db[model].count({ where: { imageId: req.params.id } }),
+          ),
+        );
+        if (used.some(Boolean))
+          throw fail(
+            409,
+            "Remove this photo from honours, staff and toppers before deleting it.",
+          );
+        const refs = await db.media.findUnique({
+          where: { id: req.params.id },
+          include: {
+            _count: {
+              select: {
+                eventImages: true,
+                attachments: true,
+                galleryMedia: true,
+                activities: true,
+                announcementImages: true,
+                emailAttachments: true,
+                homeSlides: true,
+                homeSlidePosters: true,
+                principalDesks: true,
+                leaderProfiles: true,
+              },
+            },
+          },
+        });
+        if (refs && Object.values(refs._count).some(Boolean))
+          throw fail(
+            409,
+            "Remove this media from events, galleries and activities before deleting it.",
+          );
+        const covers = await db.event.count({
+          where: { cover: `/api/media/${req.params.id}` },
+        });
+        if (covers)
+          throw fail(
+            409,
+            "This image is used as an event cover. Remove that reference first.",
+          );
       }
-      const removed = await db.$transaction(async tx => {
-        const deleted = await tx[model].delete({ where: { id: req.params.id } });
-        if (resource === 'media') await queueMediaDeletion(tx, deleted);
-        await audit(tx, req, 'DELETE', resource, req.params.id);
+      const removed = await db.$transaction(async (tx) => {
+        const deleted = await tx[model].delete({
+          where: { id: req.params.id },
+        });
+        if (resource === "media") await queueMediaDeletion(tx, deleted);
+        await audit(tx, req, "DELETE", resource, req.params.id);
         return deleted;
       });
-      if (resource === 'media') await cleanStorage(db, store, removed.filename).catch(() => {});
+      if (resource === "media")
+        await cleanStorage(db, store, removed.filename).catch(() => {});
       res.status(204).end();
     });
   }
@@ -150,35 +407,88 @@ export function adminRouter(db, auth, store = storage) {
 }
 async function saveResource(db, req, resource, model, audit, update) {
   const { imageIds, ...data } = req.validated;
-  return db.$transaction(async tx => {
+  if (resource === "settings" && data.key === "annualReportYoutubeUrl")
+    data.public = true;
+  return db.$transaction(async (tx) => {
+    if (
+      resource === "leadership-groups" &&
+      !update &&
+      (await tx.leadershipGroup.count()) >= 2
+    ) {
+      throw fail(
+        409,
+        "Two leadership sections already exist. Edit their titles instead.",
+      );
+    }
     if (data.imageId) {
       const image = await tx.media.findUnique({ where: { id: data.imageId } });
-      if (!image?.mimeType.startsWith('image/')) throw fail(400, 'Choose an image from the media library for the activity.');
+      if (!image?.mimeType.startsWith("image/"))
+        throw fail(
+          400,
+          "Choose an image from the media library for the activity.",
+        );
     }
-    if (resource === 'home-slides' && data.mediaId) {
+    if (resource === "leadership" && data.groupId) {
+      const group = await tx.leadershipGroup.findUnique({
+        where: { id: data.groupId },
+      });
+      if (!group) throw fail(400, "Choose a valid leadership section.");
+    }
+    if (resource === "home-slides" && data.mediaId) {
       const media = await tx.media.findUnique({ where: { id: data.mediaId } });
-      const prefix = data.kind === 'VIDEO' ? 'video/' : 'image/';
-      if (!media?.mimeType.startsWith(prefix)) throw fail(400, `Choose ${data.kind === 'VIDEO' ? 'an MP4 video' : 'an image'} from the media library.`);
+      const prefix = data.kind === "VIDEO" ? "video/" : "image/";
+      if (!media?.mimeType.startsWith(prefix))
+        throw fail(
+          400,
+          `Choose ${data.kind === "VIDEO" ? "an MP4 video" : "an image"} from the media library.`,
+        );
     }
-    if (resource === 'home-slides' && data.posterId) {
-      const poster = await tx.media.findUnique({ where: { id: data.posterId } });
-      if (!poster?.mimeType.startsWith('image/')) throw fail(400, 'Choose an image for the video poster.');
+    if (resource === "home-slides" && data.posterId) {
+      const poster = await tx.media.findUnique({
+        where: { id: data.posterId },
+      });
+      if (!poster?.mimeType.startsWith("image/"))
+        throw fail(400, "Choose an image for the video poster.");
     }
     if (imageIds?.length) {
-      const count = await tx.media.count({ where: { id: { in: [...new Set(imageIds)] }, mimeType: { startsWith: 'image/' } } });
-      if (count !== imageIds.length) throw fail(400, 'Select unique image files from the media library.');
+      const count = await tx.media.count({
+        where: {
+          id: { in: [...new Set(imageIds)] },
+          mimeType: { startsWith: "image/" },
+        },
+      });
+      if (count !== imageIds.length)
+        throw fail(400, "Select unique image files from the media library.");
     }
     if (data.attachmentId) {
-      const attachment = await tx.media.findUnique({ where: { id: data.attachmentId } });
-      if (!attachment || attachment.mimeType !== 'application/pdf') throw fail(400, 'Attachments must be PDF files from the media library.');
+      const attachment = await tx.media.findUnique({
+        where: { id: data.attachmentId },
+      });
+      if (!attachment || attachment.mimeType !== "application/pdf")
+        throw fail(
+          400,
+          "Attachments must be PDF files from the media library.",
+        );
     }
-    if (data.cover?.startsWith('/api/media/')) {
-      const cover = await tx.media.findUnique({ where: { id: data.cover.split('/').pop() } });
-      if (!cover?.mimeType.startsWith('image/')) throw fail(400, 'Choose an image from the media library for the cover.');
+    if (data.cover?.startsWith("/api/media/")) {
+      const cover = await tx.media.findUnique({
+        where: { id: data.cover.split("/").pop() },
+      });
+      if (!cover?.mimeType.startsWith("image/"))
+        throw fail(
+          400,
+          "Choose an image from the media library for the cover.",
+        );
     }
-    if (imageIds) data.images = { ...(update ? { deleteMany: {} } : {}), create: imageIds.map((mediaId, order) => ({ mediaId, order })) };
-    const item = update ? await tx[model].update({ where: { id: req.params.id }, data }) : await tx[model].create({ data });
-    await audit(tx, req, update ? 'UPDATE' : 'CREATE', resource, item.id);
+    if (imageIds)
+      data.images = {
+        ...(update ? { deleteMany: {} } : {}),
+        create: imageIds.map((mediaId, order) => ({ mediaId, order })),
+      };
+    const item = update
+      ? await tx[model].update({ where: { id: req.params.id }, data })
+      : await tx[model].create({ data });
+    await audit(tx, req, update ? "UPDATE" : "CREATE", resource, item.id);
     return item;
   });
 }

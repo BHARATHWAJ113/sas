@@ -76,7 +76,7 @@ export function createApp(db, options = {}) {
     res.json({ settings, translations, demo, privacyRetentionDays: config.VISITOR_RETENTION_DAYS });
   });
   app.get('/api/sitemap.xml', async (_req, res) => {
-    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'library', 'laboratories', 'smart-class', 'e-communication', 'school-chimes', 'transport', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy', 'fees', 'honours', 'staff', 'toppers', 'school-anthem', 'annual-report', 'e-magazine'];
+    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'library', 'laboratories', 'smart-class', 'school-chimes', 'transport', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy', 'fees', 'honours', 'staff', 'toppers', 'school-anthem', 'annual-report', 'e-magazine'];
     const events = demo ? [] : await db.event.findMany({ where: published, select: { slug: true } });
     const base = config.SITE_URL.replace(/\/$/, '');
     const escape = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');

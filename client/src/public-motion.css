@@ -61,12 +61,12 @@
     transition: background-color 180ms ease-out, border-color 180ms ease-out;
   }
 
-  :is(.quick-link, .text-link, .button, .hero-second, .campus-enquire) > svg:last-child,
+  :is(.quick-link, .text-link, .button, .hero-second) > svg:last-child,
   .academic-card .card-arrow {
     transition: translate 180ms ease-out;
   }
 
-  :is(.quick-link, .text-link, .button, .hero-second, .campus-enquire):focus-visible > svg:last-child,
+  :is(.quick-link, .text-link, .button, .hero-second):focus-visible > svg:last-child,
   .academic-card:focus-visible .card-arrow {
     translate: 2px -2px;
   }
@@ -89,7 +89,7 @@
   }
 
   @media (hover: hover) and (pointer: fine) {
-    :is(.quick-link, .text-link, .button, .hero-second, .campus-enquire):hover > svg:last-child,
+    :is(.quick-link, .text-link, .button, .hero-second):hover > svg:last-child,
     .academic-card:hover .card-arrow {
       translate: 2px -2px;
     }
