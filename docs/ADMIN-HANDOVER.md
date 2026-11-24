@@ -55,6 +55,8 @@ MINIO_SECRET_KEY=provided-through-secure-channel
 
 The endpoint setting contains the service origin; `MINIO_URL` contains the public bucket base URL. Keep the access and secret keys out of source control and browser configuration.
 
+The supplied Apache layout is one trusted reverse-proxy hop, so production must retain `TRUST_PROXY=1`. Public `GET`, `HEAD` and `OPTIONS` requests—including images and ordinary page data—do not consume the API write quota. Login, enquiry, email and other state-changing operations remain rate-limited. If static images or every public endpoint returns HTTP 429, confirm the current release contains this policy and restart `school-api`; do not disable the narrower login or enquiry protection.
+
 ## Production release procedure
 
 From the deployed release directory, after backing up the database:

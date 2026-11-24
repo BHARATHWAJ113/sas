@@ -59,7 +59,7 @@ Public browser reads share in-flight requests and cache successful responses for
 
 Requests have a 15-second timeout. Public reads retry one transient failure after 500 ms. Writes use explicit idempotency references. Event searches wait 220 ms between typed changes. The email editor loads only when an administrator opens Email management. Email bodies are fetched only when opening details, while history is paginated.
 
-The remaining IP-based ingress rate limit uses process-local memory. Deploy a shared ingress limiter when scaling behind multiple API instances. Database submission and administrator email quotas remain shared through MySQL.
+The remaining IP-based ingress rate limit applies only to state-changing API traffic and uses process-local memory. Public reads and images do not consume that quota. Login and enquiry routes retain their narrower endpoint limits. Deploy a shared ingress limiter when scaling behind multiple API instances. Database submission and administrator email quotas remain shared through MySQL.
 
 The public scroll-to-top arrow appears after 500 pixels, restores keyboard focus to the main content and uses instant movement when reduced motion is requested. Its listener is passive and updates at most once per animation frame. The React root is reused during development hot updates to prevent duplicate mounts. [Vite HMR data](https://vite.dev/guide/api-hmr#hot-data)
 

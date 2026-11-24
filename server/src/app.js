@@ -32,7 +32,19 @@ export function createApp(db, options = {}) {
   app.disable('x-powered-by');
   app.set('trust proxy', config.TRUST_PROXY);
   app.use(helmet(), cors({ origin: config.origins, credentials: true }), cookieParser());
-  app.use('/api', rateLimit({ windowMs: 15 * 60 * 1000, limit: 500, standardHeaders: 'draft-8', legacyHeaders: false, message: { error: 'Too many requests. Please try again shortly.' } }));
+  // Public pages request several API resources and responsive image variants at once.
+  // Limiting safe reads made the reverse proxy's shared bucket an availability risk:
+  // once exhausted, even the crest and health endpoint returned 429. Sensitive
+  // operations retain their narrower endpoint limits below; this ingress guard is
+  // only for state-changing API traffic.
+  app.use('/api', rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 500,
+    skip: req => ['GET', 'HEAD', 'OPTIONS'].includes(req.method),
+    standardHeaders: 'draft-8',
+    legacyHeaders: false,
+    message: { error: 'Too many requests. Please try again shortly.' },
+  }));
   app.use(express.json({ limit: '512kb' }), originGuard);
   // Only the published site-asset allowlist is accessible without a media record.
   // The legacy route keeps saved /images/ links working without local files.

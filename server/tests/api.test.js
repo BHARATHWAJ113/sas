@@ -40,6 +40,12 @@ describe('read-only preview API', () => {
   it('never pretends to save an enquiry in demo mode', async () => { const { body } = await request(app).post('/api/enquiries').set('Origin', origin).send({}).expect(503); expect(body.id).toBeUndefined(); });
   it('never offers a demo administrator login', async () => { await request(app).post('/api/auth/login').set('Origin', origin).send({ email: 'admin@example.test', password: 'bad' }).expect(503); });
   it('sets security headers', async () => { const res = await request(app).get('/api/events'); expect(res.headers['x-content-type-options']).toBe('nosniff'); expect(res.headers['x-powered-by']).toBeUndefined(); expect(res.headers['cache-control']).toBe('no-store'); });
+  it('does not consume the write quota for public reads', async () => {
+    const read = await request(app).get('/api/events').expect(200);
+    expect(read.headers.ratelimit).toBeUndefined();
+    const write = await request(app).post('/api/not-an-endpoint').set('Origin', origin).send({}).expect(404);
+    expect(write.headers.ratelimit).toContain('500-in-15min');
+  });
 });
 describe('public database boundaries', () => {
   let db; let app;
