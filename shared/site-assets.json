@@ -260,74 +260,74 @@
   {
     "filename": "e-magazine-edition-01.pdf",
     "mimeType": "application/pdf",
-    "size": 1422064,
-    "sha256": "805cf72080efa52c3ad05daa5eab5ca5b91fde57e6c14272097d04be78fec726"
+    "size": 1509257,
+    "sha256": "d9e8a74e554550a331afb36474c0626798be4f290c8506eab3e0ccad07e79122"
   },
   {
     "filename": "e-magazine-edition-02.pdf",
     "mimeType": "application/pdf",
-    "size": 1541257,
-    "sha256": "3d828e0c4e04e7a4b4d094b7cd4038bbcfa32127aca696addc498876d061ec74"
+    "size": 1677548,
+    "sha256": "7ba7eb501cb68e31049279cd2bcc6367262077eff540a4294788b73fa93f4226"
   },
   {
     "filename": "e-magazine-edition-03.pdf",
     "mimeType": "application/pdf",
-    "size": 2154778,
-    "sha256": "9b13a5a6539340b0443830a97e51ef3c1a9d926c47cbea26278fbb518e13738d"
+    "size": 2315080,
+    "sha256": "bb056b10a8f602cf43601ec0a1a71548e33c72589399f6612f3442212aca77de"
   },
   {
     "filename": "e-magazine-edition-04.pdf",
     "mimeType": "application/pdf",
-    "size": 2593951,
-    "sha256": "58e9beabad1a3a759ce87ef50cb6de8fcc7cbea1639231bbdf0a80d91de29e5d"
+    "size": 2736474,
+    "sha256": "bb6266d10947f138191cc1493fa8a1dbbe21b243d85fcb66dc51e7393df8d66f"
   },
   {
     "filename": "e-magazine-edition-05.pdf",
     "mimeType": "application/pdf",
-    "size": 2338596,
-    "sha256": "deef0ce2a4cebeb6ba79a96d2e3a1219dd6a1205052a60270e775e870c2cc761"
+    "size": 2437872,
+    "sha256": "ceaecab1f3343da85825bd46e8b2991266815ecb410e421211ccdf85c1fbc648"
   },
   {
     "filename": "e-magazine-edition-06.pdf",
     "mimeType": "application/pdf",
-    "size": 3204427,
-    "sha256": "6db6a24f8b3af4b3e86b072b3cbbd0b6ec22a825598ef3be68b5f93969d3a738"
+    "size": 3402362,
+    "sha256": "ef4cd994a4c760ce048c8d4370b84a21c2d2b86b52eb99802de5f27d5051410d"
   },
   {
     "filename": "e-magazine-edition-07.pdf",
     "mimeType": "application/pdf",
-    "size": 3870384,
-    "sha256": "e8033def4be2f646b7ade14c11e915db24e46b8145bbb65b98838bd24fd9ed65"
+    "size": 4072794,
+    "sha256": "6362ea0a829958d4a7eadb9a66867db78a91bd9b1682558d26f056a1988058b8"
   },
   {
     "filename": "e-magazine-edition-08.pdf",
     "mimeType": "application/pdf",
-    "size": 3149452,
-    "sha256": "5ac9f444808b7a5bc3077d6000ad67e0ac2f049d27b76cd01e1fb9a7671c55a6"
+    "size": 3334531,
+    "sha256": "71792c160adab21d71e51645c2a0e69e09fa78ec64012db1b31d784ee67199de"
   },
   {
     "filename": "e-magazine-edition-09.pdf",
     "mimeType": "application/pdf",
-    "size": 3380937,
-    "sha256": "3d088033f3c0c3a9d840865f32406a409711efa1b943f1497b2c771f23f73ef9"
+    "size": 3620181,
+    "sha256": "f0556512370d1948bd1605602df6c3516efd84eecac9711ae589bcae8cbecfb2"
   },
   {
     "filename": "e-magazine-edition-10.pdf",
     "mimeType": "application/pdf",
-    "size": 2584915,
-    "sha256": "7229da9474d529c83e9509ea0322001723225f65785d39607eb54d90754170cb"
+    "size": 2793427,
+    "sha256": "e4c2a34f05d9f8c7880c42c20bb879a09a10093689280e1d121e3716e371f97b"
   },
   {
     "filename": "e-magazine-edition-11.pdf",
     "mimeType": "application/pdf",
-    "size": 6848778,
-    "sha256": "e222c56e16369f9a51c8c29279268548e8abf0c5cdbaeb98c6210b6a56a76563"
+    "size": 7119533,
+    "sha256": "c28f6bf5a24f8983a8cb30a73e97be10c6d55b766afe1b2e6efccce627233ae8"
   },
   {
     "filename": "e-magazine-edition-12.pdf",
     "mimeType": "application/pdf",
-    "size": 4564550,
-    "sha256": "3d22a37cd499a1b3126883ed802e406137b48a10bcef44d282c19f22bfde3776"
+    "size": 4734667,
+    "sha256": "1be8682c3464ee3ee2ba14283c7cae70efecfd30a3751fbb4f5da2c1f6811700"
   },
   {
     "filename": "fr-anandaraj.webp",
@@ -458,8 +458,8 @@
   {
     "filename": "school-history.pdf",
     "mimeType": "application/pdf",
-    "size": 141693,
-    "sha256": "c94b3114ecdd7a75f00693f32974cdd5afd11185c402e4e5b4e858a2b9b83321"
+    "size": 255411,
+    "sha256": "674f7d233142e067ea8698f10e0450100720a950a6f0aa9de83e22b92ed0ab80"
   },
   {
     "filename": "sports-640.webp",

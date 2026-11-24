@@ -38,9 +38,11 @@ export function HomeCarousel() {
   const slides = data?.items?.length ? data.items : fallbackSlides;
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false);
+  const [soundBlocked, setSoundBlocked] = useState(false);
   const [reduced, setReduced] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const video = useRef(null);
+  const slide = slides[active];
 
   useEffect(() => setActive(current => Math.min(current, slides.length - 1)), [slides.length]);
   useEffect(() => {
@@ -60,16 +62,60 @@ export function HomeCarousel() {
     if (video.current) video.current.muted = muted;
   }, [active, muted]);
 
+  useEffect(() => {
+    const current = video.current;
+    if (!current || slide?.kind !== 'VIDEO' || reduced) return;
+    let cancelled = false;
+    const start = async () => {
+      current.muted = false;
+      setMuted(false);
+      try {
+        await current.play();
+        if (!cancelled) setSoundBlocked(false);
+      } catch {
+        if (cancelled) return;
+        // Browsers normally reject autoplay with audio. Keep the video moving,
+        // then let the first visitor gesture or the sound button enable audio.
+        current.muted = true;
+        setMuted(true);
+        setSoundBlocked(true);
+        try { await current.play(); } catch { /* The sound button can still start playback. */ }
+      }
+    };
+    start();
+    return () => { cancelled = true; };
+  }, [active, reduced, slide?.id, slide?.kind]);
+
+  useEffect(() => {
+    if (!soundBlocked) return;
+    const enableSound = event => {
+      if (event.target instanceof Element && event.target.closest('.home-carousel-audio')) return;
+      const current = video.current;
+      if (!current) return;
+      current.muted = false;
+      if (current.volume === 0) current.volume = 1;
+      setMuted(false);
+      setSoundBlocked(false);
+      current.play().catch(() => {});
+    };
+    document.addEventListener('pointerdown', enableSound, { capture: true, once: true });
+    return () => document.removeEventListener('pointerdown', enableSound, true);
+  }, [soundBlocked]);
+
   const move = direction => setActive(value => (value + direction + slides.length) % slides.length);
-  const toggleMute = () => setMuted(current => {
-    const next = !current;
-    if (video.current) {
-      video.current.muted = next;
-      if (!next && video.current.volume === 0) video.current.volume = 1;
+  const toggleMute = async event => {
+    event.stopPropagation();
+    const current = video.current;
+    if (!current) return;
+    const next = !current.muted;
+    current.muted = next;
+    if (!next && current.volume === 0) current.volume = 1;
+    setMuted(next);
+    setSoundBlocked(false);
+    if (current.paused) {
+      try { await current.play(); } catch { /* The UI remains available for another attempt. */ }
     }
-    return next;
-  });
-  const slide = slides[active];
+  };
   return (
     <section
       className="home-carousel"
@@ -80,7 +126,7 @@ export function HomeCarousel() {
     >
       <div className="home-carousel-frame">
         {slide.kind === 'VIDEO' ? (
-          <video ref={video} key={slide.id} src={slideSource(slide)} poster={slide.poster?.id ? mediaUrl(slide.poster.id) : undefined} muted={muted} autoPlay={!reduced} playsInline controls onVolumeChange={event => setMuted(event.currentTarget.muted || event.currentTarget.volume === 0)} aria-label={pick(slide, 'alt')} />
+          <video ref={video} key={slide.id} src={slideSource(slide)} poster={slide.poster?.id ? mediaUrl(slide.poster.id) : undefined} muted={muted} autoPlay={!reduced} playsInline controls loop preload="auto" onVolumeChange={event => setMuted(event.currentTarget.muted || event.currentTarget.volume === 0)} aria-label={pick(slide, 'alt')} />
         ) : <img key={slide.id} src={slideSource(slide)} alt={pick(slide, 'alt')} width="1920" height="920" fetchPriority={active === 0 ? 'high' : 'auto'} />}
         <div className="home-carousel-vignette" aria-hidden="true" />
         <div className="container home-carousel-mark">
@@ -91,7 +137,7 @@ export function HomeCarousel() {
           <button className="home-carousel-arrow home-carousel-arrow-previous" type="button" onClick={() => move(-1)} aria-label={t('previousSlide')}><ChevronLeft size={24} /></button>
           <button className="home-carousel-arrow home-carousel-arrow-next" type="button" onClick={() => move(1)} aria-label={t('nextSlide')}><ChevronRight size={24} /></button>
         </>}
-        {slide.kind === 'VIDEO' && <button className="home-carousel-audio" type="button" onClick={toggleMute} aria-label={t(muted ? 'unmuteVideo' : 'muteVideo')}>{muted ? <VolumeX size={20} /> : <Volume2 size={20} />}</button>}
+        {slide.kind === 'VIDEO' && <button className="home-carousel-audio" type="button" onClick={toggleMute} aria-label={t(muted ? 'unmuteVideo' : 'muteVideo')} title={t(muted ? 'unmuteVideo' : 'muteVideo')}>{muted ? <VolumeX size={20} /> : <Volume2 size={20} />}<span>{t(muted ? 'unmuteVideo' : 'muteVideo')}</span></button>}
       </div>
       {slides.length > 1 && <div className="container home-carousel-controls">
         <div className="home-carousel-dots" role="tablist" aria-label={t('selectSlide')}>
