@@ -1,0 +1,62 @@
+/* Public photos must remain fully visible at every responsive breakpoint. */
+#public-shell :is(
+  .home-carousel-frame,
+  .page-hero-photo,
+  .welcome-photo,
+  .life-photo,
+  .photo-card > div:first-child,
+  .event-image,
+  .event-detail-banner,
+  .image-grid button,
+  .gallery-strip a,
+  .gallery-slide,
+  .gallery-photo-grid button,
+  .activity-visual,
+  .leadership-photo,
+  .principal-portrait,
+  .anthem-illustration
+) {
+  background: #e9eff5;
+}
+
+#public-shell :is(
+  .home-carousel-frame > img,
+  .hero-image,
+  .page-hero-photo img,
+  .welcome-photo > img,
+  .life-photo > img,
+  .photo-card img,
+  .event-image img,
+  .event-detail-banner > img,
+  .image-grid img,
+  .gallery-strip img,
+  .gallery-slide img,
+  .gallery-photo-grid button img,
+  .activity-visual img,
+  .leadership-photo img,
+  .principal-portrait img,
+  .anthem-illustration img
+) {
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+
+#public-shell :is(
+  .photo-card:hover img,
+  .image-grid button:hover img,
+  .leadership-card:hover .leadership-photo img
+) {
+  transform: none;
+}
+
+/* Dark media stages make letterboxing intentional and keep pale photo edges clear. */
+#public-shell :is(.home-carousel-frame, .event-detail-banner) {
+  background: #071b37;
+}
+
+@media (max-width: 650px) {
+  #public-shell .principal-portrait img {
+    height: auto;
+    max-height: 620px;
+  }
+}

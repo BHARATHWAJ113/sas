@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight, Pause, Play, Quote, ShieldCheck } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Pause, Play, Quote, ShieldCheck, Volume2, VolumeX } from 'lucide-react';
 import { assetUrl, mediaUrl, useApi } from './api';
 import { useSite } from './context';
 
@@ -38,6 +38,7 @@ export function HomeCarousel() {
   const slides = data?.items?.length ? data.items : fallbackSlides;
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [muted, setMuted] = useState(true);
   const [reduced, setReduced] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const video = useRef(null);
 
@@ -55,7 +56,19 @@ export function HomeCarousel() {
     return () => window.clearTimeout(timer);
   }, [active, paused, reduced, slides]);
 
+  useEffect(() => {
+    if (video.current) video.current.muted = muted;
+  }, [active, muted]);
+
   const move = direction => setActive(value => (value + direction + slides.length) % slides.length);
+  const toggleMute = () => setMuted(current => {
+    const next = !current;
+    if (video.current) {
+      video.current.muted = next;
+      if (!next && video.current.volume === 0) video.current.volume = 1;
+    }
+    return next;
+  });
   const slide = slides[active];
   return (
     <section
@@ -67,7 +80,7 @@ export function HomeCarousel() {
     >
       <div className="home-carousel-frame">
         {slide.kind === 'VIDEO' ? (
-          <video ref={video} key={slide.id} src={slideSource(slide)} poster={slide.poster?.id ? mediaUrl(slide.poster.id) : undefined} muted autoPlay={!reduced} playsInline controls aria-label={pick(slide, 'alt')} />
+          <video ref={video} key={slide.id} src={slideSource(slide)} poster={slide.poster?.id ? mediaUrl(slide.poster.id) : undefined} muted={muted} autoPlay={!reduced} playsInline controls onVolumeChange={event => setMuted(event.currentTarget.muted || event.currentTarget.volume === 0)} aria-label={pick(slide, 'alt')} />
         ) : <img key={slide.id} src={slideSource(slide)} alt={pick(slide, 'alt')} width="1920" height="920" fetchPriority={active === 0 ? 'high' : 'auto'} />}
         <div className="home-carousel-vignette" aria-hidden="true" />
         <div className="container home-carousel-mark">
@@ -78,6 +91,7 @@ export function HomeCarousel() {
           <button className="home-carousel-arrow home-carousel-arrow-previous" type="button" onClick={() => move(-1)} aria-label={t('previousSlide')}><ChevronLeft size={24} /></button>
           <button className="home-carousel-arrow home-carousel-arrow-next" type="button" onClick={() => move(1)} aria-label={t('nextSlide')}><ChevronRight size={24} /></button>
         </>}
+        {slide.kind === 'VIDEO' && <button className="home-carousel-audio" type="button" onClick={toggleMute} aria-label={t(muted ? 'unmuteVideo' : 'muteVideo')}>{muted ? <VolumeX size={20} /> : <Volume2 size={20} />}</button>}
       </div>
       {slides.length > 1 && <div className="container home-carousel-controls">
         <div className="home-carousel-dots" role="tablist" aria-label={t('selectSlide')}>

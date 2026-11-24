@@ -29,6 +29,7 @@ import './gallery.css';
 import './theme.css';
 import './home-content.css';
 import './resource-pages.css';
+import './image-visibility.css';
 const SchoolSection = lazy(() => import('./SchoolSection'));
 const Admin = lazy(() => import('./admin/Admin'));
 class ErrorBoundary extends React.Component {
