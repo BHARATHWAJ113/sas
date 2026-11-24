@@ -79,7 +79,13 @@ describe('dynamic school sections', () => {
     for (const resource of Object.keys(fixtures)) for (const { id: _id, ...item } of manifest[resource]) expect(schoolSchemas[resource].safeParse(item).success).toBe(true);
     expect(manifest.staff).toHaveLength(60); expect(manifest.fees).toHaveLength(42);
     for (const { id: _id, ...album } of manifest.galleries) expect(schemas.galleries.safeParse(album).success).toBe(true);
-    expect(manifest.toppers.every(row => row.rank == null)).toBe(true);
+    const ranked = manifest.toppers.filter(row => row.rank != null);
+    expect(ranked).toHaveLength(5);
+    for (const row of ranked) {
+      expect(row.academicYear).toBe('2024-25');
+      expect(row.sourceRef).toContain('Annual_Report_2025-26_web.pdf');
+      expect(row.sourceRef).toContain('explicit 2024-25 rank');
+    }
     const sums = [20500,23500,26000,27000,29000];
     for (const [i, standard] of ['LKG','1','6','9','12'].entries()) expect(manifest.fees.filter(row => row.standard === standard).reduce((sum,row) => sum+row.amount,0)).toBe(sums[i]);
   });

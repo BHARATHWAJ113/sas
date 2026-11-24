@@ -276,6 +276,24 @@
     "sha256": "73ca1d94bdb3f0e0d795991d360bb99913599f834eb1e12134217d034ee5baf0"
   },
   {
+    "filename": "fr-v-chinnappan-1200.webp",
+    "mimeType": "image/webp",
+    "size": 61302,
+    "sha256": "231c2d8f42b846b5933411efc2476eeb7ea0e60f56ae5a283ec395dcb89c3de4"
+  },
+  {
+    "filename": "fr-v-chinnappan-640.webp",
+    "mimeType": "image/webp",
+    "size": 23964,
+    "sha256": "f93fa806ee48a955ac7a9629251ec5a085ffe8a91c5cf85f43fc36ef3e2496ea"
+  },
+  {
+    "filename": "fr-v-chinnappan.webp",
+    "mimeType": "image/webp",
+    "size": 61302,
+    "sha256": "231c2d8f42b846b5933411efc2476eeb7ea0e60f56ae5a283ec395dcb89c3de4"
+  },
+  {
     "filename": "hero-640.webp",
     "mimeType": "image/webp",
     "size": 42588,

@@ -1,272 +1,342 @@
 ﻿filename,path,dimensions,bytes,format,quality,issues,action,section,selected
-IMG-20241121-WA0009.jpg,D:\SAS\assets\schl_doc\2024\BISHOP_S VISIT\IMG-20241121-WA0009.jpg,780x1040,140124,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-IMG-20241121-WA0012.jpg,D:\SAS\assets\schl_doc\2024\BISHOP_S VISIT\IMG-20241121-WA0012.jpg,1600x1200,365198,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-IMG-20240713-WA0006.jpg,D:\SAS\assets\schl_doc\2024\BOOK FAIR\IMG-20240713-WA0006.jpg,1280x960,253528,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-IMG-20240713-WA0008.jpg,D:\SAS\assets\schl_doc\2024\BOOK FAIR\IMG-20240713-WA0008.jpg,1280x960,262755,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-IMG-20240713-WA0010.jpg,D:\SAS\assets\schl_doc\2024\BOOK FAIR\IMG-20240713-WA0010.jpg,,184969,jpg,Poor,Decode failed: UnidentifiedImageError,Exclude,Review,False
-DSC08033 (1).JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08033 (1).JPG,5472x3648,7089062,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08035.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08035.JPG,5472x3648,5980008,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08036.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08036.JPG,5472x3648,6300920,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08040.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08040.JPG,5472x3648,6072708,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08041.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08041.JPG,5472x3648,6272246,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08083.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08083.JPG,5472x3648,8685855,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-DSC08108.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08108.JPG,5472x3648,7944736,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08117.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08117.JPG,5472x3648,7574160,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08160.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08160.JPG,5472x3648,8104610,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08164.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08164.JPG,5472x3648,7492222,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08165.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08165.JPG,5472x3648,7960131,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08171.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08171.JPG,5472x3648,7811695,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08173.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08173.JPG,5472x3648,7924845,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08178.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08178.JPG,5472x3648,8788270,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08181.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08181.JPG,5472x3648,8306347,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08182.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08182.JPG,5472x3648,7741334,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08185.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08185.JPG,5472x3648,7759102,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08189.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08189.JPG,5472x3648,7963882,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08190.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08190.JPG,5472x3648,7587130,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08191.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08191.JPG,5472x3648,7421554,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08198.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08198.JPG,5472x3648,7817910,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08199.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08199.JPG,5472x3648,7081627,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08232.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08232.JPG,5472x3648,6716703,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08248.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08248.JPG,5472x3648,7872015,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-DSC08252.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08252.JPG,5472x3648,6404226,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC08254.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08254.JPG,5472x3648,7125659,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-DSC08256.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08256.JPG,5472x3648,7874204,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC01963.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC01963.JPG,5472x3648,7563666,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC01967.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC01967.JPG,5472x3648,8140200,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-DSC01983.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC01983.JPG,5472x3648,7719798,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC01996.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC01996.JPG,5472x3648,10424412,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-DSC02006.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC02006.JPG,5472x3648,7421693,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC02016.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC02016.JPG,5472x3648,6003920,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC02024.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC02024.JPG,5472x3648,7493168,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-IMG_20241223_111620.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_111620.jpg,4080x1836,3164763,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_111740.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_111740.jpg,4080x1836,3091754,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_111958.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_111958.jpg,4080x1836,3078496,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_112000.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112000.jpg,4080x1836,3106784,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_112002.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112002.jpg,4080x1836,3180302,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_112447.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112447.jpg,1920x1088,1252557,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20241223_112516.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112516.jpg,1920x1088,1236265,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20241223_112637.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112637.jpg,1920x1088,1253678,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20241223_112723.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112723.jpg,1920x1088,1245495,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20241223_113046.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_113046.jpg,1920x1088,1224928,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20241223_113118.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_113118.jpg,1920x1088,1224311,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20241223_115347.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_115347.jpg,4080x1836,2984828,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_115411.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_115411.jpg,4080x1836,2908363,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_120444.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_120444.jpg,4080x1836,2813257,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_121200.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_121200.jpg,4080x1836,2933221,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_124849.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_124849.jpg,4080x1836,3002259,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_124858.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_124858.jpg,4080x1836,3071511,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_124956.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_124956.jpg,4080x1836,3084608,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125007.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125007.jpg,4080x1836,3002374,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125023.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125023.jpg,4080x1836,3001809,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125036.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125036.jpg,4080x1836,3085129,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125045_1.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125045_1.jpg,4080x1836,3035623,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125056.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125056.jpg,4080x1836,3094396,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125154_1.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125154_1.jpg,4080x1836,3057931,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125211.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125211.jpg,4080x1836,2809778,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125253.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125253.jpg,4080x1836,3083735,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125322.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125322.jpg,4080x1836,2984768,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125333.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125333.jpg,4080x1836,2968719,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125409.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125409.jpg,4080x1836,3053313,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125426.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125426.jpg,4080x1836,3058636,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125553.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125553.jpg,4080x1836,3046716,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20241223_125840.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125840.jpg,1920x1088,1467030,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07662.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07662.JPG,5472x3648,8978253,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07666.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07666.JPG,3648x5472,8855016,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07669.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07669.JPG,5472x3648,9421816,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07672.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07672.JPG,5472x3648,7599227,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07675.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07675.JPG,5472x3648,7448137,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07676.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07676.JPG,5472x3648,8641437,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07687.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07687.JPG,5472x3648,7717442,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07693.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07693.JPG,5472x3648,7029727,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07698.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07698.JPG,5472x3648,7089377,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07703.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07703.JPG,5472x3648,6647318,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07730.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07730.JPG,5472x3648,9985368,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07757.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07757.JPG,5472x3648,11224825,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07780.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07780.JPG,5472x3648,9278269,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07786.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07786.JPG,5472x3648,11780134,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-DSC07794.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07794.JPG,3648x5472,7809273,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07797.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07797.JPG,3648x5472,7470506,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-DSC07800.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07800.JPG,5472x3648,8041669,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-DSC07811.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07811.JPG,5472x3648,9008799,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07825.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07825.JPG,5472x3648,10622854,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07830.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07830.JPG,5472x3648,7952746,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07833.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07833.JPG,5472x3648,10895140,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07840.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07840.JPG,5472x3648,8634331,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07846.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07846.JPG,5472x3648,9383939,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07852.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07852.JPG,5472x3648,9817054,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07854.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07854.JPG,5472x3648,9593502,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07863.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07863.JPG,5472x3648,9262173,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07888.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07888.JPG,5472x3648,9584986,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07890.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07890.JPG,5472x3648,7294231,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07909.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07909.JPG,5472x3648,7466203,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07912.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07912.JPG,5472x3648,7240803,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07937.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07937.JPG,5472x3648,6300084,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-DSC07941.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07941.JPG,5472x3648,8772692,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251114_091427.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_091427.jpg,4080x1836,3280312,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_091746.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_091746.jpg,4080x1836,2995822,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_092224.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092224.jpg,4080x1836,2773284,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_092238.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092238.jpg,4080x1836,2806299,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_092258.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092258.jpg,4080x1836,2683223,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_092312.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092312.jpg,4080x1836,3039410,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_092329.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092329.jpg,4080x1836,2805548,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_092344.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092344.jpg,4080x1836,2914249,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_094752.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094752.jpg,4080x1836,2693747,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_094808.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094808.jpg,4080x1836,2968935,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_094822.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094822.jpg,4080x1836,2797851,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_094835.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094835.jpg,4080x1836,3008347,JPG,Good,Unusual aspect ratio,Optimize,Gallery,True
-IMG_20251114_094844.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094844.jpg,4080x1836,2960703,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_094857_1.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094857_1.jpg,4080x1836,2910574,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_094908.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094908.jpg,4080x1836,3056158,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_094921.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094921.jpg,4080x1836,2952130,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_095630.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_095630.jpg,4080x1836,2812617,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_095737.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_095737.jpg,4080x1836,3266721,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_100756.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_100756.jpg,4080x1836,2829344,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_101103.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_101103.jpg,4080x1836,3255499,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_101149.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_101149.jpg,4080x1836,3193904,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_101212.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_101212.jpg,4080x1836,2987243,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_101345.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_101345.jpg,4080x1836,3532382,JPG,Good,Unusual aspect ratio,Optimize,Gallery,True
-IMG_20251114_101438.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_101438.jpg,4080x1836,3174670,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_104831.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_104831.jpg,4080x1836,3195854,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_105023.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_105023.jpg,4080x1836,3022011,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_105455.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_105455.jpg,4080x1836,2559465,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_110622.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_110622.jpg,4080x1836,3557582,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_123321.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_123321.jpg,4080x1836,2704210,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251114_124558.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_124558.jpg,4080x1836,3439088,JPG,Good,Unusual aspect ratio,Optimize,Gallery,True
-IMG_20251223_112119.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_112119.jpg,4080x1836,2737288,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_112211.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_112211.jpg,1920x1088,1398172,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_112624.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_112624.jpg,4080x1836,2782627,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_112918.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_112918.jpg,4080x1836,2763251,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_113202.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113202.jpg,1920x1088,1441839,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_113455.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113455.jpg,1920x1088,1489691,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_113804.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113804.jpg,4080x1836,2788166,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_113823.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113823.jpg,4080x1836,2818710,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_113833.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113833.jpg,4080x1836,2728229,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_113859.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113859.jpg,4080x1836,2684409,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_114745.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_114745.jpg,1920x1088,1371770,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_114928.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_114928.jpg,1920x1088,1423540,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_115301.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115301.jpg,1920x1088,1227525,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_115337.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115337.jpg,1920x1088,1390659,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_115408.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115408.jpg,1920x1088,1517246,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_115618.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115618.jpg,1920x1088,1486487,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_115803.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115803.jpg,4080x1836,2936983,JPG,Good,Unusual aspect ratio,Optimize,Gallery,True
-IMG_20251223_115805.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115805.jpg,4080x1836,3486833,JPG,Good,Unusual aspect ratio,Optimize,Gallery,True
-IMG_20251223_115913.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115913.jpg,4080x1836,4008318,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_120002.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_120002.jpg,1920x1088,1272797,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_120211.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_120211.jpg,4080x1836,3468807,JPG,Good,Unusual aspect ratio,Optimize,Gallery,True
-IMG_20251223_120712.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_120712.jpg,1920x1088,1396926,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_120816.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_120816.jpg,1920x1088,1442916,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-IMG_20251223_121015.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_121015.jpg,4080x1836,2764436,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_121035.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_121035.jpg,4080x1836,2800676,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_121131_1.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_121131_1.jpg,4080x1836,2725408,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_121431.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_121431.jpg,4080x1836,2831703,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20251223_122954.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_122954.jpg,4080x1836,2771768,JPG,Good,Unusual aspect ratio,Optimize,Gallery,False
-IMG_20250728_095537.jpg,D:\SAS\assets\schl_doc\2025\LITERARY ASSOCIATION - 2025\IMG_20250728_095537.jpg,4080x2296,3949919,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-26b1.jpg,D:\SAS\assets\schl_doc\2026-2027\band\26b1.jpg,206x206,13882,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26b2.jpg,D:\SAS\assets\schl_doc\2026-2027\band\26b2.jpg,206x206,13740,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26b4.jpg,D:\SAS\assets\schl_doc\2026-2027\band\26b4.jpg,206x206,15202,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26c1.jpg,D:\SAS\assets\schl_doc\2026-2027\childrens day\26c1.jpg,206x206,13255,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26c2.jpg,D:\SAS\assets\schl_doc\2026-2027\childrens day\26c2.jpg,206x206,11887,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26c3.jpg,D:\SAS\assets\schl_doc\2026-2027\childrens day\26c3.jpg,206x206,13532,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26af1.jpg,D:\SAS\assets\schl_doc\2026-2027\feast day\26af1.jpg,206x206,15467,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26af2.jpg,D:\SAS\assets\schl_doc\2026-2027\feast day\26af2.jpg,206x206,13317,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26af3.jpg,D:\SAS\assets\schl_doc\2026-2027\feast day\26af3.jpg,206x206,12554,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26EL1.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26EL1.jpg,206x206,10788,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26EL2.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26EL2.jpg,2048x1153,334031,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-26EL3.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26EL3.jpg,2048x1153,341944,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-26EL4.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26EL4.jpg,2048x1153,329891,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,False
-26tamildrama1.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26tamildrama1.jpg,206x206,11381,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26TL1.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26TL1.jpg,206x206,14968,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26TL2.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26TL2.jpg,2048x1153,391452,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-26TL3.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26TL3.jpg,206x206,11445,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26ec1.jpg,D:\SAS\assets\schl_doc\2026-2027\medical camp\26ec1.jpg,206x206,8130,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26ec2.jpg,D:\SAS\assets\schl_doc\2026-2027\medical camp\26ec2.jpg,206x206,9575,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26ec3.jpg,D:\SAS\assets\schl_doc\2026-2027\medical camp\26ec3.jpg,2048x1365,208455,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-26ncc1.jpg,D:\SAS\assets\schl_doc\2026-2027\ncc\26ncc1.jpg,206x206,11227,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26ncc2.jpg,D:\SAS\assets\schl_doc\2026-2027\ncc\26ncc2.jpg,206x206,14330,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26ncc3.jpg,D:\SAS\assets\schl_doc\2026-2027\ncc\26ncc3.jpg,206x206,14045,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26sb1.jpg,D:\SAS\assets\schl_doc\2026-2027\ncc\26sb1.jpg,1280x960,233431,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-26sb2.jpg,D:\SAS\assets\schl_doc\2026-2027\ncc\26sb2.jpg,206x206,13297,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26d1.jpg,D:\SAS\assets\schl_doc\2026-2027\parade and drill\26d1.jpg,1357x1001,192654,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-26d2.jpg,D:\SAS\assets\schl_doc\2026-2027\parade and drill\26d2.jpg,206x206,16188,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26p1.jpg,D:\SAS\assets\schl_doc\2026-2027\parade and drill\26p1.jpg,206x206,11200,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26p2.jpg,D:\SAS\assets\schl_doc\2026-2027\parade and drill\26p2.jpg,206x206,10757,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26r1.jpg,D:\SAS\assets\schl_doc\2026-2027\rangoli competition\26r1.jpg,206x206,12421,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26r2.jpg,D:\SAS\assets\schl_doc\2026-2027\rangoli competition\26r2.jpg,206x206,20817,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26r3.jpg,D:\SAS\assets\schl_doc\2026-2027\rangoli competition\26r3.jpg,206x206,13097,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26tr1.jpg,D:\SAS\assets\schl_doc\2026-2027\retirement\26tr1.jpg,206x206,12301,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26sc2.jpg,D:\SAS\assets\schl_doc\2026-2027\science exhibition\26sc2.jpg,206x206,11322,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26sc3.jpg,D:\SAS\assets\schl_doc\2026-2027\science exhibition\26sc3.jpg,206x206,12051,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26sci1.jpg,D:\SAS\assets\schl_doc\2026-2027\science exhibition\26sci1.jpg,206x206,9716,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26s&g1.jpg,D:\SAS\assets\schl_doc\2026-2027\scout and guides\26s&g1.jpg,206x206,12200,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26s&g2.jpg,D:\SAS\assets\schl_doc\2026-2027\scout and guides\26s&g2.jpg,206x206,13131,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26s&g3.jpg,D:\SAS\assets\schl_doc\2026-2027\scout and guides\26s&g3.jpg,206x206,13565,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26sp1.jpg,D:\SAS\assets\schl_doc\2026-2027\singapenne\26sp1.jpg,206x206,13475,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26sp2.jpg,D:\SAS\assets\schl_doc\2026-2027\singapenne\26sp2.jpg,206x206,11345,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26sp3.jpg,D:\SAS\assets\schl_doc\2026-2027\singapenne\26sp3.jpg,206x206,9235,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26am1.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26am1.jpg,206x206,8689,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26am2.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26am2.jpg,206x206,12863,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26am3.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26am3.jpg,206x206,10887,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26am4.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26am4.jpg,206x206,9203,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26am5.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26am5.jpg,206x206,10413,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26asm1.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26asm1.jpg,206x206,9556,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26asm2.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26asm2.jpg,206x206,10588,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26t1.jpg,D:\SAS\assets\schl_doc\2026-2027\teachers programme\26t1.jpg,206x206,12769,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26t2.jpg,D:\SAS\assets\schl_doc\2026-2027\teachers programme\26t2.jpg,206x206,11908,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26t3.jpg,D:\SAS\assets\schl_doc\2026-2027\teachers programme\26t3.jpg,206x206,11803,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26t6.jpg,D:\SAS\assets\schl_doc\2026-2027\teachers programme\26t6.jpg,206x206,15316,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26ft1.jpg,D:\SAS\assets\schl_doc\2026-2027\trip\26ft1.jpg,206x206,13104,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26o1.jpg,D:\SAS\assets\schl_doc\2026-2027\trip\26o1.jpg,206x206,11690,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,False
-26o2.jpg,D:\SAS\assets\schl_doc\2026-2027\trip\26o2.jpg,206x206,11690,JPG,Average,Exact duplicate of 2026-2027/trip/26o1.jpg; Small source; avoid enlargement,Exclude,Gallery,False
-26o3.jpg,D:\SAS\assets\schl_doc\2026-2027\trip\26o3.jpg,206x206,14200,JPG,Average,Small source; avoid enlargement,Optimize,Gallery,True
-26o4.jpg,D:\SAS\assets\schl_doc\2026-2027\trip\26o4.jpg,1280x960,102744,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Gallery,True
-26vac1.jpg,D:\SAS\assets\schl_doc\2026-2027\vaccine\26vac1.jpg,206x206,7122,JPG,Poor,Visual review: strong haze / low contrast; hold from website,Review,Gallery,False
-26vacc2.jpg,D:\SAS\assets\schl_doc\2026-2027\vaccine\26vacc2.jpg,206x206,6761,JPG,Poor,Visual review: strong haze / low contrast; hold from website,Review,Gallery,False
-ANANDA RAJ FATHER.jpg.jpeg,D:\SAS\assets\schl_doc\ANANDA RAJ FATHER.jpg.jpeg,1050x1350,279284,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Unlabelled / archive review,False
-FR THOMAS2.jpg.jpeg,D:\SAS\assets\schl_doc\FR THOMAS2.jpg.jpeg,2400x3432,1227964,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Unlabelled / archive review,False
-IMG_0753.JPEG,D:\SAS\assets\schl_doc\IMG_0753.JPEG,4096x2730,2525377,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / library,True
-IMG_0757.JPEG,D:\SAS\assets\schl_doc\IMG_0757.JPEG,3994x3003,2580824,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / library,True
-IMG_0760.JPEG,D:\SAS\assets\schl_doc\IMG_0760.JPEG,3994x3003,2413835,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / classrooms,True
-IMG_0761.JPEG,D:\SAS\assets\schl_doc\IMG_0761.JPEG,3826x2869,2580335,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / classrooms,True
-IMG_0763.JPEG,D:\SAS\assets\schl_doc\IMG_0763.JPEG,4096x2730,2275637,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / classrooms,True
-IMG_0764.JPEG,D:\SAS\assets\schl_doc\IMG_0764.JPEG,3510x2633,1886949,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / classrooms,True
-IMG_0765.JPEG,D:\SAS\assets\schl_doc\IMG_0765.JPEG,4000x3000,4100763,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / school-life,True
-IMG_0766.JPEG,D:\SAS\assets\schl_doc\IMG_0766.JPEG,4000x2786,2697764,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / smart-learning,True
-IMG_0767.JPEG,D:\SAS\assets\schl_doc\IMG_0767.JPEG,3575x2783,2145970,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / school-life,True
-IMG_0768.JPEG,D:\SAS\assets\schl_doc\IMG_0768.JPEG,3994x3003,2603840,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / classrooms,True
-IMG_0826.JPEG,D:\SAS\assets\schl_doc\IMG_0826.JPEG,4096x2730,1948970,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / indoor-games,True
-IMG_0827.JPEG,D:\SAS\assets\schl_doc\IMG_0827.JPEG,4096x2396,1720117,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / indoor-games,True
-IMG_0828.JPEG,D:\SAS\assets\schl_doc\IMG_0828.JPEG,3995x2406,1900528,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Campus gallery / indoor-games,True
-pascal.JPG.jpeg,D:\SAS\assets\schl_doc\pascal.JPG.jpeg,1050x1350,409064,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Unlabelled / archive review,False
-"Rev. Fr. A . Charles Antony 2005 - 2006 M. A., M. Phil., B.Ed.,.webp","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. A . Charles Antony 2005 - 2006 M. A., M. Phil., B.Ed.,.webp",1075x976,74828,WEBP,Good,No automated resolution/decode issue; visual review still advised,Optimize,Historical leadership,False
-Rev. Fr. Dr. Anandaraj 2015 - 2021.png,D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. Dr. Anandaraj 2015 - 2021.png,1106x1422,1958767,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Historical leadership,False
-"Rev. Fr. E. Thomas 1985 - 1994 M. A., B.Ed.,.webp","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. E. Thomas 1985 - 1994 M. A., B.Ed.,.webp",928x1129,53876,WEBP,Good,No automated resolution/decode issue; visual review still advised,Optimize,Historical leadership,False
-"Rev. Fr. M. John Kennedy M.A., M.A.,M.Sc., M.Ed., 2021 - Present.jpg","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. M. John Kennedy M.A., M.A.,M.Sc., M.Ed., 2021 - Present.jpg",4032x3024,1830128,JPG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Historical leadership,True
-"Rev. Fr. P. Arul Nathan 2007 - 2009 M. Sc., B.Ed.,.webp","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. P. Arul Nathan 2007 - 2009 M. Sc., B.Ed.,.webp",1206x1305,61436,WEBP,Good,No automated resolution/decode issue; visual review still advised,Optimize,Historical leadership,False
-"Rev. Fr. R. Pascal Raj 2009 - 2015 M.Sc., M.Ed.,.png","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. R. Pascal Raj 2009 - 2015 M.Sc., M.Ed.,.png",1106x1422,1951312,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Historical leadership,False
-"Rev. Fr. V. Don Bosco 2000 - 2002 M.Sc., B.Ed.,.webp","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. V. Don Bosco 2000 - 2002 M.Sc., B.Ed.,.webp",1312x1199,57310,WEBP,Good,No automated resolution/decode issue; visual review still advised,Optimize,Historical leadership,False
-print.jpg.jpeg,D:\SAS\assets\schl_doc\print.jpg.jpeg,5400x3600,5095693,JPEG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Unlabelled / archive review,False
-Pragadeeswari.R 465 out of 500.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers std 10\Pragadeeswari.R 465 out of 500.png,1080x1350,724473,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Tamilselvan.V 463 out of 500.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers std 10\Tamilselvan.V 463 out of 500.png,1080x1350,484860,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Thennarasan.A 474out of 500.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers std 10\Thennarasan.A 474out of 500.png,1122x1402,1749350,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Aathithya.D 547 out of 600.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers Std 12\Aathithya.D 547 out of 600.png,1080x1350,460697,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Kishore.P 560out of 600.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers Std 12\Kishore.P 560out of 600.png,1080x1350,546372,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Santhiya.R 560 out of 600.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers Std 12\Santhiya.R 560 out of 600.png,1080x1350,521250,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Swathi.G 590 out of 600.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers Std 12\Swathi.G 590 out of 600.png,372x397,308331,PNG,Average,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Abinaya.K 465 out of 500.png,D:\SAS\assets\schl_doc\toppers\22-23 toppers std 10\Abinaya.K 465 out of 500.png,1080x1350,806754,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Kabila.c 463 out of  500.png,D:\SAS\assets\schl_doc\toppers\22-23 toppers std 10\Kabila.c 463 out of  500.png,1080x1350,903514,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Kowshikan.R 475 out of 500.png,D:\SAS\assets\schl_doc\toppers\22-23 toppers std 10\Kowshikan.R 475 out of 500.png,1080x1350,691846,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Mukeh Kumar.R 463 out of 500.png,D:\SAS\assets\schl_doc\toppers\22-23 toppers std 10\Mukeh Kumar.R 463 out of 500.png,1080x1350,566697,PNG,Good,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Keerthana.T 491 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 10\Keerthana.T 491 out of 600.jpg,274x347,21435,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
-Mahalakshmi.P 487 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 10\Mahalakshmi.P 487 out of 500.jpg,305x347,21910,JPG,Average,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Nivetha.M 487 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 10\Nivetha.M 487 out of 500.jpg,245x347,20300,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
-Sadhana.G 493 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 10\Sadhana.G 493 out of 500.jpg,274x347,22385,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
-Aravinth.V 541 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 12\Aravinth.V 541 out of 600.jpg,266x347,13154,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
-Arun kumar.D  536 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 12\Arun kumar.D  536 out of 600.jpg,224x347,14183,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
-thennarasan.A  564 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 12\thennarasan.A  564 out of 600.jpg,259x348,14614,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
-Abiudhai.M.V 490 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 10\Abiudhai.M.V 490 out of 500.jpg,320x348,16739,JPG,Average,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Ansten Roys.J 475 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 10\Ansten Roys.J 475 out of 500.jpg,280x348,15926,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
-Sarina.J 477 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 10\Sarina.J 477 out of 500.jpg,280x348,20209,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
-Kabila.C 564 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 12\Kabila.C 564 out of 600.jpg,280x348,22384,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
-Mukesh Kumar.R  558 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 12\Mukesh Kumar.R  558 out of 600.jpg,276x348,20161,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
-Muthamizh Jeeva 567 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 12\Muthamizh Jeeva 567 out of 600.jpg,336x348,20758,JPG,Average,No automated resolution/decode issue; visual review still advised,Optimize,Toppers,True
-Priyadarshini.C 558 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 12\Priyadarshini.C 558 out of 600.jpg,295x348,23119,JPG,Average,Small source; avoid enlargement,Optimize,Toppers,True
+IMG-20241121-WA0009.jpg,D:\SAS\assets\schl_doc\2024\BISHOP_S VISIT\IMG-20241121-WA0009.jpg,780x1040,140124,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+IMG-20241121-WA0012.jpg,D:\SAS\assets\schl_doc\2024\BISHOP_S VISIT\IMG-20241121-WA0012.jpg,1600x1200,365198,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+IMG-20240713-WA0006.jpg,D:\SAS\assets\schl_doc\2024\BOOK FAIR\IMG-20240713-WA0006.jpg,1280x960,253528,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+IMG-20240713-WA0008.jpg,D:\SAS\assets\schl_doc\2024\BOOK FAIR\IMG-20240713-WA0008.jpg,1280x960,262755,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+IMG-20240713-WA0010.jpg,D:\SAS\assets\schl_doc\2024\BOOK FAIR\IMG-20240713-WA0010.jpg,,184969,JPG,Poor,Decode unavailable/failed: UnidentifiedImageError; retain original for review,Review,Review,False
+DSC08033 (1).JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08033 (1).JPG,5472x3648,7089062,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08035.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08035.JPG,5472x3648,5980008,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08036.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08036.JPG,5472x3648,6300920,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08040.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08040.JPG,5472x3648,6072708,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08041.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08041.JPG,5472x3648,6272246,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08083.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08083.JPG,5472x3648,8685855,MPO,Good,No automated decode/resolution issue,Optimize,Gallery,True
+DSC08108.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08108.JPG,5472x3648,7944736,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08117.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08117.JPG,5472x3648,7574160,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08160.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08160.JPG,5472x3648,8104610,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08164.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08164.JPG,5472x3648,7492222,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08165.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08165.JPG,5472x3648,7960131,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08171.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08171.JPG,5472x3648,7811695,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08173.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08173.JPG,5472x3648,7924845,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08178.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08178.JPG,5472x3648,8788270,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08181.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08181.JPG,5472x3648,8306347,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08182.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08182.JPG,5472x3648,7741334,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08185.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08185.JPG,5472x3648,7759102,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08189.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08189.JPG,5472x3648,7963882,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08190.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08190.JPG,5472x3648,7587130,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08191.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08191.JPG,5472x3648,7421554,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08198.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08198.JPG,5472x3648,7817910,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08199.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08199.JPG,5472x3648,7081627,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08232.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08232.JPG,5472x3648,6716703,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08248.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08248.JPG,5472x3648,7872015,MPO,Good,No automated decode/resolution issue,Optimize,Gallery,True
+DSC08252.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08252.JPG,5472x3648,6404226,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC08254.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08254.JPG,5472x3648,7125659,MPO,Good,No automated decode/resolution issue,Optimize,Gallery,True
+DSC08256.JPG,D:\SAS\assets\schl_doc\2024\BOOK RELEASE\DSC08256.JPG,5472x3648,7874204,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC01963.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC01963.JPG,5472x3648,7563666,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC01967.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC01967.JPG,5472x3648,8140200,MPO,Good,No automated decode/resolution issue,Optimize,Gallery,True
+DSC01983.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC01983.JPG,5472x3648,7719798,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC01996.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC01996.JPG,5472x3648,10424412,MPO,Good,No automated decode/resolution issue,Optimize,Gallery,True
+DSC02006.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC02006.JPG,5472x3648,7421693,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC02016.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC02016.JPG,5472x3648,6003920,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC02024.JPG,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\DSC02024.JPG,5472x3648,7493168,MPO,Good,No automated decode/resolution issue,Optimize,Gallery,True
+IMG_20241223_111620.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_111620.jpg,4080x1836,3164763,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_111740.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_111740.jpg,4080x1836,3091754,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_111958.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_111958.jpg,4080x1836,3078496,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_112000.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112000.jpg,4080x1836,3106784,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_112002.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112002.jpg,4080x1836,3180302,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_112447.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112447.jpg,1920x1088,1252557,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20241223_112516.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112516.jpg,1920x1088,1236265,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20241223_112637.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112637.jpg,1920x1088,1253678,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20241223_112723.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_112723.jpg,1920x1088,1245495,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20241223_113046.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_113046.jpg,1920x1088,1224928,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20241223_113118.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_113118.jpg,1920x1088,1224311,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20241223_115347.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_115347.jpg,4080x1836,2984828,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_115411.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_115411.jpg,4080x1836,2908363,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_120444.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_120444.jpg,4080x1836,2813257,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_121200.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_121200.jpg,4080x1836,2933221,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_124849.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_124849.jpg,4080x1836,3002259,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_124858.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_124858.jpg,4080x1836,3071511,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_124956.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_124956.jpg,4080x1836,3084608,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125007.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125007.jpg,4080x1836,3002374,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125023.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125023.jpg,4080x1836,3001809,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125036.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125036.jpg,4080x1836,3085129,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125045_1.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125045_1.jpg,4080x1836,3035623,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125056.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125056.jpg,4080x1836,3094396,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125154_1.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125154_1.jpg,4080x1836,3057931,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125211.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125211.jpg,4080x1836,2809778,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125253.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125253.jpg,4080x1836,3083735,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125322.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125322.jpg,4080x1836,2984768,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125333.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125333.jpg,4080x1836,2968719,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125409.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125409.jpg,4080x1836,3053313,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125426.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125426.jpg,4080x1836,3058636,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125553.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125553.jpg,4080x1836,3046716,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20241223_125840.jpg,D:\SAS\assets\schl_doc\2024\CHRISTMAS CELEBRATION\IMG_20241223_125840.jpg,1920x1088,1467030,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07662.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07662.JPG,5472x3648,8978253,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07666.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07666.JPG,3648x5472,8855016,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07669.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07669.JPG,5472x3648,9421816,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07672.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07672.JPG,5472x3648,7599227,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07675.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07675.JPG,5472x3648,7448137,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07676.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07676.JPG,5472x3648,8641437,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07687.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07687.JPG,5472x3648,7717442,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07693.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07693.JPG,5472x3648,7029727,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07698.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07698.JPG,5472x3648,7089377,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07703.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07703.JPG,5472x3648,6647318,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07730.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07730.JPG,5472x3648,9985368,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07757.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07757.JPG,5472x3648,11224825,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07780.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07780.JPG,5472x3648,9278269,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07786.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07786.JPG,5472x3648,11780134,MPO,Good,No automated decode/resolution issue,Optimize,Gallery,True
+DSC07794.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07794.JPG,3648x5472,7809273,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07797.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07797.JPG,3648x5472,7470506,MPO,Good,No automated decode/resolution issue,Optimize,Gallery,True
+DSC07800.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07800.JPG,5472x3648,8041669,MPO,Good,No automated decode/resolution issue,Optimize,Gallery,True
+DSC07811.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07811.JPG,5472x3648,9008799,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07825.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07825.JPG,5472x3648,10622854,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07830.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07830.JPG,5472x3648,7952746,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07833.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07833.JPG,5472x3648,10895140,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07840.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07840.JPG,5472x3648,8634331,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07846.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07846.JPG,5472x3648,9383939,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07852.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07852.JPG,5472x3648,9817054,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07854.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07854.JPG,5472x3648,9593502,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07863.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07863.JPG,5472x3648,9262173,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07888.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07888.JPG,5472x3648,9584986,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07890.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07890.JPG,5472x3648,7294231,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07909.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07909.JPG,5472x3648,7466203,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07912.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07912.JPG,5472x3648,7240803,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07937.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07937.JPG,5472x3648,6300084,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+DSC07941.JPG,D:\SAS\assets\schl_doc\2024\ST.ANTONY_S FEAST\DSC07941.JPG,5472x3648,8772692,MPO,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251114_091427.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_091427.jpg,4080x1836,3280312,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_091746.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_091746.jpg,4080x1836,2995822,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_092224.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092224.jpg,4080x1836,2773284,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_092238.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092238.jpg,4080x1836,2806299,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_092258.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092258.jpg,4080x1836,2683223,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_092312.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092312.jpg,4080x1836,3039410,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_092329.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092329.jpg,4080x1836,2805548,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_092344.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_092344.jpg,4080x1836,2914249,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_094752.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094752.jpg,4080x1836,2693747,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_094808.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094808.jpg,4080x1836,2968935,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_094822.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094822.jpg,4080x1836,2797851,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_094835.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094835.jpg,4080x1836,3008347,JPEG,Good,Unusual aspect ratio,Optimize,Gallery,True
+IMG_20251114_094844.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094844.jpg,4080x1836,2960703,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_094857_1.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094857_1.jpg,4080x1836,2910574,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_094908.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094908.jpg,4080x1836,3056158,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_094921.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_094921.jpg,4080x1836,2952130,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_095630.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_095630.jpg,4080x1836,2812617,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_095737.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_095737.jpg,4080x1836,3266721,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_100756.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_100756.jpg,4080x1836,2829344,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_101103.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_101103.jpg,4080x1836,3255499,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_101149.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_101149.jpg,4080x1836,3193904,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_101212.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_101212.jpg,4080x1836,2987243,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_101345.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_101345.jpg,4080x1836,3532382,JPEG,Good,Unusual aspect ratio,Optimize,Gallery,True
+IMG_20251114_101438.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_101438.jpg,4080x1836,3174670,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_104831.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_104831.jpg,4080x1836,3195854,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_105023.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_105023.jpg,4080x1836,3022011,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_105455.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_105455.jpg,4080x1836,2559465,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_110622.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_110622.jpg,4080x1836,3557582,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_123321.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_123321.jpg,4080x1836,2704210,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251114_124558.jpg,D:\SAS\assets\schl_doc\2025\CHILDREN_S DAY\IMG_20251114_124558.jpg,4080x1836,3439088,JPEG,Good,Unusual aspect ratio,Optimize,Gallery,True
+IMG_20251223_112119.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_112119.jpg,4080x1836,2737288,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_112211.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_112211.jpg,1920x1088,1398172,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_112624.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_112624.jpg,4080x1836,2782627,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_112918.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_112918.jpg,4080x1836,2763251,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_113202.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113202.jpg,1920x1088,1441839,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_113455.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113455.jpg,1920x1088,1489691,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_113804.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113804.jpg,4080x1836,2788166,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_113823.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113823.jpg,4080x1836,2818710,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_113833.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113833.jpg,4080x1836,2728229,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_113859.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_113859.jpg,4080x1836,2684409,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_114745.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_114745.jpg,1920x1088,1371770,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_114928.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_114928.jpg,1920x1088,1423540,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_115301.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115301.jpg,1920x1088,1227525,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_115337.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115337.jpg,1920x1088,1390659,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_115408.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115408.jpg,1920x1088,1517246,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_115618.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115618.jpg,1920x1088,1486487,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_115803.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115803.jpg,4080x1836,2936983,JPEG,Good,Unusual aspect ratio,Optimize,Gallery,True
+IMG_20251223_115805.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115805.jpg,4080x1836,3486833,JPEG,Good,Unusual aspect ratio,Optimize,Gallery,True
+IMG_20251223_115913.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_115913.jpg,4080x1836,4008318,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_120002.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_120002.jpg,1920x1088,1272797,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_120211.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_120211.jpg,4080x1836,3468807,JPEG,Good,Unusual aspect ratio,Optimize,Gallery,True
+IMG_20251223_120712.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_120712.jpg,1920x1088,1396926,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_120816.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_120816.jpg,1920x1088,1442916,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+IMG_20251223_121015.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_121015.jpg,4080x1836,2764436,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_121035.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_121035.jpg,4080x1836,2800676,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_121131_1.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_121131_1.jpg,4080x1836,2725408,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_121431.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_121431.jpg,4080x1836,2831703,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20251223_122954.jpg,D:\SAS\assets\schl_doc\2025\CHRISTMAS CELEBRATION - 2025\IMG_20251223_122954.jpg,4080x1836,2771768,JPEG,Good,Unusual aspect ratio,Review,Gallery,False
+IMG_20250728_095537.jpg,D:\SAS\assets\schl_doc\2025\LITERARY ASSOCIATION - 2025\IMG_20250728_095537.jpg,4080x2296,3949919,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+26b1.jpg,D:\SAS\assets\schl_doc\2026-2027\band\26b1.jpg,206x206,13882,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26b2.jpg,D:\SAS\assets\schl_doc\2026-2027\band\26b2.jpg,206x206,13740,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26b4.jpg,D:\SAS\assets\schl_doc\2026-2027\band\26b4.jpg,206x206,15202,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26c1.jpg,D:\SAS\assets\schl_doc\2026-2027\childrens day\26c1.jpg,206x206,13255,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26c2.jpg,D:\SAS\assets\schl_doc\2026-2027\childrens day\26c2.jpg,206x206,11887,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26c3.jpg,D:\SAS\assets\schl_doc\2026-2027\childrens day\26c3.jpg,206x206,13532,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26af1.jpg,D:\SAS\assets\schl_doc\2026-2027\feast day\26af1.jpg,206x206,15467,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26af2.jpg,D:\SAS\assets\schl_doc\2026-2027\feast day\26af2.jpg,206x206,13317,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26af3.jpg,D:\SAS\assets\schl_doc\2026-2027\feast day\26af3.jpg,206x206,12554,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26EL1.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26EL1.jpg,206x206,10788,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26EL2.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26EL2.jpg,2048x1153,334031,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+26EL3.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26EL3.jpg,2048x1153,341944,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+26EL4.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26EL4.jpg,2048x1153,329891,JPEG,Good,No automated decode/resolution issue,Review,Gallery,False
+26tamildrama1.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26tamildrama1.jpg,206x206,11381,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26TL1.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26TL1.jpg,206x206,14968,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26TL2.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26TL2.jpg,2048x1153,391452,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+26TL3.jpg,D:\SAS\assets\schl_doc\2026-2027\literary association\26TL3.jpg,206x206,11445,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26ec1.jpg,D:\SAS\assets\schl_doc\2026-2027\medical camp\26ec1.jpg,206x206,8130,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26ec2.jpg,D:\SAS\assets\schl_doc\2026-2027\medical camp\26ec2.jpg,206x206,9575,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26ec3.jpg,D:\SAS\assets\schl_doc\2026-2027\medical camp\26ec3.jpg,2048x1365,208455,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+26ncc1.jpg,D:\SAS\assets\schl_doc\2026-2027\ncc\26ncc1.jpg,206x206,11227,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26ncc2.jpg,D:\SAS\assets\schl_doc\2026-2027\ncc\26ncc2.jpg,206x206,14330,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26ncc3.jpg,D:\SAS\assets\schl_doc\2026-2027\ncc\26ncc3.jpg,206x206,14045,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26sb1.jpg,D:\SAS\assets\schl_doc\2026-2027\ncc\26sb1.jpg,1280x960,233431,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+26sb2.jpg,D:\SAS\assets\schl_doc\2026-2027\ncc\26sb2.jpg,206x206,13297,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26d1.jpg,D:\SAS\assets\schl_doc\2026-2027\parade and drill\26d1.jpg,1357x1001,192654,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+26d2.jpg,D:\SAS\assets\schl_doc\2026-2027\parade and drill\26d2.jpg,206x206,16188,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26p1.jpg,D:\SAS\assets\schl_doc\2026-2027\parade and drill\26p1.jpg,206x206,11200,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26p2.jpg,D:\SAS\assets\schl_doc\2026-2027\parade and drill\26p2.jpg,206x206,10757,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26r1.jpg,D:\SAS\assets\schl_doc\2026-2027\rangoli competition\26r1.jpg,206x206,12421,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26r2.jpg,D:\SAS\assets\schl_doc\2026-2027\rangoli competition\26r2.jpg,206x206,20817,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26r3.jpg,D:\SAS\assets\schl_doc\2026-2027\rangoli competition\26r3.jpg,206x206,13097,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26tr1.jpg,D:\SAS\assets\schl_doc\2026-2027\retirement\26tr1.jpg,206x206,12301,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26sc2.jpg,D:\SAS\assets\schl_doc\2026-2027\science exhibition\26sc2.jpg,206x206,11322,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26sc3.jpg,D:\SAS\assets\schl_doc\2026-2027\science exhibition\26sc3.jpg,206x206,12051,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26sci1.jpg,D:\SAS\assets\schl_doc\2026-2027\science exhibition\26sci1.jpg,206x206,9716,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26s&g1.jpg,D:\SAS\assets\schl_doc\2026-2027\scout and guides\26s&g1.jpg,206x206,12200,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26s&g2.jpg,D:\SAS\assets\schl_doc\2026-2027\scout and guides\26s&g2.jpg,206x206,13131,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26s&g3.jpg,D:\SAS\assets\schl_doc\2026-2027\scout and guides\26s&g3.jpg,206x206,13565,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26sp1.jpg,D:\SAS\assets\schl_doc\2026-2027\singapenne\26sp1.jpg,206x206,13475,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26sp2.jpg,D:\SAS\assets\schl_doc\2026-2027\singapenne\26sp2.jpg,206x206,11345,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26sp3.jpg,D:\SAS\assets\schl_doc\2026-2027\singapenne\26sp3.jpg,206x206,9235,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26am1.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26am1.jpg,206x206,8689,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26am2.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26am2.jpg,206x206,12863,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26am3.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26am3.jpg,206x206,10887,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26am4.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26am4.jpg,206x206,9203,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26am5.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26am5.jpg,206x206,10413,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26asm1.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26asm1.jpg,206x206,9556,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26asm2.jpg,D:\SAS\assets\schl_doc\2026-2027\sports meet\26asm2.jpg,206x206,10588,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26t1.jpg,D:\SAS\assets\schl_doc\2026-2027\teachers programme\26t1.jpg,206x206,12769,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26t2.jpg,D:\SAS\assets\schl_doc\2026-2027\teachers programme\26t2.jpg,206x206,11908,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26t3.jpg,D:\SAS\assets\schl_doc\2026-2027\teachers programme\26t3.jpg,206x206,11803,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26t6.jpg,D:\SAS\assets\schl_doc\2026-2027\teachers programme\26t6.jpg,206x206,15316,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26ft1.jpg,D:\SAS\assets\schl_doc\2026-2027\trip\26ft1.jpg,206x206,13104,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26o1.jpg,D:\SAS\assets\schl_doc\2026-2027\trip\26o1.jpg,206x206,11690,JPEG,Average,Small source; no enlargement,Review,Gallery,False
+26o2.jpg,D:\SAS\assets\schl_doc\2026-2027\trip\26o2.jpg,206x206,11690,JPEG,Average,Small source; no enlargement; Exact duplicate of 2026-2027/trip/26o1.jpg,Exclude,Gallery,False
+26o3.jpg,D:\SAS\assets\schl_doc\2026-2027\trip\26o3.jpg,206x206,14200,JPEG,Average,Small source; no enlargement,Optimize,Gallery,True
+26o4.jpg,D:\SAS\assets\schl_doc\2026-2027\trip\26o4.jpg,1280x960,102744,JPEG,Good,No automated decode/resolution issue,Optimize,Gallery,True
+26vac1.jpg,D:\SAS\assets\schl_doc\2026-2027\vaccine\26vac1.jpg,206x206,7122,JPEG,Poor,Visual review: strong haze / low contrast; held from website,Review,Gallery,False
+26vacc2.jpg,D:\SAS\assets\schl_doc\2026-2027\vaccine\26vacc2.jpg,206x206,6761,JPEG,Poor,Visual review: strong haze / low contrast; held from website,Review,Gallery,False
+ANANDA RAJ FATHER.jpg.jpeg,D:\SAS\assets\schl_doc\ANANDA RAJ FATHER.jpg.jpeg,1050x1350,279284,JPEG,Good,No automated decode/resolution issue,Review,Unlabelled / archive review,False
+FR THOMAS2.jpg.jpeg,D:\SAS\assets\schl_doc\FR THOMAS2.jpg.jpeg,2400x3432,1227964,JPEG,Good,No automated decode/resolution issue,Review,Unlabelled / archive review,False
+IMG_0753.JPEG,D:\SAS\assets\schl_doc\IMG_0753.JPEG,4096x2730,2525377,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / library,True
+IMG_0757.JPEG,D:\SAS\assets\schl_doc\IMG_0757.JPEG,3994x3003,2580824,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / library,True
+IMG_0760.JPEG,D:\SAS\assets\schl_doc\IMG_0760.JPEG,3994x3003,2413835,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / classrooms,True
+IMG_0761.JPEG,D:\SAS\assets\schl_doc\IMG_0761.JPEG,3826x2869,2580335,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / classrooms,True
+IMG_0763.JPEG,D:\SAS\assets\schl_doc\IMG_0763.JPEG,4096x2730,2275637,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / classrooms,True
+IMG_0764.JPEG,D:\SAS\assets\schl_doc\IMG_0764.JPEG,3510x2633,1886949,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / classrooms,True
+IMG_0765.JPEG,D:\SAS\assets\schl_doc\IMG_0765.JPEG,4000x3000,4100763,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / school-life,True
+IMG_0766.JPEG,D:\SAS\assets\schl_doc\IMG_0766.JPEG,4000x2786,2697764,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / smart-learning,True
+IMG_0767.JPEG,D:\SAS\assets\schl_doc\IMG_0767.JPEG,3575x2783,2145970,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / school-life,True
+IMG_0768.JPEG,D:\SAS\assets\schl_doc\IMG_0768.JPEG,3994x3003,2603840,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / classrooms,True
+IMG_0826.JPEG,D:\SAS\assets\schl_doc\IMG_0826.JPEG,4096x2730,1948970,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / indoor-games,True
+IMG_0827.JPEG,D:\SAS\assets\schl_doc\IMG_0827.JPEG,4096x2396,1720117,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / indoor-games,True
+IMG_0828.JPEG,D:\SAS\assets\schl_doc\IMG_0828.JPEG,3995x2406,1900528,JPEG,Good,No automated decode/resolution issue,Optimize,Campus gallery / indoor-games,True
+pascal.JPG.jpeg,D:\SAS\assets\schl_doc\pascal.JPG.jpeg,1050x1350,409064,JPEG,Good,No automated decode/resolution issue,Review,Unlabelled / archive review,False
+"Rev. Fr. A . Charles Antony 2005 - 2006 M. A., M. Phil., B.Ed.,.webp","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. A . Charles Antony 2005 - 2006 M. A., M. Phil., B.Ed.,.webp",1075x976,74828,WEBP,Good,No automated decode/resolution issue,Review,Historical leadership,False
+Rev. Fr. Dr. Anandaraj 2015 - 2021.png,D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. Dr. Anandaraj 2015 - 2021.png,1106x1422,1958767,PNG,Good,No automated decode/resolution issue,Review,Historical leadership,False
+"Rev. Fr. E. Thomas 1985 - 1994 M. A., B.Ed.,.webp","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. E. Thomas 1985 - 1994 M. A., B.Ed.,.webp",928x1129,53876,WEBP,Good,No automated decode/resolution issue,Review,Historical leadership,False
+"Rev. Fr. M. John Kennedy M.A., M.A.,M.Sc., M.Ed., 2021 - Present.jpg","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. M. John Kennedy M.A., M.A.,M.Sc., M.Ed., 2021 - Present.jpg",4032x3024,1830128,JPEG,Good,No automated decode/resolution issue,Optimize,Historical leadership,True
+"Rev. Fr. P. Arul Nathan 2007 - 2009 M. Sc., B.Ed.,.webp","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. P. Arul Nathan 2007 - 2009 M. Sc., B.Ed.,.webp",1206x1305,61436,WEBP,Good,No automated decode/resolution issue,Review,Historical leadership,False
+"Rev. Fr. R. Pascal Raj 2009 - 2015 M.Sc., M.Ed.,.png","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. R. Pascal Raj 2009 - 2015 M.Sc., M.Ed.,.png",1106x1422,1951312,PNG,Good,No automated decode/resolution issue,Review,Historical leadership,False
+Rev. Fr. V. Chinnappan 2002 - 2006.jpeg,D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. V. Chinnappan 2002 - 2006.jpeg,843x1084,514901,JPEG,Good,"No automated decode/resolution issue; User identified Rev. Fr. V. Chinnappan, 2002–2006; supplied photo visually reviewed",Optimize,Historical leadership,True
+"Rev. Fr. V. Don Bosco 2000 - 2002 M.Sc., B.Ed.,.webp","D:\SAS\assets\schl_doc\PRINCIPALS OF ST. ANTONY_S\Rev. Fr. V. Don Bosco 2000 - 2002 M.Sc., B.Ed.,.webp",1312x1199,57310,WEBP,Good,No automated decode/resolution issue,Review,Historical leadership,False
+print.jpg.jpeg,D:\SAS\assets\schl_doc\print.jpg.jpeg,5400x3600,5095693,JPEG,Good,No automated decode/resolution issue,Review,Unlabelled / archive review,False
+Pragadeeswari.R 465 out of 500.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers std 10\Pragadeeswari.R 465 out of 500.png,1080x1350,724473,PNG,Good,No automated decode/resolution issue,Optimize,Toppers,True
+Tamilselvan.V 463 out of 500.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers std 10\Tamilselvan.V 463 out of 500.png,1080x1350,484860,PNG,Good,No automated decode/resolution issue,Optimize,Toppers,True
+Thennarasan.A 474out of 500.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers std 10\Thennarasan.A 474out of 500.png,1122x1402,1749350,PNG,Good,No automated decode/resolution issue,Optimize,Toppers,True
+Aathithya.D 547 out of 600.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers Std 12\Aathithya.D 547 out of 600.png,1080x1350,460697,PNG,Good,No automated decode/resolution issue,Optimize,Toppers,True
+Kishore.P 560out of 600.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers Std 12\Kishore.P 560out of 600.png,1080x1350,546372,PNG,Good,No automated decode/resolution issue,Optimize,Toppers,True
+Santhiya.R 560 out of 600.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers Std 12\Santhiya.R 560 out of 600.png,1080x1350,521250,PNG,Good,No automated decode/resolution issue,Optimize,Toppers,True
+Swathi.G 590 out of 600.png,D:\SAS\assets\schl_doc\toppers\21-22 toppers Std 12\Swathi.G 590 out of 600.png,372x397,308331,PNG,Average,Small source; no enlargement,Optimize,Toppers,True
+Abinaya.K 465 out of 500.png,D:\SAS\assets\schl_doc\toppers\22-23 toppers std 10\Abinaya.K 465 out of 500.png,1080x1350,806754,PNG,Good,No automated decode/resolution issue,Optimize,Toppers,True
+Kabila.c 463 out of  500.png,D:\SAS\assets\schl_doc\toppers\22-23 toppers std 10\Kabila.c 463 out of  500.png,1080x1350,903514,PNG,Good,No automated decode/resolution issue,Optimize,Toppers,True
+Kowshikan.R 475 out of 500.png,D:\SAS\assets\schl_doc\toppers\22-23 toppers std 10\Kowshikan.R 475 out of 500.png,1080x1350,691846,PNG,Good,No automated decode/resolution issue,Optimize,Toppers,True
+Mukeh Kumar.R 463 out of 500.png,D:\SAS\assets\schl_doc\toppers\22-23 toppers std 10\Mukeh Kumar.R 463 out of 500.png,1080x1350,566697,PNG,Good,No automated decode/resolution issue,Optimize,Toppers,True
+Keerthana.T 491 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 10\Keerthana.T 491 out of 600.jpg,274x347,21435,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Mahalakshmi.P 487 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 10\Mahalakshmi.P 487 out of 500.jpg,305x347,21910,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Nivetha.M 487 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 10\Nivetha.M 487 out of 500.jpg,245x347,20300,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Sadhana.G 493 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 10\Sadhana.G 493 out of 500.jpg,274x347,22385,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Aravinth.V 541 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 12\Aravinth.V 541 out of 600.jpg,266x347,13154,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Arun kumar.D  536 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 12\Arun kumar.D  536 out of 600.jpg,224x347,14183,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+thennarasan.A  564 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\23-24 toppers std 12\thennarasan.A  564 out of 600.jpg,259x348,14614,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Abiudhai.M.V 490 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 10\Abiudhai.M.V 490 out of 500.jpg,320x348,16739,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Ansten Roys.J 475 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 10\Ansten Roys.J 475 out of 500.jpg,280x348,15926,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Sarina.J 477 out of 500.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 10\Sarina.J 477 out of 500.jpg,280x348,20209,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Kabila.C 564 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 12\Kabila.C 564 out of 600.jpg,280x348,22384,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Mukesh Kumar.R  558 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 12\Mukesh Kumar.R  558 out of 600.jpg,276x348,20161,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Muthamizh Jeeva 567 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 12\Muthamizh Jeeva 567 out of 600.jpg,336x348,20758,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+Priyadarshini.C 558 out of 600.jpg,D:\SAS\assets\schl_doc\toppers\24-25 toppers std 12\Priyadarshini.C 558 out of 600.jpg,295x348,23119,JPEG,Average,Small source; no enlargement,Optimize,Toppers,True
+fr-m-john-kennedy.webp,D:\SAS\assets\schl_doc\update-23112026\fr-m-john-kennedy.webp,4032x3024,915610,WEBP,Good,No automated decode/resolution issue,Review,Branding / leadership reference,False
+IMG_0562.HEIC,D:\SAS\assets\schl_doc\update-23112026\IMG_0562.HEIC,5712x4284 (header only),1479177,HEIC,Average,HEIC header readable with Sharp; pixel decoding failed. Visual quality unverified; export an original JPEG/PNG for review.,Review,Source review,False
+ncc logo.png,D:\SAS\assets\schl_doc\update-23112026\ncc logo.png,1254x1254,1744499,PNG,Good,No automated decode/resolution issue,Review,Branding / leadership reference,False
+repeted image.jpeg,D:\SAS\assets\schl_doc\update-23112026\repeted image.jpeg,1280x720,73799,JPEG,Good,Screenshot of website feedback; not an original school photograph,Exclude,Website feedback screenshot,False
+repeted img 2.jpeg,D:\SAS\assets\schl_doc\update-23112026\repeted img 2.jpeg,1280x720,126156,JPEG,Good,Screenshot of website feedback; not an original school photograph,Exclude,Website feedback screenshot,False
+school anthem.jpeg,D:\SAS\assets\schl_doc\update-23112026\school anthem.jpeg,1280x720,81525,JPEG,Good,Rotated photograph of anthem text; use accessible text after transcription review,Review,Document reference,False
+scout.jpeg,D:\SAS\assets\schl_doc\update-23112026\scout.jpeg,691x1024,61020,JPEG,Good,No automated decode/resolution issue,Review,Branding / leadership reference,False
+side image size reduce.jpeg,D:\SAS\assets\schl_doc\update-23112026\side image size reduce.jpeg,1280x720,104870,JPEG,Good,Screenshot of website feedback; not an original school photograph,Exclude,Website feedback screenshot,False
+sports.webp,D:\SAS\assets\schl_doc\update-23112026\sports.webp,1664x1536,478170,WEBP,Good,No automated decode/resolution issue,Review,Branding / leadership reference,False
+ST. ANTONY.jpg.jpeg,D:\SAS\assets\schl_doc\update-23112026\ST. ANTONY.jpg.jpeg,672x960,71273,JPEG,Good,No automated decode/resolution issue,Review,Branding / leadership reference,False
+ALBERT MARY S.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\ALBERT MARY S.png,1123x1400,2377382,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+CELINE CHANDRALEGA J.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\CELINE CHANDRALEGA J.png,1123x1400,1890650,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+CLARAMARY S.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\CLARAMARY S.png,1123x1401,1826976,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+GRACY F.JPG,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\GRACY F.JPG,2144x1424,1611636,JPEG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+HELEN REETA F.JPG,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\HELEN REETA F.JPG,2144x1424,1619420,JPEG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+JENIFER D.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\JENIFER D.png,1124x1399,2113576,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+JENMARAKKINI P.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\JENMARAKKINI P.png,1122x1402,1942950,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+JESURANI R.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\JESURANI R.png,1406x1119,2001554,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+JULI ANTONY MARY A.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\JULI ANTONY MARY A.png,1122x1402,2043344,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+LOOURDU MARIA A.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\LOOURDU MARIA A.png,1122x1402,1859319,PNG,Good,No automated decode/resolution issue; Unconfirmed spelling/initial: not assigned to any profile,Review,Staff directory,False
+MARK ASHOK JOSE A.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\MARK ASHOK JOSE A.png,1122x1402,1616634,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+MARY PRIYANGA J.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\MARY PRIYANGA J.png,1122x1402,2018298,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+NIRMALA SUDHA S.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\NIRMALA SUDHA S.png,1403x1121,1908531,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+PASCA PRAMILA E.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\PASCA PRAMILA E.png,1122x1402,2063876,PNG,Good,No automated decode/resolution issue; Unconfirmed spelling/initial: not assigned to any profile,Review,Staff directory,False
+SALVIUSE RANI P.JPG,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\SALVIUSE RANI P.JPG,2144x1424,1599118,JPEG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SHEELA JAYANTHI A.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\SHEELA JAYANTHI A.png,1122x1402,2205905,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SOFIA B.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\SOFIA B.png,1404x1120,1784334,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SOPHIA A.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\SOPHIA A.png,1122x1402,2150629,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+STELLA CHRIS ROSE MARY A.JPG,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\STELLA CHRIS ROSE MARY A.JPG,2144x1424,1541376,JPEG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+STELLA MARY SHANTHI K.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\STELLA MARY SHANTHI K.png,1122x1402,1966496,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+VIMAL M.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\VIMAL M.png,1122x1402,1793316,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+VISHNU PRIYA A.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 1\VISHNU PRIYA A.png,1122x1402,2212105,PNG,Good,No automated decode/resolution issue; Unconfirmed spelling/initial: not assigned to any profile,Review,Staff directory,False
+AROCKIA CHINNAPPA RAJ S.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\AROCKIA CHINNAPPA RAJ S.png,1122x1402,1550228,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+AROCKIA MARY V.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\AROCKIA MARY V.png,1401x1123,1890623,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+BASKER S.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\BASKER S.png,1122x1402,1584352,PNG,Good,No automated decode/resolution issue; Unconfirmed spelling/initial: not assigned to any profile,Review,Staff directory,False
+CHINNAPONNU P.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\CHINNAPONNU P.png,1122x1402,2362199,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+DAISY M.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\DAISY M.png,1122x1402,1945616,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+DURAI K.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\DURAI K.png,1122x1402,1789320,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+GURUMOORTHY B.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\GURUMOORTHY B.png,1122x1402,2235765,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+HELEN MARY P.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\HELEN MARY P.png,1122x1402,2032237,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+JENCI P.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\JENCI P.png,1122x1402,2040311,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+JENEFER DOROTHE A.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\JENEFER DOROTHE A.png,1402x1122,2056111,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+JOHNSON NEHRU V.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\JOHNSON NEHRU V.png,1405x1120,1624681,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+JOSVA A.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\JOSVA A.png,1124x1399,1460763,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+KALAI SELVAN R.jpeg,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\KALAI SELVAN R.jpeg,300x369,94342,JPEG,Average,Small source; no enlargement; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+LAKSHMI K.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\LAKSHMI K.png,1122x1402,2005028,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+LOUIS FLORA M.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\LOUIS FLORA M.png,1122x1402,2314913,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+MARIA PUSHPAM C.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\MARIA PUSHPAM C.png,1402x1122,2212488,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+MARY STELLA A.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\MARY STELLA A.png,1122x1402,1861170,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+MOHAN RAJ J.jpeg,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\MOHAN RAJ J.jpeg,789x1014,578488,JPEG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+MONICA J.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\MONICA J.png,1122x1402,2144538,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+NIVETHA MARY M.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\NIVETHA MARY M.png,922x1064,1315283,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+PAPPITHA E.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\PAPPITHA E.png,1122x1402,2108805,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+PASCAL NITHYA MARYS.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\PASCAL NITHYA MARYS.png,1122x1402,2239094,PNG,Good,No automated decode/resolution issue; Unconfirmed spelling/initial: not assigned to any profile,Review,Staff directory,False
+PAUL ARIVAZHAGI S.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\PAUL ARIVAZHAGI S.png,1122x1402,2071098,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+RAMESH D.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\RAMESH D.png,1122x1402,1596483,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SAHAYA MERIT HELEN J.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\SAHAYA MERIT HELEN J.png,1122x1402,2125656,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SANGEETHA M.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\SANGEETHA M.png,1122x1402,1916248,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SANTHOSE MARY I.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\SANTHOSE MARY I.png,1122x1402,2610003,PNG,Good,No automated decode/resolution issue; Unconfirmed spelling/initial: not assigned to any profile,Review,Staff directory,False
+SELVI R.jpeg,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\SELVI R.jpeg,658x835,120089,JPEG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SELVI S.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\SELVI S.png,1402x1122,1881319,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SHANTHA P.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\SHANTHA P.png,1122x1402,2090437,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SHANTHI SAGAYA MARY S.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\SHANTHI SAGAYA MARY S.png,1122x1402,2137747,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SOFIA THERESE L.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\SOFIA THERESE L.png,1122x1402,1943142,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SUNDARAMOORTHY K.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\SUNDARAMOORTHY K.png,1402x1122,1966610,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+SUYAMANI D.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\SUYAMANI D.png,1122x1402,2337977,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+TEJAVA VATHU VASANTHA.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\TEJAVA VATHU VASANTHA.png,1124x1399,2237851,PNG,Good,No automated decode/resolution issue; Unconfirmed spelling/initial: not assigned to any profile,Review,Staff directory,False
+UMAMAHESWARI D.png,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\UMAMAHESWARI D.png,1122x1402,2113887,PNG,Good,No automated decode/resolution issue; Filename matched staff list; contact sheet reviewed,Optimize,Staff directory,True
+Vinith Hudson.PNG,D:\SAS\assets\schl_doc\update-23112026\STAFF PHOTO WITH NAME 2\Vinith Hudson.PNG,1087x1447,2086905,PNG,Good,No automated decode/resolution issue; Unconfirmed spelling/initial: not assigned to any profile,Review,Staff directory,False

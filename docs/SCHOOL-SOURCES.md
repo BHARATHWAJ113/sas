@@ -15,12 +15,13 @@ The website uses the school material supplied in `assets/schl_doc`. The page num
 
 | Original filename | Caption or filename evidence | Historical context |
 |---|---|---|
+| `Rev. Fr. V. Chinnappan 2002 - 2006.jpeg` | User supplied this named photograph on 24 November 2026, with the 2002–2006 period in its filename | Added to historical leadership, not the current staff list. The original is preserved in the PRINCIPALS source folder; WebP variants are served from MinIO. |
 | `FR THOMAS2.jpg.jpeg` | Printed caption “FR. THOMAS.E 1984–1985” | History p. 1 names Rev. Fr. E. Thomas as the St. Paul’s principal who started its kindergarten annexe in 1994. The portrait’s earlier date is reproduced as an archival caption. |
 | `pascal.JPG.jpeg` | Given name in the filename | History p. 1 names Rev. Fr. Pascal Raj as principal during early expansion. The association with this captionless portrait comes from the supplied filename. |
 | `ANANDA RAJ FATHER.jpg.jpeg` | “ANANDA RAJ” in the filename | History pp. 2–3 uses the spelling Rev. Fr. Anandaraj and dates his appointment as correspondent and principal to June 2015. The association with this captionless portrait comes from the supplied filename. |
 | `print.jpg.jpeg` | Tribute poster names Rev. Fr. M. John Kennedy and gives the role “The Correspondent cum Principal” | History p. 4 records his appointment on 13 June 2023. The site describes the dated appointment. |
 
-The original files are in `assets/schl_doc`. The public build contains resized WebP copies of the four portraits and the site’s sourced summaries. The handbook and school history PDFs remain local references.
+The original files are in `assets/schl_doc`. Five selected leadership portraits are prepared as WebP assets and served through the MinIO-backed API; they are not stored in the public frontend build. The handbook and school history PDFs remain local references.
 
 The handbook specifies an admission month. Exact application dates, age criteria, fees and available places should come from the school office. The planner is presented as the 2026–27 handbook schedule, with dates only. The handbook gives two different morning arrival times on printed p. 23, so that passage was omitted. Current office hours and leadership tenure dates beyond the documented appointments remain open for school confirmation.
 

@@ -42,7 +42,7 @@ Use the old directory that actually contains the files. On your server the other
 
 The CI deployment excludes the root `assets/` source directory and all upload/transfer directories. Thus the release uses MinIO without copying image folders onto the web server. Initial migration/import commands need the full maintenance checkout; normal production builds and readiness checks need only the code, database and MinIO. Once this collection has been transferred, do not upload it again for every deployment.
 
-The first migration command is read-only. The second uploads missing objects and verifies their actual bytes with SHA-256. Both use the database to include all media, including drafts, archived records and PDFs, then include the 54 prepared site assets. Missing thumbnails are generated in memory. Missing originals stop the migration; recover them from the old upload backup first. Different existing MinIO objects stop the migration instead of being overwritten. An interrupted transfer can be rerun: matching objects are verified and skipped. It never deletes source files or edits captions, publication status, media IDs or gallery associations.
+The first migration command is read-only. The second uploads missing objects and verifies their actual bytes with SHA-256. Both use the database to include all media, including drafts, archived records and PDFs, then include the 57 prepared site assets. Missing thumbnails are generated in memory. Missing originals stop the migration; recover them from the old upload backup first. Different existing MinIO objects stop the migration instead of being overwritten. An interrupted transfer can be rerun: matching objects are verified and skipped. It never deletes source files or edits captions, publication status, media IDs or gallery associations.
 
 For the original school asset collection only, `npm run assets:import -- --apply` can restore missing source-imported photos directly into MinIO while preserving existing database edits. It cannot recover later uploads made by school staff. `npm run storage:migrate -- --site-only --apply` transfers just the homepage/logo assets.
 
@@ -57,7 +57,7 @@ Verify homepage images, gallery photos, a draft visible only while logged in, an
 
 ## 3. Upload the prepared group of images manually
 
-The prepared `artifacts/minio-school-images-2026-11-22.zip` contains **360 image objects** for the original collection: 102 originals, 204 responsive versions and 54 site assets. This ZIP does not include any later uploads that exist only on the production server; use the database-driven migration above for those.
+The current `artifacts/minio-school-images-2026-11-24.zip` contains **516 image objects**: 153 CMS originals, 306 responsive versions and 57 site assets. It includes 51 newly matched staff portraits and three sizes of Rev. Fr. V. Chinnappan's portrait (2002–2006). The older 22 November ZIP has only the original 360 objects. These packages do not include later uploads made by school administrators; use the database-driven migration above for those. Rebuild the package offline with `node scripts/package-school-images.mjs` (Python 3 is required for ZIP creation).
 
 Extract the ZIP on your computer. Open the `stantonys` bucket in the MinIO console and upload the contents using **exactly these prefixes**:
 
@@ -77,11 +77,22 @@ stantonys/
 
 The filename above is illustrative: use the complete filenames in the ZIP, unchanged. Do not type a filename as a shell command. Do not upload the ZIP itself, rename files, flatten the directories, add a second `stantonys` folder inside the bucket, or use `schl_doc` camera filenames. In consoles without folder upload, create/open `media` and upload the files from the extracted `media` directory; then create/open `assets/images` and upload the extracted site images. Keep `OBJECTS.json` and `README.txt` locally as verification records.
 
-The database must already contain the corresponding media/gallery records (your existing database import does this). Uploading objects alone does not create gallery entries. After manual upload run the read-only migration command above to compare hashes, then `npm run production:check` on the server.
+Uploading objects alone does not create database entries or attach staff portraits. From an updated full maintenance checkout, with database and MinIO credentials configured, validate and then import:
+
+```bash
+npm run assets:import -- --refresh-source
+npm run assets:import -- --apply --refresh-source
+npm run storage:migrate -- --site-only --apply
+npm run production:check
+```
+
+The importer uploads missing images automatically, so manual ZIP upload is optional. The refresh flag fills 51 reviewed empty staff-photo links and five explicitly documented topper ranks on unchanged earlier imports. It preserves CMS edits and reports skips for manual review. A fresh database import already includes these fields. Review `reports/school-source-update-2026-11-24.md` for eight unassigned staff photographs and other held assets. Keep sources as backups; do not delete MinIO objects just because they are absent from this source package.
+
+On 24 November, local MySQL authentication was repaired using its pinned RSA public key. The local database import added 51 media records and applied all 56 source updates; MinIO received the new images, including Chinnappan's three site images. No public-server database import or application deployment was performed. Run the commands above against your server's configuration when deploying. After manual upload, the read-only migration command above can compare hashes; `production:check` must pass against the actual running server configuration. See the MySQL authentication notes in [PRODUCTION.md](./PRODUCTION.md); the local Windows public-key path must not be copied to Linux.
 
 ## 4. Future uploads and replacements
 
-Use **Admin → Media library → Upload file** to select a group of JPEG, PNG or WebP images. The existing batch uploader sends them individually through the compression pipeline into MinIO. Add English and Tamil captions, then publish approved photos and add them to the relevant gallery. Direct uploads of arbitrary new camera files into MinIO bypass compression, validation and database registration; use the admin uploader for new content.
+Use **Admin → Media library → Upload file** to select a group of JPEG, PNG or WebP images. The existing batch uploader sends them individually through the compression pipeline into MinIO. Add English captions and review the automatic Tamil/Hindi translations, then publish approved photos and add them to the relevant gallery. Direct uploads of arbitrary new camera files into MinIO bypass compression, validation and database registration; use the admin uploader for new content.
 
 To update an existing photo, open **Media library → Edit → Replace file**, select the new image and save. Caption and publication changes are saved in the same database transaction. The media ID stays the same, so all linked galleries, staff cards and events use the new image. Once the replacement succeeds, the old original and both thumbnails are deleted. Replacing a PDF requires another PDF. Changing a card to point to another existing library image does not delete that library image, because it may be used elsewhere.
 

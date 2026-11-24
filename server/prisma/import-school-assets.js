@@ -8,9 +8,17 @@ import { schoolSchemas } from '../src/school-sections.js';
 import { schemas } from '../src/validation.js';
 import { restoreImportedMedia } from './restore-imported-media.js';
 import { schoolSocialSettings } from '../../shared/social-links.js';
+import { refreshSchoolSources, sourceUpdateSchema } from './refresh-school-sources.js';
 
 const directory = fileURLToPath(new URL('../../assets/optimized-school/', import.meta.url));
 const manifest = JSON.parse(await readFile(join(directory, 'manifest.json'), 'utf8'));
+const refresh = process.argv.includes('--refresh-source');
+const updates = refresh ? JSON.parse(await readFile(join(directory, 'source-updates.json'), 'utf8')).map(value => sourceUpdateSchema.parse(value)) : [];
+for (const update of updates) {
+  const record = manifest[update.resource].find(row => row.id === update.id);
+  if (!record || Object.entries(update.data).some(([key, value]) => record[key] !== value)) throw new Error(`Source update does not match manifest: ${update.id}`);
+  if (update.data.imageId && !manifest.media.some(media => media.id === update.data.imageId)) throw new Error(`Source update photo missing: ${update.id}`);
+}
 // Validate the entire batch before connecting or writing. Imported records have stable IDs.
 for (const [resource, schema] of Object.entries(schoolSchemas)) {
   for (const { id: _id, ...record } of manifest[resource]) schema.parse(record);
@@ -21,6 +29,7 @@ for (const media of manifest.media) {
 }
 for (const { id: _id, ...album } of manifest.galleries) schemas.galleries.parse(album);
 console.log('Source records:', Object.fromEntries(Object.entries(manifest).map(([key, value]) => [key, value.length])));
+if (refresh) console.log(`Validated ${updates.length} narrowly scoped source updates. CMS edits will be preserved.`);
 if (!process.argv.includes('--apply')) {
   console.log('Validation only. Use --apply to import missing records into the configured database.');
 } else {
@@ -28,6 +37,8 @@ if (!process.argv.includes('--apply')) {
   const created = {};
   let restoredFiles = 0;
   try {
+    // Fail before any MinIO writes if the configured database is unavailable.
+    await db.$queryRaw`SELECT 1`;
     await storage.check();
     for (const [key, value] of Object.entries(schoolSocialSettings)) {
       schemas.settings.parse({ key, value, public: true });
@@ -74,5 +85,6 @@ if (!process.argv.includes('--apply')) {
     });
     console.log('Created:', created, 'Existing records and admin edits were preserved.');
     console.log(`Restored ${restoredFiles} missing MinIO objects for existing imported media.`);
+    if (refresh) console.log('Source refresh:', JSON.stringify(await refreshSchoolSources(db, updates), null, 2));
   } finally { await db.$disconnect(); }
 }

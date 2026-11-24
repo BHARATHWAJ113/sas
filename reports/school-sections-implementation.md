@@ -1,77 +1,87 @@
 # Dynamic school sections
 
-## Included
+Updated 24 November 2026. Existing features were reused; no duplicate sections were created.
 
-- Public routes /fees, /honours, /staff, /toppers, with English/Tamil interface labels, filters, loading/error/empty states and navigation links.
-- Existing CMS extended with four resource types, image selection/removal, private source notes, search, column filters, ordering, pagination, publication controls, authenticated writes and audit records.
-- Existing gallery extended with zoom, captions, event dates, responsive image variants, selected-image ordering and sequential batch upload with individual previews and retry status.
-- Additive Prisma migration creates fees, honours, staff_members, toppers, and extends media. Existing records and historical migrations are preserved.
-- Public APIs only expose published records. Draft portraits are hidden, source notes are omitted, and referenced portraits cannot be deleted until unlinked.
-- Server-side 10-second bounded caching and client request deduplication cover the new routes. Admin mutations invalidate caches. Profiles are paginated. Fees use the complete selected year's schedule with totals calculated in paise.
-- School pages are lazy-loaded. Uploaded/imported photos have 640/1200 pixel WebP variants. Original source assets remain untouched.
+## Implemented features
 
-## Source import and review decisions
+- Fees, honours, staff and toppers have Prisma models, validated public APIs, authenticated admin CRUD, publication controls, search, filters, ordering, pagination and audit logs.
+- Gallery supports albums, batch uploads, metadata, previews, ordering, responsive images, lightbox navigation and zoom.
+- Public APIs expose published records only, hide draft portraits and omit private source notes. Referenced media cannot be deleted until unlinked.
+- English, Tamil and Hindi interfaces, compact profile cards with accessible detail modals, light mode for new visitors and a theme toggle are available. The CMS offers free MyMemory translation with manual corrections and quota handling.
+- Fees show the complete selected year's schedule and total in paise. No unsupported fee breakdown is invented.
+- Runtime images live in private MinIO storage, served through the API. Uploads are compressed in memory; replacing an image uses the deletion outbox to remove old objects safely.
 
-The importer contains 42 fee instalments (14 standards), 60 staff profiles, 25 honour entries, 25 topper entries, 23 gallery albums and 89 optimized photographs.
+## Verified source collection
 
-Fee amounts were checked visually against fees.pdf. Only its June, October and January instalments are entered. The document does not supply a tuition/admission/other-charge breakdown, so none is invented.
+The prepared import contains **42 fee installments, 60 staff profiles, 25 honours, 25 toppers, 28 gallery albums and 153 media originals**. The transfer package has **516 image objects**, including 306 responsive versions and 57 site assets.
 
-Honour years are result years as printed. The 2021 COVID rows have no individual results and are omitted. Merged cells in 2014 and 2016 contain two names each and are entered as separate records. No unverified portraits are attached to honour records.
+Fee amounts follow fees.pdf: June, October and January installments across 14 standards. No tuition/admission breakdown was provided. Honour years are result years as printed; the 2021 COVID rows have no individual results and are omitted. No unverified honour portraits are attached.
 
-Staff names and designations follow STAFF LIST.pdf. Department/type labels group the supplied designations. Only the explicitly named principal photograph is matched. Other staff use a profile placeholder.
+Staff names/designations follow STAFF LIST.pdf. The previously matched principal portrait plus 51 new photos cover 52 profiles. Matching removes only titles, spaces and punctuation from filenames; it does not compare faces or fuzzy-match different names. Eight conflicting spellings/initials remain unassigned. See [source match report](school-source-update-2026-11-24.md).
 
-Topper names, classes and marks follow filenames. No ranks are invented. Four records remain drafts:
+Five existing toppers receive ranks explicitly stated on pages 1–2 of Annual_Report_2025-26_web.pdf, with matching names, classes, year and scores. These results belong to **2024–25**, not the report's title year. Rank is never inferred by sorting marks. Four earlier records remain drafts:
 
-- Swathi.G 590 out of 600.png: initials conflict with the honour document's SWATHI S; the image is a group presentation photo.
-- Mukeh Kumar.R 463 out of 500.png: filename spelling differs from the later Mukesh Kumar record.
-- Kowshikan.R 475 out of 500.png: filename differs from the honour document's KOWSHIKAN.
-- Keerthana.T 491 out of 600.jpg: denominator conflicts with its Class 10 folder.
+- Swathi.G: initials conflict with SWATHI S in the honour document; group presentation photo.
+- Mukeh Kumar.R: spelling conflict.
+- Kowshikan.R: spelling conflict with KOWSHIKAN.
+- Keerthana.T: denominator conflicts with the Class 10 folder.
 
-Names remain in their source spelling. Tamil names/descriptions can be added in the CMS; until supplied, the public Tamil view falls back to the source English content.
+Muthamizh Jeeva and Mukesh Kumar.R retain unset ranks because the annual report's names differ. Source spelling and existing photos are preserved. Personal-name translations require school review; missing translated content falls back to English.
 
-Gallery titles use the supplied year/event folder context. Exact event dates remain unset unless entered by staff. Two hazy vaccination images were withheld following visual review. Unlabelled IMG files are held for context review. No identities are inferred from faces.
+The 13 campus IMG photographs remain in five activity-based albums without inferred identities. Gallery dates remain unset unless documented. Two hazy vaccination images remain excluded. New feedback screenshots are not gallery photographs; branding references and the anthem photograph are retained for review. The new HEIC has readable dimensions but failed pixel decoding and is held for a JPEG/PNG export.
 
-## Changed and new files
+The user-supplied **Rev. Fr. V. Chinnappan (2002–2006)** photograph is now included in the former-principals section and its accessible detail modal, with English, Tamil and Hindi labels. The original is preserved in the principals source folder; three optimized WebP sizes are served from MinIO. It is historical leadership content, not an additional current staff profile.
 
-- shared/school-sections.js, shared/record-fields.js: shared labels, standards, resource mapping and admin search fields.
-- server/prisma/schema.prisma, server/prisma/migrations/202611210001_school_sections/migration.sql: additive database changes.
-- server/src/school-sections.js: validation and public directory/fee APIs.
-- server/src/admin.js, validation.js, app.js, gallery.js, public-cache.js: reuse of CRUD, publication, cache and media serving.
-- server/src/image-variants.js, uploads.js: optimized responsive images.
-- client/src/SchoolSection.jsx, school-sections.css, main.jsx, SiteHeader.jsx, context.jsx, api.js: public pages and navigation.
-- client/src/Gallery.jsx, components.jsx: gallery zoom, metadata and responsive sources.
-- client/src/admin/Admin.jsx, school-fields.js, BatchUpload.jsx: reusable admin forms and uploads.
-- client/public/images/profile-placeholder.svg: default portrait.
-- scripts/prepare-school-assets.py: repeatable audit, derivative and source manifest generation.
-- server/prisma/import-school-assets.js, root/server package scripts: validated, repeatable database import.
-- assets/optimized-school/: source manifest and selected derivatives.
-- server/tests/school-sections.test.js, mysql.integration.test.js: API, validation, roles, publication, totals, real persistence and media checks.
+## Files changed in this update
 
-## Local run and deployment
+- scripts/prepare-school-update.py: repeatable source matching, optimized staff portraits and complete audit/inventory; originals unchanged.
+- scripts/prepare-school-assets.py: invokes the supplement after the original and campus pipelines.
+- assets/optimized-school/manifest.json, source-updates.json and 51 new WebP files: prepared import data and evidence.
+- server/prisma/refresh-school-sources.js, import-school-assets.js: validated optional enrichment, preserving CMS and concurrent edits; database preflight before storage writes.
+- server/tests/source-refresh.test.js, school-sections.test.js: preservation, concurrency, draft photo, repeat import and rank-provenance checks.
+- scripts/package-school-images.mjs: offline ZIP with SHA-256 inventory; no credentials or database dumps.
+- scripts/audit-school-cleanup.py: audits current MinIO source inputs instead of the obsolete public image folder.
+- Reports: image-quality Markdown/CSV, asset inventory JSON, cleanup report, source-match report, implementation report and resume checkpoint.
+- deployment/MINIO.md: updated group-upload and source-refresh instructions.
+- client/src/SchoolRecords.jsx, three assets/site-images/fr-v-chinnappan*.webp files and shared/site-assets.json: former-principal portrait and responsive sizes.
+- server/src/database.js, server/tests/database-options.test.js and environment examples: optional trusted MySQL RSA public key, retaining verified TLS and avoiding automatic key retrieval.
+- docs/SCHOOL-SOURCES.md and deployment/PRODUCTION.md: portrait provenance and database authentication/deployment notes.
 
-Use the existing environment templates. No new credentials or environment variables are needed. Back up the target database and upload directory before deployment.
+Existing relevant implementation: server/src/school-sections.js, admin.js, uploads.js, storage.js, storage-cleanup.js; client/src/SchoolSection.jsx, ProfileModal.jsx, Gallery.jsx and admin forms; shared field definitions and Prisma migrations. No new schema migration is needed for this update.
 
-    npm ci
-    npm run db:migrate
-    npm run build
-    npm run assets:import
-    npm run assets:import -- --apply
-    npm run lint
-    npm test
-    npm run dev
+## Import and deployment
 
-assets:import without --apply validates files and data without connecting to the database. The apply command creates missing stable IDs and preserves existing records/admin edits. It archives published demo gallery albums only when real albums are first imported. It never resets a database. Re-running it does not overwrite existing rows or files.
+Back up the database and private MinIO bucket together. Use an updated full maintenance checkout containing assets/optimized-school; normal CI releases exclude source assets. Configure the server environment privately as described in [MinIO instructions](../deployment/MINIO.md). Run from the repository root:
 
-Deploy the application code and assets/optimized-school/ along with the migration. The original multi-megabyte source collection is not required on the VPS. Import as the service user with write access to the existing UPLOAD_DIR, so Node can serve the files. Publish client/dist through the existing Apache configuration and restart the existing Node service using your established deployment procedure. Do not expose source documents, manifests, review assets, .env or uploads as an unrestricted Apache directory.
+```bash
+npm ci
+npm run db:migrate
+npm run build
+npm run assets:import -- --refresh-source
+npm run assets:import -- --apply --refresh-source
+npm run storage:migrate -- --site-only --apply
+npm run production:check
+```
 
-There was no automatic production deployment.
+Without --apply, import validates without connecting or writing. Apply creates missing stable IDs and uploads missing objects. The optional --refresh-source fills only reviewed empty portrait/rank fields on unchanged source imports. It skips records with a CMS UPDATE audit, including intentionally removed portraits, and checks updatedAt to preserve concurrent changes. SOURCE_ENRICH audits identify changed records; source-updates.json contains evidence. Review skips and use the CMS for manual corrections. Existing names, translations, publication states and selected photos are preserved.
 
-To rebuild the asset audit, run python scripts/prepare-school-assets.py in an environment with Pillow and pypdf. Review generated manifests before importing. Regeneration preserves originals and moves obsolete generated candidates into assets/optimized-school-review/.
+No UPLOAD_DIR is used. Source documents, manifests, environment files and review assets must not be publicly served. Follow [production instructions](../deployment/PRODUCTION.md) for release activation. No automatic deployment was performed.
 
-## Validation
+Rebuild additions with python scripts/prepare-school-update.py (Pillow), then python scripts/audit-school-cleanup.py. The complete pipeline is python scripts/prepare-school-assets.py (Pillow and pypdf), which includes this supplement. Review regenerated manifests before import. Package images with node scripts/package-school-images.mjs (Python 3 for ZIP creation). Originals are retained.
 
-The additive migration was applied to local MySQL. Source import and schema validation succeeded. The automated suite passed 92 tests, with four database tests skipped in its default mode. All four MySQL integration tests passed separately, including authenticated CRUD/publication changes for the new resources, fee totals, gallery metadata, media variants, and the existing authentication/enquiry/email workflows.
+## Validation on 24 November 2026
 
-Production build and lint passed. Public pages were checked at 1440, 768 and 390 pixels with no page-level horizontal overflow or broken displayed images. Fee standard selection, staff search, Tamil layout, gallery zoom and keyboard navigation passed. All six affected CMS create/upload forms opened successfully at 390 pixels. Screenshots and local QA scripts are under the ignored artifacts directory.
+- Lint and production build passed.
+- Automated suite: **149 passed**; the four opt-in MySQL integration tests were skipped by the default command and **all four passed separately against local MySQL**.
+- Source validation passed: 153 media files and 56 narrowly scoped enrichment patches.
+- Browser checks: **16 passed** using the built frontend, prepared source records and intercepted API fixtures. Desktop/mobile fees, honours, staff, toppers, gallery, filters, compact cards, image decoding, modal focus/Escape, gallery navigation/zoom, default light mode, admin creation forms and Chinnappan's portrait were checked. Screenshots were visually reviewed. These checks do not assert public-server deployment.
+- ZIP verification: 516 objects, ZIP CRC and SHA-256 checksums; CMS originals match prepared files; no environment files included.
+- Audit covers 341 source images. The 51 new staff main images are 93.5% smaller than their originals; complete totals are in the cleanup report.
+- Local import created 51 media records and applied all 56 source enrichments without skips. A pre-import backup of the affected records is retained privately under artifacts/.
+- Repeat refresh verified idempotence: zero changes, 56 unchanged, no skips. Actual local counts are 60 staff, 52 linked portraits, 153 media records (149 published) and five ranked toppers.
+- MinIO site transfer uploaded Chinnappan's three images and verified the existing 54 by SHA-256.
+- Production-readiness command **passed against the local database and configured MinIO bucket**: one active administrator, 149 published media records, required site assets present and anonymous reads denied.
 
-The repeat import created zero duplicate records. The audit covered 271 originals; selected main WebP files are 91.8% smaller in total than their corresponding originals. No performance benchmark against production was performed. Batch uploads reuse the tested single-file upload API sequentially; no live production upload or deployment was performed.
+The earlier Prisma P2039 / adapter 45028 error was traced to MySQL SHA2 public-key authentication. Pinning the local server's public key restored connectivity without resetting the database or changing account credentials. The optional DATABASE_RSA_PUBLIC_KEY path is deployment-specific; never copy a Windows path to Linux. No public-server database import, release activation, production performance benchmark or live-server login verification was performed. Repeat the deployment acceptance checks on the actual server before launch.
+
+Technical support and future reference: **Bharathwaj TP — 9600641464**. Existing guides are in docs/handover; current MinIO instructions supersede their older filesystem-storage instructions.

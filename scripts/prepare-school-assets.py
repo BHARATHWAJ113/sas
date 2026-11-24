@@ -159,3 +159,4 @@ print(json.dumps({k:len(v) for k,v in manifest.items()}))
 # Include the user-supplied campus collection whenever the complete manifest is rebuilt.
 import runpy
 runpy.run_path(str(root / 'scripts/prepare-campus-photos.py'))
+runpy.run_path(str(root / 'scripts/prepare-school-update.py'), run_name='__main__')

@@ -1,0 +1,242 @@
+# Codex Task: Implement Dynamic School Website Sections with Admin Panel Management
+
+## Project Details
+
+**Project:** St. Antony's Matriculation Higher Secondary School Website  
+**Website:** https://stantonysneyveli.in  
+**Local Asset Directory:** `D:\SAS\assets\schl_doc`
+
+## Objective
+
+Enhance the existing school website by implementing five fully dynamic sections with complete administrative management. Use the documents, images, and other relevant resources available in the specified local asset directory.
+
+Follow the website's existing technology stack, coding standards, database architecture, and design system.
+
+**Important:** Inspect the existing project structure, database schema, admin panel, and asset directory before implementing changes. Reuse existing components and functionality wherever possible. Do not create duplicate features.
+
+## 1. Dynamic School Fees Structure
+
+Implement a fully dynamic, standard-wise school fees management system.
+
+**Frontend Requirements:**
+- Display the fees structure based on the selected class or standard.
+- Provide a dropdown to select standards from LKG to Class 12.
+- Display applicable fee categories such as tuition fees, admission fees, term fees, and other charges.
+- Show fee amounts, payment frequency, and total fees in a responsive table.
+- Apply an elegant, professional, mobile-friendly design.
+- Handle missing fee information gracefully.
+
+**Admin Panel Requirements:**
+- Add, edit, delete, and view fee records.
+- Manage fees separately for each standard.
+- Support academic year, fee category, amount, and payment frequency.
+- Allow administrators to activate or deactivate fee records.
+- Provide filtering and search functionality.
+
+## 2. Roll of Honour
+
+Create a professional and dynamic Roll of Honour section.
+
+**Frontend Requirements:**
+- Display student achievements in an attractive and organized layout.
+- Include student name, achievement title, academic year, class, description, and photograph where available.
+- Support academic-year filtering.
+- Use a modern, elegant card-based design.
+- Maintain the school's professional appearance.
+
+**Admin Panel Requirements:**
+- Add, edit, delete, and view honour records.
+- Upload student photographs.
+- Manage achievement categories, academic years, and display order.
+- Enable or disable individual records.
+
+## 3. Dynamic Staff Directory
+
+Implement a complete staff directory with photographs.
+
+**Frontend Requirements:**
+- Display staff members in a responsive grid layout.
+- Include staff photograph, name, designation, department, and other available relevant details.
+- Categorize staff by department or staff type.
+- Provide search and filtering options.
+- If a staff photograph is unavailable, automatically display a professional default profile image.
+- Maintain consistent image dimensions and alignment across all staff cards.
+
+**Admin Panel Requirements:**
+- Add, edit, delete, and view staff profiles.
+- Upload, replace, and remove staff photographs.
+- Manage staff categories, designations, departments, and display order.
+- Enable or disable staff profiles.
+
+## 4. Dynamic Academic Toppers Section
+
+Create a visually attractive, modern, and professional academic toppers section.
+
+**Frontend Requirements:**
+- Display toppers with student photographs, names, standards, academic years, marks, percentages, and ranks where applicable.
+- Include filters for academic year, standard, and examination category.
+- Use elegant cards with subtle animations and hover effects.
+- Highlight top performers appropriately without making the design overly colourful or distracting.
+- Use smooth transitions, responsive layouts, and professional typography.
+- Handle missing student photographs using a default image.
+
+**Admin Panel Requirements:**
+- Add, edit, delete, and view topper records.
+- Upload student photographs.
+- Manage academic years, standards, examination types, marks, percentages, and ranks.
+- Support display ordering and active/inactive status.
+
+## 5. Modern Dynamic Photo Gallery
+
+Develop a fully dynamic school photo gallery with a clean, modern design.
+
+**Frontend Requirements:**
+- Display photographs using a responsive masonry or well-balanced grid layout.
+- Organize photographs into categories such as school events, celebrations, academics, sports, cultural activities, and achievements, based on available content.
+- Implement a modern image lightbox with zoom and navigation.
+- Support lazy loading, image optimization, and responsive image sizes.
+- Use subtle hover effects and smooth transitions.
+- Maintain consistent visual quality across desktop, tablet, and mobile devices.
+
+**Admin Panel Requirements:**
+- Upload single or multiple photographs.
+- Add image titles, descriptions, categories, and event dates.
+- Edit, delete, reorder, and manage gallery photographs.
+- Enable or disable photographs.
+- Provide image previews before publishing.
+- Validate uploaded file types and sizes.
+
+## 6. Local Image and Document Analysis
+
+Analyze all relevant assets available in:
+
+`D:\SAS\assets\schl_doc`
+
+**Tasks:**
+1. Recursively scan the directory and identify available photographs, documents, and other relevant assets.
+2. Review image resolution, sharpness, clarity, blur, compression artifacts, aspect ratio, and duplicate images.
+3. Select the best-quality photographs for the appropriate website sections.
+4. Prefer original, high-resolution images over compressed or blurry versions.
+5. Avoid using heavily blurred, pixelated, corrupted, duplicated, or irrelevant images.
+6. Generate optimized web versions while preserving the original source files.
+7. Convert suitable images into modern formats such as WebP where appropriate.
+8. Match images to the correct staff members, students, achievements, or events only when their identity or context is reliably established by the available data.
+9. Do not invent names, academic results, fee amounts, or staff information when source data is unavailable.
+10. Prepare an image-quality audit report.
+
+**Required Image Quality Report:**
+
+Generate a report containing:
+- Original filename and file path
+- Image dimensions and file size
+- Image format
+- Quality assessment: Good, Average, or Poor
+- Identified issues, such as blur, low resolution, or duplication
+- Recommended action: Use, Optimize, Review, or Exclude
+- Recommended website section
+
+Save the report as:
+
+`reports/school-image-quality-report.md`
+
+Also generate a CSV report if feasible:
+
+`reports/school-image-quality-report.csv`
+
+## 7. Remove Unnecessary Images and Data
+
+Audit the existing website and its asset directories.
+
+- Identify unused, outdated, duplicate, irrelevant, and poor-quality images.
+- Replace low-quality website images with suitable high-quality assets from the specified directory.
+- Remove unnecessary demo content from the affected sections when verified real data is available.
+- Remove broken asset references and unused imports.
+- Identify unused files before deletion.
+- Do not delete original source assets from `D:\SAS\assets\schl_doc`.
+- Do not permanently delete existing project files without verifying that they are unused.
+- Prepare a cleanup report and move uncertain files to a safe backup or review directory instead of deleting them.
+
+Use suitable images from the provided school asset directory rather than unrelated stock images.
+
+## 8. Admin Panel and Database Integration
+
+All five sections must be dynamically managed through the existing admin panel.
+
+**Technical Requirements:**
+- Follow the existing React, Node.js/Express, and MySQL/MariaDB architecture.
+- Reuse the existing Prisma schema and migration conventions where applicable.
+- Create necessary database tables or models and relationships.
+- Implement secure CRUD APIs.
+- Follow existing administrator authentication and authorization mechanisms.
+- Add server-side validation and safe file-upload handling.
+- Prevent unauthorized modifications.
+- Provide search, filters, sorting, and pagination where appropriate.
+- Reuse the existing admin panel's tables, forms, buttons, alerts, and design patterns.
+- Ensure updates made in the admin panel appear on the public website without manual code changes.
+- Maintain compatibility with the current deployment environment.
+
+## 9. UI/UX Design Guidelines
+
+Maintain the existing school website's design identity.
+
+**Colour Palette:**
+- Navy Blue: `#102A56`
+- Slate Blue: `#6699CC`
+- Light Blue: `#EAF4FF`
+- White: `#FFFFFF`
+- Soft Slate: `#F1F5F9`
+- Body Text: `#334155`
+
+Design Expectations:
+- Modern, clean, elegant, and professional.
+- Suitable for an educational institution.
+- Consistent typography, spacing, cards, tables, and buttons.
+- Fully responsive across desktop, tablet, and mobile devices.
+- Smooth, subtle animations without excessive visual effects.
+- Optimized loading performance.
+- Accessible controls, meaningful alt text, and good colour contrast.
+- Respect reduced-motion preferences.
+
+## 10. Testing and Quality Assurance
+
+After implementation:
+
+1. Verify all five frontend sections.
+2. Test all admin CRUD operations.
+3. Validate database migrations and API responses.
+4. Check image upload, replacement, deletion, and fallback behaviour.
+5. Test filtering, sorting, pagination, and responsive layouts.
+6. Ensure there are no broken image links.
+7. Verify that existing website functionality remains unchanged.
+8. Run available linting, build, and automated tests.
+9. Fix errors introduced by these changes.
+10. Ensure the implementation is production-ready.
+
+## 11. Final Deliverables
+
+Provide:
+
+1. Fully implemented dynamic Fees Structure section.
+2. Fully implemented Roll of Honour section.
+3. Fully implemented Staff Directory section.
+4. Fully implemented Academic Toppers section.
+5. Fully implemented Photo Gallery section.
+6. Admin panel management for all five sections.
+7. Required database schema changes and migrations.
+8. Image optimization and integration.
+9. Image-quality audit report.
+10. Unused-assets and cleanup report.
+11. Summary of modified and newly created files.
+12. Testing results and deployment instructions.
+
+## Final Instructions
+
+First, inspect the existing codebase and the local asset folder. Then implement the required frontend, backend, database, and admin panel changes.
+
+Extract and use authentic school information from the available documents wherever possible.
+
+Do not replace working functionality unnecessarily, do not create hardcoded content when dynamic database functionality is required, and do not populate missing information with fabricated data.
+
+Keep the original source assets safe. Avoid destructive database operations, and do not automatically deploy to production.
+
+**Expected Outcome:** A fully functional, database-driven, visually polished school website with five dynamic sections, complete admin panel control, high-quality authentic school photographs, and detailed image-quality and cleanup reports.

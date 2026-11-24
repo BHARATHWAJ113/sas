@@ -8,7 +8,7 @@ sourceBytes=sum((root/'assets/schl_doc'/m['source']).stat().st_size for m in man
 webBytes=sum((root/'assets/optimized-school'/m['filename']).stat().st_size for m in manifest['media'])
 code='\n'.join(file.read_text(encoding='utf-8',errors='replace') for base in ['client/src','server/src','server/prisma','shared'] for file in (root/base).rglob('*') if file.suffix in ['.js','.jsx','.css','.json'])
 unused=[]
-for file in (root/'client/public/images').glob('*'):
+for file in (root/'assets/site-images').glob('*'):
     if file.is_file() and file.stem.removesuffix('-640').removesuffix('-960').removesuffix('-1200') not in code and file.name!='profile-placeholder.svg':
         unused.append(file.name)
 lines=['# School asset cleanup report','',
@@ -24,9 +24,9 @@ lines=['# School asset cleanup report','',
  '- Historical leadership assets remain in use. Generated hero/discovery/sports image references now resolve to authentic campus photographs, and the generated preview video is no longer used. Legacy files are preserved for reference review.',
  '- All 13 supplied IMG photographs are now classified by visible school activity and included in five campus albums. No staff/student name was attached based on appearance.',
  '',
- '## Existing public asset reference scan',
+ '## Existing MinIO site-asset reference scan',
  '',
- 'This static scan checks source code, shared data and seed records, including common responsive filename variants. Database-managed references cannot be proven unused by a source scan. No existing public asset was deleted or moved.',
+ 'This static scan checks the offline assets/site-images collection against source code, shared data (including the MinIO asset allowlist) and seed records, including responsive filename variants. Runtime files are served from MinIO. Database-managed references cannot be proven unused by a source scan. No existing source asset was deleted or moved.',
  '',
  'Potentially unreferenced files requiring a database/reference review:',
  *(['- '+name for name in unused] or ['- None found.']),
@@ -40,6 +40,14 @@ lines=['# School asset cleanup report','',
  *['- '+p.relative_to(root).as_posix() for p in sorted((root/'assets/schl_doc').rglob('*.pdf'))],
  '',
  'The fees, staff and Roll of Honour PDFs were extracted and visually checked. The existing school-history and diary content already has source documentation in docs/SCHOOL-SOURCES.md and was preserved. Full per-image quality evidence is in school-image-quality-report.md and its CSV.',
+ '',
+ '## November additions',
+ '',
+ 'The user-supplied Rev. Fr. V. Chinnappan (2002–2006) portrait is preserved in the principals source directory and represented by three optimized site-image sizes in MinIO. It is historical leadership content, separate from the 153 CMS originals.',
+ '',
+ '51 staff portraits were matched using filenames and staff-list names and optimized without altering originals. Eight names/initials differ and remain unassigned. Five explicit topper ranks were corroborated against pages 1-2 of Annual_Report_2025-26_web.pdf. No rank was inferred from marks. See school-source-update-2026-11-24.md for every match and held photo.',
+ '',
+ 'Three feedback screenshots were excluded from gallery import; branding references and the rotated anthem photograph remain for review. IMG_0562.HEIC could not be pixel-decoded and was not imported. No new source file was deleted. No production database cleanup or deployment was performed in this update.',
  '',
  'Contact sheets for all selected candidates were inspected. Automated Good/Average/Poor grades are screening aids, not a guarantee of optical sharpness. Smaller archival portraits are displayed without destructive source editing. The two visibly hazy vaccination images are excluded from import.'
 ]

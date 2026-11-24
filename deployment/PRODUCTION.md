@@ -73,7 +73,7 @@ Apache must be able to traverse the symlink target and read built assets. Keep p
 ## Live acceptance before school handover
 
 1. Confirm HTTPS for apex and www, HTTP redirects, certificate renewal and browser security headers. Direct requests to server secrets and draft media must fail. Check `/api/health` returns status ok with database connected.
-2. Open home, gallery, school records, contact and privacy on phone and desktop in English and Tamil. Check welcome animation once per browser tab session, reduced motion, light and dark modes, and keyboard navigation.
+2. Open home, gallery, school records, contact and privacy on phone and desktop in English, Tamil and Hindi. Check welcome animation once per browser tab session, reduced motion, light and dark modes, and keyboard navigation.
 3. Sign in with the approved administrator. Verify account details, create a draft, publish approved content and confirm the public page. Verify EDITOR and VIEWER restrictions with school-approved test accounts. Sign out on shared devices.
 4. Submit one clearly labelled test enquiry with school approval and verify its reference and saved record. Remove test personal data through the approved retention process.
 5. Configure approved Gmail SMTP credentials and office notification recipients before enabling email. Enabling the worker can send pending queued mail: review the queue first. With explicit school approval, test confirmation and office delivery to controlled recipients. SENT means SMTP acceptance, not confirmed inbox delivery. No live email was sent in this task.
@@ -83,6 +83,7 @@ Apache must be able to traverse the symlink target and read built assets. Keep p
 
 - Login failure: verify email and account state, allow rate limits to clear, check HTTPS cookies and origin configuration. An account update invalidates old sessions. Never send passwords in screenshots.
 - Site loads but data fails: check `systemctl status school-api`, `journalctl -u school-api`, `/api/health`, database connectivity and migration status. Redact personal data before sharing logs.
+- MySQL SHA2 authentication after a restart: if the connector reports `ER_CANNOT_RETRIEVE_RSA_KEY` (sometimes wrapped as a pool timeout/P2039), configure verified database TLS or set `DATABASE_RSA_PUBLIC_KEY` to a trusted copy of that MySQL server's public-key PEM. Obtain it from the server administrator. The connector pins this key for SHA2 authentication; it does not enable automatic key retrieval or disable TLS verification. This setting is optional and deployment-specific. Do not copy the local Windows/Laragon path onto Linux, use a private key, or reset database users to work around the error.
 - Email issue: inspect Email management status before retrying; UNKNOWN or PARTIAL may already have delivered to some recipients. See `docs/EMAIL-AND-CONSENT.md`.
 - Manual rollback: verify a known previous release remains compatible with the current database, atomically repoint live to it, restart school-api and check health and external HTTPS. Restore a database backup only with an agreed outage and reconciliation plan to avoid losing newer enquiries.
 
