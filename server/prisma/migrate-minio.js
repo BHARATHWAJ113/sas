@@ -5,10 +5,10 @@ import { resolve, join } from 'node:path';
 import { createDatabase } from '../src/database.js';
 import { storage, checksum, mediaKey } from '../src/storage.js';
 import { config } from '../src/config.js';
-import { mediaMigrationFiles, migrateObject } from './minio-migration.js';
+import { mediaMigrationFiles, migrateObject, replaceSiteObject } from './minio-migration.js';
 import siteAssets from '../../shared/site-assets.json' with { type: 'json' };
 
-const { values } = parseArgs({ options: { apply: { type: 'boolean', default: false }, uploads: { type: 'string' }, 'site-only': { type: 'boolean', default: false } } });
+const { values } = parseArgs({ options: { apply: { type: 'boolean', default: false }, uploads: { type: 'string' }, 'site-only': { type: 'boolean', default: false }, 'replace-site': { type: 'boolean', default: false } } });
 if (!values.uploads && !values['site-only']) throw new Error('Supply --uploads /absolute/path/to/old/uploads or --site-only.');
 const assets = fileURLToPath(new URL('../../assets/site-images/', import.meta.url));
 const db = values['site-only'] ? null : createDatabase();
@@ -21,9 +21,12 @@ try {
     if (checksum(await readFile(join(assets, asset.filename))) !== asset.sha256) throw new Error(`Site asset checksum mismatch: ${asset.filename}`);
   }
   await storage.check();
-  const counts = { uploaded: 0, verified: 0, missing: 0 };
+  const counts = { uploaded: 0, replaced: 0, verified: 0, missing: 0, different: 0 };
   for await (const file of mediaMigrationFiles(media, uploads)) counts[await migrateObject(storage, file.key, file.buffer, file.mimeType, values.apply)]++;
-  for (const asset of siteAssets) counts[await migrateObject(storage, `assets/images/${asset.filename}`, await readFile(join(assets, asset.filename)), asset.mimeType, values.apply)]++;
+  for (const asset of siteAssets) {
+    const migrate = values['replace-site'] ? replaceSiteObject : migrateObject;
+    counts[await migrate(storage, `assets/images/${asset.filename}`, await readFile(join(assets, asset.filename)), asset.mimeType, values.apply)]++;
+  }
   console.log(`${values.apply ? 'Migration' : 'Read-only preview'}: ${config.MINIO_BUCKET}`, counts);
   console.log(values.apply ? 'All transferred objects verified by SHA-256. Local originals and database records were preserved.' : 'No objects changed. Repeat with --apply to upload missing files.');
 } catch (error) {

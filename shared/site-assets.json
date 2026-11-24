@@ -1,5 +1,11 @@
 [
   {
+    "filename": "annual-report-2025-26.pdf",
+    "mimeType": "application/pdf",
+    "size": 837588,
+    "sha256": "52bd8acffea83fa627b3a2010783b79c0af04347a9c31946b64dfc41a59e8114"
+  },
+  {
     "filename": "campus-carrom-1200.webp",
     "mimeType": "image/webp",
     "size": 87710,
@@ -264,10 +270,22 @@
     "sha256": "98c7a54e7776f2da68c1daaf3196fd5f2a0d90495e005ea8c16717ec87ef0b2b"
   },
   {
+    "filename": "fr-m-john-kennedy-1200.webp",
+    "mimeType": "image/webp",
+    "size": 120582,
+    "sha256": "ce0938b0810230ace3244feb9888b6c61ea33632b62ab7155f3c46d5d04bc921"
+  },
+  {
+    "filename": "fr-m-john-kennedy-640.webp",
+    "mimeType": "image/webp",
+    "size": 54054,
+    "sha256": "a61d799a43297312cf5cb55949505309c80a7f6c74199aab8171509bad04dce1"
+  },
+  {
     "filename": "fr-m-john-kennedy.webp",
     "mimeType": "image/webp",
-    "size": 113584,
-    "sha256": "55992d7eff28ded300a0006b5eb350db2a1d8d6e6402369da15c481c66583b1e"
+    "size": 174754,
+    "sha256": "5e0836401a3e68db21b7945c4c2a271847f5a71f688090732b16677e90500874"
   },
   {
     "filename": "fr-pascal-raj.webp",
@@ -324,6 +342,24 @@
     "sha256": "1f08eea6f11d5a83d92a7ea855db588fc29075d240c1518069c69616c2c3f218"
   },
   {
+    "filename": "school-anthem-1200.webp",
+    "mimeType": "image/webp",
+    "size": 68384,
+    "sha256": "62836b749d25509c8a0e45a63bfd75c9181b1d3c716c11cde5b09d9c0b08aacb"
+  },
+  {
+    "filename": "school-anthem-640.webp",
+    "mimeType": "image/webp",
+    "size": 58746,
+    "sha256": "3f83eca57d68ecdfbaee3c3722007a8fd1ecde22029d79dc2ffe06323443e116"
+  },
+  {
+    "filename": "school-anthem.webp",
+    "mimeType": "image/webp",
+    "size": 68384,
+    "sha256": "62836b749d25509c8a0e45a63bfd75c9181b1d3c716c11cde5b09d9c0b08aacb"
+  },
+  {
     "filename": "sports-640.webp",
     "mimeType": "image/webp",
     "size": 48836,
@@ -340,5 +376,23 @@
     "mimeType": "image/webp",
     "size": 159366,
     "sha256": "55a08c8cce8cbcc88d3c674fd8da2063993ae1bf905113bc7362f0ba4f02780c"
+  },
+  {
+    "filename": "st-antony-home-1200.webp",
+    "mimeType": "image/webp",
+    "size": 80720,
+    "sha256": "3d50f21d67ad26e7b2fc09aa42028d0d92a95ece7e4eb67ebf7551c0b210ccd3"
+  },
+  {
+    "filename": "st-antony-home-640.webp",
+    "mimeType": "image/webp",
+    "size": 78784,
+    "sha256": "7624f099681906de73cd00f143bf55557bca5b11ba60cefdb1b8f8a9febab7e5"
+  },
+  {
+    "filename": "st-antony-home.webp",
+    "mimeType": "image/webp",
+    "size": 80720,
+    "sha256": "3d50f21d67ad26e7b2fc09aa42028d0d92a95ece7e4eb67ebf7551c0b210ccd3"
   }
 ]

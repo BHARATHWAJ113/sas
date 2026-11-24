@@ -17,6 +17,16 @@ export async function migrateObject(store, key, buffer, mimeType, apply) {
   return 'uploaded';
 }
 
+export async function replaceSiteObject(store, key, buffer, mimeType, apply) {
+  const previous = await store.stat(key);
+  if (!previous) return migrateObject(store, key, buffer, mimeType, apply);
+  if (previous.size === buffer.length && checksum(await store.read(key)) === checksum(buffer)) return 'verified';
+  if (!apply) return 'different';
+  await store.replace(key, buffer, mimeType);
+  if (checksum(await store.read(key)) !== checksum(buffer)) throw new Error(`Verification failed: ${key}`);
+  return 'replaced';
+}
+
 // These are migration inputs, never runtime image storage. No database content is modified.
 export async function* mediaMigrationFiles(media, uploads) {
   for (const item of media) {

@@ -22,6 +22,8 @@
     "db:migrate": "npm run migrate -w server",
     "db:seed": "npm run seed -w server",
     "assets:import": "npm run import:school -w server --",
+    "assets:home": "node scripts/prepare-home-content.mjs",
+    "home:import": "npm run import:home -w server --",
     "db:studio": "npm run studio -w server",
     "production:check": "npm run production:check -w server --",
     "storage:migrate": "npm run storage:migrate -w server --",

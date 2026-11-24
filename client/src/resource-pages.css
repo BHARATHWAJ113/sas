@@ -1,0 +1,3 @@
+.resource-feature{padding-top:0;background:var(--surface-page,#fff)}
+.resource-feature img{width:min(900px,100%);max-height:800px;object-fit:contain;margin-inline:auto;border:1px solid var(--border,#dde5ee);border-radius:8px;background:white}
+.resource-download{padding-top:0;text-align:center}

@@ -7,7 +7,7 @@ import { createStorage, minioOptions, mediaKey } from '../src/storage.js';
 import { mountUploads } from '../src/uploads.js';
 import { cleanStorage } from '../src/storage-cleanup.js';
 import { createApp } from '../src/app.js';
-import { migrateObject } from '../prisma/minio-migration.js';
+import { migrateObject, replaceSiteObject } from '../prisma/minio-migration.js';
 import { memoryStorage } from './memory-storage.js';
 
 function fixture(role = 'EDITOR') {
@@ -118,6 +118,14 @@ describe('MinIO migration and S3 adapter', () => {
     expect(await migrateObject(store, 'media/abc.webp', bytes, 'image/webp', true)).toBe('uploaded');
     expect(await migrateObject(store, 'media/abc.webp', bytes, 'image/webp', true)).toBe('verified');
     await expect(migrateObject(store, 'media/abc.webp', Buffer.from('other'), 'image/webp', true)).rejects.toThrow('Different object');
+  });
+  it('replaces only an explicitly selected site object and verifies its bytes', async () => {
+    const store = memoryStorage(); store.replace = async (key, buffer) => store.objects.set(key, Buffer.from(buffer));
+    await store.put('assets/images/principal.webp', Buffer.from('old'));
+    expect(await replaceSiteObject(store, 'assets/images/principal.webp', Buffer.from('new'), 'image/webp', false)).toBe('different');
+    expect((await store.read('assets/images/principal.webp')).toString()).toBe('old');
+    expect(await replaceSiteObject(store, 'assets/images/principal.webp', Buffer.from('new'), 'image/webp', true)).toBe('replaced');
+    expect((await store.read('assets/images/principal.webp')).toString()).toBe('new');
   });
   it('uses private path-style S3 operations with conditional writes and bounded reads', async () => {
     const env = { MINIO_ENDPOINT: 'https://minio.example', MINIO_BUCKET: 'school', MINIO_REGION: 'us-east-1', MINIO_ACCESS_KEY: 'test', MINIO_SECRET_KEY: 'test' };

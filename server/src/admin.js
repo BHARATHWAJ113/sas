@@ -10,12 +10,16 @@ import { queueMediaDeletion, cleanStorage } from './storage-cleanup.js';
 import { mountEmailAdmin } from './email-admin.js';
 import { adminList, listEnvelope } from './admin-list.js';
 import { schoolResources } from '../../shared/school-sections.js';
-const resources = { ...schoolResources, pages: 'page', events: 'event', activities: 'activity', 'activity-categories': 'activityCategory', announcements: 'announcement', translations: 'translation', galleries: 'gallery', settings: 'siteSetting', media: 'media' };
+import { homeContentResources } from '../../shared/home-content.js';
+const resources = { ...schoolResources, ...homeContentResources, pages: 'page', events: 'event', activities: 'activity', 'activity-categories': 'activityCategory', announcements: 'announcement', translations: 'translation', galleries: 'gallery', settings: 'siteSetting', media: 'media' };
 const relations = {
   honours: { image: true }, staff: { image: true }, toppers: { image: true },
   events: { images: { orderBy: { order: 'asc' }, include: { media: true } }, attachment: true },
   activities: { category: { select: { title: true, status: true } }, image: { select: { id: true, alt: true, status: true } } },
   galleries: { images: { orderBy: { order: 'asc' }, include: { media: true } } },
+  'home-slides': { media: true, poster: true },
+  'principal-desks': { image: true },
+  leadership: { image: true },
 };
 const audit = (tx, req, action, entity, entityId) => tx.auditLog.create({ data: { userId: req.user.id, action, entity, entityId } });
 export function adminRouter(db, auth, store = storage) {
@@ -127,7 +131,7 @@ export function adminRouter(db, auth, store = storage) {
       if (resource === 'media') {
         const used = await Promise.all(['honour', 'staffMember', 'topper'].map(model => db[model].count({ where: { imageId: req.params.id } })));
         if (used.some(Boolean)) throw fail(409, 'Remove this photo from honours, staff and toppers before deleting it.');
-        const refs = await db.media.findUnique({ where: { id: req.params.id }, include: { _count: { select: { eventImages: true, attachments: true, galleryMedia: true, activities: true, announcementImages: true, emailAttachments: true } } } });
+        const refs = await db.media.findUnique({ where: { id: req.params.id }, include: { _count: { select: { eventImages: true, attachments: true, galleryMedia: true, activities: true, announcementImages: true, emailAttachments: true, homeSlides: true, homeSlidePosters: true, principalDesks: true, leaderProfiles: true } } } });
         if (refs && Object.values(refs._count).some(Boolean)) throw fail(409, 'Remove this media from events, galleries and activities before deleting it.');
         const covers = await db.event.count({ where: { cover: `/api/media/${req.params.id}` } });
         if (covers) throw fail(409, 'This image is used as an event cover. Remove that reference first.');
@@ -150,6 +154,15 @@ async function saveResource(db, req, resource, model, audit, update) {
     if (data.imageId) {
       const image = await tx.media.findUnique({ where: { id: data.imageId } });
       if (!image?.mimeType.startsWith('image/')) throw fail(400, 'Choose an image from the media library for the activity.');
+    }
+    if (resource === 'home-slides' && data.mediaId) {
+      const media = await tx.media.findUnique({ where: { id: data.mediaId } });
+      const prefix = data.kind === 'VIDEO' ? 'video/' : 'image/';
+      if (!media?.mimeType.startsWith(prefix)) throw fail(400, `Choose ${data.kind === 'VIDEO' ? 'an MP4 video' : 'an image'} from the media library.`);
+    }
+    if (resource === 'home-slides' && data.posterId) {
+      const poster = await tx.media.findUnique({ where: { id: data.posterId } });
+      if (!poster?.mimeType.startsWith('image/')) throw fail(400, 'Choose an image for the video poster.');
     }
     if (imageIds?.length) {
       const count = await tx.media.count({ where: { id: { in: [...new Set(imageIds)] }, mimeType: { startsWith: 'image/' } } });

@@ -76,6 +76,51 @@ export const schoolPages = {
     summary: 'அறிவியல் கண்காட்சிகள், பள்ளிகளுக்கிடையிலான போட்டிகள், தேசிய மாணவர் படை முகாம்கள், சாரணர் மற்றும் சாரணியர் செயல்பாடுகளில் மாணவர்கள் பங்கேற்றதாகப் பள்ளி வரலாறு குறிப்பிடுகிறது.',
     body: 'பரதநாட்டியம், சிலம்பம், விளையாட்டுகள் மற்றும் அருட்தந்தை எம். ஜான் கென்னடியின் தலைமையில் தொடங்கப்பட்ட ஆண்டு விளையாட்டுப் போட்டி ஆகியவையும் வரலாற்றில் இடம்பெற்றுள்ளன. 2024–25 கல்வியாண்டில் பேச்சு ஆங்கிலம், ஜூனியர் ஐஏஎஸ், ஒழுக்க விழுமியங்கள் மற்றும் கணினி அறிவியல் குறித்த நூல்களை ஆசிரியர்கள் உருவாக்கினர். அவை பள்ளி வளாகத்திலேயே அச்சிடப்பட்டு, தொகுக்கப்பட்டன. மாணவர் மற்றும் ஆசிரியர் படைப்புகளை வெளியிடப் பள்ளி இதழும் தொடங்கப்பட்டது.',
   }),
+  'school-anthem': schoolPage('school-anthem', {
+    title: 'Our school anthem',
+    summary: 'The school anthem expresses the shared spirit and values of St. Antony’s.',
+    body: 'The anthem reference is presented below for the school community. Contact the school office for the official words, music and guidance for school programmes.',
+  }, {
+    title: 'எங்கள் பள்ளி கீதம்',
+    summary: 'புனித அந்தோணியார் பள்ளியின் பொதுவான உணர்வையும் விழுமியங்களையும் பள்ளி கீதம் வெளிப்படுத்துகிறது.',
+    body: 'பள்ளிச் சமூகத்திற்கான கீதக் குறிப்பு கீழே வழங்கப்பட்டுள்ளது. அதிகாரப்பூர்வ வரிகள், இசை மற்றும் பள்ளி நிகழ்ச்சிகளுக்கான வழிகாட்டலுக்கு பள்ளி அலுவலகத்தைத் தொடர்புகொள்ளுங்கள்.',
+  }),
+  'annual-report': schoolPage('annual-report', {
+    title: 'Annual Report 2025–26',
+    summary: 'Read the school’s annual report for the 2025–26 academic year.',
+    body: 'The report records the academic year’s programmes, activities and development. Use the PDF button below to open the complete report.',
+  }, {
+    title: '2025–26 ஆண்டு அறிக்கை',
+    summary: '2025–26 கல்வியாண்டிற்கான பள்ளியின் ஆண்டு அறிக்கையைப் பாருங்கள்.',
+    body: 'கல்வியாண்டின் நிகழ்ச்சிகள், செயல்பாடுகள் மற்றும் வளர்ச்சியை இவ்வறிக்கை பதிவு செய்கிறது. முழு அறிக்கையைத் திறக்க கீழே உள்ள PDF பொத்தானைப் பயன்படுத்தவும்.',
+  }),
+  'e-communication': schoolPage('e-communication', {
+    title: 'e-Communication',
+    summary: 'Official digital communication keeps families connected with school information.',
+    body: 'Current notices and announcements are published on this website. Families should use the contact details registered with the school and follow instructions issued by the school office. For access support or a change of contact details, contact the office directly.',
+  }, {
+    title: 'மின்னணுத் தொடர்பு',
+    summary: 'பள்ளியின் அதிகாரப்பூர்வ தகவல்களை குடும்பங்களுடன் இணைக்க மின்னணுத் தொடர்பு உதவுகிறது.',
+    body: 'தற்போதைய அறிவிப்புகள் இந்த இணையதளத்தில் வெளியிடப்படுகின்றன. பள்ளியில் பதிவு செய்யப்பட்ட தொடர்பு விவரங்களைப் பயன்படுத்தி அலுவலகம் வழங்கும் அறிவுறுத்தல்களைப் பின்பற்றவும். அணுகல் உதவி அல்லது தொடர்பு விவர மாற்றத்திற்கு அலுவலகத்தை நேரடியாகத் தொடர்புகொள்ளுங்கள்.',
+  }),
+  'e-magazine': schoolPage('e-magazine', {
+    title: 'e-Magazine',
+    summary: 'A digital space for student and teacher writing, creativity and school memories.',
+    body: 'The next school-approved issue will be published here. Contributions and publication dates are coordinated by the school; contact the office for current information.',
+  }, {
+    title: 'மின்னிதழ்',
+    summary: 'மாணவர் மற்றும் ஆசிரியர் எழுத்துகள், படைப்பாற்றல், பள்ளி நினைவுகளுக்கான மின்னணு தளம்.',
+    body: 'பள்ளி அங்கீகரிக்கும் அடுத்த இதழ் இங்கே வெளியிடப்படும். படைப்புகள் மற்றும் வெளியீட்டுத் தேதிகளை பள்ளி ஒருங்கிணைக்கிறது; தற்போதைய தகவலுக்கு அலுவலகத்தைத் தொடர்புகொள்ளுங்கள்.',
+  }),
+  'school-chimes': schoolPage('school-chimes', {
+    title: 'School Chimes',
+    summary: 'School Chimes is the school’s designated communication channel for families.',
+    body: 'This page provides a permanent reference for the service. Parents and guardians should use only the access details issued by the school. For login, account recovery or a change of registered mobile number, contact the school office; never share a password or one-time code with another person.',
+  }, {
+    title: 'ஸ்கூல் சைம்ஸ்',
+    summary: 'குடும்பங்களுக்கான பள்ளியின் குறிப்பிட்ட தகவல் தொடர்புச் சேவை ஸ்கூல் சைம்ஸ்.',
+    body: 'இந்தப் பக்கம் சேவைக்கான நிலையான குறிப்பாகும். பள்ளி வழங்கிய அணுகல் விவரங்களை மட்டும் பெற்றோர் பயன்படுத்த வேண்டும். உள்நுழைவு, கணக்கு மீட்பு அல்லது பதிவு செய்யப்பட்ட கைபேசி எண் மாற்றத்திற்கு பள்ளி அலுவலகத்தைத் தொடர்புகொள்ளுங்கள்; கடவுச்சொல் அல்லது ஒருமுறை குறியீட்டை மற்றவருடன் பகிர வேண்டாம்.',
+  }),
   contact: schoolPage('contact', {
     title: 'Visiting the school',
     summary: 'The school office is in Block 29, Neyveli Township, Tamil Nadu 607807.',

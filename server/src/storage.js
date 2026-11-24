@@ -9,7 +9,7 @@ export function minioOptions(env) {
   return { endpoint: url.origin, forcePathStyle: true, region: env.MINIO_REGION, credentials: { accessKeyId: env.MINIO_ACCESS_KEY, secretAccessKey: env.MINIO_SECRET_KEY }, maxAttempts: 2, requestHandler: { connectionTimeout: 3000, requestTimeout: 10000 }, requestChecksumCalculation: 'WHEN_REQUIRED', responseChecksumValidation: 'WHEN_REQUIRED' };
 }
 export const mediaKey = filename => {
-  if (!/^[a-f0-9-]+\.(webp|pdf)$/.test(filename)) throw new Error('Invalid media filename.');
+  if (!/^[a-f0-9-]+\.(webp|pdf|mp4)$/.test(filename)) throw new Error('Invalid media filename.');
   return `media/${filename}`;
 };
 export const missingObject = error => ['NoSuchKey', 'NotFound', 'NoSuchObject'].includes(error?.name || error?.code);
@@ -23,6 +23,7 @@ export function createStorage(env, injectedClient) {
   return {
     async stat(Key) { try { const value = await connection().send(new HeadObjectCommand({ Bucket, Key })); return { size: value.ContentLength, sha256: value.Metadata?.sha256 }; } catch (error) { if (missingObject(error)) return null; throw error; } },
     async put(Key, buffer, mimeType) { await connection().send(new PutObjectCommand({ Bucket, Key, Body: buffer, ContentLength: buffer.length, ContentType: mimeType, Metadata: { sha256: checksum(buffer) }, IfNoneMatch: '*' })); },
+    async replace(Key, buffer, mimeType) { await connection().send(new PutObjectCommand({ Bucket, Key, Body: buffer, ContentLength: buffer.length, ContentType: mimeType, Metadata: { sha256: checksum(buffer) } })); },
     stream: streamObject,
     async read(key, limit = 16 * 1024 * 1024) {
       const stream = await streamObject(key);

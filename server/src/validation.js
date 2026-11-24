@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { activityIcons } from '../../shared/school-activities.js';
 import { metadataSchema } from './metadata.js';
 import { schoolSchemas } from './school-sections.js';
+import { homeContentSchemas } from './home-content.js';
 import { socialPlatforms, validSocialUrl } from '../../shared/social-links.js';
 const text = (n = 255) => z.string().trim().min(1).max(n);
 const optionalText = (n) => z.string().trim().max(n).nullable().optional();
@@ -15,6 +16,7 @@ const sortOrder = z.number().int().min(0).max(9999).default(0);
 export const eventSchema = z.object({ ...bilingual, ...body, ...seo, slug, category: text(80), categoryTa: text(120), categoryHi: optionalText(120), date, endDate: date.nullable().optional(), location: text(), locationTa: text(), locationHi: optionalText(255), cover: z.string().regex(/^\/(?:(?:images|api\/assets\/images)\/[a-z0-9-]+\.(?:webp|jpg|png)|api\/media\/[a-zA-Z0-9_-]+)$/).nullable().optional(), attachmentId: text(191).nullable().optional(), imageIds: z.array(text(191)).max(30).default([]), status, isDemo: z.boolean().default(false) }).strict().refine(v => !v.endDate || new Date(v.endDate) >= new Date(v.date), { message: 'End date must follow the start date.', path: ['endDate'] });
 export const schemas = {
   ...schoolSchemas,
+  ...homeContentSchemas,
   pages: z.object({ ...bilingual, ...body, ...seo, slug, status, isDemo: z.boolean().default(false) }).strict(),
   events: eventSchema,
   activities: z.object({ ...bilingual, slug, categoryId: text(191), imageId: text(191).nullable().optional(), sortOrder, status, isDemo: z.boolean().default(false) }).strict(),

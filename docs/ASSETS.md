@@ -2,7 +2,9 @@
 
 The supplied **assets/st_antonys_logo.jpeg** is preserved unchanged. The 160px WebP at **client/public/images/logo.webp** is a resized display copy of that official crest. No logo or asset from either design reference was copied.
 
-The school supplied four additional archival images for the About page. The WebP display copies are `fr-e-thomas.webp`, `fr-pascal-raj.webp`, `fr-anandaraj.webp` and `fr-m-john-kennedy.webp`. Their original filenames and caption evidence are recorded in [school source notes](SCHOOL-SOURCES.md).
+The school supplied archival leadership images for the About page. The WebP display copies are `fr-e-thomas.webp`, `fr-v-chinnappan.webp`, `fr-pascal-raj.webp`, `fr-anandaraj.webp` and `fr-m-john-kennedy.webp`. The current principal portrait was replaced with the newer school-supplied office photograph. Their original filenames and caption evidence are recorded in [school source notes](SCHOOL-SOURCES.md).
+
+The curated production set in `assets/site-images` is the static source of truth for site-owned images and the annual-report PDF. `scripts/prepare-home-content.mjs` creates responsive WebP variants and updates the SHA-256 manifest. The objects are stored in MinIO under `assets/images/`; CMS uploads use database-backed `media/` object keys and must be added through the admin Media library. See [the administration handover](ADMIN-HANDOVER.md) for the approved group-upload and production-release workflow.
 
 The following project assets were generated with the built-in ImageGen tool and optimised to WebP with Sharp. They are fictional illustrative school scenes, explicitly labeled in the public interface. They are not photographs of St. Antony’s campus, staff or students. Final files:
 

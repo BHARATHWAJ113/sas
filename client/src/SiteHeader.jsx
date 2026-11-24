@@ -8,9 +8,10 @@ import { useSite } from './context';
 
 const navigation = [
   { label: 'home', path: '/' },
-  { label: 'about', pages: [['about', '/about'], ['infrastructure', '/infrastructure'], ['staff', '/staff']] },
+  { label: 'ourSchool', pages: [['about', '/about'], ['principalDesk', '/about#principal-desk'], ['leadershipTitle', '/about#school-leadership'], ['schoolAnthem', '/school-anthem'], ['annualReport', '/annual-report']] },
   { label: 'academics', pages: [['academics', '/academics'], ['honours', '/honours'], ['toppers', '/toppers']] },
   { label: 'studentLife', pages: [['studentLife', '/student-life'], ['activitiesNav', '/student-life#activities'], ['events', '/events'], ['news', '/news']] },
+  { label: 'facilitiesMenu', pages: [['infrastructure', '/infrastructure'], ['eCommunication', '/e-communication'], ['eMagazine', '/e-magazine'], ['schoolChimes', '/school-chimes']] },
   { label: 'gallery', path: '/gallery' },
   { label: 'admissions', pages: [['admissions', '/admissions'], ['fees', '/fees']] },
   { label: 'contact', pages: [['contact', '/contact'], ['socialMedia', '/social-media']] },

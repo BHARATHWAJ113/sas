@@ -8,21 +8,22 @@ import { imageVariants } from './image-variants.js';
 import { storage, mediaKey } from './storage.js';
 import { cleanStorage, queueMediaDeletion } from './storage-cleanup.js';
 import { schemas } from './validation.js';
-const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 8 * 1024 * 1024, files: 1, fields: 4, fieldSize: 32768 } });
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 30 * 1024 * 1024, files: 1, fields: 4, fieldSize: 32768 } });
 export function mountUploads(router, db, audit, store = storage) {
   const save = replacing => async (req, res) => {
-    if (!req.file) throw fail(400, 'Choose a JPEG, PNG, WebP image or PDF, up to 8 MB.');
+    if (!req.file) throw fail(400, 'Choose a JPEG, PNG, WebP, MP4 or PDF file, up to 30 MB.');
     const existing = replacing ? await db.media.findUnique({ where: { id: req.params.id } }) : null;
     if (replacing && !existing) throw fail(404, 'Media unavailable.');
     let metadata;
     try { metadata = req.body.metadata ? JSON.parse(req.body.metadata) : null; } catch { throw fail(400, 'Invalid image details.'); }
     const captions = replacing ? (metadata ? schemas.media.parse(metadata) : {}) : z.object({ alt: z.string().trim().min(1).max(255), altTa: z.string().trim().min(1).max(255), altHi: z.string().trim().max(255).optional() }).parse(req.body);
     const type = await fileTypeFromBuffer(req.file.buffer);
-    if (!type || !['image/jpeg', 'image/png', 'image/webp', 'application/pdf'].includes(type.mime)) throw fail(400, 'The file contents are not a supported image or PDF.');
-    if (existing && existing.mimeType.startsWith('image/') !== type.mime.startsWith('image/')) throw fail(400, 'Replace an image with an image, or a PDF with a PDF, to preserve existing references.');
+    if (!type || !['image/jpeg', 'image/png', 'image/webp', 'video/mp4', 'application/pdf'].includes(type.mime)) throw fail(400, 'The file contents are not a supported image, MP4 or PDF.');
+    const family = mime => mime.startsWith('image/') ? 'image' : mime.startsWith('video/') ? 'video' : 'document';
+    if (existing && family(existing.mimeType) !== family(type.mime)) throw fail(400, 'Replace media with the same kind of file to preserve existing references.');
     let buffer = req.file.buffer;
     let mimeType = type.mime;
-    let extension = 'pdf';
+    let extension = mimeType === 'video/mp4' ? 'mp4' : 'pdf';
     if (mimeType.startsWith('image/')) {
       try { buffer = await sharp(buffer, { limitInputPixels: 25000000 }).rotate().resize({ width: 2400, height: 2400, fit: 'inside', withoutEnlargement: true }).webp({ quality: 85 }).toBuffer(); }
       catch { throw fail(400, 'This image could not be decoded. Choose a valid image under 25 megapixels.'); }

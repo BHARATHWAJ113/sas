@@ -15,7 +15,7 @@ import { WelcomeLoader } from './Loading';
 import { SiteProvider } from './context';
 import { Footer, RouteReset, ScrollToTop, StateBox } from './components';
 import { SiteHeader } from './SiteHeader';
-import { Home, About, Academics, Admissions, Infrastructure, StudentLife, Updates, Events, EventDetails, Contact, NotFound, Privacy } from './pages';
+import { Home, About, Academics, Admissions, Infrastructure, SchoolResourcePage, StudentLife, Updates, Events, EventDetails, Contact, NotFound, Privacy } from './pages';
 import { Gallery } from './Gallery';
 import { SocialMedia, SocialSidebar } from './SocialMedia';
 import { useScrollReveal } from './useScrollReveal';
@@ -27,6 +27,8 @@ import './site-header.css';
 import './public-motion.css';
 import './gallery.css';
 import './theme.css';
+import './home-content.css';
+import './resource-pages.css';
 const SchoolSection = lazy(() => import('./SchoolSection'));
 const Admin = lazy(() => import('./admin/Admin'));
 class ErrorBoundary extends React.Component {
@@ -49,6 +51,7 @@ function PublicSite() {
           <Route path="/admissions" element={<Admissions />} />
           <Route path="/infrastructure" element={<Infrastructure />} />
           <Route path="/student-life" element={<StudentLife />} />
+          {['school-anthem', 'annual-report', 'e-communication', 'e-magazine', 'school-chimes'].map(slug => <Route key={slug} path={`/${slug}`} element={<SchoolResourcePage slug={slug}/>}/>)}
           {['fees', 'honours', 'staff', 'toppers'].map(resource => <Route key={resource} path={`/${resource}`} element={<SchoolSection key={resource} resource={resource}/>}/>)}
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/social-media" element={<SocialMedia />} />

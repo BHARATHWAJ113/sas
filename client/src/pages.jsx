@@ -2,14 +2,14 @@ import { localeFor } from '../../shared/languages.js';
 import { Loader } from './Loading';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { ArrowUpRight, ArrowRight, BookOpen, Building2, GraduationCap, CalendarDays, MessageCircle, MapPin, Palette, Trophy, Sparkles, CheckCircle2, X, Download, AlertCircle, HeartHandshake } from 'lucide-react';
+import { ArrowUpRight, BookOpen, Building2, GraduationCap, CalendarDays, MessageCircle, MapPin, Palette, Trophy, Sparkles, CheckCircle2, X, Download, AlertCircle, HeartHandshake } from 'lucide-react';
 import { useSite } from './context';
 import { api, useApi, mediaUrl, assetUrl } from './api';
 import { ResponsiveImage, AcademicCards, AdmissionsCTA, ButtonLink, ContactBlock, DemoBadge, EventCard, EventPreview, FacilityCards, PageHero, Pagination, SearchField, SectionHeading, Seo, StateBox, TextLink, Vision } from './components';
 import { schoolPages } from '../../shared/school-profile.js';
 import { SchoolDiary, SchoolLeadership } from './SchoolRecords';
 import { SchoolJourney, SchoolStats, WhyChooseSchool } from './HomeHighlights';
-import { HeroVideo } from './HeroVideo';
+import { HomeCarousel, PrincipalDesk } from './HomeContent';
 import { ActivityExplorer } from './ActivityExplorer';
 import { GalleryPreview, ImageGrid } from './Gallery';
 import { useOptionalMetadata } from './OptionalMetadata';
@@ -29,26 +29,8 @@ export function Home() {
   return (
     <>
       <Seo title={page.data?.seoTitle || t('schoolFull')} description={page.data?.seoDescription} />
-      <section className="hero">
-        <HeroVideo />
-        <div className="container hero-content">
-          <span className="hero-eyebrow"><Sparkles size={17} aria-hidden="true" />{t('heroEyebrow')}</span>
-          <h1>
-            <span className="hero-line">{t('hero1')}</span>
-            <em className="hero-emphasis">{t('hero2')} {t('hero3')}</em>
-          </h1>
-          <p>{t('heroText')}</p>
-          <div className="hero-actions">
-            <ButtonLink to="/about" light>{t('discover')}</ButtonLink>
-            <Link to="/admissions" className="hero-second">{t('admissions')}<ArrowRight size={18} /></Link>
-          </div>
-        </div>
-        <div className="hero-bottom container">
-          <span><BookOpen size={18} aria-hidden="true" />{t('board')}</span>
-          <span><GraduationCap size={19} aria-hidden="true" />{t('grades')}</span>
-          <span className="hero-location"><MapPin size={18} aria-hidden="true" />{t('neyveli')}</span>
-        </div>
-      </section>
+      <HomeCarousel />
+      <PrincipalDesk />
       <section className="quick-section">
         <div className="container quick-grid">
           {quickLinks.map(({ page, label, Icon }) => (
@@ -145,33 +127,27 @@ function PageContent({ slug }) {
 }
 
 export function About() {
-  const { t, setting } = useSite();
-  const principal = setting('principal');
+  const { t } = useSite();
 
   return (
     <>
-      <PageHero eyebrow={t('about')} title={t('aboutTitle')} text={t('aboutSub')} image="/api/assets/images/campus-smart-class.webp" />
+      <PageHero eyebrow={t('about')} title={t('aboutTitle')} text={t('aboutSub')} image="/api/assets/images/campus-primary.webp" />
       <PageContent slug="about" />
       <SchoolLeadership />
       <Vision />
-      {principal !== t('principalPending') && (
-        <section className="section">
-          <div className="container principal-panel">
-            <div>
-              <span className="eyebrow">{t('principal')}</span>
-              <h2>{t('motto')}</h2>
-              <p>{principal}</p>
-            </div>
-            <ResponsiveImage src="/api/assets/images/logo.webp" width="180" height="180" alt="Official school crest" />
-          </div>
-        </section>
-      )}
+      <PrincipalDesk />
       <AdmissionsCTA />
     </>
   );
 }
-export function Academics() { const { t } = useSite(); return <><PageHero eyebrow={t('academics')} title={t('academicTitle')} text={t('academicSub')} image="/api/assets/images/campus-smart-class.webp"/><section className="section"><div className="container"><SectionHeading eyebrow={t('programme')} title={t('academicsTitle')} text={t('programmeDemo')}/><AcademicCards full/></div></section><PageContent slug="academics"/><AdmissionsCTA/></>; }
-export function Infrastructure() { const { t } = useSite(); return <><PageHero eyebrow={t('infrastructure')} title={t('infraTitle')} text={t('infraSub')} image="/api/assets/images/campus-smart-class.webp"/><section className="section"><div className="container"><SectionHeading eyebrow={t('campusTag')} title={t('campusTitle')} text={t('campusText')} icon={Building2}/><FacilityCards/></div></section><PageContent slug="infrastructure"/><AdmissionsCTA/></>; }
+export function Academics() { const { t } = useSite(); return <><PageHero eyebrow={t('academics')} title={t('academicTitle')} text={t('academicSub')} image="/api/assets/images/campus-learning.webp"/><section className="section"><div className="container"><SectionHeading eyebrow={t('programme')} title={t('academicsTitle')} text={t('programmeDemo')}/><AcademicCards full/></div></section><PageContent slug="academics"/><AdmissionsCTA/></>; }
+export function Infrastructure() { const { t } = useSite(); return <><PageHero eyebrow={t('infrastructure')} title={t('infraTitle')} text={t('infraSub')} image="/api/assets/images/campus-classroom.webp"/><section className="section"><div className="container"><SectionHeading eyebrow={t('campusTag')} title={t('campusTitle')} text={t('campusText')} icon={Building2}/><FacilityCards/></div></section><PageContent slug="infrastructure"/><AdmissionsCTA/></>; }
+export function SchoolResourcePage({ slug }) {
+  const { t } = useSite();
+  const images = { 'school-anthem': '/api/assets/images/school-anthem.webp', 'annual-report': '/api/assets/images/campus-library.webp', 'e-communication': '/api/assets/images/campus-smart-class.webp', 'e-magazine': '/api/assets/images/campus-library.webp', 'school-chimes': '/api/assets/images/campus-students.webp' };
+  const labels = { 'school-anthem': 'schoolAnthem', 'annual-report': 'annualReport', 'e-communication': 'eCommunication', 'e-magazine': 'eMagazine', 'school-chimes': 'schoolChimes' };
+  return <><PageHero eyebrow={t('ourSchool')} title={t(labels[slug])} image={images[slug]}/><PageContent slug={slug}/>{slug === 'school-anthem' && <section className="section resource-feature"><div className="container"><ResponsiveImage src="/api/assets/images/school-anthem.webp" alt={t('schoolAnthem')} width="1200" height="900" loading="lazy"/></div></section>}{slug === 'annual-report' && <section className="section resource-download"><div className="container"><a className="button" href="/api/assets/images/annual-report-2025-26.pdf" target="_blank" rel="noreferrer">{t('download')} · PDF<Download size={17}/></a></div></section>}<AdmissionsCTA/></>;
+}
 export function StudentLife() { const { t } = useSite(); return <><PageHero eyebrow={t('studentLife')} title={t('lifePageTitle')} text={t('lifeSub')} image="/api/assets/images/campus-carrom.webp"/><StudentLifeSection/><ActivityExplorer/><div className="container achievement-panel"><Trophy size={38}/><div><h2>{t('achievements')}</h2><p>{t('achievementsText')}</p></div></div><PageContent slug="student-life"/><EventPreview/><AdmissionsCTA/></>; }
 export function EnquiryForm() {
   const { t, lang } = useSite(); const health = useApi('/health');

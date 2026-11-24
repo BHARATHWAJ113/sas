@@ -27,7 +27,7 @@ export default function BatchUpload({ mutate, onSaved }) {
       for (let i = 0; i < next.length; i++) {
         if (next[i].status === 'Uploaded') continue;
         const item = next[i];
-        if (item.file.size > 8 * 1024 * 1024) throw new Error(`${item.file.name} exceeds 8 MB.`);
+        if (item.file.size > 30 * 1024 * 1024) throw new Error(`${item.file.name} exceeds 30 MB.`);
         next[i] = { ...item, status: 'Uploading…' }; setItems([...next]);
         const body = new FormData(); body.append('file', item.file); body.append('alt', item.alt); body.append('altTa', item.altTa); body.append('altHi', item.altHi);
         try { await mutate('/media/upload', 'POST', body); }
@@ -39,9 +39,9 @@ export default function BatchUpload({ mutate, onSaved }) {
   }
   const complete = items.length > 0 && items.every(item => item.status === 'Uploaded');
   return <form className="admin-form" onSubmit={upload}>
-    <p>Upload up to 30 photos or PDFs, 8 MB each. Files remain drafts until published in the Media library. Add photos to an album to set their category and order.</p>
+    <p>Upload up to 30 photos, MP4 videos or PDFs, 30 MB each. Files remain drafts until published in the Media library.</p>
     {error && <p role="alert" className="admin-error">{error}</p>}
-    <label>Choose files<input type="file" multiple accept="image/jpeg,image/png,image/webp,application/pdf" disabled={busy} onChange={e => select(e.target.files)}/></label>
+    <label>Choose files<input type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,application/pdf" disabled={busy} onChange={e => select(e.target.files)}/></label>
     <div className="batch-upload-list">{items.map((item, i) => <div key={i} className="batch-upload-item">
       {item.url && <img src={item.url} alt="Upload preview"/>}<span>{item.file.name}<small role="status">{item.status}</small></span>
       <CaptionFields key={item.url} item={item} busy={busy} mutate={mutate} onBusy={value => setTranslating(current => current[i] === value ? current : { ...current, [i]: value })} setItem={update => setItems(current => current.map((row, index) => index === i ? update(row) : row))}/>

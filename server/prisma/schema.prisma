@@ -32,6 +32,10 @@ enum ConsentChoice {
   ACCEPTED
   REJECTED
 }
+enum HomeSlideKind {
+  IMAGE
+  VIDEO
+}
 model Role {
   id    String @id @default(cuid()) @db.VarChar(191)
   name  String @unique @db.VarChar(50)
@@ -206,11 +210,86 @@ model Media {
   attachments Event[] @relation("EventAttachment")
   galleryMedia GalleryMedia[]
   activities  Activity[]
+  homeSlides HomeSlide[] @relation("HomeSlideMedia")
+  homeSlidePosters HomeSlide[] @relation("HomeSlidePoster")
+  principalDesks PrincipalDesk[]
+  leaderProfiles LeaderProfile[]
   announcementImages Announcement[] @relation("AnnouncementImage")
   emailAttachments EmailMessage[] @relation("EmailAttachment")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   @@map("media")
+}
+
+model HomeSlide {
+  id          String @id @default(cuid()) @db.VarChar(191)
+  kind        HomeSlideKind @default(IMAGE)
+  alt         String @db.VarChar(255)
+  altTa       String? @db.VarChar(255)
+  altHi       String? @db.VarChar(255)
+  mediaId     String? @db.VarChar(191)
+  media       Media? @relation("HomeSlideMedia", fields: [mediaId], references: [id], onDelete: SetNull)
+  asset       String? @db.VarChar(255)
+  videoUrl    String? @db.VarChar(1000)
+  posterId    String? @db.VarChar(191)
+  poster      Media? @relation("HomeSlidePoster", fields: [posterId], references: [id], onDelete: SetNull)
+  duration    Int @default(7)
+  sortOrder   Int @default(0)
+  status      ContentStatus @default(DRAFT)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([status, sortOrder])
+  @@map("home_slides")
+}
+
+model PrincipalDesk {
+  id          String @id @default(cuid()) @db.VarChar(191)
+  title       String @db.VarChar(255)
+  titleTa     String? @db.VarChar(255)
+  titleHi     String? @db.VarChar(255)
+  name        String @db.VarChar(160)
+  nameTa      String? @db.VarChar(160)
+  nameHi      String? @db.VarChar(160)
+  designation String @db.VarChar(200)
+  designationTa String? @db.VarChar(200)
+  designationHi String? @db.VarChar(200)
+  message     String @db.LongText
+  messageTa   String? @db.LongText
+  messageHi   String? @db.LongText
+  imageId     String? @db.VarChar(191)
+  image       Media? @relation(fields: [imageId], references: [id], onDelete: SetNull)
+  imageAsset  String? @db.VarChar(255)
+  status      ContentStatus @default(DRAFT)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([status, updatedAt])
+  @@map("principal_desks")
+}
+
+model LeaderProfile {
+  id          String @id @default(cuid()) @db.VarChar(191)
+  name        String @db.VarChar(160)
+  nameTa      String? @db.VarChar(160)
+  nameHi      String? @db.VarChar(160)
+  designation String @db.VarChar(200)
+  designationTa String? @db.VarChar(200)
+  designationHi String? @db.VarChar(200)
+  tenure      String? @db.VarChar(80)
+  legacy      String @db.Text
+  legacyTa    String? @db.Text
+  legacyHi    String? @db.Text
+  quote       String? @db.Text
+  quoteTa     String? @db.Text
+  quoteHi     String? @db.Text
+  imageId     String? @db.VarChar(191)
+  image       Media? @relation(fields: [imageId], references: [id], onDelete: SetNull)
+  imageAsset  String? @db.VarChar(255)
+  sortOrder   Int @default(0)
+  status      ContentStatus @default(DRAFT)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([status, sortOrder])
+  @@map("leader_profiles")
 }
 model ActivityCategory {
   id         String @id @default(cuid()) @db.VarChar(191)

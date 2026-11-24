@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { BookOpen, Building2, BusFront, GraduationCap, LibraryBig, School, Sprout, Trophy, UsersRound } from 'lucide-react';
+import { BookOpen, Building2, BusFront, GraduationCap, LibraryBig, School, Sprout, Trophy } from 'lucide-react';
 import { SectionHeading } from './components';
 import { useSite } from './context';
 
@@ -19,8 +19,8 @@ const schoolHighlights = [
 
 const schoolStats = [
   { value: 1994, label: 'statsAnnexe', Icon: GraduationCap },
-  { value: 164, label: 'statsPupils', Icon: UsersRound },
-  { value: 21, label: 'statsClassrooms', Icon: Building2 },
+  { value: 31, label: 'statsClassroomsUsed', Icon: Building2 },
+  { value: 8, label: 'statsClassroomsUnused', Icon: Building2 },
   { value: 5, label: 'statsCampus', Icon: Sprout },
 ];
 

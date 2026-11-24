@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { CalendarDays, Medal } from 'lucide-react';
 import ProfileModal from './ProfileModal';
 import { localeFor } from '../../shared/languages.js';
 import { useSite } from './context';
+import { mediaUrl, useApi } from './api';
 import { SectionHeading } from './components';
 import './school-records.css';
 
@@ -55,33 +57,57 @@ const portraits = [
   },
 ];
 
+const leaderTenures = {
+  'fr-e-thomas.webp': 'From 1994',
+  'fr-v-chinnappan.webp': '2002–2006',
+  'fr-anandaraj.webp': '2015–2023',
+  'fr-m-john-kennedy.webp': '2023–Present',
+};
+const fallbackLeaders = portraits.map((portrait, sortOrder) => ({
+  id: portrait.image,
+  ...portrait,
+  imageAsset: portrait.image,
+  name: portrait.title,
+  nameTa: portrait.titleTa,
+  nameHi: portrait.titleHi,
+  designation: 'Principal & Correspondent',
+  designationTa: 'முதல்வர் மற்றும் தாளாளர்',
+  designationHi: 'प्रधानाचार्य एवं प्रबंधक',
+  tenure: leaderTenures[portrait.image],
+  legacy: portrait.text,
+  legacyTa: portrait.textTa,
+  legacyHi: portrait.textHi,
+  sortOrder,
+}));
+
 export function SchoolLeadership() {
   const { t, pick } = useSite();
   const [selected, setSelected] = useState(null);
+  const { data } = useApi('/leadership');
+  const leaders = data?.items?.length ? data.items : fallbackLeaders;
+  const imageFor = leader => leader.image?.id ? mediaUrl(leader.image.id) : `/api/assets/images/${leader.imageAsset || leader.image}`;
 
   return (
     <section className="section school-leadership" id="school-leadership" aria-label={t('leadershipTitle')}>
       <div className="container">
         <SectionHeading eyebrow={t('leadershipTag')} title={t('leadershipTitle')} text={t('leadershipIntro')} />
         <div className="leadership-grid">
-          {portraits.map((portrait) => (
-            <button type="button" className="leadership-card" key={portrait.image} onClick={() => setSelected(portrait)} aria-haspopup="dialog" aria-label={`${t('viewDetails')}: ${pick(portrait, 'title')}`}>
-              <img
-                src={`/api/assets/images/${portrait.image}`}
-                alt={pick(portrait, 'title')}
-                width={portrait.width}
-                height={portrait.height}
-                loading="lazy"
-              />
+          {leaders.map((leader) => (
+            <button type="button" className="leadership-card" key={leader.id} onClick={() => setSelected(leader)} aria-haspopup="dialog" aria-label={`${t('viewDetails')}: ${pick(leader, 'name')}`}>
+              <span className="leadership-photo">
+                <img src={imageFor(leader)} alt={pick(leader, 'name')} width={leader.width || 700} height={leader.height || 860} loading="lazy" />
+                {leader.tenure && <span className="leadership-tenure"><CalendarDays size={13} aria-hidden="true" />{leader.tenure}</span>}
+              </span>
               <span className="leadership-caption">
-                <h3>{pick(portrait, 'title')}</h3>
+                <h3>{pick(leader, 'name')}</h3>
+                <span><Medal size={14} aria-hidden="true" />{pick(leader, 'designation')}</span>
                 <small>{t('viewDetails')} ↗</small>
               </span>
             </button>
           ))}
         </div>
       </div>
-      {selected && <ProfileModal title={pick(selected, 'title')} image={`/api/assets/images/${selected.image}`} onClose={() => setSelected(null)}><p>{pick(selected, 'text')}</p></ProfileModal>}
+      {selected && <ProfileModal title={pick(selected, 'name')} image={imageFor(selected)} onClose={() => setSelected(null)}><p className="profile-role">{selected.tenure}{selected.tenure ? ' · ' : ''}{pick(selected, 'designation')}</p><p>{pick(selected, 'legacy')}</p>{pick(selected, 'quote') && <blockquote>“{pick(selected, 'quote')}”</blockquote>}</ProfileModal>}
     </section>
   );
 }

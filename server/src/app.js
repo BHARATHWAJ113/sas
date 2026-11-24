@@ -13,6 +13,7 @@ import { adminRouter } from './admin.js';
 import { enquirySchema, listQuery, parse } from './validation.js';
 import { galleryMedia } from './gallery.js';
 import { mountSchoolSections } from './school-sections.js';
+import { mountHomeContent } from './home-content.js';
 import { variantFilename } from './image-variants.js';
 import { saveEnquiry } from './enquiries.js';
 import { publicCache } from './public-cache.js';
@@ -51,6 +52,7 @@ export function createApp(db, options = {}) {
   const databaseOnly = (_req, _res, next) => demo ? next(fail(503, 'This preview uses read-only demo content. Authentication and enquiry submission require a configured MySQL database.')) : next();
   app.use(cache.middleware);
   mountSchoolSections(app, db, databaseOnly);
+  mountHomeContent(app, db, databaseOnly);
   app.get('/api/health', async (_req, res) => {
     if (demo) return res.json({ status: 'demo', database: 'unavailable', readOnly: true });
     try { await db.$queryRaw`SELECT 1`; res.json({ status: 'ok', database: 'connected', readOnly: false }); }
@@ -62,7 +64,7 @@ export function createApp(db, options = {}) {
     res.json({ settings, translations, demo, privacyRetentionDays: config.VISITOR_RETENTION_DAYS });
   });
   app.get('/api/sitemap.xml', async (_req, res) => {
-    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy', 'fees', 'honours', 'staff', 'toppers'];
+    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy', 'fees', 'honours', 'staff', 'toppers', 'school-anthem', 'annual-report', 'e-communication', 'e-magazine', 'school-chimes'];
     const events = demo ? [] : await db.event.findMany({ where: published, select: { slug: true } });
     const base = config.SITE_URL.replace(/\/$/, '');
     const escape = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -162,7 +164,7 @@ export function createApp(db, options = {}) {
       const session = req.cookies.school_session ? await db.session.findUnique({ where: { id: hashToken(req.cookies.school_session) }, include: { user: true } }) : null;
       if (!session || session.expiresAt <= new Date() || !session.user.active) throw fail(404, 'File not found.');
     }
-    if (!/^[a-f0-9-]+\.(webp|pdf)$/.test(media.filename)) throw fail(404, 'File not found.');
+    if (!/^[a-f0-9-]+\.(webp|pdf|mp4)$/.test(media.filename)) throw fail(404, 'File not found.');
     const width = z.enum(['640', '1200']).optional().parse(req.query.width);
     const key = mediaKey(width && media.hasVariants ? variantFilename(media.filename, width) : media.filename);
     res.type(media.mimeType).set('X-Content-Type-Options', 'nosniff').set('Cross-Origin-Resource-Policy', 'same-site');
