@@ -8,7 +8,7 @@ import { useSite } from './context';
 
 const navigation = [
   { label: 'home', path: '/' },
-  { label: 'ourSchool', pages: [['about', '/about'], ['principalDesk', '/about#principal-desk'], ['leadershipTitle', '/about#school-leadership'], ['schoolAnthem', '/school-anthem'], ['annualReport', '/annual-report']] },
+  { label: 'ourSchool', pages: [['about', '/about'], ['principalDesk', '/about#principal-desk'], ['leadershipTitle', '/about#school-leadership'], ['staffDirectory', '/staff'], ['schoolAnthem', '/school-anthem'], ['annualReport', '/annual-report']] },
   { label: 'academics', pages: [['academics', '/academics'], ['honours', '/honours'], ['toppers', '/toppers']] },
   { label: 'studentLife', pages: [['studentLife', '/student-life'], ['activitiesNav', '/student-life#activities'], ['events', '/events'], ['news', '/news']] },
   { label: 'facilitiesMenu', pages: [['infrastructure', '/infrastructure'], ['eCommunication', '/e-communication'], ['eMagazine', '/e-magazine'], ['schoolChimes', '/school-chimes']] },

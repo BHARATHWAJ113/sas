@@ -32,7 +32,7 @@ Open **Leadership through the years**. Each record supports the leader’s name,
 
 ## Group image and video upload to MinIO
 
-Use the website’s **Media library → Batch upload** screen instead of copying files directly into the MinIO bucket. The admin upload creates the required database record, optimises images with high-quality WebP variants, stores the objects in MinIO, and keeps the public URL stable.
+Use the website’s **Media library → Batch upload** screen instead of copying files directly into the MinIO bucket. The admin upload creates the required database record, optimises images with high-quality WebP variants, stores the objects in MinIO, and keeps the public URL stable. Use the dimensions and limits in the [media upload guide](MEDIA-UPLOAD-GUIDE.md).
 
 1. Select up to 30 JPEG, PNG, WebP, MP4 or PDF files per batch; each file may be up to 30 MB.
 2. Enter meaningful English alternative text for every file, then generate and review Tamil and Hindi text.
@@ -67,6 +67,7 @@ npm run db:generate
 npm run db:migrate
 npm run db:seed
 npm run home:import -- --apply
+npm run history:update -- --apply
 npm run build
 npm run production:check
 ```

@@ -194,8 +194,8 @@ export function createApp(db, options = {}) {
   app.use((_req, _res, next) => next(fail(404, 'Endpoint not found.')));
   app.use((error, _req, res, _next) => {
     if (error instanceof z.ZodError) return res.status(422).json({ error: 'Please check the highlighted information.', fields: Object.fromEntries(error.issues.map(i => [i.path.join('.'), i.message])) });
-    if (error.code === 'LIMIT_FILE_SIZE') return res.status(413).json({ error: 'File must be 8 MB or smaller.' });
-    if (error.name === 'MulterError') return res.status(400).json({ error: 'Upload rejected. Choose one file up to 8 MB.' });
+    if (error.code === 'LIMIT_FILE_SIZE') return res.status(413).json({ error: 'Media file must be 30 MB or smaller.' });
+    if (error.name === 'MulterError') return res.status(400).json({ error: 'Upload rejected. Choose one media file up to 30 MB.' });
     if (error.code === 'P2002') return res.status(409).json({ error: 'This slug, email or translation key already exists.' });
     if (error.code === 'P2025') return res.status(404).json({ error: 'This record no longer exists.' });
     if (error.code === 'P2003') return res.status(409).json({ error: 'The selected related record is unavailable or still in use.' });

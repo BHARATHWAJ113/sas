@@ -13,6 +13,7 @@
     "seed": "node prisma/seed.js",
     "import:school": "node prisma/import-school-assets.js",
     "import:home": "node prisma/import-home-content.js",
+    "update:history": "node prisma/update-school-history.js",
     "studio": "prisma studio",
     "production:check": "node prisma/production-readiness.js",
     "storage:migrate": "node prisma/migrate-minio.js",
