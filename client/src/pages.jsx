@@ -100,7 +100,7 @@ function UpdatesPreview() {
   const { t, pick, lang } = useSite(); const state = useApi('/announcements?limit=4');
   return <section className="section updates-section"><div className="container"><SectionHeading eyebrow={t('updatesTag')} title={t('updatesTitle')} link={t('allNotices')} to="/notices"/><StateBox {...state} empty={state.data?.items.length === 0}/><div className="updates-grid">{state.data?.items.map(item => <Link key={item.id} to={`/${item.kind === 'NEWS' ? 'news' : 'notices'}?article=${item.slug}`} className="update-card"><div><span className="small-label">{t(item.kind === 'NEWS' ? 'news' : 'notices')}</span>{item.isDemo && <DemoBadge/>}</div><h3>{pick(item, 'title')}</h3><p>{pick(item, 'summary')}</p><span className="update-date">{new Intl.DateTimeFormat(localeFor(lang), { dateStyle: 'medium', timeZone: 'Asia/Kolkata' }).format(new Date(item.publishedAt))}<ArrowUpRight size={20}/></span></Link>)}</div></div></section>;
 }
-function PageContent({ slug }) {
+function PageContent({ slug, wide = false }) {
   const { pick, t } = useSite();
   const state = useApi('/pages/' + slug);
   const reference = schoolPages[slug];
@@ -109,10 +109,10 @@ function PageContent({ slug }) {
 
   return (
     <>
-      <Seo title={page?.seoTitle || t(label)} description={page?.seoDescription || (page && !page.isDemo ? pick(page, 'summary') : undefined)} />
+      <Seo title={page?.seoTitle || (page ? pick(page, 'title') : t(label))} description={page?.seoDescription || (page && !page.isDemo ? pick(page, 'summary') : undefined)} />
       <div className="container content-section">
         {page ? (
-          <article className="prose">
+          <article className={`prose${wide ? ' prose-wide' : ''}`}>
             {page.isDemo && <DemoBadge>{t('demoContent')}</DemoBadge>}
             <h2>{pick(page, 'title')}</h2>
             <p className="lead">{pick(page, 'summary')}</p>
@@ -132,7 +132,8 @@ export function About() {
   return (
     <>
       <PageHero eyebrow={t('about')} title={t('aboutTitle')} text={t('aboutSub')} image="/api/assets/images/campus-primary.webp" />
-      <PageContent slug="about" />
+      <PageContent slug="about" wide />
+      <section className="resource-download history-download"><div className="container"><a className="button button-secondary" href="/api/assets/images/school-history.pdf" target="_blank" rel="noreferrer">{t('schoolHistoryPdf')}<Download size={17}/></a></div></section>
       <SchoolLeadership />
       <Vision />
       <PrincipalDesk />
@@ -142,11 +143,25 @@ export function About() {
 }
 export function Academics() { const { t } = useSite(); return <><PageHero eyebrow={t('academics')} title={t('academicTitle')} text={t('academicSub')} image="/api/assets/images/campus-learning.webp"/><section className="section"><div className="container"><SectionHeading eyebrow={t('programme')} title={t('academicsTitle')} text={t('programmeDemo')}/><AcademicCards full/></div></section><PageContent slug="academics"/><AdmissionsCTA/></>; }
 export function Infrastructure() { const { t } = useSite(); return <><PageHero eyebrow={t('infrastructure')} title={t('infraTitle')} text={t('infraSub')} image="/api/assets/images/campus-classroom.webp"/><section className="section"><div className="container"><SectionHeading eyebrow={t('campusTag')} title={t('campusTitle')} text={t('campusText')} icon={Building2}/><FacilityCards/></div></section><PageContent slug="infrastructure"/><AdmissionsCTA/></>; }
+const magazineEditions = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+function AnthemContent() {
+  const { pick, t } = useSite();
+  const state = useApi('/pages/school-anthem');
+  const page = state.data && !state.data.isDemo ? state.data : schoolPages['school-anthem'];
+  const stanzas = pick(page, 'body').split(/\n{2,}/);
+  return <section className="section anthem-section"><div className="container anthem-layout"><figure className="anthem-illustration"><ResponsiveImage src="/api/assets/images/st-antony-home.webp" alt={t('schoolAnthem')} width="1200" height="1200" loading="lazy"/><figcaption>{t('anthemOfficialNote')}</figcaption></figure><article><span className="eyebrow">{t('schoolAnthem')}</span><h2>{pick(page, 'title')}</h2><p className="lead">{pick(page, 'summary')}</p><div className="anthem-lyrics">{stanzas.map((stanza, index) => <p key={`${index}-${stanza}`}>{stanza.split('\n').map((line, lineIndex) => <span key={`${lineIndex}-${line}`}>{line}</span>)}</p>)}</div></article></div></section>;
+}
+function MagazineLibrary() {
+  const { t } = useSite();
+  return <section className="section magazine-section"><div className="container"><div className="magazine-grid">{magazineEditions.map((edition, index) => <a key={edition} href={`/api/assets/images/e-magazine-edition-${String(index + 1).padStart(2, '0')}.pdf`} target="_blank" rel="noreferrer"><span className="magazine-number">{String(index + 1).padStart(2, '0')}</span><div><small>{t('eMagazine')}</small><h3>Edition {edition}</h3><span>{t('readEdition')}<Download size={16}/></span></div></a>)}</div></div></section>;
+}
 export function SchoolResourcePage({ slug }) {
   const { t } = useSite();
-  const images = { 'school-anthem': '/api/assets/images/school-anthem.webp', 'annual-report': '/api/assets/images/campus-library.webp', 'e-communication': '/api/assets/images/campus-smart-class.webp', 'e-magazine': '/api/assets/images/campus-library.webp', 'school-chimes': '/api/assets/images/campus-students.webp' };
-  const labels = { 'school-anthem': 'schoolAnthem', 'annual-report': 'annualReport', 'e-communication': 'eCommunication', 'e-magazine': 'eMagazine', 'school-chimes': 'schoolChimes' };
-  return <><PageHero eyebrow={t('ourSchool')} title={t(labels[slug])} image={images[slug]}/><PageContent slug={slug}/>{slug === 'school-anthem' && <section className="section resource-feature"><div className="container"><ResponsiveImage src="/api/assets/images/school-anthem.webp" alt={t('schoolAnthem')} width="1200" height="900" loading="lazy"/></div></section>}{slug === 'annual-report' && <section className="section resource-download"><div className="container"><a className="button" href="/api/assets/images/annual-report-2025-26.pdf" target="_blank" rel="noreferrer">{t('download')} · PDF<Download size={17}/></a></div></section>}<AdmissionsCTA/></>;
+  const images = { 'annual-report': '/api/assets/images/campus-library.webp', 'e-communication': '/api/assets/images/campus-smart-class.webp', 'e-magazine': '/api/assets/images/campus-library.webp', 'school-chimes': '/api/assets/images/school-chimes.webp', library: '/api/assets/images/campus-library.webp', laboratories: '/api/assets/images/campus-physics.webp', 'smart-class': '/api/assets/images/campus-smart-class.webp', transport: '/api/assets/images/campus-primary.webp' };
+  const labels = { 'school-anthem': 'schoolAnthem', 'annual-report': 'annualReport', 'e-communication': 'eCommunication', 'e-magazine': 'eMagazine', 'school-chimes': 'schoolChimes', library: 'library', laboratories: 'laboratories', 'smart-class': 'smartClass', transport: 'transport' };
+  const facility = ['e-communication', 'school-chimes', 'library', 'laboratories', 'smart-class', 'transport'].includes(slug);
+  if (slug === 'school-anthem') return <><PageHero eyebrow={t('ourSchool')} title={t('schoolAnthem')} image={null}/><AnthemContent/><AdmissionsCTA/></>;
+  return <><PageHero eyebrow={t(facility ? 'facilitiesMenu' : 'ourSchool')} title={t(labels[slug])} image={images[slug]}/><PageContent slug={slug}/>{slug === 'annual-report' && <section className="section resource-download"><div className="container"><a className="button" href="/api/assets/images/annual-report-2025-26.pdf" target="_blank" rel="noreferrer">{t('download')} · PDF<Download size={17}/></a></div></section>}{slug === 'e-magazine' && <MagazineLibrary/>}{slug === 'school-chimes' && <section className="section resource-feature school-chimes-feature"><div className="container"><ResponsiveImage src="/api/assets/images/school-chimes.webp" alt={t('schoolChimes')} width="1800" height="1200" loading="lazy"/></div></section>}<AdmissionsCTA/></>;
 }
 export function StudentLife() { const { t } = useSite(); return <><PageHero eyebrow={t('studentLife')} title={t('lifePageTitle')} text={t('lifeSub')} image="/api/assets/images/campus-carrom.webp"/><StudentLifeSection/><ActivityExplorer/><div className="container achievement-panel"><Trophy size={38}/><div><h2>{t('achievements')}</h2><p>{t('achievementsText')}</p></div></div><PageContent slug="student-life"/><EventPreview/><AdmissionsCTA/></>; }
 export function EnquiryForm() {

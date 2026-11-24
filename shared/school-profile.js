@@ -89,6 +89,42 @@ export const schoolPages = {
     summary: 'விளையாட்டு மைதானம் உட்பட ஐந்து ஏக்கர் நிலத்திற்கான என்.எல்.சி.ஐ.எல். குத்தகையையும், 2015ஆம் ஆண்டு 21 வகுப்பறைகளுடன் திறக்கப்பட்ட பேராயர் ஆனந்தராயர் கட்டடத்தையும் பள்ளி வரலாறு பதிவு செய்கிறது.',
     body: 'நிர்வாகக் கட்டடம் 2016ஆம் ஆண்டு திறக்கப்பட்டது. 2017ஆம் ஆண்டு முதல் புனித தாமஸ் கட்டடத்தில் மேல்நிலைப் பிரிவு இயங்கத் தொடங்கியது. என்.எல்.சி.ஐ.எல். நிறுவனத்தின் சமூகப் பொறுப்புத் திட்ட உதவியுடன் 2019ஆம் ஆண்டு நான்கு வகுப்பறைகள் சேர்க்கப்பட்டன. சிற்றாலயம், மாடித் தோட்டம், 2025 செப்டம்பரில் திறக்கப்பட்ட சிறுநீர் கழிக்கும் வசதிகளுடன் கூடிய 24 கழிப்பறைகள் கொண்ட கட்டடம் ஆகியவற்றையும் பள்ளி வரலாறு குறிப்பிடுகிறது.\n\nபெரியகுறிச்சி, இருப்புக்குறிச்சி, மாத்தூர், அரசக்குழி ஆகிய பகுதிகளிலிருந்து பிளாக் 29 வரை பள்ளிப் பேருந்து வழித்தடங்கள் உள்ளன. தற்போதைய நிறுத்தங்கள், நேரம், இடவசதி ஆகியவற்றைப் பள்ளி அலுவலகத்தில் கேட்டறியுங்கள்.',
   }),
+  library: schoolPage('library', {
+    title: 'Knowledge Centre & Library',
+    summary: 'The school library gives students a calm place to read, explore reference material and develop independent learning habits.',
+    body: 'The Knowledge Centre supports classroom learning with school-approved reading and reference material. Contact the school office or librarian for current opening times, borrowing arrangements and class access.',
+  }, {
+    title: 'அறிவு மையம் மற்றும் நூலகம்',
+    summary: 'மாணவர்கள் வாசிக்கவும், குறிப்புதவி நூல்களை ஆராயவும், சுயமாகக் கற்கும் பழக்கத்தை வளர்க்கவும் பள்ளி நூலகம் அமைதியான சூழலை வழங்குகிறது.',
+    body: 'பள்ளி அங்கீகரித்த வாசிப்பு மற்றும் குறிப்புதவி நூல்களுடன் அறிவு மையம் வகுப்பறைக் கற்றலை ஆதரிக்கிறது. தற்போதைய திறப்பு நேரம், நூல் இரவல் முறை மற்றும் வகுப்பு அணுகல் பற்றிப் பள்ளி அலுவலகம் அல்லது நூலகப் பொறுப்பாளரைத் தொடர்புகொள்ளுங்கள்.',
+  }),
+  laboratories: schoolPage('laboratories', {
+    title: 'Laboratories',
+    summary: 'Science laboratories help students learn through observation, practical investigation and carefully guided experiments.',
+    body: 'The school history records a separate Physics Laboratory and dedicated facilities for science learning. Laboratory sessions are conducted under teacher supervision and the school’s safety procedures.',
+  }, {
+    title: 'ஆய்வகங்கள்',
+    summary: 'கவனிப்பு, செய்முறை ஆராய்ச்சி மற்றும் ஆசிரியர் வழிகாட்டும் பரிசோதனைகள் மூலம் அறிவியலைக் கற்க ஆய்வகங்கள் உதவுகின்றன.',
+    body: 'தனி இயற்பியல் ஆய்வகமும் அறிவியல் கற்றலுக்கான வசதிகளும் உள்ளதாகப் பள்ளி வரலாறு பதிவு செய்கிறது. ஆசிரியர் மேற்பார்வையிலும் பள்ளியின் பாதுகாப்பு நடைமுறைகளின்படியும் ஆய்வகப் பாடங்கள் நடைபெறுகின்றன.',
+  }),
+  'smart-class': schoolPage('smart-class', {
+    title: 'Smart Class',
+    summary: 'Interactive panels and audio-visual material make classroom learning more engaging, effective and technology-supported.',
+    body: 'Two interactive panels were inaugurated on 26 June 2026 to promote digital learning. Teachers use school-approved digital material where it supports the lesson and learning objectives.',
+  }, {
+    title: 'ஸ்மார்ட் வகுப்பறை',
+    summary: 'ஊடாடும் திரைகளும் ஒலி-ஒளி வளங்களும் வகுப்பறைக் கற்றலை ஈர்க்கக்கூடியதாகவும் பயனுள்ளதாகவும் தொழில்நுட்ப ஆதரவுடனும் மாற்றுகின்றன.',
+    body: 'மின்னணுக் கற்றலை ஊக்குவிக்க 2026 ஜூன் 26 அன்று இரண்டு ஊடாடும் காட்சிப்பலகைகள் திறந்து வைக்கப்பட்டன. பாடத்திற்கும் கற்றல் நோக்கங்களுக்கும் உதவும் பள்ளி அங்கீகரித்த மின்னணு வளங்களை ஆசிரியர்கள் பயன்படுத்துகின்றனர்.',
+  }),
+  transport: schoolPage('transport', {
+    title: 'School Transport',
+    summary: 'School buses support safe travel for students from Neyveli and nearby communities.',
+    body: 'Recorded routes serve Block 29 from Periyakurichi, Iruppukurichi, Mathur and Arasakuzhi. Confirm current routes, stops, timings, fees and seat availability directly with the school office.',
+  }, {
+    title: 'பள்ளிப் போக்குவரத்து',
+    summary: 'நெய்வேலி மற்றும் சுற்றுப்புறப் பகுதிகளிலிருந்து மாணவர்கள் பாதுகாப்பாகப் பயணம் செய்ய பள்ளிப் பேருந்துகள் உதவுகின்றன.',
+    body: 'பெரியகுறிச்சி, இருப்புக்குறிச்சி, மாத்தூர், அரசக்குழி ஆகிய பகுதிகளிலிருந்து பிளாக் 29 வரை பேருந்து வழித்தடங்கள் பதிவு செய்யப்பட்டுள்ளன. தற்போதைய வழித்தடம், நிறுத்தம், நேரம், கட்டணம் மற்றும் இருக்கை இருப்பை பள்ளி அலுவலகத்தில் உறுதிப்படுத்துங்கள்.',
+  }),
   'student-life': schoolPage('student-life', {
     title: 'Learning and participation',
     summary: 'The school history records participation in science exhibitions, inter-school competitions, NCC camps and Scouts and Guides activities.',
@@ -101,11 +137,11 @@ export const schoolPages = {
   'school-anthem': schoolPage('school-anthem', {
     title: 'Our school anthem',
     summary: 'The school anthem expresses the shared spirit and values of St. Antony’s.',
-    body: 'The anthem reference is presented below for the school community. Contact the school office for the official words, music and guidance for school programmes.',
+    body: 'Let us come together and stand in strong\nWith hearts full of hope we march along\nValues guide each step we take\nVirtues form the path we make\n\nSt. Antony, our guiding star\nLeading us forward both near and far\n\nLet us sing together with choirs of voice\nMay God our Father shower his grace\nFriends and mentors by our side\nIn this world, we walk with pride\n\nSt. Antony, we strive and shine\nGuide our life in the ways of divine',
   }, {
     title: 'எங்கள் பள்ளி கீதம்',
     summary: 'புனித அந்தோணியார் பள்ளியின் பொதுவான உணர்வையும் விழுமியங்களையும் பள்ளி கீதம் வெளிப்படுத்துகிறது.',
-    body: 'பள்ளிச் சமூகத்திற்கான கீதக் குறிப்பு கீழே வழங்கப்பட்டுள்ளது. அதிகாரப்பூர்வ வரிகள், இசை மற்றும் பள்ளி நிகழ்ச்சிகளுக்கான வழிகாட்டலுக்கு பள்ளி அலுவலகத்தைத் தொடர்புகொள்ளுங்கள்.',
+    body: 'பள்ளியின் அதிகாரப்பூர்வ கீதம் ஆங்கிலத்தில்\n\nLet us come together and stand in strong\nWith hearts full of hope we march along\nValues guide each step we take\nVirtues form the path we make\n\nSt. Antony, our guiding star\nLeading us forward both near and far\n\nLet us sing together with choirs of voice\nMay God our Father shower his grace\nFriends and mentors by our side\nIn this world, we walk with pride\n\nSt. Antony, we strive and shine\nGuide our life in the ways of divine',
   }),
   'annual-report': schoolPage('annual-report', {
     title: 'Annual Report 2025–26',

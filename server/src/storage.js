@@ -19,7 +19,7 @@ export function createStorage(env, injectedClient) {
   let client = injectedClient;
   const connection = () => client ||= new S3Client(minioOptions(env));
   const Bucket = env.MINIO_BUCKET;
-  const streamObject = async Key => (await connection().send(new GetObjectCommand({ Bucket, Key }))).Body;
+  const streamObject = async (Key, input = {}) => (await connection().send(new GetObjectCommand({ Bucket, Key, ...input }))).Body;
   return {
     async stat(Key) { try { const value = await connection().send(new HeadObjectCommand({ Bucket, Key })); return { size: value.ContentLength, sha256: value.Metadata?.sha256 }; } catch (error) { if (missingObject(error)) return null; throw error; } },
     async put(Key, buffer, mimeType) { await connection().send(new PutObjectCommand({ Bucket, Key, Body: buffer, ContentLength: buffer.length, ContentType: mimeType, Metadata: { sha256: checksum(buffer) }, IfNoneMatch: '*' })); },

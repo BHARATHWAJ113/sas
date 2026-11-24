@@ -3,6 +3,7 @@ import { createDatabase } from '../src/database.js';
 import { homeContentSchemas } from '../src/home-content.js';
 
 const slides = [
+  { id: 'home-campus-video', kind: 'VIDEO', alt: 'Welcome to St. Antony’s Matriculation Higher Secondary School', altTa: 'புனித அந்தோணியார் மெட்ரிகுலேஷன் மேல்நிலைப் பள்ளிக்கு வரவேற்கிறோம்', altHi: 'सेंट एंटनीज़ मैट्रिकुलेशन हायर सेकेंडरी स्कूल में आपका स्वागत है', asset: 'home-campus-video.mp4', mediaId: null, videoUrl: null, posterId: null, duration: 12, sortOrder: 5, status: 'PUBLISHED' },
   { id: 'home-st-antony', kind: 'IMAGE', alt: 'St. Antony, patron of the school', altTa: 'பள்ளியின் பாதுகாவலரான புனித அந்தோணியார்', altHi: 'विद्यालय के संरक्षक संत एंटनी', asset: 'st-antony-home.webp', mediaId: null, videoUrl: null, posterId: null, duration: 7, sortOrder: 10, status: 'PUBLISHED' },
   { id: 'home-library', kind: 'IMAGE', alt: 'The school library', altTa: 'பள்ளி நூலகம்', altHi: 'विद्यालय का पुस्तकालय', asset: 'campus-library.webp', mediaId: null, videoUrl: null, posterId: null, duration: 7, sortOrder: 20, status: 'PUBLISHED' },
   { id: 'home-activities', kind: 'IMAGE', alt: 'Students taking part in school activities', altTa: 'பள்ளிச் செயல்பாடுகளில் பங்கேற்கும் மாணவர்கள்', altHi: 'विद्यालय की गतिविधियों में भाग लेते विद्यार्थी', asset: 'campus-carrom.webp', mediaId: null, videoUrl: null, posterId: null, duration: 7, sortOrder: 30, status: 'PUBLISHED' },

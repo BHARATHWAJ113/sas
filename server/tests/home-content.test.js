@@ -21,6 +21,7 @@ describe('homepage content', () => {
     const base = { alt: 'School life', altTa: null, altHi: null, duration: 7, sortOrder: 0, status: 'PUBLISHED' };
     expect(homeContentSchemas['home-slides'].safeParse({ ...base, kind: 'IMAGE', asset: 'campus-library.webp', mediaId: null, videoUrl: null, posterId: null }).success).toBe(true);
     expect(homeContentSchemas['home-slides'].safeParse({ ...base, kind: 'VIDEO', mediaId: 'video', asset: null, videoUrl: null, posterId: null }).success).toBe(true);
+    expect(homeContentSchemas['home-slides'].safeParse({ ...base, kind: 'VIDEO', mediaId: null, asset: 'home-campus-video.mp4', videoUrl: null, posterId: null }).success).toBe(true);
     expect(homeContentSchemas['home-slides'].safeParse({ ...base, kind: 'VIDEO', mediaId: null, asset: null, videoUrl: null, posterId: null }).success).toBe(false);
   });
 

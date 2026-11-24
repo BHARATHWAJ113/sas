@@ -109,6 +109,15 @@ describe('MinIO media lifecycle', () => {
     await store.put('media/abc.webp', Buffer.from('photo'));
     await request(app).get('/api/media/public-id').expect(200);
   });
+  it('serves byte ranges for MinIO-hosted video playback', async () => {
+    const store = memoryStorage();
+    const app = createApp({}, { storage: store });
+    await store.put('assets/images/home-campus-video.mp4', Buffer.from('0123456789'));
+    const response = await request(app).get('/api/assets/images/home-campus-video.mp4').set('Range', 'bytes=2-5').expect(206);
+    expect(response.headers['content-range']).toBe('bytes 2-5/10');
+    expect(response.headers['accept-ranges']).toBe('bytes');
+    expect(response.body.toString()).toBe('2345');
+  });
 });
 
 describe('MinIO migration and S3 adapter', () => {

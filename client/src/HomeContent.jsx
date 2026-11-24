@@ -4,6 +4,7 @@ import { assetUrl, mediaUrl, useApi } from './api';
 import { useSite } from './context';
 
 const fallbackSlides = [
+  { id: 'campus-video', kind: 'VIDEO', asset: 'home-campus-video.mp4', alt: 'Welcome to St. Antony’s Matriculation Higher Secondary School', altTa: 'புனித அந்தோணியார் மெட்ரிகுலேஷன் மேல்நிலைப் பள்ளிக்கு வரவேற்கிறோம்', altHi: 'सेंट एंटनीज़ मैट्रिकुलेशन हायर सेकेंडरी स्कूल में आपका स्वागत है', duration: 12 },
   { id: 'st-antony', kind: 'IMAGE', asset: 'st-antony-home.webp', alt: 'St. Antony, patron of the school', altTa: 'பள்ளியின் பாதுகாவலரான புனித அந்தோணியார்', altHi: 'विद्यालय के संरक्षक संत एंटनी', duration: 7 },
   { id: 'campus-library', kind: 'IMAGE', asset: 'campus-library.webp', alt: 'The school library', altTa: 'பள்ளி நூலகம்', altHi: 'विद्यालय का पुस्तकालय', duration: 7 },
   { id: 'campus-sports', kind: 'IMAGE', asset: 'campus-carrom.webp', alt: 'Students taking part in school activities', altTa: 'பள்ளிச் செயல்பாடுகளில் பங்கேற்கும் மாணவர்கள்', altHi: 'विद्यालय की गतिविधियों में भाग लेते विद्यार्थी', duration: 7 },
@@ -73,16 +74,16 @@ export function HomeCarousel() {
           <span>{String(active + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}</span>
           <strong>{pick(slide, 'alt')}</strong>
         </div>
+        {slides.length > 1 && <>
+          <button className="home-carousel-arrow home-carousel-arrow-previous" type="button" onClick={() => move(-1)} aria-label={t('previousSlide')}><ChevronLeft size={24} /></button>
+          <button className="home-carousel-arrow home-carousel-arrow-next" type="button" onClick={() => move(1)} aria-label={t('nextSlide')}><ChevronRight size={24} /></button>
+        </>}
       </div>
       {slides.length > 1 && <div className="container home-carousel-controls">
         <div className="home-carousel-dots" role="tablist" aria-label={t('selectSlide')}>
           {slides.map((item, index) => <button key={item.id} type="button" aria-label={`${t('slide')} ${index + 1}`} aria-selected={index === active} role="tab" onClick={() => setActive(index)} />)}
         </div>
-        <div>
-          <button type="button" onClick={() => move(-1)} aria-label={t('previousSlide')}><ChevronLeft size={20} /></button>
-          <button type="button" onClick={() => setPaused(value => !value)} aria-label={t(paused ? 'playCarousel' : 'pauseCarousel')}>{paused ? <Play size={17} /> : <Pause size={17} />}</button>
-          <button type="button" onClick={() => move(1)} aria-label={t('nextSlide')}><ChevronRight size={20} /></button>
-        </div>
+        <button className="home-carousel-pause" type="button" onClick={() => setPaused(value => !value)} aria-label={t(paused ? 'playCarousel' : 'pauseCarousel')}>{paused ? <Play size={17} /> : <Pause size={17} />}</button>
       </div>}
     </section>
   );

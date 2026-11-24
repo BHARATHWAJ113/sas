@@ -8,10 +8,10 @@ import { useSite } from './context';
 
 const navigation = [
   { label: 'home', path: '/' },
-  { label: 'ourSchool', pages: [['about', '/about'], ['principalDesk', '/about#principal-desk'], ['leadershipTitle', '/about#school-leadership'], ['staffDirectory', '/staff'], ['schoolAnthem', '/school-anthem'], ['annualReport', '/annual-report']] },
+  { label: 'ourSchool', pages: [['about', '/about'], ['principalDesk', '/about#principal-desk'], ['leadershipTitle', '/about#school-leadership'], ['staffDirectory', '/staff'], ['schoolAnthem', '/school-anthem'], ['annualReport', '/annual-report'], ['eMagazine', '/e-magazine']] },
   { label: 'academics', pages: [['academics', '/academics'], ['honours', '/honours'], ['toppers', '/toppers']] },
   { label: 'studentLife', pages: [['studentLife', '/student-life'], ['activitiesNav', '/student-life#activities'], ['events', '/events'], ['news', '/news']] },
-  { label: 'facilitiesMenu', pages: [['infrastructure', '/infrastructure'], ['eCommunication', '/e-communication'], ['eMagazine', '/e-magazine'], ['schoolChimes', '/school-chimes']] },
+  { label: 'facilitiesMenu', pages: [['infrastructure', '/infrastructure'], ['library', '/library'], ['laboratories', '/laboratories'], ['smartClass', '/smart-class'], ['eCommunication', '/e-communication'], ['schoolChimes', '/school-chimes'], ['transport', '/transport']] },
   { label: 'gallery', path: '/gallery' },
   { label: 'admissions', pages: [['admissions', '/admissions'], ['fees', '/fees']] },
   { label: 'contact', pages: [['contact', '/contact'], ['socialMedia', '/social-media']] },

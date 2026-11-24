@@ -52,7 +52,7 @@ export function createApp(db, options = {}) {
     const asset = siteAssets.find(item => item.filename === req.params.filename);
     if (!asset) throw fail(404, 'File not found.');
     res.type(asset.mimeType).set('Cache-Control', 'public, max-age=3600').set('Cross-Origin-Resource-Policy', 'same-site');
-    await serveObject(store, `assets/images/${asset.filename}`, res);
+    await serveObject(store, `assets/images/${asset.filename}`, req, res);
   });
   app.use('/api', (req, res, next) => {
     res.set('Cache-Control', 'no-store');
@@ -76,7 +76,7 @@ export function createApp(db, options = {}) {
     res.json({ settings, translations, demo, privacyRetentionDays: config.VISITOR_RETENTION_DAYS });
   });
   app.get('/api/sitemap.xml', async (_req, res) => {
-    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy', 'fees', 'honours', 'staff', 'toppers', 'school-anthem', 'annual-report', 'e-communication', 'e-magazine', 'school-chimes'];
+    const routes = ['', 'about', 'academics', 'admissions', 'infrastructure', 'library', 'laboratories', 'smart-class', 'e-communication', 'school-chimes', 'transport', 'student-life', 'gallery', 'news', 'events', 'notices', 'contact', 'privacy', 'fees', 'honours', 'staff', 'toppers', 'school-anthem', 'annual-report', 'e-magazine'];
     const events = demo ? [] : await db.event.findMany({ where: published, select: { slug: true } });
     const base = config.SITE_URL.replace(/\/$/, '');
     const escape = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -181,7 +181,7 @@ export function createApp(db, options = {}) {
     const key = mediaKey(width && media.hasVariants ? variantFilename(media.filename, width) : media.filename);
     res.type(media.mimeType).set('X-Content-Type-Options', 'nosniff').set('Cross-Origin-Resource-Policy', 'same-site');
     if (media.mimeType === 'application/pdf') res.attachment(media.originalName || 'attachment.pdf').set('Content-Security-Policy', "sandbox; default-src 'none'");
-    await serveObject(store, key, res);
+    await serveObject(store, key, req, res);
   });
   app.post('/api/enquiries', databaseOnly, rateLimit({ windowMs: 60 * 60 * 1000, limit: 5, standardHeaders: 'draft-8', legacyHeaders: false, message: { error: 'Enquiry limit reached. Please try again later.' } }), parse(enquirySchema), async (req, res) => {
     res.status(201).json(await saveEnquiry(db, req));

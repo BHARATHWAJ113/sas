@@ -62,6 +62,14 @@
 .campus-language:hover,
 .campus-menu-toggle:hover { background: #f1f5fa; }
 
+.campus-language {
+  width: 132px;
+  min-width: 132px;
+  flex: 0 0 132px;
+  padding-inline: 12px 34px;
+  text-overflow: clip;
+}
+
 .campus-nav > a.active,
 .campus-dropdown summary.is-current,
 .campus-dropdown[open] summary {
@@ -273,7 +281,7 @@
   .campus-nav-actions { flex-shrink: 0; }
   .campus-nav-shell .campus-brand span span,
   .campus-nav-shell .campus-brand small { display: none; }
-  .campus-language { font-size: 13px; padding-inline: 7px; }
+  .campus-language { width: 120px; min-width: 120px; flex-basis: 120px; font-size: 13px; padding-inline: 8px 28px; }
   .notice-board-link { padding-inline: 12px; }
   .notice-board-link span { display: none; }
   .notice-row { padding-inline: 10px; }

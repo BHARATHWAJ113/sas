@@ -108,7 +108,7 @@ export function RouteReset() {
 }
 export function PageHero({ eyebrow, title, text, image = '/api/assets/images/campus-students.webp' }) {
   const { t } = useSite();
-  return <section className="page-hero"><div className="container page-hero-inner"><div><div className="breadcrumb"><Link to="/">{t('home')}</Link><span>/</span>{eyebrow}</div><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{text}</p></div><div className="page-hero-photo"><ResponsiveImage src={image} alt={t('schoolFull')} width="600" height="400"/></div></div></section>;
+  return <section className={`page-hero${image ? '' : ' page-hero-text-only'}`}><div className="container page-hero-inner"><div><div className="breadcrumb"><Link to="/">{t('home')}</Link><span>/</span>{eyebrow}</div><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{text}</p></div>{image && <div className="page-hero-photo"><ResponsiveImage src={image} alt={t('schoolFull')} width="600" height="400"/></div>}</div></section>;
 }
 export function AcademicCards({ full = false }) {
   const { t } = useSite();
