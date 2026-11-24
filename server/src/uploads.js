@@ -8,7 +8,7 @@ import { imageVariants } from './image-variants.js';
 import { storage, mediaKey } from './storage.js';
 import { cleanStorage, queueMediaDeletion } from './storage-cleanup.js';
 import { schemas } from './validation.js';
-const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 30 * 1024 * 1024, files: 1, fields: 4, fieldSize: 32768 } });
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 40 * 1024 * 1024, files: 1, fields: 4, fieldSize: 32768 } });
 export function mountUploads(router, db, audit, store = storage) {
   const save = replacing => async (req, res) => {
     if (!req.file) throw fail(400, 'Choose a JPEG, PNG, WebP, MP4 or PDF file, up to 30 MB.');

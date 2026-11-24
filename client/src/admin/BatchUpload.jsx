@@ -27,7 +27,7 @@ export default function BatchUpload({ mutate, onSaved }) {
       for (let i = 0; i < next.length; i++) {
         if (next[i].status === 'Uploaded') continue;
         const item = next[i];
-        if (item.file.size > 30 * 1024 * 1024) throw new Error(`${item.file.name} exceeds 30 MB.`);
+        if (item.file.size > 40 * 1024 * 1024) throw new Error(`${item.file.name} exceeds 30 MB.`);
         next[i] = { ...item, status: 'Uploading…' }; setItems([...next]);
         const body = new FormData(); body.append('file', item.file); body.append('alt', item.alt); body.append('altTa', item.altTa); body.append('altHi', item.altHi);
         try { await mutate('/media/upload', 'POST', body); }
